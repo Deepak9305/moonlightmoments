@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moonlight Moments | Daily Celestial Gallery</title>
     
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
 
     <style>
@@ -49,10 +51,7 @@
             border-radius: 12px; box-shadow: 0px 10px 30px rgba(0,0,0,0.8); z-index: 1001;
             overflow: hidden;
         }
-        .dropdown-content a {
-            color: #ccc; padding: 14px 20px; text-decoration: none;
-            display: block; font-size: 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
+        .dropdown-content a { color: #ccc; padding: 14px 20px; text-decoration: none; display: block; font-size: 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .dropdown-content a:hover { background: var(--accent); color: white; }
         .show { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -63,17 +62,11 @@
         #hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; filter: saturate(1.4); animation: slowZoom 40s infinite alternate linear; }
         @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.15); } }
         
-        .btn-main {
-            background: var(--accent); color: white; border: none; padding: 10px 20px;
-            border-radius: 20px; font-weight: 600; cursor: pointer; transition: var(--transition);
-        }
+        .btn-main { background: var(--accent); color: white; border: none; padding: 10px 20px; border-radius: 20px; font-weight: 600; transition: var(--transition); }
         .btn-main:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(114, 164, 242, 0.3); }
         .btn-main:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
 
-        #search-input, #birth-date-input {
-            background: var(--glass); border: 1px solid var(--glass-border);
-            padding: 10px 15px; border-radius: 20px; color: white; width: 100%; outline: none;
-        }
+        #search-input, #birth-date-input { background: var(--glass); border: 1px solid var(--glass-border); padding: 10px 15px; border-radius: 20px; color: white; width: 100%; outline: none; }
 
         #clear-search:hover { color: #fff; border-color: var(--accent); background: rgba(114, 164, 242, 0.05); }
 
@@ -92,7 +85,6 @@
         #support-container { transition: var(--transition); animation: borderGlow 4s infinite alternate ease-in-out; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); }
         @keyframes borderGlow { from { box-shadow: 0 0 10px rgba(114, 164, 242, 0.05); border-color: rgba(114, 164, 242, 0.2); } to { box-shadow: 0 0 25px rgba(114, 164, 242, 0.15); border-color: rgba(114, 164, 242, 0.6); } }
 
-        /* --- Footer --- */
         footer { padding: 60px 8%; text-align: center; border-top: 1px solid var(--glass-border); background: rgba(0,0,0,0.2); }
         .footer-link { color: #666; text-decoration: none; font-size: 0.8rem; transition: color 0.3s ease; text-transform: uppercase; letter-spacing: 1px; }
         .footer-link:hover { color: var(--accent); }
@@ -164,7 +156,7 @@
             </div>
             <h3 style="font-family: 'Playfair Display'; font-size: 2.5rem; margin-bottom: 20px; color: #fff; line-height: 1.1;">Protect the Silence.<br>Support the Vision.</h3>
             <p style="color: #999; font-size: 1.1rem; margin-bottom: 35px; max-width: 550px; margin-left: auto; margin-right: auto; line-height: 1.6;">
-                The stars shouldn't be hidden behind pop-ups. <span style="color: #eee;">Moonlight Moments exists only because of you.</span> Help us stay pure.
+                The stars shouldn't be hidden behind noise. <span style="color: #eee;">Moonlight Moments exists only because of you.</span> Help us stay pure and free.
             </p>
             <div style="display: flex; justify-content: center; transform: scale(1.15);">
                 <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
@@ -200,20 +192,17 @@
     </div>
 
     <script>
-        // --- API CONFIG ---
         const API_KEYS = ['hKmFC3fvOigiVn60dpwIfQdIvQs4DeONZCWeDfLR', 'DEMO_KEY'];
         let currentKeyIndex = 0;
         let galleryItems = [];
 
-        // --- LEGAL DATA ---
         const legalData = {
             about: { title: "The Vision", img: "https://www.nasa.gov/wp-content/uploads/2023/03/main_image_deep_field_smacs0723-5mb.jpg", content: "Moonlight Moments is a rebellion for peace. We provide a daily sanctuary of celestial perspective, keeping the universe accessible, independent, and free from the clutter of advertisements." },
             privacy: { title: "Privacy Shield", img: "https://www.nasa.gov/wp-content/uploads/2015/01/p1501ay.jpg", content: "Your journey through the stars is private. We do not track your identity or harvest your data. This is a space for observation, not observation of the user." },
             terms: { title: "Terms of Use", img: "https://www.nasa.gov/wp-content/uploads/2022/07/stsci-01g7nb48mppv8sk9f6cgf0m6ge.png", content: "Images are via NASA's Open API. We encourage personal exploration and the sharing of beauty. Respect the frontier; respect the silence." },
-            contact: { title: "Get in Touch", img: "https://www.nasa.gov/wp-content/uploads/2023/09/stsci-01h8p63v02f06j0n687sc8pq44.png", content: "Questions or cosmic findings to share? Reach out at:<br><br><strong style='color:var(--accent); font-size:1.3rem;'>support@moonlightmoments.co.in</strong>" }
+            contact: { title: "Get in Touch", img: "https://www.nasa.gov/wp-content/uploads/2023/09/stsci-01h8p63v02f06j0n687sc8pq44.png", content: "Questions or cosmic findings to share? Reach out to our independent team.<br><br><strong style='color:var(--accent); font-size:1.3rem;'>support@moonlightmoments.co.in</strong>" }
         };
 
-        // --- CORE FUNCTIONS ---
         const getActiveKey = () => API_KEYS[currentKeyIndex];
 
         async function smartNasaFetch(baseUrl) {
