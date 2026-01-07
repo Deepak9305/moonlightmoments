@@ -29,7 +29,7 @@
         }
         .cursor-expand { width: 50px !important; height: 50px !important; background: rgba(255,255,255,0.1); }
         .no-mouse { cursor: none !important; }
-        .no-mouse a, .no-mouse button, .no-mouse .grid-item-card { cursor: none !important; }
+        .no-mouse a, .no-mouse button, .no-mouse .grid-item-card, .no-mouse input { cursor: none !important; }
 
         /* --- Preloader --- */
         #preloader {
@@ -46,7 +46,7 @@
         .support-btn { color: var(--accent); text-decoration: none; font-size: 0.85rem; border: 1px solid var(--accent); padding: 8px 18px; border-radius: 20px; transition: 0.3s; white-space: nowrap; }
         .support-btn:hover { background: var(--accent); color: white; }
 
-        .hamburger-btn { background: var(--glass); border: 1px solid var(--glass-border); width: 40px; height: 40px; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; }
+        .hamburger-btn { background: var(--glass); border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; cursor: pointer; }
         .hamburger-btn span { width: 18px; height: 2px; background: white; transition: 0.3s; }
         
         .dropdown { position: relative; }
@@ -57,22 +57,22 @@
 
         /* --- Hero --- */
         .hero-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; text-align: center; padding: 140px 20px 40px; }
-        #hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.5; transition: opacity 2s ease; }
+        #hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.5; transition: opacity 2s ease; background: #000; }
         #hero-bg img { width: 100%; height: 100%; object-fit: cover; }
         
         .hero-controls { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 15px; margin: 0 auto; }
         .input-pill { background: var(--glass); border: 1px solid var(--glass-border); padding: 6px; border-radius: 40px; display: flex; backdrop-filter: blur(10px); }
-        .input-pill input { background: none; border: none; padding: 10px 20px; color: white; flex: 1; outline: none; }
-        .btn-pill { background: var(--accent); color: white; border: none; padding: 10px 25px; border-radius: 30px; font-weight: 600; }
+        .input-pill input { background: none; border: none; padding: 10px 20px; color: white; flex: 1; outline: none; font-size: 0.9rem; }
+        .btn-pill { background: var(--accent); color: white; border: none; padding: 10px 25px; border-radius: 30px; font-weight: 600; cursor: pointer; }
 
         /* --- Gallery --- */
         .gallery-section { padding: 80px 8%; }
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .grid-item-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; opacity: 0; transform: translateY(30px); transition: 0.5s; }
-        .card-img-wrapper { aspect-ratio: 16/10; overflow: hidden; background: #111; }
+        .grid-item-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; opacity: 0; transform: translateY(30px); transition: 0.5s; cursor: pointer; }
+        .card-img-wrapper { aspect-ratio: 16/10; overflow: hidden; background: #111; position: relative; }
         .card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: 1s; }
 
-        /* --- Footer & Buttons --- */
+        /* --- Footer --- */
         footer { padding: 80px 5% 40px; text-align: center; border-top: 1px solid var(--glass-border); }
         .footer-nav { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 40px; }
         .footer-btn { 
@@ -80,30 +80,23 @@
             border: 1px solid var(--glass-border); border-radius: 30px; background: var(--glass); 
             backdrop-filter: blur(10px); transition: var(--transition); letter-spacing: 1px; text-transform: uppercase;
         }
-        .footer-btn:hover { color: white; border-color: var(--accent); transform: translateY(-3px); background: rgba(114, 164, 242, 0.1); }
 
         /* --- Modals --- */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; z-index: 2000; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(20px); }
         .modal-content { background: #0a0a0a; width: 100%; max-width: 1000px; display: flex; border: 1px solid var(--glass-border); position: relative; max-height: 90vh; overflow: hidden; border-radius: 12px; }
-        .modal-img-side { flex: 1.3; background: #000; cursor: zoom-in; }
+        .modal-img-side { flex: 1.3; background: #000; display: flex; align-items: center; justify-content: center; }
         .modal-img-side img { width: 100%; height: 100%; object-fit: contain; }
         .modal-text-side { flex: 1; padding: 40px; overflow-y: auto; }
         
         .legal-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #050505; z-index: 3000; display: none; padding: 80px 20px; overflow-y: auto; }
         .legal-inner { max-width: 700px; margin: 0 auto; }
 
-        .lightbox { position: fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:5000; display:none; justify-content:center; align-items:center; cursor: zoom-out; }
-        .lightbox img { max-width:100%; max-height:100%; }
-
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 768px) {
-            .nav-right { flex-direction: column !important; align-items: flex-end !important; gap: 8px !important; }
-            .support-btn { padding: 4px 12px; font-size: 0.7rem; }
             .modal-content { flex-direction: column; }
             .modal-img-side { height: 280px; flex: none; }
-            .hero-section { padding-top: 180px; }
         }
     </style>
 </head>
@@ -142,7 +135,7 @@
                     <button class="btn-pill" id="search-btn">Explore</button>
                 </div>
                 <div class="input-pill" style="max-width: 350px; margin: 0 auto;">
-                    <input type="date" id="date-input" min="1995-06-16">
+                    <input type="date" id="date-input">
                     <button class="btn-pill" id="date-btn">Birth Star</button>
                 </div>
             </div>
@@ -154,13 +147,6 @@
     </section>
 
     <footer id="support-section">
-        <div id="support-container" style="margin: 0 auto 60px; padding: 40px; border: 1px solid var(--accent); border-radius: 24px; max-width: 800px; background: rgba(114, 164, 242, 0.02);">
-            <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 15px;">Keep the Void Clear</h3>
-            <p style="color: #777; margin-bottom: 25px; font-size: 0.9rem;">Your support keeps this gallery ad-free and open for all.</p>
-            <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
-            <script type='text/javascript'>kofiwidget2.init('Support the Mission', '#72a4f2', 'H2H71RHHAJ'); kofiwidget2.draw();</script>
-        </div>
-
         <div class="footer-nav">
             <a href="javascript:void(0)" onclick="showLegal('about')" class="footer-btn">Our Story</a>
             <a href="javascript:void(0)" onclick="showLegal('privacy')" class="footer-btn">Privacy Orbit</a>
@@ -172,13 +158,13 @@
 
     <div id="modal" class="modal-overlay">
         <div class="modal-content">
-            <button style="position:absolute; top:15px; right:20px; color:white; font-size:2rem; background:none; border:none; z-index:10;" onclick="closeModal()">&times;</button>
-            <div class="modal-img-side" onclick="openLightbox()"><img id="m-img" src=""></div>
+            <button style="position:absolute; top:15px; right:20px; color:white; font-size:2rem; background:none; border:none; z-index:10; cursor:pointer;" onclick="closeModal()">&times;</button>
+            <div class="modal-img-side"></div>
             <div class="modal-text-side">
                 <span id="m-date" style="color:var(--accent); font-size:0.75rem; letter-spacing:1px;"></span>
                 <h2 id="m-title" style="font-family:'Playfair Display'; margin: 10px 0 20px;"></h2>
                 <p id="m-desc" style="color:#999; font-size:0.9rem; margin-bottom:30px;"></p>
-                <button id="m-dl" style="width:100%; padding:15px; background:white; color:black; border:none; font-weight:700; border-radius:8px;">DOWNLOAD HI-RES</button>
+                <button id="m-dl" style="width:100%; padding:15px; background:white; color:black; border:none; font-weight:700; border-radius:8px; cursor:pointer;">DOWNLOAD ASSET</button>
             </div>
         </div>
     </div>
@@ -187,8 +173,6 @@
         <span style="position:fixed; top:30px; right:30px; font-size:2.5rem; color:#fff; cursor:pointer;" onclick="closeLegal()">&times;</span>
         <div class="legal-inner" id="legal-content"></div>
     </div>
-
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()"><img id="l-img" src=""></div>
 
     <script>
         const API_KEY = 'DzuEQHQeW71HYPPMwkW66E0B8dYiVEVPRdLkfaRk';
@@ -200,10 +184,8 @@
 
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX; mouseY = e.clientY;
-            if (window.matchMedia("(pointer: fine)").matches) {
-                cursor.style.display = 'block';
-                document.body.classList.add('no-mouse');
-            }
+            cursor.style.display = 'block';
+            document.body.classList.add('no-mouse');
         });
 
         function animateCursor() {
@@ -221,88 +203,103 @@
             });
         }
 
-        // --- Daily-Locked Logic ---
+        // --- NASA Logic ---
+        function getNASADate(offset = 0) {
+            const d = new Date();
+            d.setDate(d.getDate() - offset);
+            return d.toISOString().split('T')[0];
+        }
+
         async function loadDaily() {
-            const today = new Date();
-            const endDate = today.toISOString().split('T')[0];
-            const past = new Date(); past.setDate(today.getDate() - 11);
-            const startDate = past.toISOString().split('T')[0];
+            const grid = document.getElementById('main-grid');
+            // We fetch from 1 day ago to 12 days ago to avoid "future date" crashes
+            const start = getNASADate(12);
+            const end = getNASADate(1);
 
             try {
-                const res = await fetch(`https://api.nasa.gov/planetary/apod?start_date=${startDate}&end_date=${endDate}&api_key=${API_KEY}`);
+                const res = await fetch(`https://api.nasa.gov/planetary/apod?start_date=${start}&end_date=${end}&api_key=${API_KEY}`);
+                if(!res.ok) throw new Error("NASA API connection failed");
+                
                 const data = await res.json();
                 galleryItems = data.reverse();
-                document.getElementById('hero-bg').innerHTML = `<img src="${galleryItems[0].url}">`;
-                renderGrid();
-            } catch(e) { console.error("Orbit Failed", e); }
 
-            const loader = document.getElementById('preloader');
-            loader.style.opacity = '0';
-            setTimeout(() => loader.remove(), 800);
+                const hero = galleryItems.find(i => i.media_type === 'image') || galleryItems[0];
+                document.getElementById('hero-bg').innerHTML = `<img src="${hero.url}">`;
+                
+                renderGrid();
+            } catch(e) {
+                grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--accent);">Signal lost. Try using the search bar above.</p>`;
+            } finally {
+                const loader = document.getElementById('preloader');
+                loader.style.opacity = '0';
+                setTimeout(() => loader.remove(), 800);
+            }
         }
 
         function renderGrid() {
-            document.getElementById('main-grid').innerHTML = galleryItems.map((item, i) => `
+            document.getElementById('main-grid').innerHTML = galleryItems.map((item, i) => {
+                const isVideo = item.media_type === 'video';
+                const thumb = isVideo ? 'https://images-api.nasa.gov/astronomy.jpg' : item.url;
+                return `
                 <div class="grid-item-card" onclick="openModal(${i})" style="animation: fadeInUp 0.6s forwards ${i * 0.1}s;">
-                    <div class="card-img-wrapper"><img src="${item.url}" onload="this.style.opacity='1'"></div>
+                    <div class="card-img-wrapper">
+                        <img src="${thumb}" onload="this.style.opacity='1'">
+                    </div>
                     <div style="padding:20px;">
                         <span style="font-size:0.7rem; color:var(--accent);">${item.date}</span>
                         <h3 style="font-size:0.95rem; margin-top:5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${item.title}</h3>
                     </div>
-                </div>`).join('');
+                </div>`;
+            }).join('');
             setupHovers();
         }
 
-        // --- Interaction ---
-        document.getElementById('menuBtn').onclick = (e) => { e.stopPropagation(); document.getElementById('myDropdown').classList.toggle('show'); };
-        window.onclick = () => document.getElementById('myDropdown').classList.remove('show');
-
-        document.getElementById('search-btn').onclick = async () => {
+        // --- Search ---
+        document.getElementById('search-btn').onclick = async function() {
             const q = document.getElementById('search-input').value; if(!q) return;
-            const res = await fetch(`https://images-api.nasa.gov/search?q=${q}&media_type=image`);
-            const d = await res.json();
-            galleryItems = d.collection.items.slice(0,12).map(i => ({
-                url: i.links[0].href, title: i.data[0].title, explanation: i.data[0].description, date: i.data[0].date_created.split('T')[0]
-            }));
-            renderGrid();
-            document.getElementById('gallery').scrollIntoView();
+            this.innerText = "...";
+            try {
+                const res = await fetch(`https://images-api.nasa.gov/search?q=${q}&media_type=image`);
+                const d = await res.json();
+                galleryItems = d.collection.items.slice(0, 12).map(i => ({
+                    url: i.links[0].href,
+                    title: i.data[0].title,
+                    explanation: i.data[0].description,
+                    date: i.data[0].date_created.split('T')[0],
+                    media_type: 'image'
+                }));
+                renderGrid();
+                document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+            } catch(e) { alert("Search error"); }
+            this.innerText = "Explore";
         };
 
-        document.getElementById('date-btn').onclick = async () => {
-            const d = document.getElementById('date-input').value; if(!d) return;
-            const res = await fetch(`https://api.nasa.gov/planetary/apod?date=${d}&api_key=${API_KEY}`);
-            const item = await res.json();
-            galleryItems.unshift(item); renderGrid(); openModal(0);
-        };
-
+        // --- Modals ---
         function openModal(i) {
             const item = galleryItems[i];
-            document.getElementById('m-img').src = item.url;
-            document.getElementById('l-img').src = item.hdurl || item.url;
+            const imgSide = document.querySelector('.modal-img-side');
+            if(item.media_type === 'video') {
+                imgSide.innerHTML = `<iframe src="${item.url}" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>`;
+            } else {
+                imgSide.innerHTML = `<img src="${item.url}">`;
+            }
             document.getElementById('m-title').innerText = item.title;
             document.getElementById('m-date').innerText = item.date;
             document.getElementById('m-desc').innerText = item.explanation;
             document.getElementById('modal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
-            document.getElementById('m-dl').onclick = () => window.open(item.url, '_blank');
+            document.getElementById('m-dl').onclick = () => window.open(item.hdurl || item.url, '_blank');
         }
-        function closeModal() { document.getElementById('modal').style.display='none'; document.body.style.overflow='auto'; }
-        function openLightbox() { document.getElementById('lightbox').style.display='flex'; }
-        function closeLightbox() { document.getElementById('lightbox').style.display='none'; }
 
-        // --- Content Modals ---
-        const legalData = {
-            about: { title: "Our Story", content: "<p>Moonlight Moments is a digital observatory designed to reconnect the modern world with the ancient wonder of the cosmos through daily high-definition imagery.</p>" },
-            privacy: { title: "Privacy Orbit", content: "<p>Observation without surveillance. We do not track you or sell your data.</p>" },
-            terms: { title: "Guidelines", content: "<p>All images are provided via NASA API and fall under their respective public domain and copyright guidelines.</p>" },
-            contact: { title: "Transmission", content: "<p>Direct communications: support@moonlightmoments.co.in</p>" }
-        };
+        function closeModal() { document.getElementById('modal').style.display='none'; document.body.style.overflow='auto'; }
+
+        document.getElementById('menuBtn').onclick = (e) => { e.stopPropagation(); document.getElementById('myDropdown').classList.toggle('show'); };
+        window.onclick = () => document.getElementById('myDropdown').classList.remove('show');
 
         function showLegal(t) {
-            const d = legalData[t];
-            document.getElementById('legal-content').innerHTML = `<h2 style="font-family:'Playfair Display'; font-size:2.5rem; margin-bottom:20px; color:var(--accent);">${d.title}</h2><div style="font-size:1.1rem; color:#ccc;">${d.content}</div>`;
+            const data = { about: "Moonlight Moments shares NASA discovery.", privacy: "No tracking used.", terms: "NASA API guidelines apply.", contact: "support@moonlightmoments.co.in" };
+            document.getElementById('legal-content').innerHTML = `<h2>${t.toUpperCase()}</h2><p>${data[t]}</p>`;
             document.getElementById('legal-modal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
         }
         function closeLegal() { document.getElementById('legal-modal').style.display='none'; document.body.style.overflow='auto'; }
 
