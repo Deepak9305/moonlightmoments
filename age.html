@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interstellar Identity | Moonlight Moments</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <style>
@@ -25,27 +24,26 @@
             color: #fff;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            cursor: none; /* Hide default for custom cursor */
+            line-height: 1.6;
         }
 
-        /* --- 1. SMOOTH INTERPOLATED CURSOR --- */
+        /* --- 1. CURSOR --- */
         #cursor {
             position: fixed;
-            width: 25px;
-            height: 25px;
+            width: 25px; height: 25px;
             border: 1px solid var(--accent);
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
+            transition: width 0.3s, height 0.3s, background 0.3s;
             will-change: transform;
+            display: block;
         }
 
         #cursor-dot {
             position: fixed;
-            width: 4px;
-            height: 4px;
+            width: 4px; height: 4px;
             background: white;
             border-radius: 50%;
             pointer-events: none;
@@ -53,165 +51,72 @@
             transform: translate(-50%, -50%);
         }
 
-        /* --- 2. MENU NAVIGATION --- */
+        /* --- 2. NAVIGATION --- */
         nav {
             position: fixed;
-            top: 25px;
-            left: 50%;
+            top: 25px; left: 50%;
             transform: translateX(-50%);
-            width: 90%;
-            max-width: 1100px;
+            width: 90%; max-width: 1100px;
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 100px;
-            padding: 18px 45px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 12px 45px;
+            display: flex; justify-content: space-between; align-items: center;
             z-index: 1000;
         }
 
         .logo { font-family: 'Playfair Display', serif; font-style: italic; color: #fff; text-decoration: none; font-size: 1.1rem; }
-        .nav-links { display: flex; gap: 35px; }
+        .nav-links { display: flex; gap: 25px; align-items: center; }
         .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; }
         .nav-links a:hover, .nav-links a.active { color: #fff; }
 
+        .support-nav-btn {
+            color: var(--accent) !important;
+            border: 1px solid var(--accent);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
         /* --- 3. HERO & CONTROLS --- */
-        .main-container {
-            max-width: 1200px;
-            margin: 180px auto 100px;
-            text-align: center;
-            padding: 0 5%;
-        }
+        .main-container { max-width: 1200px; margin: 180px auto 100px; text-align: center; padding: 0 5%; }
+        .hero-text h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 8vw, 4.5rem); font-style: italic; margin-bottom: 10px; }
+        .hero-text p { color: var(--accent); letter-spacing: 6px; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 60px; }
 
-        .hero-text h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            font-weight: 400;
-            font-style: italic;
-            margin-bottom: 10px;
-        }
+        .control-panel { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 100px; }
+        .glass-pill { background: var(--glass); border: 1px solid var(--glass-border); backdrop-filter: blur(15px); padding: 8px 30px; border-radius: 100px; }
+        .glass-pill input { background: none; border: none; color: white; padding: 10px 0; outline: none; width: 160px; font-size: 0.9rem; }
 
-        .hero-text p {
-            color: var(--accent);
-            letter-spacing: 6px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            margin-bottom: 60px;
-        }
-
-        .control-panel {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 100px;
-        }
-
-        .glass-pill {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(15px);
-            padding: 8px 30px;
-            border-radius: 100px;
-            display: flex;
-            align-items: center;
-        }
-
-        .glass-pill input {
-            background: none;
-            border: none;
-            color: white;
-            padding: 10px 0;
-            outline: none;
-            font-family: 'Inter', sans-serif;
-            width: 160px;
-            font-size: 0.9rem;
-        }
-
-        .sync-btn {
-            background: #fff;
-            color: #000;
-            border: none;
-            padding: 16px 40px;
-            border-radius: 100px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.4s;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .sync-btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(255,255,255,0.1); }
+        .sync-btn { background: #fff; color: #000; border: none; padding: 16px 40px; border-radius: 100px; font-weight: 600; cursor: pointer; transition: 0.4s; }
+        .sync-btn:hover { transform: scale(1.05); }
 
         .action-btns { margin-top: 20px; display: none; gap: 10px; justify-content: center; }
-        .action-btn {
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            color: var(--text-dim);
-            padding: 12px 25px;
-            border-radius: 100px;
-            cursor: pointer;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
-        }
+        .action-btn { background: transparent; border: 1px solid var(--glass-border); color: var(--text-dim); padding: 12px 25px; border-radius: 100px; cursor: pointer; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
         .action-btn:hover { border-color: white; color: white; }
 
-        /* --- 4. PLANET GRID --- */
-        .planet-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-
-        .planet-card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 45px;
-            text-align: left;
-            position: relative;
-            backdrop-filter: blur(10px);
-            opacity: 0;
-            transform: translateY(30px);
-            transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
+        /* --- 4. GRID --- */
+        .planet-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-top: 20px; }
+        .planet-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 24px; padding: 45px; text-align: left; position: relative; backdrop-filter: blur(10px); opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .planet-card.active { opacity: 1; transform: translateY(0); }
-
-        .planet-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 4px; height: 100%;
-            background: var(--p-color);
-        }
-
+        .planet-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--p-color); }
         .planet-name { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-style: italic; margin-bottom: 30px; }
         .stat-label { font-size: 0.6rem; color: var(--text-dim); letter-spacing: 3px; margin-bottom: 5px; text-transform: uppercase; }
         .stat-val { font-size: 1.5rem; font-weight: 300; margin-bottom: 25px; }
 
-        /* --- 5. KO-FI & WATERMARK --- */
-        .kofi-widget { position: fixed; bottom: 30px; right: 30px; z-index: 1000; }
-        .kofi-btn {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-            padding: 12px 22px;
-            border-radius: 50px;
-            color: #fff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 0.8rem;
-            transition: 0.3s;
-        }
-        .kofi-btn:hover { background: rgba(255,255,255,0.08); border-color: white; }
-
         .watermark { display: none; text-align: center; margin-top: 50px; font-size: 0.7rem; letter-spacing: 6px; color: #444; text-transform: uppercase; }
+
+        /* --- MOBILE OVERRIDES --- */
+        @media (max-width: 768px) {
+            #cursor, #cursor-dot { display: none !important; }
+            body { cursor: auto !important; }
+            nav { flex-direction: column; border-radius: 25px; padding: 20px; top: 15px; }
+            .logo { margin-bottom: 15px; }
+            .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 10px; }
+            .support-nav-btn { width: 100%; text-align: center; margin-top: 5px; }
+            .glass-pill, .sync-btn { width: 100%; }
+            .glass-pill input { width: 100%; text-align: center; }
+        }
     </style>
 </head>
 <body>
@@ -220,13 +125,14 @@
     <div id="cursor-dot"></div>
 
     <nav>
-    <a href="index.html" class="logo">Moonlight Moments</a>
-    <div class="nav-links">
-        <a href="index.html">Archive</a>
-        <a href="age.html" class="active">Identity</a>
-        <a href="event.html">Forecast</a>
-    </div>
-</nav>
+        <a href="index.html" class="logo">Moonlight Moments</a>
+        <div class="nav-links">
+            <a href="index.html">Archive</a>
+            <a href="age.html" class="active">Identity</a>
+            <a href="event.html">Forecast</a>
+            <a href="https://ko-fi.com/moonlightmoments" target="_blank" class="support-nav-btn">Support Us</a>
+        </div>
+    </nav>
 
     <div class="main-container">
         <div class="hero-text">
@@ -235,7 +141,7 @@
         </div>
 
         <div class="control-panel">
-            <div class="glass-pill"><input type="number" id="weight" placeholder="Mass on Earth (kg)"></div>
+            <div class="glass-pill"><input type="number" id="weight" placeholder="Earth Weight (kg)"></div>
             <div class="glass-pill"><input type="date" id="birthdate"></div>
             <button class="sync-btn" onclick="initializeSync()">Sync Profile</button>
             <div class="action-btns" id="actions">
@@ -250,51 +156,51 @@
         </div>
     </div>
 
-    <div class="kofi-widget">
-        <a href="https://ko-fi.com/YOUR_USERNAME" target="_blank" class="kofi-btn">
-            <img src="https://ko-fi.com/img/cup-border.png" width="22">
-            <span>Support Mission</span>
-        </a>
-    </div>
-
     <script>
-        // --- 1. SMOOTH INTERPOLATED CURSOR LOGIC ---
+        // --- Cursor Logic with Mobile Protection ---
         const cursor = document.getElementById('cursor');
         const dot = document.getElementById('cursor-dot');
         let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
-        const lerpSpeed = 0.15; 
 
         document.addEventListener('mousemove', e => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-            dot.style.left = mouseX + 'px';
-            dot.style.top = mouseY + 'px';
+            if (window.innerWidth > 768) {
+                dot.style.left = mouseX + 'px';
+                dot.style.top = mouseY + 'px';
+            }
         });
 
         function animateCursor() {
-            cursorX += (mouseX - cursorX) * lerpSpeed;
-            cursorY += (mouseY - cursorY) * lerpSpeed;
-            cursor.style.left = cursorX + 'px';
-            cursor.style.top = cursorY + 'px';
+            if (window.innerWidth > 768) {
+                cursorX += (mouseX - cursorX) * 0.15;
+                cursorY += (mouseY - cursorY) * 0.15;
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+            }
             requestAnimationFrame(animateCursor);
         }
         animateCursor();
 
-        // Cursor scaling
+        // Cursor Scaling
         document.querySelectorAll('a, button, input').forEach(el => {
             el.addEventListener('mouseenter', () => {
-                cursor.style.width = '65px';
-                cursor.style.height = '65px';
-                cursor.style.background = 'rgba(114, 164, 242, 0.08)';
+                if (window.innerWidth > 768) {
+                    cursor.style.width = '65px';
+                    cursor.style.height = '65px';
+                    cursor.style.background = 'rgba(114, 164, 242, 0.08)';
+                }
             });
             el.addEventListener('mouseleave', () => {
-                cursor.style.width = '25px';
-                cursor.style.height = '25px';
-                cursor.style.background = 'transparent';
+                if (window.innerWidth > 768) {
+                    cursor.style.width = '25px';
+                    cursor.style.height = '25px';
+                    cursor.style.background = 'transparent';
+                }
             });
         });
 
-        // --- 2. PLANETARY LOGIC ---
+        // --- Planetary Logic ---
         const planetDB = [
             { name: 'Mercury', g: 0.38, yr: 88, color: '#A5A5A5' },
             { name: 'Venus', g: 0.91, yr: 224.7, color: '#E3BB76' },
@@ -333,7 +239,6 @@
             document.getElementById('actions').style.display = 'flex';
         }
 
-        // --- 3. EXPORT & SHARE ---
         async function exportPass() {
             const area = document.getElementById('capture-area');
             const mark = document.getElementById('watermark');
@@ -341,7 +246,7 @@
             
             const canvas = await html2canvas(area, { backgroundColor: '#050505', scale: 2 });
             const link = document.createElement('a');
-            link.download = 'Moonlight-Moments-Pass.png';
+            link.download = 'Interstellar-Pass.png';
             link.href = canvas.toDataURL();
             link.click();
             mark.style.display = 'none';
@@ -351,9 +256,11 @@
             if (navigator.share) {
                 navigator.share({
                     title: 'Interstellar Identity',
-                    text: 'Sync your cosmic age and weight with NASA data!',
+                    text: 'I just synced my orbital biometrics!',
                     url: window.location.href
                 });
+            } else {
+                alert("Sharing not supported on this browser.");
             }
         }
     </script>
