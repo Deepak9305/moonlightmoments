@@ -22,7 +22,7 @@
             color: #fff;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            cursor: none;
+            line-height: 1.6;
         }
 
         /* --- Custom Cursor --- */
@@ -35,6 +35,7 @@
             z-index: 9999;
             transform: translate(-50%, -50%);
             transition: width 0.3s, height 0.3s, background 0.3s;
+            display: block; /* Visible by default on desktop */
         }
 
         /* --- Navigation --- */
@@ -47,18 +48,32 @@
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 100px;
-            padding: 18px 45px;
+            padding: 12px 45px; /* Reduced padding slightly */
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000;
         }
 
         .logo { font-family: 'Playfair Display', serif; font-style: italic; color: #fff; text-decoration: none; font-size: 1.1rem; }
 
+        .nav-links { display: flex; gap: 25px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.7rem; letter-spacing: 2px; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; }
+
+        /* Support Button Styling */
+        .support-nav-btn {
+            color: var(--accent) !important;
+            border: 1px solid var(--accent);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 500;
+        }
+        .support-nav-btn:hover { background: var(--accent); color: #000 !important; }
+
         /* --- Countdown Section --- */
         .countdown-wrap {
             background: linear-gradient(to bottom, rgba(114,164,242,0.05), transparent);
             border-bottom: 1px solid var(--glass-border);
-            padding: 150px 8% 60px;
+            padding: 180px 8% 60px;
             text-align: center;
         }
 
@@ -136,6 +151,37 @@
         .event-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; }
 
         .fade-out { opacity: 0; transform: translateY(20px); pointer-events: none; }
+
+        /* --- MOBILE VIEW UPDATES --- */
+        @media (max-width: 768px) {
+            /* 1. Remove custom cursor */
+            #cursor { display: none !important; }
+            body { cursor: auto !important; }
+
+            /* 2. Reposition Nav for Mobile */
+            nav {
+                flex-direction: column;
+                border-radius: 25px;
+                padding: 20px;
+                top: 15px;
+            }
+
+            .logo { margin-bottom: 15px; }
+
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            /* Push Support button to its own line below the menu */
+            .support-nav-btn {
+                width: 100%;
+                text-align: center;
+                margin-top: 5px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -143,13 +189,14 @@
     <div id="cursor"></div>
 
     <nav>
-    <a href="index.html" class="logo">Moonlight Moments</a>
-    <div class="nav-links" style="display:flex; gap:30px">
-        <a href="index.html" style="text-decoration:none; color:var(--text-dim); font-size:0.7rem; letter-spacing:2px">ARCHIVE</a>
-        <a href="age.html" style="text-decoration:none; color:var(--text-dim); font-size:0.7rem; letter-spacing:2px">IDENTITY</a>
-        <a href="event.html" style="text-decoration:none; color:#fff; font-size:0.7rem; letter-spacing:2px">FORECAST</a>
-    </div>
-</nav>
+        <a href="index.html" class="logo">Moonlight Moments</a>
+        <div class="nav-links">
+            <a href="index.html">ARCHIVE</a>
+            <a href="age.html">IDENTITY</a>
+            <a href="event.html" class="active">FORECAST</a>
+            <a href="https://ko-fi.com/moonlightmoments" target="_blank" class="support-nav-btn">SUPPORT US</a>
+        </div>
+    </nav>
 
     <div class="countdown-wrap">
         <span class="next-event-label" id="timer-title">Awaiting Next Orbital Sequence</span>
@@ -176,12 +223,20 @@
     </div>
 
     <script>
+        // Custom Cursor Logic
         const cursor = document.getElementById('cursor');
         let mX = 0, mY = 0, cX = 0, cY = 0;
-        document.addEventListener('mousemove', e => { mX = e.clientX; mY = e.clientY; });
+        
+        document.addEventListener('mousemove', e => { 
+            mX = e.clientX; mY = e.clientY; 
+        });
+
         function move() {
-            cX += (mX - cX) * 0.12; cY += (mY - cY) * 0.12;
-            cursor.style.left = cX + 'px'; cursor.style.top = cY + 'px';
+            // Check window width to prevent unnecessary calculations on mobile
+            if (window.innerWidth > 768) {
+                cX += (mX - cX) * 0.12; cY += (mY - cY) * 0.12;
+                cursor.style.left = cX + 'px'; cursor.style.top = cY + 'px';
+            }
             requestAnimationFrame(move);
         }
         move();
@@ -277,8 +332,16 @@
 
         function addHoverEffects() {
             document.querySelectorAll('a, button, .event-card').forEach(el => {
-                el.onmouseenter = () => { cursor.style.width='60px'; cursor.style.height='60px'; cursor.style.background='rgba(114, 164, 242, 0.1)'; };
-                el.onmouseleave = () => { cursor.style.width='20px'; cursor.style.height='20px'; cursor.style.background='transparent'; };
+                el.onmouseenter = () => { 
+                    if (window.innerWidth > 768) {
+                        cursor.style.width='60px'; cursor.style.height='60px'; cursor.style.background='rgba(114, 164, 242, 0.1)'; 
+                    }
+                };
+                el.onmouseleave = () => { 
+                    if (window.innerWidth > 768) {
+                        cursor.style.width='20px'; cursor.style.height='20px'; cursor.style.background='transparent'; 
+                    }
+                };
             });
         }
 
