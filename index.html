@@ -31,8 +31,10 @@
         .glass-nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(25px); border-bottom: 1px solid var(--glass-border); z-index: 1000; }
         .logo { font-family: 'Playfair Display'; font-size: 1.4rem; font-weight: 700; text-decoration: none; color: white; }
         .nav-right { display: flex; gap: 15px; align-items: center; }
-        .support-btn { color: var(--accent); text-decoration: none; font-size: 0.85rem; border: 1px solid var(--accent); padding: 8px 18px; border-radius: 20px; transition: 0.3s; white-space: nowrap; }
-        .support-btn:hover { background: var(--accent); color: white; }
+        
+        /* Updated Support Button */
+        .support-btn { color: var(--accent); text-decoration: none; font-size: 0.85rem; border: 1px solid var(--accent); padding: 8px 18px; border-radius: 20px; transition: 0.3s; white-space: nowrap; font-weight: 600; }
+        .support-btn:hover { background: var(--accent); color: white; box-shadow: 0 0 15px rgba(114, 164, 242, 0.4); }
 
         .hamburger-btn { background: var(--glass); border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; cursor: pointer; }
         .hamburger-btn span { width: 18px; height: 2px; background: white; transition: 0.3s; }
@@ -61,8 +63,11 @@
         .card-img-wrapper { aspect-ratio: 16/10; overflow: hidden; background: #111; }
         .card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: 1.2s; }
 
-        /* Footer */
-        footer { padding: 80px 5% 40px; text-align: center; border-top: 1px solid var(--glass-border); }
+        /* Footer Updates */
+        footer { padding: 100px 5% 40px; text-align: center; border-top: 1px solid var(--glass-border); background: linear-gradient(to bottom, #050505, #0a0a0a); }
+        .support-us-footer { max-width: 700px; margin: 0 auto 60px; background: var(--glass); border: 1px solid var(--glass-border); padding: 40px 20px; border-radius: 24px; backdrop-filter: blur(15px); }
+        .support-us-footer h2 { font-family: 'Playfair Display'; font-style: italic; font-size: 1.8rem; margin-bottom: 15px; }
+        .support-us-footer p { color: #aaa; font-size: 0.95rem; line-height: 1.8; margin-bottom: 25px; }
         .footer-nav { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 40px; }
         .footer-btn { color: #aaa; text-decoration: none; font-size: 0.75rem; padding: 10px 22px; border: 1px solid var(--glass-border); border-radius: 30px; background: var(--glass); text-transform: uppercase; letter-spacing: 1px; }
 
@@ -91,23 +96,23 @@
     <div id="preloader"><div class="loader-spin"></div><p style="margin-top:15px; font-size:0.6rem; letter-spacing:2px;">FILTERING TERRESTRIAL DATA</p></div>
     <div id="cursor-ring"></div>
 
-  <nav class="glass-nav">
-    <a href="index.html" class="logo">moonlightmoments.co.in</a>
-    <div class="nav-right">
-        <a href="javascript:void(0)" onclick="showLegal('contact')" class="support-btn">Support</a>
-        <div class="dropdown">
-            <button class="hamburger-btn" id="menuBtn"><span></span><span></span><span></span></button>
-            <div class="dropdown-content" id="myDropdown">
-                <a href="index.html">✦ Archive (Home)</a>
-                <a href="age.html">✦ Interstellar Identity</a>
-                <a href="event.html">✦ Celestial Forecast</a>
-                <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.05); margin: 5px 0;">
-                <a href="javascript:void(0)" onclick="showLegal('about')">Our Story</a>
-                <a href="javascript:void(0)" onclick="showLegal('privacy')">Privacy Orbit</a>
+    <nav class="glass-nav">
+        <a href="index.html" class="logo">moonlightmoments.co.in</a>
+        <div class="nav-right">
+            <a href="https://ko-fi.com/moonlightmoments" target="_blank" class="support-btn">Support Us</a>
+            <div class="dropdown">
+                <button class="hamburger-btn" id="menuBtn"><span></span><span></span><span></span></button>
+                <div class="dropdown-content" id="myDropdown">
+                    <a href="index.html">✦ Archive (Home)</a>
+                    <a href="age.html">✦ Interstellar Identity</a>
+                    <a href="event.html">✦ Celestial Forecast</a>
+                    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.05); margin: 5px 0;">
+                    <a href="javascript:void(0)" onclick="showLegal('about')">Our Story</a>
+                    <a href="javascript:void(0)" onclick="showLegal('privacy')">Privacy Orbit</a>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <header class="hero-section">
         <div id="hero-bg"></div>
@@ -135,6 +140,20 @@
     </section>
 
     <footer>
+        <div class="support-us-footer">
+            <h2>A Sanctuary in the Stars</h2>
+            <p>
+                Moonlight Moments is a labor of love, intentionally kept free of advertisements 
+                to protect your peace of mind. To keep this archive growing and open to all explorers, 
+                we rely on the kindness of our community. If this journey has brought you comfort, 
+                please consider supporting us.
+            </p>
+            <a href="https://ko-fi.com/moonlightmoments" target="_blank" class="support-btn" style="padding: 12px 30px; font-size: 1rem;">
+                ☕ Support Us on Ko-fi
+            </a>
+            <p style="margin-top: 20px; font-size: 0.65rem; color: var(--accent); letter-spacing: 2px; text-transform: uppercase;">Pure Experience • No Ads • Open Cosmos</p>
+        </div>
+
         <div class="footer-nav">
             <a href="javascript:void(0)" onclick="showLegal('about')" class="footer-btn">Our Story</a>
             <a href="javascript:void(0)" onclick="showLegal('privacy')" class="footer-btn">Privacy Orbit</a>
@@ -187,17 +206,15 @@
             });
         }
 
-        // --- Core NASA Gallery Logic (With Human Filter) ---
+        // --- NASA Gallery Logic ---
         async function loadLibraryGallery(query = '') {
             const preloader = document.getElementById('preloader');
             preloader.style.display = 'flex';
             preloader.style.opacity = '1';
 
-            const terms = ['nebula', 'galaxy', 'supernova', 'deep space', 'hubble', 'exoplanet', 'black hole'];
+            const terms = ['nebula', 'galaxy', 'supernova', 'deep space', 'hubble'];
             const q = query || terms[Math.floor(Math.random() * terms.length)];
-            
-            // Filter keywords
-            const terrestrialBlacklist = ['person', 'people', 'human', 'engineer', 'technician', 'crowd', 'audience', 'building', 'office', 'suit', 'standing', 'pose', 'meeting', 'infographic', 'diagram', 'text', 'logo'];
+            const terrestrialBlacklist = ['person', 'people', 'engineer', 'technician', 'building', 'office', 'text', 'logo'];
 
             try {
                 const res = await fetch(`https://images-api.nasa.gov/search?q=${q}&media_type=image`);
@@ -237,7 +254,7 @@
             setupHovers();
         }
 
-        // --- User Actions ---
+        // --- Actions ---
         document.getElementById('search-btn').onclick = () => {
             const val = document.getElementById('search-input').value;
             if(val) { loadLibraryGallery(val); document.getElementById('gallery').scrollIntoView({behavior:'smooth'}); }
@@ -253,7 +270,7 @@
                 galleryItems.unshift(item);
                 renderGrid();
                 openModal(0);
-            } catch(e) { alert("Birth Star currently unavailable, using archive instead."); }
+            } catch(e) { alert("Birth Star currently unavailable."); }
             finally { this.innerText = "Birth Star"; }
         };
 
@@ -271,16 +288,16 @@
 
         function closeModal() { document.getElementById('modal').style.display='none'; document.body.style.overflow='auto'; }
 
-        // --- Nav Logic ---
+        // --- Nav ---
         document.getElementById('menuBtn').onclick = (e) => { e.stopPropagation(); document.getElementById('myDropdown').classList.toggle('show'); };
         window.onclick = () => document.getElementById('myDropdown').classList.remove('show');
 
         function showLegal(t) {
             const data = { 
-                about: "Moonlight Moments is a high-fidelity gateway to the cosmos. We filter thousands of NASA records to bring you only the most breathtaking views of our universe.", 
+                about: "Moonlight Moments is a high-fidelity gateway to the cosmos. We filter thousands of NASA records to bring you only the most breathtaking views.", 
                 privacy: "Privacy Orbit: No personal data is collected. Your celestial journey remains anonymous.", 
-                terms: "Guidelines: All media is sourced via NASA Open APIs. Commercial use is subject to NASA media guidelines.", 
-                contact: "Transmission: Questions or bugs? Contact us at support@moonlightmoments.co.in" 
+                terms: "Guidelines: All media is sourced via NASA Open APIs. Commercial use is subject to NASA guidelines.", 
+                contact: "Transmission: Questions? Contact us at support@moonlightmoments.co.in" 
             };
             document.getElementById('legal-content').innerHTML = `
                 <h2 style="font-family:'Playfair Display'; font-size:2.5rem; margin-bottom:30px;">${t.toUpperCase()}</h2>
