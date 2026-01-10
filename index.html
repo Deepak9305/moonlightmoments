@@ -31,21 +31,17 @@
         .glass-nav { position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 5%; background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(25px); border-bottom: 1px solid var(--glass-border); z-index: 1000; }
         .logo { font-family: 'Playfair Display'; font-size: 1.4rem; font-weight: 700; text-decoration: none; color: white; }
         .nav-right { display: flex; gap: 15px; align-items: center; }
-        
-        .support-btn { color: var(--accent); text-decoration: none; font-size: 0.85rem; border: 1px solid var(--accent); padding: 8px 18px; border-radius: 20px; transition: 0.3s; white-space: nowrap; font-weight: 600; }
-        .support-btn:hover { background: var(--accent); color: white; box-shadow: 0 0 15px rgba(114, 164, 242, 0.4); }
+        .support-btn { color: var(--accent); text-decoration: none; font-size: 0.85rem; border: 1px solid var(--accent); padding: 8px 18px; border-radius: 20px; transition: 0.3s; font-weight: 600; }
+        .support-btn:hover { background: var(--accent); color: white; }
 
         .hamburger-btn { background: var(--glass); border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; cursor: pointer; }
         .hamburger-btn span { width: 18px; height: 2px; background: white; transition: 0.3s; }
         
         .dropdown { position: relative; }
-        .dropdown-content { display: none; position: absolute; right: 0; top: 50px; background: #0f0f0f; min-width: 180px; border: 1px solid var(--glass-border); border-radius: 12px; overflow: hidden; }
+        .dropdown-content { display: none; position: absolute; right: 0; top: 50px; background: #0f0f0f; min-width: 200px; border: 1px solid var(--glass-border); border-radius: 12px; overflow: hidden; }
         .dropdown-content.show { display: block; }
         .dropdown-content a { color: #ccc; padding: 14px 20px; text-decoration: none; display: block; font-size: 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .dropdown-content a:hover { background: var(--accent); color: white; }
-
-        /* Helpers for Desktop/Mobile view logic */
-        .mobile-support { display: none; }
 
         /* Hero */
         .hero-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; text-align: center; padding: 140px 20px 40px; }
@@ -56,7 +52,6 @@
         .input-pill { background: var(--glass); border: 1px solid var(--glass-border); padding: 6px; border-radius: 40px; display: flex; backdrop-filter: blur(10px); }
         .input-pill input { background: none; border: none; padding: 10px 20px; color: white; flex: 1; outline: none; font-size: 0.9rem; }
         .btn-pill { background: var(--accent); color: white; border: none; padding: 10px 25px; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.3s; }
-        .btn-pill:hover { filter: brightness(1.2); }
 
         /* Gallery */
         .gallery-section { padding: 80px 8%; }
@@ -65,68 +60,48 @@
         .card-img-wrapper { aspect-ratio: 16/10; overflow: hidden; background: #111; }
         .card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: 1.2s; }
 
-        /* Footer Updates */
-        footer { padding: 100px 5% 40px; text-align: center; border-top: 1px solid var(--glass-border); background: linear-gradient(to bottom, #050505, #0a0a0a); }
-        .support-us-footer { max-width: 700px; margin: 0 auto 60px; background: var(--glass); border: 1px solid var(--glass-border); padding: 40px 20px; border-radius: 24px; backdrop-filter: blur(15px); }
-        .support-us-footer h2 { font-family: 'Playfair Display'; font-style: italic; font-size: 1.8rem; margin-bottom: 15px; }
-        .support-us-footer p { color: #aaa; font-size: 0.95rem; line-height: 1.8; margin-bottom: 25px; }
+        /* Footer */
+        footer { padding: 100px 5% 40px; text-align: center; border-top: 1px solid var(--glass-border); }
+        .support-us-footer { max-width: 700px; margin: 0 auto 60px; background: var(--glass); border: 1px solid var(--glass-border); padding: 40px 20px; border-radius: 24px; }
         .footer-nav { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 40px; }
-        .footer-btn { color: #aaa; text-decoration: none; font-size: 0.75rem; padding: 10px 22px; border: 1px solid var(--glass-border); border-radius: 30px; background: var(--glass); text-transform: uppercase; letter-spacing: 1px; }
+        .footer-btn { color: #aaa; text-decoration: none; font-size: 0.75rem; padding: 10px 22px; border: 1px solid var(--glass-border); border-radius: 30px; background: var(--glass); }
 
-        /* Modals */
+        /* Modals & Zoom */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; z-index: 2000; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(20px); }
-        .modal-content { background: #0a0a0a; width: 100%; max-width: 1000px; display: flex; border: 1px solid var(--glass-border); position: relative; max-height: 90vh; overflow: hidden; border-radius: 12px; }
-        .modal-img-side { flex: 1.3; background: #000; display: flex; align-items: center; justify-content: center; }
-        .modal-img-side img { width: 100%; height: 100%; object-fit: contain; }
-        .modal-text-side { flex: 1; padding: 40px; overflow-y: auto; }
+        .modal-content { background: #0a0a0a; width: 100%; max-width: 1100px; display: flex; border: 1px solid var(--glass-border); position: relative; max-height: 90vh; border-radius: 12px; overflow: hidden; }
         
-        /* Preloader */
+        .modal-img-side { flex: 1.5; background: #000; position: relative; overflow: hidden; cursor: zoom-in; display: flex; align-items: center; justify-content: center; }
+        .modal-img-side img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s ease-out; transform-origin: center center; }
+        .modal-img-side.zoomed { cursor: zoom-out; }
+        .modal-img-side.zoomed img { transform: scale(2.5); }
+
+        .modal-text-side { flex: 1; padding: 40px; overflow-y: auto; background: #0a0a0a; border-left: 1px solid var(--glass-border); }
+
         #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #050505; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: 0.8s; }
         .loader-spin { width: 40px; height: 40px; border: 2px solid rgba(114, 164, 242, 0.1); border-top: 2px solid var(--accent); border-radius: 50%; animation: spin 1s linear infinite; }
-
-        .legal-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #050505; z-index: 3000; display: none; padding: 80px 20px; overflow-y: auto; }
-        .legal-inner { max-width: 700px; margin: 0 auto; }
 
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
-        /* RESPONSIVE OVERRIDES */
-        @media (max-width: 768px) { 
-            .modal-content { flex-direction: column; } 
-            .modal-img-side { height: 250px; flex: none; } 
-
-            /* 1. Remove custom cursor ring on mobile */
-            #cursor-ring { display: none !important; }
-            
-            /* 2. Re-enable default cursor (touch) so system behaves normally */
-            body.no-mouse { cursor: auto !important; }
-
-            /* 3. Reorder Support Button: Hide from main nav, show in dropdown */
-            .nav-right > .support-btn { display: none; }
-            .mobile-support { display: block !important; color: var(--accent) !important; font-weight: 600; }
-        }
+        @media (max-width: 768px) { .modal-content { flex-direction: column; } .modal-img-side { height: 300px; flex: none; } }
     </style>
 </head>
 <body class="no-mouse">
 
-    <div id="preloader"><div class="loader-spin"></div><p style="margin-top:15px; font-size:0.6rem; letter-spacing:2px;">FILTERING TERRESTRIAL DATA</p></div>
+    <div id="preloader"><div class="loader-spin"></div><p style="margin-top:15px; font-size:0.6rem; letter-spacing:2px;">PURIFYING COSMIC DATA</p></div>
     <div id="cursor-ring"></div>
 
     <nav class="glass-nav">
         <a href="index.html" class="logo">moonlightmoments.co.in</a>
         <div class="nav-right">
             <a href="https://ko-fi.com/moonlightmoments" target="_blank" class="support-btn">Support Us</a>
-            
             <div class="dropdown">
                 <button class="hamburger-btn" id="menuBtn"><span></span><span></span><span></span></button>
                 <div class="dropdown-content" id="myDropdown">
-                    <a href="index.html">✦ Archive (Home)</a>
-                    <a href="age.html">✦ Interstellar Identity</a>
-                    <a href="event.html">✦ Celestial Forecast</a>
-                    
-                    <a href="https://ko-fi.com/moonlightmoments" target="_blank" class="mobile-support">☕ Support Us</a>
-
-                    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.05); margin: 5px 0;">
+                    <a href="index.html">✦ Archive</a>
+                    <a href="age.html">✦ Identity</a>
+                    <a href="event.html">✦ Forecast</a>
+                    <hr style="border:0; border-top:1px solid #222; margin:5px 0;">
                     <a href="javascript:void(0)" onclick="showLegal('about')">Our Story</a>
                     <a href="javascript:void(0)" onclick="showLegal('privacy')">Privacy Orbit</a>
                 </div>
@@ -137,139 +112,106 @@
     <header class="hero-section">
         <div id="hero-bg"></div>
         <div class="hero-content">
-            <h1 style="font-family: 'Playfair Display'; font-size: clamp(2.2rem, 8vw, 4.5rem); margin-bottom: 30px;">Moonlight Moments</h1>
+            <h1 style="font-family:'Playfair Display'; font-size:clamp(2.2rem, 8vw, 4.5rem); margin-bottom:30px;">Moonlight Moments</h1>
             <div class="hero-controls">
                 <div class="input-pill">
-                    <input type="text" id="search-input" placeholder="Enter a nebula or galaxy name...">
+                    <input type="text" id="search-input" placeholder="Search cosmic bodies...">
                     <button class="btn-pill" id="search-btn">Explore</button>
                 </div>
-                <div class="input-pill" style="max-width: 350px; margin: 0 auto;">
+                <div class="input-pill" style="max-width:350px; margin:0 auto;">
                     <input type="date" id="date-input">
                     <button class="btn-pill" id="date-btn">Birth Star</button>
                 </div>
-                <button class="btn-pill" onclick="loadLibraryGallery()" style="background:none; border:1px solid var(--accent); color:var(--accent); margin-top:10px;">↻ Re-Sync Archive</button>
             </div>
         </div>
     </header>
 
-    <section class="gallery-section" id="gallery">
+    <section class="gallery-section">
         <div class="grid-container" id="main-grid"></div>
-        <div style="text-align: center; margin-top: 50px;">
-            <button class="btn-pill" onclick="loadLibraryGallery()">Load New Discoveries ↻</button>
+        <div style="text-align:center; margin-top:50px;">
+            <button class="btn-pill" onclick="loadLibraryGallery()" style="background:none; border:1px solid var(--accent); color:var(--accent);">↻ Re-Sync Natural Archive</button>
         </div>
     </section>
 
     <footer>
         <div class="support-us-footer">
-            <h2>A Sanctuary in the Stars</h2>
-            <p>
-                Moonlight Moments is a labor of love, intentionally kept free of advertisements 
-                to protect your peace of mind. To keep this archive growing and open to all explorers, 
-                we rely on the kindness of our community. If this journey has brought you comfort, 
-                please consider supporting us.
-            </p>
-            <a href="https://ko-fi.com/moonlightmoments" target="_blank" class="support-btn" style="padding: 12px 30px; font-size: 1rem;">
-                ☕ Support Us on Ko-fi
-            </a>
-            <p style="margin-top: 20px; font-size: 0.65rem; color: var(--accent); letter-spacing: 2px; text-transform: uppercase;">Pure Experience • No Ads • Open Cosmos</p>
+            <h2 style="font-family:'Playfair Display'; font-style:italic; margin-bottom:15px;">A Sanctuary in the Stars</h2>
+            <p style="font-size:0.9rem; color:#aaa; margin-bottom:25px;">Filtering thousands of NASA records to ensure a purely celestial experience.</p>
+            <a href="https://ko-fi.com/moonlightmoments" target="_blank" class="support-btn" style="padding:12px 30px;">☕ Support on Ko-fi</a>
         </div>
-
-        <div class="footer-nav">
-            <a href="javascript:void(0)" onclick="showLegal('about')" class="footer-btn">Our Story</a>
-            <a href="javascript:void(0)" onclick="showLegal('privacy')" class="footer-btn">Privacy Orbit</a>
-            <a href="javascript:void(0)" onclick="showLegal('terms')" class="footer-btn">Guidelines</a>
-            <a href="javascript:void(0)" onclick="showLegal('contact')" class="footer-btn">Transmission</a>
-        </div>
-        <p style="color: #444; font-size: 0.65rem; letter-spacing: 2px;">&copy; 2026 MOONLIGHT MOMENTS | NASA OPEN ARCHIVE</p>
+        <p style="color:#444; font-size:0.65rem; letter-spacing:2px;">&copy; 2026 MOONLIGHT MOMENTS | NASA OPEN ARCHIVE</p>
     </footer>
 
     <div id="modal" class="modal-overlay">
         <div class="modal-content">
-            <button style="position:absolute; top:15px; right:20px; color:white; font-size:2rem; background:none; border:none; z-index:100; cursor:pointer;" onclick="closeModal()">&times;</button>
-            <div class="modal-img-side"></div>
+            <button style="position:absolute; top:15px; right:20px; color:white; font-size:2rem; background:none; border:none; cursor:pointer; z-index:10;" onclick="closeModal()">&times;</button>
+            <div class="modal-img-side" id="zoom-container">
+                <img id="m-img" src="">
+            </div>
             <div class="modal-text-side">
                 <span id="m-date" style="color:var(--accent); font-size:0.75rem;"></span>
-                <h2 id="m-title" style="font-family:'Playfair Display'; margin: 10px 0;"></h2>
-                <p id="m-desc" style="color:#999; font-size:0.9rem; margin-bottom:30px;"></p>
+                <h2 id="m-title" style="font-family:'Playfair Display'; margin:10px 0;"></h2>
+                <p id="m-desc" style="color:#999; font-size:0.85rem; margin-bottom:30px;"></p>
                 <button id="m-dl" style="width:100%; padding:15px; background:white; color:black; border:none; font-weight:700; border-radius:8px; cursor:pointer;">DOWNLOAD</button>
             </div>
         </div>
-    </div>
-
-    <div id="legal-modal" class="legal-modal">
-        <span style="position:fixed; top:30px; right:30px; font-size:2.5rem; color:#fff; cursor:pointer;" onclick="closeLegal()">&times;</span>
-        <div class="legal-inner" id="legal-content"></div>
     </div>
 
     <script>
         const API_KEY = 'DzuEQHQeW71HYPPMwkW66E0B8dYiVEVPRdLkfaRk';
         let galleryItems = [];
 
+        // Strict Artificial/Terrestrial Blacklist
+        const blacklist = [
+            'person', 'people', 'engineer', 'technician', 'astronaut', 'suit', 'portrait', 'standing', 'working',
+            'office', 'building', 'facility', 'clean room', 'lab', 'desk', 'computer', 'monitor', 'interior',
+            'antenna', 'telescope structure', 'machinery', 'payload', 'hardware', 'component', 'module', 'frame',
+            'satellite', 'spacecraft', 'probe', 'rover', 'orbiter', 'lander', 'shuttle', 'station', 'iss', 
+            'telescope design', 'vessel', 'rocket', 'launch', 'fairing', 'array', 'solar panel',
+            'hubble assembly', 'webb mirror', 'curiosity', 'perseverance', 'voyager', 'cassini', 'juno',
+            'logo', 'text', 'diagram', 'chart', 'graph', 'blueprint', 'map'
+        ];
+
         // --- Cursor ---
         const cursor = document.getElementById('cursor-ring');
         let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-        
-        document.addEventListener('mousemove', e => {
-            mouseX = e.clientX; mouseY = e.clientY;
-            // Only show cursor if window is wider than mobile breakpoint
-            if(window.innerWidth > 768) {
-                cursor.style.display = 'block';
-            }
-        });
-
-        function animateCursor() {
-            ringX += (mouseX - ringX) * 0.15; ringY += (mouseY - ringY) * 0.15;
-            cursor.style.transform = `translate3d(${ringX - 12}px, ${ringY - 12}px, 0)`;
-            requestAnimationFrame(animateCursor);
-        }
+        document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; if(window.innerWidth > 768) cursor.style.display = 'block'; });
+        function animateCursor() { ringX += (mouseX - ringX)*0.15; ringY += (mouseY - ringY)*0.15; cursor.style.transform = `translate3d(${ringX-12}px, ${ringY-12}px, 0)`; requestAnimationFrame(animateCursor); }
         animateCursor();
 
-        function setupHovers() {
-            document.querySelectorAll('a, button, .grid-item-card, input').forEach(el => {
-                el.onmouseenter = () => cursor.classList.add('cursor-expand');
-                el.onmouseleave = () => cursor.classList.remove('cursor-expand');
-            });
-        }
-
-        // --- NASA Gallery Logic ---
+        // --- Gallery Engine ---
         async function loadLibraryGallery(query = '') {
             const preloader = document.getElementById('preloader');
-            preloader.style.display = 'flex';
-            preloader.style.opacity = '1';
-
-            const terms = ['nebula', 'galaxy', 'supernova', 'deep space', 'hubble'];
-            const q = query || terms[Math.floor(Math.random() * terms.length)];
-            const terrestrialBlacklist = ['person', 'people', 'engineer', 'technician', 'building', 'office', 'text', 'logo'];
+            preloader.style.display = 'flex'; preloader.style.opacity = '1';
+            
+            // Search query remains open to user intent
+            const cosmicPool = ['nebula', 'galaxy', 'supernova', 'star cluster', 'deep space'];
+            const q = query || cosmicPool[Math.floor(Math.random()*cosmicPool.length)];
 
             try {
                 const res = await fetch(`https://images-api.nasa.gov/search?q=${q}&media_type=image`);
                 const d = await res.json();
                 
+                // Filtering Logic: Scan all metadata for blacklist terms
                 const filtered = d.collection.items.filter(item => {
                     const data = item.data[0];
-                    const text = (data.title + " " + (data.description || "")).toLowerCase();
-                    return !terrestrialBlacklist.some(word => text.includes(word));
+                    const meta = (data.title + " " + (data.description || "") + " " + (data.keywords ? data.keywords.join(" ") : "")).toLowerCase();
+                    return !blacklist.some(word => meta.includes(word));
                 });
 
-                const shuffled = filtered.sort(() => 0.5 - Math.random());
-                galleryItems = shuffled.slice(0, 16).map(i => ({
-                    url: i.links[0].href,
-                    title: i.data[0].title,
-                    explanation: i.data[0].description,
-                    date: i.data[0].date_created.split('T')[0]
+                galleryItems = filtered.sort(() => 0.5 - Math.random()).slice(0, 16).map(i => ({
+                    url: i.links[0].href, title: i.data[0].title, explanation: i.data[0].description, date: i.data[0].date_created.split('T')[0]
                 }));
-
+                
                 renderGrid();
                 if(galleryItems[0]) document.getElementById('hero-bg').innerHTML = `<img src="${galleryItems[0].url}">`;
             } catch(e) { console.error(e); }
-            finally {
-                setTimeout(() => { preloader.style.opacity = '0'; setTimeout(() => preloader.style.display = 'none', 800); }, 500);
-            }
+            finally { setTimeout(() => { preloader.style.opacity = '0'; setTimeout(() => preloader.style.display = 'none', 800); }, 500); }
         }
 
         function renderGrid() {
             document.getElementById('main-grid').innerHTML = galleryItems.map((item, i) => `
-                <div class="grid-item-card" onclick="openModal(${i})" style="animation: fadeInUp 0.6s forwards ${i * 0.1}s;">
+                <div class="grid-item-card" onclick="openModal(${i})" style="animation: fadeInUp 0.6s forwards ${i*0.1}s;">
                     <div class="card-img-wrapper"><img src="${item.url}" onload="this.style.opacity='1'"></div>
                     <div style="padding:20px;">
                         <span style="font-size:0.7rem; color:var(--accent);">${item.date}</span>
@@ -279,30 +221,35 @@
             setupHovers();
         }
 
-        // --- Actions ---
-        document.getElementById('search-btn').onclick = () => {
-            const val = document.getElementById('search-input').value;
-            if(val) { loadLibraryGallery(val); document.getElementById('gallery').scrollIntoView({behavior:'smooth'}); }
-        };
+        function setupHovers() {
+            document.querySelectorAll('a, button, .grid-item-card, input').forEach(el => {
+                el.onmouseenter = () => cursor.classList.add('cursor-expand');
+                el.onmouseleave = () => cursor.classList.remove('cursor-expand');
+            });
+        }
 
-        document.getElementById('date-btn').onclick = async function() {
-            const date = document.getElementById('date-input').value;
-            if(!date) return;
-            this.innerText = "...";
-            try {
-                const res = await fetch(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=${API_KEY}`);
-                const item = await res.json();
-                galleryItems.unshift(item);
-                renderGrid();
-                openModal(0);
-            } catch(e) { alert("Birth Star currently unavailable."); }
-            finally { this.innerText = "Birth Star"; }
-        };
+        // --- Zoom & Pan ---
+        const zoomContainer = document.getElementById('zoom-container');
+        const zoomImg = document.getElementById('m-img');
+
+        zoomContainer.addEventListener('click', () => {
+            zoomContainer.classList.toggle('zoomed');
+            if(!zoomContainer.classList.contains('zoomed')) zoomImg.style.transform = `scale(1) translate(0,0)`;
+        });
+
+        zoomContainer.addEventListener('mousemove', (e) => {
+            if (!zoomContainer.classList.contains('zoomed')) return;
+            const rect = zoomContainer.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width;
+            const y = (e.clientY - rect.top) / rect.height;
+            zoomImg.style.transform = `scale(2.5) translate(${(0.5 - x) * 100}%, ${(0.5 - y) * 100}%)`;
+        });
 
         function openModal(i) {
             const item = galleryItems[i];
-            const side = document.querySelector('.modal-img-side');
-            side.innerHTML = `<img src="${item.url}">`;
+            zoomImg.src = item.url;
+            zoomContainer.classList.remove('zoomed');
+            zoomImg.style.transform = `scale(1) translate(0,0)`;
             document.getElementById('m-title').innerText = item.title;
             document.getElementById('m-date').innerText = item.date;
             document.getElementById('m-desc').innerText = item.explanation;
@@ -313,24 +260,23 @@
 
         function closeModal() { document.getElementById('modal').style.display='none'; document.body.style.overflow='auto'; }
 
-        // --- Nav ---
+        document.getElementById('search-btn').onclick = () => { const v = document.getElementById('search-input').value; if(v) loadLibraryGallery(v); };
+        
+        document.getElementById('date-btn').onclick = async function() {
+            const date = document.getElementById('date-input').value;
+            if(!date) return;
+            this.innerText = "...";
+            try {
+                const res = await fetch(`https://api.nasa.gov/planetary/apod?date=${date}&api_key=${API_KEY}`);
+                const item = await res.json();
+                galleryItems.unshift({ url: item.url, title: item.title, explanation: item.explanation, date: item.date });
+                renderGrid(); openModal(0);
+            } catch(e) { alert("Data unavailable."); }
+            finally { this.innerText = "Birth Star"; }
+        };
+
         document.getElementById('menuBtn').onclick = (e) => { e.stopPropagation(); document.getElementById('myDropdown').classList.toggle('show'); };
         window.onclick = () => document.getElementById('myDropdown').classList.remove('show');
-
-        function showLegal(t) {
-            const data = { 
-                about: "Moonlight Moments is a high-fidelity gateway to the cosmos. We filter thousands of NASA records to bring you only the most breathtaking views.", 
-                privacy: "Privacy Orbit: No personal data is collected. Your celestial journey remains anonymous.", 
-                terms: "Guidelines: All media is sourced via NASA Open APIs. Commercial use is subject to NASA guidelines.", 
-                contact: "Transmission: Questions? Contact us at support@moonlightmoments.co.in" 
-            };
-            document.getElementById('legal-content').innerHTML = `
-                <h2 style="font-family:'Playfair Display'; font-size:2.5rem; margin-bottom:30px;">${t.toUpperCase()}</h2>
-                <p style="font-size:1.1rem; line-height:2; color:#ccc;">${data[t]}</p>`;
-            document.getElementById('legal-modal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-        function closeLegal() { document.getElementById('legal-modal').style.display='none'; document.body.style.overflow='auto'; }
 
         loadLibraryGallery();
     </script>
