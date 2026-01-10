@@ -32,7 +32,6 @@
         .logo { font-family: 'Playfair Display'; font-size: 1.4rem; font-weight: 700; text-decoration: none; color: white; }
         .nav-right { display: flex; gap: 15px; align-items: center; }
         
-        /* Updated Support Button */
         .support-btn { color: var(--accent); text-decoration: none; font-size: 0.85rem; border: 1px solid var(--accent); padding: 8px 18px; border-radius: 20px; transition: 0.3s; white-space: nowrap; font-weight: 600; }
         .support-btn:hover { background: var(--accent); color: white; box-shadow: 0 0 15px rgba(114, 164, 242, 0.4); }
 
@@ -44,6 +43,9 @@
         .dropdown-content.show { display: block; }
         .dropdown-content a { color: #ccc; padding: 14px 20px; text-decoration: none; display: block; font-size: 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .dropdown-content a:hover { background: var(--accent); color: white; }
+
+        /* Helpers for Desktop/Mobile view logic */
+        .mobile-support { display: none; }
 
         /* Hero */
         .hero-section { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; text-align: center; padding: 140px 20px 40px; }
@@ -88,7 +90,21 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
-        @media (max-width: 768px) { .modal-content { flex-direction: column; } .modal-img-side { height: 250px; flex: none; } }
+        /* RESPONSIVE OVERRIDES */
+        @media (max-width: 768px) { 
+            .modal-content { flex-direction: column; } 
+            .modal-img-side { height: 250px; flex: none; } 
+
+            /* 1. Remove custom cursor ring on mobile */
+            #cursor-ring { display: none !important; }
+            
+            /* 2. Re-enable default cursor (touch) so system behaves normally */
+            body.no-mouse { cursor: auto !important; }
+
+            /* 3. Reorder Support Button: Hide from main nav, show in dropdown */
+            .nav-right > .support-btn { display: none; }
+            .mobile-support { display: block !important; color: var(--accent) !important; font-weight: 600; }
+        }
     </style>
 </head>
 <body class="no-mouse">
@@ -100,12 +116,16 @@
         <a href="index.html" class="logo">moonlightmoments.co.in</a>
         <div class="nav-right">
             <a href="https://ko-fi.com/moonlightmoments" target="_blank" class="support-btn">Support Us</a>
+            
             <div class="dropdown">
                 <button class="hamburger-btn" id="menuBtn"><span></span><span></span><span></span></button>
                 <div class="dropdown-content" id="myDropdown">
                     <a href="index.html">✦ Archive (Home)</a>
                     <a href="age.html">✦ Interstellar Identity</a>
                     <a href="event.html">✦ Celestial Forecast</a>
+                    
+                    <a href="https://ko-fi.com/moonlightmoments" target="_blank" class="mobile-support">☕ Support Us</a>
+
                     <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.05); margin: 5px 0;">
                     <a href="javascript:void(0)" onclick="showLegal('about')">Our Story</a>
                     <a href="javascript:void(0)" onclick="showLegal('privacy')">Privacy Orbit</a>
@@ -188,10 +208,15 @@
         // --- Cursor ---
         const cursor = document.getElementById('cursor-ring');
         let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+        
         document.addEventListener('mousemove', e => {
             mouseX = e.clientX; mouseY = e.clientY;
-            cursor.style.display = 'block';
+            // Only show cursor if window is wider than mobile breakpoint
+            if(window.innerWidth > 768) {
+                cursor.style.display = 'block';
+            }
         });
+
         function animateCursor() {
             ringX += (mouseX - ringX) * 0.15; ringY += (mouseY - ringY) * 0.15;
             cursor.style.transform = `translate3d(${ringX - 12}px, ${ringY - 12}px, 0)`;
