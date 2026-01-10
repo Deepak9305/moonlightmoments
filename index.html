@@ -231,41 +231,68 @@
             });
         }
 
-        // --- NASA Gallery Logic ---
-        async function loadLibraryGallery(query = '') {
-            const preloader = document.getElementById('preloader');
-            preloader.style.display = 'flex';
-            preloader.style.opacity = '1';
+// --- NASA Gallery Logic with Strict Terrestrial Filtering ---
+async function loadLibraryGallery(query = '') {
+    const preloader = document.getElementById('preloader');
+    preloader.style.display = 'flex';
+    preloader.style.opacity = '1';
 
-            const terms = ['nebula', 'galaxy', 'supernova', 'deep space', 'hubble'];
-            const q = query || terms[Math.floor(Math.random() * terms.length)];
-            const terrestrialBlacklist = ['person', 'people', 'engineer', 'technician', 'building', 'office', 'text', 'logo'];
+    // Randomize cosmic search terms if no query is provided
+    const cosmicPool = ['nebula', 'galaxy', 'supernova', 'star cluster', 'deep field', 'exoplanet'];
+    const q = query || cosmicPool[Math.floor(Math.random() * cosmicPool.length)];
 
-            try {
-                const res = await fetch(`https://images-api.nasa.gov/search?q=${q}&media_type=image`);
-                const d = await res.json();
-                
-                const filtered = d.collection.items.filter(item => {
-                    const data = item.data[0];
-                    const text = (data.title + " " + (data.description || "")).toLowerCase();
-                    return !terrestrialBlacklist.some(word => text.includes(word));
-                });
+    // Aggressive list of terms to exclude (Humans, Robots, Devices, Facilities)
+    const terrestrialBlacklist = [
+        'person', 'people', 'engineer', 'technician', 'astronaut', 'suit', 
+        'training', 'office', 'building', 'facility', 'antenna', 'telescope structure',
+        'rover', 'robot', 'machinery', 'computer', 'desk', 'text', 'logo', 'diagram',
+        'portrait', 'standing', 'working', 'payload', 'clean room', 'laboratory'
+    ];
 
-                const shuffled = filtered.sort(() => 0.5 - Math.random());
-                galleryItems = shuffled.slice(0, 16).map(i => ({
-                    url: i.links[0].href,
-                    title: i.data[0].title,
-                    explanation: i.data[0].description,
-                    date: i.data[0].date_created.split('T')[0]
-                }));
+    try {
+        // We fetch more items than needed (50) to allow room for filtering
+        const res = await fetch(`https://images-api.nasa.gov/search?q=${q}&media_type=image`);
+        const d = await res.json();
+        
+        const filtered = d.collection.items.filter(item => {
+            const data = item.data[0];
+            // Combine title, description, and keywords for a thorough scan
+            const metadata = (
+                data.title + " " + 
+                (data.description || "") + " " + 
+                (data.keywords ? data.keywords.join(" ") : "")
+            ).toLowerCase();
 
-                renderGrid();
-                if(galleryItems[0]) document.getElementById('hero-bg').innerHTML = `<img src="${galleryItems[0].url}">`;
-            } catch(e) { console.error(e); }
-            finally {
-                setTimeout(() => { preloader.style.opacity = '0'; setTimeout(() => preloader.style.display = 'none', 800); }, 500);
-            }
+            // Return true only if NONE of the blacklist words appear in the metadata
+            return !terrestrialBlacklist.some(word => metadata.includes(word));
+        });
+
+        // Shuffle and take the top 16 clean results
+        const shuffled = filtered.sort(() => 0.5 - Math.random());
+        galleryItems = shuffled.slice(0, 16).map(i => ({
+            url: i.links[0].href,
+            title: i.data[0].title,
+            explanation: i.data[0].description,
+            date: i.data[0].date_created.split('T')[0]
+        }));
+
+        renderGrid();
+        
+        // Update Hero Background with a high-quality filtered image
+        if(galleryItems[0]) {
+            document.getElementById('hero-bg').innerHTML = `<img src="${galleryItems[0].url}" style="opacity: 0.5;">`;
         }
+    } catch(e) { 
+        console.error("Orbit Sync Failed:", e); 
+    }
+    finally {
+        // Smooth transition out of preloader
+        setTimeout(() => { 
+            preloader.style.opacity = '0'; 
+            setTimeout(() => preloader.style.display = 'none', 800); 
+        }, 500);
+    }
+}
 
         function renderGrid() {
             document.getElementById('main-grid').innerHTML = galleryItems.map((item, i) => `
