@@ -237,37 +237,44 @@ async function loadLibraryGallery(query = '') {
     preloader.style.display = 'flex';
     preloader.style.opacity = '1';
 
-    // Randomize cosmic search terms if no query is provided
-    const cosmicPool = ['nebula', 'galaxy', 'supernova', 'star cluster', 'deep field', 'exoplanet'];
+    const cosmicPool = ['nebula', 'galaxy', 'supernova', 'hubble deep field', 'star cluster', 'interstellar'];
     const q = query || cosmicPool[Math.floor(Math.random() * cosmicPool.length)];
 
-    // Aggressive list of terms to exclude (Humans, Robots, Devices, Facilities)
+    // Expanded blacklist for human/terrestrial elements
     const terrestrialBlacklist = [
-        'person', 'people', 'engineer', 'technician', 'astronaut', 'suit', 
-        'training', 'office', 'building', 'facility', 'antenna', 'telescope structure',
-        'rover', 'robot', 'machinery', 'computer', 'desk', 'text', 'logo', 'diagram',
-        'portrait', 'standing', 'working', 'payload', 'clean room', 'laboratory'
+        'person', 'people', 'human', 'astronaut', 'suit', 'helmet', 'engineer', 'staff',
+        'portrait', 'standing', 'posing', 'office', 'desk', 'computer', 'laboratory',
+        'facility', 'workshop', 'clean room', 'technician', 'meeting', 'presentation',
+        'press conference', 'podium', 'crowd', 'spectators', 'shirt', 'clothing'
     ];
 
     try {
-        // We fetch more items than needed (50) to allow room for filtering
+        // Fetching 100 items to ensure we have enough after strict filtering
         const res = await fetch(`https://images-api.nasa.gov/search?q=${q}&media_type=image`);
         const d = await res.json();
         
         const filtered = d.collection.items.filter(item => {
             const data = item.data[0];
-            // Combine title, description, and keywords for a thorough scan
-            const metadata = (
-                data.title + " " + 
-                (data.description || "") + " " + 
-                (data.keywords ? data.keywords.join(" ") : "")
-            ).toLowerCase();
+            const title = (data.title || "").toLowerCase();
+            const description = (data.description || "").toLowerCase();
+            const keywords = data.keywords ? data.keywords.map(k => k.toLowerCase()) : [];
+            const center = (data.center || "").toLowerCase();
 
-            // Return true only if NONE of the blacklist words appear in the metadata
-            return !terrestrialBlacklist.some(word => metadata.includes(word));
+            // 1. Filter out known "Human-heavy" NASA centers (Optional but effective)
+            // JSC often has astronaut training; HQ has press events.
+            const humanCenters = ['hq', 'jsc'];
+            if (humanCenters.includes(center) && !query) return false;
+
+            // 2. Comprehensive string to check against blacklist
+            const fullMetadata = `${title} ${description} ${keywords.join(" ")}`;
+
+            // 3. Logic: If ANY blacklist word is found, reject the image
+            const hasHumanElement = terrestrialBlacklist.some(word => fullMetadata.includes(word));
+            
+            return !hasHumanElement;
         });
 
-        // Shuffle and take the top 16 clean results
+        // Shuffle and slice
         const shuffled = filtered.sort(() => 0.5 - Math.random());
         galleryItems = shuffled.slice(0, 16).map(i => ({
             url: i.links[0].href,
@@ -278,15 +285,12 @@ async function loadLibraryGallery(query = '') {
 
         renderGrid();
         
-        // Update Hero Background with a high-quality filtered image
         if(galleryItems[0]) {
             document.getElementById('hero-bg').innerHTML = `<img src="${galleryItems[0].url}" style="opacity: 0.5;">`;
         }
     } catch(e) { 
         console.error("Orbit Sync Failed:", e); 
-    }
-    finally {
-        // Smooth transition out of preloader
+    } finally {
         setTimeout(() => { 
             preloader.style.opacity = '0'; 
             setTimeout(() => preloader.style.display = 'none', 800); 
