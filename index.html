@@ -846,7 +846,7 @@
                 if (searchRes.ok) {
                     const searchData = await searchRes.json();
                     const items = searchData?.collection?.items || [];
-                    const badWords = ['astronaut', 'scientist', 'engineer', 'technician', 'personnel', 'crew portrait', 'standing next to', 'holding', 'man in', 'woman in', 'control room', 'laboratory interior', 'lab interior', 'test facility', 'machinery', 'circuitry', 'blueprint', 'schematic', 'technical diagram', 'instrument panel', 'launch vehicle technical', 'office building', 'hangar interior', 'warehouse', 'factory', 'parking lot', 'chart', 'graph', 'presentation slide', 'clipart', 'line drawing', 'patch design', 'insignia design', 'document scan', 'infographic', 'rocket', 'falcon', 'starship', 'pads', 'launch site', 'gantry', 'technical tower', 'spacesuit', 'suit portrait', 'official portrait', 'portrait of'];
+                    const badWords = ['astronaut', 'Museum', 'scientist', 'engineer', 'technician', 'personnel', 'crew portrait', 'standing next to', 'holding', 'man in', 'woman in', 'control room', 'laboratory interior', 'lab interior', 'test facility', 'machinery', 'circuitry', 'blueprint', 'schematic', 'technical diagram', 'instrument panel', 'launch vehicle technical', 'office building', 'hangar interior', 'warehouse', 'factory', 'parking lot', 'chart', 'graph', 'presentation slide', 'clipart', 'line drawing', 'patch design', 'insignia design', 'document scan', 'infographic', 'rocket', 'falcon', 'starship', 'pads', 'launch site', 'gantry', 'technical tower', 'spacesuit', 'suit portrait', 'official portrait', 'portrait of'];
 
 
                     cleanLibrary = items.filter(item => {
