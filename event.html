@@ -457,46 +457,61 @@
             const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
             setTimeout(async () => {
-                document.getElementById('month-name').innerText = monthNames[currentViewMonth];
-                container.innerHTML = '';
-                const monthlyEvents = masterCalendar.filter(ev => ev.month === currentViewMonth);
+                try {
+                    document.getElementById('month-name').innerText = monthNames[currentViewMonth];
+                    container.innerHTML = '';
+                    const monthlyEvents = masterCalendar.filter(ev => ev.month === currentViewMonth);
 
-                for (const ev of monthlyEvents) {
-                    try {
-                        const resp = await fetch(`https://images-api.nasa.gov/search?q=${ev.query}&media_type=image`);
-                        const data = await resp.json();
+                    for (const ev of monthlyEvents) {
+                        try {
+                            const resp = await fetch(`https://images-api.nasa.gov/search?q=${ev.query}&media_type=image`);
+                            if (!resp.ok) throw new Error("NASA API unavailable");
 
-                        // Surgical "Cosmos Only" Filter
-                        const badWords = [
-                            'astronaut', 'scientist', 'engineer', 'technician', 'personnel', 'crew portrait', 'standing next to', 'holding', 'man in', 'woman in',
-                            'control room', 'laboratory interior', 'lab interior', 'test facility', 'machinery', 'circuitry', 'blueprint', 'schematic', 'technical diagram', 'instrument panel', 'launch vehicle technical',
-                            'office building', 'hangar interior', 'warehouse', 'factory', 'parking lot',
-                            'chart', 'graph', 'presentation slide', 'clipart', 'line drawing', 'patch design', 'insignia design', 'document scan'
-                        ];
+                            const data = await resp.json();
+                            const items = data.collection?.items || [];
 
-                        const items = data.collection.items || [];
-                        const filteredItem = items.find(item => {
-                            const meta = (item.data[0].title + (item.data[0].description || "")).toLowerCase();
-                            return !badWords.some(word => meta.includes(word));
-                        }) || items[0]; // Fallback to first item if all filtered or use a default if items[0] is also bad
+                            // Surgical "Cosmos Only" Filter
+                            const badWords = ['astronaut', 'scientist', 'engineer', 'technician', 'personnel', 'crew portrait', 'standing next to', 'holding', 'man in', 'woman in', 'control room', 'laboratory interior', 'lab interior', 'test facility', 'machinery', 'circuitry', 'blueprint', 'schematic', 'technical diagram', 'instrument panel', 'launch vehicle technical', 'office building', 'hangar interior', 'warehouse', 'factory', 'parking lot', 'chart', 'graph', 'presentation slide', 'clipart', 'line drawing', 'patch design', 'insignia design', 'document scan'];
 
-                        const img = filteredItem?.links[0]?.href || 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
+                            const filteredItem = items.find(item => {
+                                if (!item.data || !item.data[0]) return false;
+                                const meta = (item.data[0].title + (item.data[0].description || "")).toLowerCase();
+                                return !badWords.some(word => meta.includes(word));
+                            }) || items[0];
 
-                        container.innerHTML += `
-                            <div class="event-card">
-                                <div class="img-box" style="background-image: url('${img}')"></div>
-                                <div class="card-content">
-                                    <span class="tag">${ev.type}</span>
-                                    <div class="day-num">${ev.day.toString().padStart(2, '0')}</div>
-                                    <div class="event-title">${ev.title}</div>
-                                    <p class="event-desc">${ev.desc}</p>
+                            const img = filteredItem?.links?.[0]?.href || 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
+
+                            container.innerHTML += `
+                                <div class="event-card">
+                                    <div class="img-box" style="background-image: url('${img}')"></div>
+                                    <div class="card-content">
+                                        <span class="tag">${ev.type}</span>
+                                        <div class="day-num">${ev.day.toString().padStart(2, '0')}</div>
+                                        <div class="event-title">${ev.title}</div>
+                                        <p class="event-desc">${ev.desc}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        `;
-                    } catch (e) { console.error("API error", e); }
+                            `;
+                        } catch (e) {
+                            console.error("Event fetch error", e);
+                            // Fallback for individual card failure
+                            container.innerHTML += `
+                                <div class="event-card">
+                                    <div class="img-box" style="background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800')"></div>
+                                    <div class="card-content">
+                                        <span class="tag">${ev.type}</span>
+                                        <div class="day-num">${ev.day.toString().padStart(2, '0')}</div>
+                                        <div class="event-title">${ev.title}</div>
+                                        <p class="event-desc">${ev.desc}</p>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    }
+                } finally {
+                    container.classList.remove('fade-out');
+                    addHoverEffects();
                 }
-                container.classList.remove('fade-out');
-                addHoverEffects();
             }, 500);
         }
 
