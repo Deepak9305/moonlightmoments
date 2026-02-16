@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interstellar Identity | Moonlight Moments</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    
+
     <style>
         :root {
             --bg-color: #050505;
-            --accent: #72a4f2;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent: #a78bfa;
+            --accent-secondary: #ec4899;
+            --accent-gradient: linear-gradient(135deg, #ec4899, #8b5cf6);
+            --glass: rgba(167, 139, 250, 0.08);
+            --glass-border: rgba(167, 139, 250, 0.15);
             --text-dim: #888;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             background-color: var(--bg-color);
@@ -30,7 +39,8 @@
         /* --- 1. CURSOR --- */
         #cursor {
             position: fixed;
-            width: 25px; height: 25px;
+            width: 25px;
+            height: 25px;
             border: 1px solid var(--accent);
             border-radius: 50%;
             pointer-events: none;
@@ -43,7 +53,8 @@
 
         #cursor-dot {
             position: fixed;
-            width: 4px; height: 4px;
+            width: 4px;
+            height: 4px;
             background: white;
             border-radius: 50%;
             pointer-events: none;
@@ -54,22 +65,49 @@
         /* --- 2. NAVIGATION --- */
         nav {
             position: fixed;
-            top: 25px; left: 50%;
+            top: 25px;
+            left: 50%;
             transform: translateX(-50%);
-            width: 90%; max-width: 1100px;
+            width: 90%;
+            max-width: 1100px;
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 100px;
             padding: 12px 45px;
-            display: flex; justify-content: space-between; align-items: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             z-index: 1000;
         }
 
-        .logo { font-family: 'Playfair Display', serif; font-style: italic; color: #fff; text-decoration: none; font-size: 1.1rem; }
-        .nav-links { display: flex; gap: 25px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; }
-        .nav-links a:hover, .nav-links a.active { color: #fff; }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dim);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #fff;
+        }
 
         .support-nav-btn {
             color: var(--accent) !important;
@@ -77,48 +115,224 @@
             padding: 8px 15px;
             border-radius: 50px;
             font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .support-nav-btn:hover {
+            background: var(--accent-gradient);
+            color: white !important;
+            box-shadow: 0 0 25px rgba(167, 139, 250, 0.6);
+            border-color: transparent;
+            transform: translateY(-2px);
         }
 
         /* --- 3. HERO & CONTROLS --- */
-        .main-container { max-width: 1200px; margin: 180px auto 100px; text-align: center; padding: 0 5%; }
-        .hero-text h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 8vw, 4.5rem); font-style: italic; margin-bottom: 10px; }
-        .hero-text p { color: var(--accent); letter-spacing: 6px; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 60px; }
+        .main-container {
+            max-width: 1200px;
+            margin: 180px auto 100px;
+            text-align: center;
+            padding: 0 5%;
+        }
 
-        .control-panel { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 100px; }
-        .glass-pill { background: var(--glass); border: 1px solid var(--glass-border); backdrop-filter: blur(15px); padding: 8px 30px; border-radius: 100px; }
-        .glass-pill input { background: none; border: none; color: white; padding: 10px 0; outline: none; width: 160px; font-size: 0.9rem; }
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-style: italic;
+            margin-bottom: 10px;
+        }
 
-        .sync-btn { background: #fff; color: #000; border: none; padding: 16px 40px; border-radius: 100px; font-weight: 600; cursor: pointer; transition: 0.4s; }
-        .sync-btn:hover { transform: scale(1.05); }
+        .hero-text p {
+            color: var(--accent);
+            letter-spacing: 6px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+        }
 
-        .action-btns { margin-top: 20px; display: none; gap: 10px; justify-content: center; }
-        .action-btn { background: transparent; border: 1px solid var(--glass-border); color: var(--text-dim); padding: 12px 25px; border-radius: 100px; cursor: pointer; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
-        .action-btn:hover { border-color: white; color: white; }
+        .control-panel {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 100px;
+        }
+
+        .glass-pill {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(15px);
+            padding: 8px 30px;
+            border-radius: 100px;
+        }
+
+        .glass-pill input {
+            background: none;
+            border: none;
+            color: white;
+            padding: 10px 0;
+            outline: none;
+            width: 160px;
+            font-size: 0.9rem;
+        }
+
+        .sync-btn {
+            background: var(--accent-gradient);
+            background-size: 200% 200%;
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 100px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.4s;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        .sync-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 30px rgba(167, 139, 250, 0.5);
+        }
+
+        .action-btns {
+            margin-top: 20px;
+            display: none;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .action-btn {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-dim);
+            padding: 12px 25px;
+            border-radius: 100px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .action-btn:hover {
+            border-color: white;
+            color: white;
+        }
 
         /* --- 4. GRID --- */
-        .planet-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-top: 20px; }
-        .planet-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 24px; padding: 45px; text-align: left; position: relative; backdrop-filter: blur(10px); opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .planet-card.active { opacity: 1; transform: translateY(0); }
-        .planet-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--p-color); }
-        .planet-name { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-style: italic; margin-bottom: 30px; }
-        .stat-label { font-size: 0.6rem; color: var(--text-dim); letter-spacing: 3px; margin-bottom: 5px; text-transform: uppercase; }
-        .stat-val { font-size: 1.5rem; font-weight: 300; margin-bottom: 25px; }
+        .planet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
 
-        .watermark { display: none; text-align: center; margin-top: 50px; font-size: 0.7rem; letter-spacing: 6px; color: #444; text-transform: uppercase; }
+        .planet-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 45px;
+            text-align: left;
+            position: relative;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .planet-card.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .planet-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--p-color);
+        }
+
+        .planet-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .stat-label {
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .stat-val {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 25px;
+        }
+
+        .watermark {
+            display: none;
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.7rem;
+            letter-spacing: 6px;
+            color: #444;
+            text-transform: uppercase;
+        }
 
         /* --- MOBILE OVERRIDES --- */
         @media (max-width: 768px) {
-            #cursor, #cursor-dot { display: none !important; }
-            body { cursor: auto !important; }
-            nav { flex-direction: column; border-radius: 25px; padding: 20px; top: 15px; }
-            .logo { margin-bottom: 15px; }
-            .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 10px; }
-            .support-nav-btn { width: 100%; text-align: center; margin-top: 5px; }
-            .glass-pill, .sync-btn { width: 100%; }
-            .glass-pill input { width: 100%; text-align: center; }
+
+            #cursor,
+            #cursor-dot {
+                display: none !important;
+            }
+
+            body {
+                cursor: auto !important;
+            }
+
+            nav {
+                flex-direction: column;
+                border-radius: 25px;
+                padding: 20px;
+                top: 15px;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .support-nav-btn {
+                width: 100%;
+                text-align: center;
+                margin-top: 5px;
+            }
+
+            .glass-pill,
+            .sync-btn {
+                width: 100%;
+            }
+
+            .glass-pill input {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div id="cursor"></div>
@@ -216,11 +430,11 @@
             const m = document.getElementById('weight').value;
             const d = document.getElementById('birthdate').value;
             const res = document.getElementById('results');
-            if(!m || !d) return alert("Biometrics required for sync.");
+            if (!m || !d) return alert("Biometrics required for sync.");
 
             const diff = Math.floor((new Date() - new Date(d)) / 86400000);
             res.innerHTML = '';
-            
+
             planetDB.forEach((p, i) => {
                 const card = document.createElement('div');
                 card.className = 'planet-card';
@@ -243,7 +457,7 @@
             const area = document.getElementById('capture-area');
             const mark = document.getElementById('watermark');
             mark.style.display = 'block';
-            
+
             const canvas = await html2canvas(area, { backgroundColor: '#050505', scale: 2 });
             const link = document.createElement('a');
             link.download = 'Interstellar-Pass.png';
@@ -265,4 +479,5 @@
         }
     </script>
 </body>
+
 </html>

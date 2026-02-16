@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Celestial Forecast | Moonlight Moments</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+
     <style>
         :root {
             --bg-color: #050505;
-            --accent: #72a4f2;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent: #a78bfa;
+            --accent-secondary: #ec4899;
+            --accent-gradient: linear-gradient(135deg, #ec4899, #8b5cf6);
+            --glass: rgba(167, 139, 250, 0.08);
+            --glass-border: rgba(167, 139, 250, 0.15);
             --text-dim: #888;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             background-color: var(--bg-color);
@@ -28,36 +37,64 @@
         /* --- Custom Cursor --- */
         #cursor {
             position: fixed;
-            width: 20px; height: 20px;
+            width: 20px;
+            height: 20px;
             border: 1.5px solid var(--accent);
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
             transition: width 0.3s, height 0.3s, background 0.3s;
-            display: block; /* Visible by default on desktop */
+            display: block;
+            /* Visible by default on desktop */
         }
 
         /* --- Navigation --- */
         nav {
             position: fixed;
-            top: 25px; left: 50%;
+            top: 25px;
+            left: 50%;
             transform: translateX(-50%);
-            width: 90%; max-width: 1100px;
+            width: 90%;
+            max-width: 1100px;
             background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 100px;
-            padding: 12px 45px; /* Reduced padding slightly */
-            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 45px;
+            /* Reduced padding slightly */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             z-index: 1000;
         }
 
-        .logo { font-family: 'Playfair Display', serif; font-style: italic; color: #fff; text-decoration: none; font-size: 1.1rem; }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
 
-        .nav-links { display: flex; gap: 25px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 0.7rem; letter-spacing: 2px; transition: 0.3s; }
-        .nav-links a:hover, .nav-links a.active { color: #fff; }
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dim);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #fff;
+        }
 
         /* Support Button Styling */
         .support-nav-btn {
@@ -67,11 +104,18 @@
             border-radius: 50px;
             font-weight: 500;
         }
-        .support-nav-btn:hover { background: var(--accent); color: #000 !important; }
+
+        .support-nav-btn:hover {
+            background: var(--accent-gradient);
+            color: white !important;
+            box-shadow: 0 0 25px rgba(167, 139, 250, 0.6);
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
 
         /* --- Countdown Section --- */
         .countdown-wrap {
-            background: linear-gradient(to bottom, rgba(114,164,242,0.05), transparent);
+            background: linear-gradient(to bottom, rgba(114, 164, 242, 0.05), transparent);
             border-bottom: 1px solid var(--glass-border);
             padding: 180px 8% 60px;
             text-align: center;
@@ -93,35 +137,86 @@
             font-family: 'Playfair Display', serif;
         }
 
-        .timer-block { display: flex; flex-direction: column; align-items: center; }
-        .timer-val { font-size: clamp(2.5rem, 6vw, 4.5rem); font-style: italic; font-weight: 300; }
-        .timer-unit { font-size: 0.6rem; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; margin-top: -5px; }
+        .timer-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .timer-val {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .timer-unit {
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            margin-top: -5px;
+        }
 
         /* --- Main Content --- */
-        .container { padding: 80px 8% 100px; min-height: 80vh; }
+        .container {
+            padding: 80px 8% 100px;
+            min-height: 80vh;
+        }
 
-        .header-flex { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-end; 
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
             margin-bottom: 60px;
             flex-wrap: wrap;
             gap: 20px;
         }
 
-        .month-label { color: var(--accent); letter-spacing: 8px; text-transform: uppercase; font-size: 0.7rem; margin-bottom: 10px; display: block; }
-        h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 4rem); font-style: italic; font-weight: 400; margin: 0; }
+        .month-label {
+            color: var(--accent);
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-style: italic;
+            font-weight: 400;
+            margin: 0;
+        }
 
         /* --- Navigation Buttons --- */
-        .nav-btns { display: flex; gap: 12px; }
+        .nav-btns {
+            display: flex;
+            gap: 12px;
+        }
+
         .circle-btn {
-            width: 55px; height: 55px; border-radius: 50%;
-            border: 1px solid var(--glass-border); background: var(--glass);
-            color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); backdrop-filter: blur(10px);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            border: 1px solid var(--glass-border);
+            background: var(--glass);
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(10px);
             font-size: 1.2rem;
         }
-        .circle-btn:hover { background: #fff; color: #000; transform: scale(1.1); }
+
+        .circle-btn:hover {
+            background: var(--accent-gradient);
+            color: white;
+            transform: scale(1.15);
+            box-shadow: 0 8px 20px rgba(167, 139, 250, 0.4);
+        }
 
         /* --- Events Grid --- */
         .events-grid {
@@ -139,24 +234,82 @@
             transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .event-card:hover { transform: translateY(-12px); border-color: rgba(255,255,255,0.2); }
+        .event-card:hover {
+            transform: translateY(-12px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
 
-        .img-box { height: 220px; width: 100%; background-size: cover; background-position: center; background-color: #111; position: relative; }
-        .img-box::after { content: ''; position: absolute; bottom: 0; width: 100%; height: 50%; background: linear-gradient(transparent, var(--bg-color)); }
+        .img-box {
+            height: 220px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            background-color: #111;
+            position: relative;
+        }
 
-        .card-content { padding: 30px; position: relative; margin-top: -20px; }
-        .tag { font-size: 0.55rem; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; display: block; }
-        .day-num { font-size: 2.2rem; font-family: 'Playfair Display'; font-style: italic; color: #fff; margin-bottom: 8px; }
-        .event-title { font-size: 1.15rem; font-weight: 500; margin-bottom: 12px; letter-spacing: -0.02em; }
-        .event-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; }
+        .img-box::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(transparent, var(--bg-color));
+        }
 
-        .fade-out { opacity: 0; transform: translateY(20px); pointer-events: none; }
+        .card-content {
+            padding: 30px;
+            position: relative;
+            margin-top: -20px;
+        }
+
+        .tag {
+            font-size: 0.55rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .day-num {
+            font-size: 2.2rem;
+            font-family: 'Playfair Display';
+            font-style: italic;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .event-title {
+            font-size: 1.15rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .event-desc {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .fade-out {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
 
         /* --- MOBILE VIEW UPDATES --- */
         @media (max-width: 768px) {
+
             /* 1. Remove custom cursor */
-            #cursor { display: none !important; }
-            body { cursor: auto !important; }
+            #cursor {
+                display: none !important;
+            }
+
+            body {
+                cursor: auto !important;
+            }
 
             /* 2. Reposition Nav for Mobile */
             nav {
@@ -166,7 +319,9 @@
                 top: 15px;
             }
 
-            .logo { margin-bottom: 15px; }
+            .logo {
+                margin-bottom: 15px;
+            }
 
             .nav-links {
                 width: 100%;
@@ -184,6 +339,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div id="cursor"></div>
@@ -191,9 +347,9 @@
     <nav>
         <a href="index.html" class="logo">Moonlight Moments</a>
         <div class="nav-links">
-            <a href="index.html">ARCHIVE</a>
-            <a href="age.html">IDENTITY</a>
-            <a href="event.html" class="active">FORECAST</a>
+            <a href="index.html">Archive</a>
+            <a href="age.html">Identity</a>
+            <a href="event.html" class="active">Forecast</a>
             <a href="https://ko-fi.com/moonlightmoments" target="_blank" class="support-nav-btn">SUPPORT US</a>
         </div>
     </nav>
@@ -201,10 +357,14 @@
     <div class="countdown-wrap">
         <span class="next-event-label" id="timer-title">Awaiting Next Orbital Sequence</span>
         <div class="timer-display">
-            <div class="timer-block"><span class="timer-val" id="days">00</span><span class="timer-unit">Days</span></div>
-            <div class="timer-block"><span class="timer-val" id="hours">00</span><span class="timer-unit">Hours</span></div>
-            <div class="timer-block"><span class="timer-val" id="minutes">00</span><span class="timer-unit">Mins</span></div>
-            <div class="timer-block"><span class="timer-val" id="seconds">00</span><span class="timer-unit">Secs</span></div>
+            <div class="timer-block"><span class="timer-val" id="days">00</span><span class="timer-unit">Days</span>
+            </div>
+            <div class="timer-block"><span class="timer-val" id="hours">00</span><span class="timer-unit">Hours</span>
+            </div>
+            <div class="timer-block"><span class="timer-val" id="minutes">00</span><span class="timer-unit">Mins</span>
+            </div>
+            <div class="timer-block"><span class="timer-val" id="seconds">00</span><span class="timer-unit">Secs</span>
+            </div>
         </div>
     </div>
 
@@ -226,9 +386,9 @@
         // Custom Cursor Logic
         const cursor = document.getElementById('cursor');
         let mX = 0, mY = 0, cX = 0, cY = 0;
-        
-        document.addEventListener('mousemove', e => { 
-            mX = e.clientX; mY = e.clientY; 
+
+        document.addEventListener('mousemove', e => {
+            mX = e.clientX; mY = e.clientY;
         });
 
         function move() {
@@ -249,22 +409,22 @@
             { month: 1, day: 15, type: "Celestial Primary", title: "Mars Opposition", query: "mars", dateObj: new Date(2026, 1, 15, 22, 0), desc: "Mars is visible all night and at its brightest." },
             { month: 2, day: 3, type: "Celestial Primary", title: "Total Lunar Eclipse", query: "lunar eclipse", dateObj: new Date(2026, 2, 3, 11, 30), desc: "A rare blood moon visible across the Pacific." },
             { month: 2, day: 20, type: "Orbital Equinox", title: "March Equinox", query: "equinox", dateObj: new Date(2026, 2, 20, 14, 0), desc: "Spring begins in the Northern Hemisphere." },
-            { month: 3, day: 12, type: "Stellar Event", title: "Ceres at Opposition", query: "asteroid", dateObj: new Date(2026, 3, 12, 01, 0), desc: "The dwarf planet Ceres is bright in the night sky." },
+            { month: 3, day: 12, type: "Stellar Event", title: "Ceres at Opposition", query: "asteroid", dateObj: new Date(2026, 3, 12, 1, 0), desc: "The dwarf planet Ceres is bright in the night sky." },
             { month: 3, day: 21, type: "Celestial Primary", title: "Lyrids Shower", query: "lyrids", dateObj: new Date(2026, 3, 21, 23, 0), desc: "Active meteor shower originating from Comet Thatcher." },
-            { month: 4, day: 5, type: "Stellar Event", title: "Eta Aquariids", query: "comet halley", dateObj: new Date(2026, 4, 5, 03, 0), desc: "Fast meteors produced by debris from Halley's Comet." },
+            { month: 4, day: 5, type: "Stellar Event", title: "Eta Aquariids", query: "comet halley", dateObj: new Date(2026, 4, 5, 3, 0), desc: "Fast meteors produced by debris from Halley's Comet." },
             { month: 4, day: 31, type: "Lunar Phase", title: "Super Flower Moon", query: "supermoon", dateObj: new Date(2026, 4, 31, 18, 45), desc: "One of the largest full moons of the year." },
-            { month: 5, day: 12, type: "Planetary Alignment", title: "Moon & Saturn", query: "saturn", dateObj: new Date(2026, 5, 12, 02, 0), desc: "A stunning pre-dawn pairing in the eastern sky." },
-            { month: 5, day: 21, type: "Orbital Solstice", title: "June Solstice", query: "solstice", dateObj: new Date(2026, 5, 21, 08, 20), desc: "The longest day of the year for the North." },
+            { month: 5, day: 12, type: "Planetary Alignment", title: "Moon & Saturn", query: "saturn", dateObj: new Date(2026, 5, 12, 2, 0), desc: "A stunning pre-dawn pairing in the eastern sky." },
+            { month: 5, day: 21, type: "Orbital Solstice", title: "June Solstice", query: "solstice", dateObj: new Date(2026, 5, 21, 8, 20), desc: "The longest day of the year for the North." },
             { month: 6, day: 4, type: "Planetary Alignment", title: "Earth at Aphelion", query: "earth orbit", dateObj: new Date(2026, 6, 4, 15, 0), desc: "Earth reaches its furthest point from the Sun." },
             { month: 6, day: 28, type: "Stellar Event", title: "Delta Aquariids", query: "meteors", dateObj: new Date(2026, 6, 28, 22, 0), desc: "Best viewed from southern dark-sky locations." },
             { month: 7, day: 12, type: "Celestial Primary", title: "Perseids Peak", query: "perseid", dateObj: new Date(2026, 7, 12, 23, 0), desc: "The most famous meteor shower of the summer." },
             { month: 7, day: 28, type: "Planetary Alignment", title: "Neptune Opposition", query: "neptune", dateObj: new Date(2026, 7, 28, 21, 0), desc: "The blue ice giant is at its closest point to Earth." },
-            { month: 8, day: 14, type: "Lunar Phase", title: "Harvest Supermoon", query: "harvest moon", dateObj: new Date(2026, 8, 14, 05, 0), desc: "A massive moon rising near the autumnal equinox." },
+            { month: 8, day: 14, type: "Lunar Phase", title: "Harvest Supermoon", query: "harvest moon", dateObj: new Date(2026, 8, 14, 5, 0), desc: "A massive moon rising near the autumnal equinox." },
             { month: 8, day: 21, type: "Celestial Primary", title: "Saturn Opposition", query: "saturn rings", dateObj: new Date(2026, 8, 21, 19, 0), desc: "The ringed planet is visible all night at its brightest." },
             { month: 9, day: 12, type: "Planetary Alignment", title: "Moon & Venus", query: "venus moon", dateObj: new Date(2026, 9, 12, 18, 0), desc: "Bright evening pairing in the western sky." },
             { month: 9, day: 21, type: "Stellar Event", title: "Orionids Shower", query: "orionids", dateObj: new Date(2026, 9, 21, 23, 0), desc: "Meteors from the tail of Comet Halley." },
-            { month: 10, day: 10, type: "Stellar Event", title: "Taurids Peak", query: "fireball", dateObj: new Date(2026, 10, 10, 01, 0), desc: "Known for slow-moving, bright fireball meteors." },
-            { month: 10, day: 17, type: "Stellar Event", title: "Leonids Shower", query: "leonid", dateObj: new Date(2026, 10, 17, 02, 0), desc: "Fast-moving meteors from Comet Tempel-Tuttle." },
+            { month: 10, day: 10, type: "Stellar Event", title: "Taurids Peak", query: "fireball", dateObj: new Date(2026, 10, 10, 1, 0), desc: "Known for slow-moving, bright fireball meteors." },
+            { month: 10, day: 17, type: "Stellar Event", title: "Leonids Shower", query: "leonid", dateObj: new Date(2026, 10, 17, 2, 0), desc: "Fast-moving meteors from Comet Tempel-Tuttle." },
             { month: 11, day: 14, type: "Celestial Primary", title: "Geminids Peak", query: "geminids", dateObj: new Date(2026, 11, 14, 21, 0), desc: "Usually the strongest meteor shower of the year." },
             { month: 11, day: 21, type: "Orbital Solstice", title: "December Solstice", query: "winter", dateObj: new Date(2026, 11, 21, 20, 50), desc: "The shortest day of the year in the North." },
             { month: 11, day: 31, type: "Lunar Phase", title: "New Year's Moon", query: "crescent", dateObj: new Date(2026, 11, 31, 23, 59), desc: "Closing the year under a waning crescent moon." }
@@ -275,11 +435,11 @@
         function startCountdown() {
             const now = new Date();
             const futureEvents = masterCalendar.filter(ev => ev.dateObj > now).sort((a, b) => a.dateObj - b.dateObj);
-            
+
             if (futureEvents.length > 0) {
                 const next = futureEvents[0];
                 document.getElementById('timer-title').innerText = `Next Sequence: ${next.title}`;
-                
+
                 setInterval(() => {
                     const diff = next.dateObj - new Date();
                     if (diff <= 0) return location.reload();
@@ -295,7 +455,7 @@
             const container = document.getElementById('events-container');
             container.classList.add('fade-out');
             const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            
+
             setTimeout(async () => {
                 document.getElementById('month-name').innerText = monthNames[currentViewMonth];
                 container.innerHTML = '';
@@ -305,7 +465,25 @@
                     try {
                         const resp = await fetch(`https://images-api.nasa.gov/search?q=${ev.query}&media_type=image`);
                         const data = await resp.json();
-                        const img = data.collection.items[0]?.links[0]?.href || 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
+
+                        // Strict "Beautiful Only" Filter - Exclude non-cosmic imagery
+                        const badWords = [
+                            'person', 'people', 'astronaut', 'crew', 'human', 'man', 'woman', 'portrait', 'face', 'scientist', 'engineer', 'team', 'worker', 'staff', 'personnel', 'official', 'president', 'administrator', 'director',
+                            'robot', 'robotic', 'rover', 'lander', 'probe', 'satellite dish', 'antenna', 'equipment', 'machinery', 'machine', 'tool', 'instrument panel', 'control room', 'console',
+                            'building', 'facility', 'center', 'office', 'room', 'laboratory', 'lab', 'hangar', 'launch pad', 'launchpad', 'ground', 'base', 'station interior', 'control center',
+                            'shuttle', 'rocket on pad', 'launch vehicle', 'capsule', 'module interior', 'cockpit', 'cabin',
+                            'diagram', 'chart', 'graph', 'blueprint', 'schematic', 'map', 'illustration', 'drawing', 'render', 'concept art', 'cgi',
+                            'ceremony', 'meeting', 'conference', 'presentation', 'standing', 'sitting', 'walking', 'working', 'testing', 'training', 'suit up', 'suited',
+                            'logo', 'patch', 'insignia', 'flag', 'sign', 'text', 'document', 'screen', 'monitor', 'display'
+                        ];
+
+                        const items = data.collection.items || [];
+                        const filteredItem = items.find(item => {
+                            const meta = (item.data[0].title + (item.data[0].description || "")).toLowerCase();
+                            return !badWords.some(word => meta.includes(word));
+                        }) || items[0]; // Fallback to first item if all filtered or use a default if items[0] is also bad
+
+                        const img = filteredItem?.links[0]?.href || 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
 
                         container.innerHTML += `
                             <div class="event-card">
@@ -332,14 +510,14 @@
 
         function addHoverEffects() {
             document.querySelectorAll('a, button, .event-card').forEach(el => {
-                el.onmouseenter = () => { 
+                el.onmouseenter = () => {
                     if (window.innerWidth > 768) {
-                        cursor.style.width='60px'; cursor.style.height='60px'; cursor.style.background='rgba(114, 164, 242, 0.1)'; 
+                        cursor.style.width = '60px'; cursor.style.height = '60px'; cursor.style.background = 'rgba(114, 164, 242, 0.1)';
                     }
                 };
-                el.onmouseleave = () => { 
+                el.onmouseleave = () => {
                     if (window.innerWidth > 768) {
-                        cursor.style.width='20px'; cursor.style.height='20px'; cursor.style.background='transparent'; 
+                        cursor.style.width = '20px'; cursor.style.height = '20px'; cursor.style.background = 'transparent';
                     }
                 };
             });
@@ -349,4 +527,5 @@
         updateUI();
     </script>
 </body>
+
 </html>
