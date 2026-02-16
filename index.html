@@ -779,18 +779,7 @@
         createStars();
 
         // --- Multi-Source Cosmic Intake ---
-        async function fetchSpaceX() {
-            try {
-                const res = await fetch('https://api.spacexdata.com/v5/launches');
-                if (!res.ok) return [];
-                const data = await res.json();
-                return data.filter(l => l.links?.flickr?.original?.length > 0).slice(-5).flatMap(l =>
-                    l.links.flickr.original.map(img => ({
-                        url: img, title: l.name, explanation: l.details || "SpaceX Launch Snapshot", date: l.date_utc.split('T')[0], source: 'SPACEX'
-                    }))
-                );
-            } catch (e) { return []; }
-        }
+
 
         async function fetchMarsRover() {
             try {
@@ -857,7 +846,8 @@
                 if (searchRes.ok) {
                     const searchData = await searchRes.json();
                     const items = searchData?.collection?.items || [];
-                    const badWords = ['astronaut', 'scientist', 'engineer', 'technician', 'personnel', 'crew portrait', 'standing next to', 'holding', 'man in', 'woman in', 'control room', 'laboratory interior', 'lab interior', 'test facility', 'machinery', 'circuitry', 'blueprint', 'schematic', 'technical diagram', 'instrument panel', 'launch vehicle technical', 'office building', 'hangar interior', 'warehouse', 'factory', 'parking lot', 'chart', 'graph', 'presentation slide', 'clipart', 'line drawing', 'patch design', 'insignia design', 'document scan', 'infographic'];
+                    const badWords = ['astronaut', 'scientist', 'engineer', 'technician', 'personnel', 'crew portrait', 'standing next to', 'holding', 'man in', 'woman in', 'control room', 'laboratory interior', 'lab interior', 'test facility', 'machinery', 'circuitry', 'blueprint', 'schematic', 'technical diagram', 'instrument panel', 'launch vehicle technical', 'office building', 'hangar interior', 'warehouse', 'factory', 'parking lot', 'chart', 'graph', 'presentation slide', 'clipart', 'line drawing', 'patch design', 'insignia design', 'document scan', 'infographic', 'rocket', 'falcon', 'starship', 'pads', 'launch site', 'gantry', 'technical tower', 'spacesuit', 'suit portrait', 'official portrait', 'portrait of'];
+
 
                     cleanLibrary = items.filter(item => {
                         if (!item.data || !item.data[0]) return false;
@@ -872,9 +862,9 @@
                     })).filter(i => i.url);
                 }
 
-                // Source 3: Diversified Intake (SpaceX, Mars, EPIC)
+                // Source 3: Diversified Intake (Mars, EPIC)
                 if (isAppend || query === '') {
-                    const diversified = await Promise.all([fetchSpaceX(), fetchMarsRover(), fetchEPIC()]);
+                    const diversified = await Promise.all([fetchMarsRover(), fetchEPIC()]);
                     extraSources = diversified.flat();
                 }
 
