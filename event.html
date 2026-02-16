@@ -466,15 +466,12 @@
                         const resp = await fetch(`https://images-api.nasa.gov/search?q=${ev.query}&media_type=image`);
                         const data = await resp.json();
 
-                        // Strict "Beautiful Only" Filter - Exclude non-cosmic imagery
+                        // Surgical "Cosmos Only" Filter
                         const badWords = [
-                            'person', 'people', 'astronaut', 'crew', 'human', 'man', 'woman', 'portrait', 'face', 'scientist', 'engineer', 'team', 'worker', 'staff', 'personnel', 'official', 'president', 'administrator', 'director',
-                            'robot', 'robotic', 'rover', 'lander', 'probe', 'satellite dish', 'antenna', 'equipment', 'machinery', 'machine', 'tool', 'instrument panel', 'control room', 'console',
-                            'building', 'facility', 'center', 'office', 'room', 'laboratory', 'lab', 'hangar', 'launch pad', 'launchpad', 'ground', 'base', 'station interior', 'control center',
-                            'shuttle', 'rocket on pad', 'launch vehicle', 'capsule', 'module interior', 'cockpit', 'cabin',
-                            'diagram', 'chart', 'graph', 'blueprint', 'schematic', 'map', 'illustration', 'drawing', 'render', 'concept art', 'cgi',
-                            'ceremony', 'meeting', 'conference', 'presentation', 'standing', 'sitting', 'walking', 'working', 'testing', 'training', 'suit up', 'suited',
-                            'logo', 'patch', 'insignia', 'flag', 'sign', 'text', 'document', 'screen', 'monitor', 'display'
+                            'astronaut', 'scientist', 'engineer', 'technician', 'personnel', 'crew portrait', 'standing next to', 'holding', 'man in', 'woman in',
+                            'control room', 'laboratory interior', 'lab interior', 'test facility', 'machinery', 'circuitry', 'blueprint', 'schematic', 'technical diagram', 'instrument panel', 'launch vehicle technical',
+                            'office building', 'hangar interior', 'warehouse', 'factory', 'parking lot',
+                            'chart', 'graph', 'presentation slide', 'clipart', 'line drawing', 'patch design', 'insignia design', 'document scan'
                         ];
 
                         const items = data.collection.items || [];

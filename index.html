@@ -806,20 +806,14 @@
 
                 // Strict "Beautiful Only" Filter - Exclude non-cosmic imagery
                 const badWords = [
-                    // People & Astronauts
-                    'person', 'people', 'astronaut', 'crew', 'human', 'man', 'woman', 'portrait', 'face', 'scientist', 'engineer', 'team', 'worker', 'staff', 'personnel', 'official', 'president', 'administrator', 'director',
-                    // Robots & Equipment
-                    'robot', 'robotic', 'rover', 'lander', 'probe', 'satellite dish', 'antenna', 'equipment', 'machinery', 'machine', 'tool', 'instrument panel', 'control room', 'console',
-                    // Buildings & Facilities
-                    'building', 'facility', 'center', 'office', 'room', 'laboratory', 'lab', 'hangar', 'launch pad', 'launchpad', 'ground', 'base', 'station interior', 'control center',
-                    // Vehicles & Craft (close-up/technical)
-                    'shuttle', 'rocket on pad', 'launch vehicle', 'capsule', 'module interior', 'cockpit', 'cabin',
-                    // Technical/Diagrams
-                    'diagram', 'chart', 'graph', 'blueprint', 'schematic', 'map', 'illustration', 'drawing', 'render', 'concept art', 'cgi',
-                    // Events & Activities
-                    'ceremony', 'meeting', 'conference', 'presentation', 'standing', 'sitting', 'walking', 'working', 'testing', 'training', 'suit up', 'suited',
-                    // Misc Non-Cosmic
-                    'logo', 'patch', 'insignia', 'flag', 'sign', 'text', 'document', 'screen', 'monitor', 'display'
+                    // People (Specific)
+                    'astronaut', 'scientist', 'engineer', 'technician', 'personnel', 'crew portrait', 'standing next to', 'holding', 'man in', 'woman in',
+                    // Technical/Robots (Surgical)
+                    'control room', 'laboratory interior', 'lab interior', 'test facility', 'machinery', 'circuitry', 'blueprint', 'schematic', 'technical diagram', 'instrument panel', 'launch vehicle technical',
+                    // Buildings (Specific)
+                    'office building', 'hangar interior', 'warehouse', 'factory', 'parking lot',
+                    // Graphics/Non-Photo
+                    'chart', 'graph', 'presentation slide', 'clipart', 'line drawing', 'patch design', 'insignia design', 'document scan', 'infographic'
                 ];
 
                 const cleanLibrary = searchData.collection.items
@@ -838,34 +832,64 @@
                     }));
 
                 galleryItems = [...cleanApods, ...cleanLibrary].sort(() => 0.5 - Math.random());
+
+                if (galleryItems.length === 0) {
+                    console.warn("No cosmic images passed the filter. Retrying with fallback...");
+                    loadArchive('galaxy'); // Automatic fallback if filter is TOO strict
+                    return;
+                }
+
+                if (galleryItems.length === 0 && !query.includes('galaxy')) {
+                    console.warn("No cosmic images passed the filter. Retrying with fallback...");
+                    loadArchive('galaxy nebula'); // Fallback keywords
+                    return;
+                }
+
                 renderGrid();
 
                 if (galleryItems[0]) {
                     document.getElementById('hero-bg').innerHTML = `<img src="${galleryItems[0].url}">`;
                 }
-            } catch (e) { console.error("Archive sync failure", e); }
-            finally {
+            } catch (e) {
+                console.error("Archive sync failure", e);
+                // Fallback UI if API fails
+                if (!galleryItems.length) {
+                    document.getElementById('main-grid').innerHTML = '<p style="grid-column:1/-1; text-align:center; padding:50px; opacity:0.5;">Connecting to Deep Space... If images do not appear, please check your network or try again.</p>';
+                }
+            } finally {
                 const elapsedTime = Date.now() - startTime;
                 const minWait = 4000;
                 const remainingWait = Math.max(0, minWait - elapsedTime);
 
                 setTimeout(() => {
                     preloader.style.opacity = '0';
-                    setTimeout(() => preloader.style.display = 'none', 1500);
+                    setTimeout(() => preloader.style.display = 'none', 1600);
                 }, remainingWait);
             }
         }
 
         function renderGrid() {
-            document.getElementById('main-grid').innerHTML = galleryItems.map((item, i) => `
-                <div class="grid-item-card" onclick="openModal(${i})" style="animation: fadeInUp 0.7s forwards ${i * 0.12}s;">
+            const container = document.getElementById('main-grid');
+            container.innerHTML = galleryItems.map((item, i) => `
+                <div class="grid-item-card" onclick="openModal(${i})" style="animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards ${i * 0.1}s;">
                     <div class="source-tag">${item.source}</div>
-                    <div class="card-img-wrapper"><img src="${item.url}" onload="this.style.opacity='1'"></div>
+                    <div class="card-img-wrapper" style="background:#0a0a0c;">
+                        <img src="${item.url}" 
+                             style="opacity:0;" 
+                             onload="this.style.opacity='1'" 
+                             onerror="this.src='https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800'">
+                    </div>
                     <div style="padding:22px;">
                         <span style="font-size:0.75rem; color:var(--accent); font-weight:600;">${item.date}</span>
                         <h3 style="font-size:1rem; margin-top:8px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:white;">${item.title}</h3>
                     </div>
                 </div>`).join('');
+
+            // Handle cached images where onload might have already fired
+            container.querySelectorAll('img').forEach(img => {
+                if (img.complete) img.style.opacity = '1';
+            });
+
             setupHovers();
         }
 
