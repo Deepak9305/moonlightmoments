@@ -674,7 +674,6 @@
             <div class="orbital-ring ring-4"></div>
             <div class="singularity-core"></div>
         </div>
-        <div class="loader-text">Archival Sync In Progress...</div>
     </div>
     <div id="cursor-ring"></div>
 
@@ -719,9 +718,8 @@
     <section class="gallery-section" id="gallery">
         <div class="grid-container" id="main-grid"></div>
         <div style="text-align: center; margin-top: 60px;">
-            <button class="btn-pill" onclick="loadArchive()"
-                style="background: none; border: 1px solid var(--accent); color: var(--accent);">Load Rare Discoveries
-                ↻</button>
+            <button class="btn-pill" id="load-more-btn" onclick="loadArchive('', true)"
+                style="background: none; border: 1px solid var(--accent); color: var(--accent);">Load More ✧</button>
         </div>
     </section>
 
@@ -780,98 +778,151 @@
         }
         createStars();
 
+        // --- Multi-Source Cosmic Intake ---
+        async function fetchSpaceX() {
+            try {
+                const res = await fetch('https://api.spacexdata.com/v5/launches');
+                if (!res.ok) return [];
+                const data = await res.json();
+                return data.filter(l => l.links?.flickr?.original?.length > 0).slice(-5).flatMap(l =>
+                    l.links.flickr.original.map(img => ({
+                        url: img, title: l.name, explanation: l.details || "SpaceX Launch Snapshot", date: l.date_utc.split('T')[0], source: 'SPACEX'
+                    }))
+                );
+            } catch (e) { return []; }
+        }
+
+        async function fetchMarsRover() {
+            try {
+                const sol = Math.floor(Math.random() * 1000) + 1000;
+                const res = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=${sol}&api_key=${API_KEY}`);
+                if (!res.ok) return [];
+                const data = await res.json();
+                return (data.photos || []).slice(0, 8).map(p => ({
+                    url: p.img_src, title: `Mars - ${p.camera.full_name}`, explanation: `Captured by Curiosity Rover on Sol ${p.sol}.`, date: p.earth_date, source: 'MARS ROVER'
+                }));
+            } catch (e) { return []; }
+        }
+
+        async function fetchEPIC() {
+            try {
+                const res = await fetch(`https://api.nasa.gov/EPIC/api/natural/images?api_key=${API_KEY}`);
+                if (!res.ok) return [];
+                const data = await res.json();
+                return data.slice(0, 5).map(i => {
+                    const date = i.date.split(' ')[0].replace(/-/g, '/');
+                    return {
+                        url: `https://api.nasa.gov/EPIC/archive/natural/${date}/png/${i.image}.png?api_key=${API_KEY}`,
+                        title: "Earth from EPIC", explanation: i.caption, date: i.date.split(' ')[0], source: 'EARTH EPIC'
+                    };
+                });
+            } catch (e) { return []; }
+        }
+
         // --- Aesthetic Search Logic ---
-        async function loadArchive(query = '') {
+        async function loadArchive(query = '', isAppend = false) {
             const preloader = document.getElementById('preloader');
+            const loadBtn = document.getElementById('load-more-btn');
             const startTime = Date.now();
 
-            preloader.style.display = 'flex';
-            preloader.style.opacity = '1';
+            if (!isAppend) {
+                preloader.style.display = 'flex';
+                preloader.style.opacity = '1';
+            } else if (loadBtn) {
+                loadBtn.innerText = "...";
+            }
 
             // High-Beauty Search Pool
             const beautyPool = ['nebula', 'galaxy cluster', 'carina nebula', 'hubble legacy', 'webb deep field', 'stellar nursery'];
             const searchQ = query || beautyPool[Math.floor(Math.random() * beautyPool.length)];
 
+            let cleanApods = [];
+            let cleanLibrary = [];
+            let extraSources = [];
+
             try {
-                // Source 1: Curated APOD (Usually the highest quality)
-                const apodRes = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&count=10`);
-                const apodData = await apodRes.json();
-                const cleanApods = apodData.filter(i => i.media_type === 'image' && !i.url.includes('youtube')).map(i => ({
-                    url: i.url, title: i.title, explanation: i.explanation, date: i.date, source: 'CURATED'
-                }));
+                // Source 1: Curated APOD
+                try {
+                    const apodRes = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&count=6`);
+                    if (apodRes.ok) {
+                        const apodData = await apodRes.json();
+                        cleanApods = (apodData || []).filter(i => i && i.media_type === 'image' && i.url).map(i => ({
+                            url: i.url, title: i.title || "Celestial View", explanation: i.explanation || "", date: i.date || "Archive", source: 'CURATED'
+                        }));
+                    }
+                } catch (e) { console.warn("APOD sync skipped"); }
 
-                // Source 2: Filtered Search Library
+                // Source 2: Filtered Search Library (Keyless)
                 const searchRes = await fetch(`https://images-api.nasa.gov/search?q=${searchQ}&media_type=image`);
-                const searchData = await searchRes.json();
+                if (searchRes.ok) {
+                    const searchData = await searchRes.json();
+                    const items = searchData?.collection?.items || [];
+                    const badWords = ['astronaut', 'scientist', 'engineer', 'technician', 'personnel', 'crew portrait', 'standing next to', 'holding', 'man in', 'woman in', 'control room', 'laboratory interior', 'lab interior', 'test facility', 'machinery', 'circuitry', 'blueprint', 'schematic', 'technical diagram', 'instrument panel', 'launch vehicle technical', 'office building', 'hangar interior', 'warehouse', 'factory', 'parking lot', 'chart', 'graph', 'presentation slide', 'clipart', 'line drawing', 'patch design', 'insignia design', 'document scan', 'infographic'];
 
-                // Strict "Beautiful Only" Filter - Exclude non-cosmic imagery
-                const badWords = [
-                    // People (Specific)
-                    'astronaut', 'scientist', 'engineer', 'technician', 'personnel', 'crew portrait', 'standing next to', 'holding', 'man in', 'woman in',
-                    // Technical/Robots (Surgical)
-                    'control room', 'laboratory interior', 'lab interior', 'test facility', 'machinery', 'circuitry', 'blueprint', 'schematic', 'technical diagram', 'instrument panel', 'launch vehicle technical',
-                    // Buildings (Specific)
-                    'office building', 'hangar interior', 'warehouse', 'factory', 'parking lot',
-                    // Graphics/Non-Photo
-                    'chart', 'graph', 'presentation slide', 'clipart', 'line drawing', 'patch design', 'insignia design', 'document scan', 'infographic'
-                ];
-
-                const cleanLibrary = searchData.collection.items
-                    .filter(item => {
+                    cleanLibrary = items.filter(item => {
+                        if (!item.data || !item.data[0]) return false;
                         const meta = (item.data[0].title + (item.data[0].description || "")).toLowerCase();
-                        const isUgly = badWords.some(word => meta.includes(word));
-                        return !isUgly;
-                    })
-                    .slice(0, 8)
-                    .map(item => ({
-                        url: item.links[0].href,
-                        title: item.data[0].title,
-                        explanation: item.data[0].description,
-                        date: item.data[0].date_created.split('T')[0],
+                        return !badWords.some(word => meta.includes(word));
+                    }).slice(0, 8).map(item => ({
+                        url: item.links?.[0]?.href,
+                        title: item.data[0].title || "Cosmic Object",
+                        explanation: item.data[0].description || "",
+                        date: item.data[0].date_created?.split('T')[0] || "Archive",
                         source: 'NASA ARCHIVE'
-                    }));
+                    })).filter(i => i.url);
+                }
 
-                galleryItems = [...cleanApods, ...cleanLibrary].sort(() => 0.5 - Math.random());
+                // Source 3: Diversified Intake (SpaceX, Mars, EPIC)
+                if (isAppend || query === '') {
+                    const diversified = await Promise.all([fetchSpaceX(), fetchMarsRover(), fetchEPIC()]);
+                    extraSources = diversified.flat();
+                }
 
-                if (galleryItems.length === 0) {
-                    console.warn("No cosmic images passed the filter. Retrying with fallback...");
-                    loadArchive('galaxy'); // Automatic fallback if filter is TOO strict
+                const newItems = [...cleanApods, ...cleanLibrary, ...extraSources].sort(() => 0.5 - Math.random());
+
+                if (newItems.length === 0 && !query.includes('galaxy')) {
+                    loadArchive('galaxy nebula cosmos', isAppend);
                     return;
                 }
 
-                if (galleryItems.length === 0 && !query.includes('galaxy')) {
-                    console.warn("No cosmic images passed the filter. Retrying with fallback...");
-                    loadArchive('galaxy nebula'); // Fallback keywords
-                    return;
-                }
-
-                renderGrid();
-
-                if (galleryItems[0]) {
-                    document.getElementById('hero-bg').innerHTML = `<img src="${galleryItems[0].url}">`;
+                if (isAppend) {
+                    const startIdx = galleryItems.length;
+                    galleryItems = [...galleryItems, ...newItems];
+                    renderGrid(true, startIdx);
+                } else {
+                    galleryItems = newItems;
+                    renderGrid();
+                    if (galleryItems[0]) {
+                        document.getElementById('hero-bg').innerHTML = `<img src="${galleryItems[0].url}">`;
+                    }
                 }
             } catch (e) {
                 console.error("Archive sync failure", e);
-                // Fallback UI if API fails
                 if (!galleryItems.length) {
-                    document.getElementById('main-grid').innerHTML = '<p style="grid-column:1/-1; text-align:center; padding:50px; opacity:0.5;">Connecting to Deep Space... If images do not appear, please check your network or try again.</p>';
+                    document.getElementById('main-grid').innerHTML = '<p style="grid-column:1/-1; text-align:center; padding:50px; opacity:0.5;">Connecting to Deep Space... Please check your data connection.</p>';
                 }
             } finally {
-                const elapsedTime = Date.now() - startTime;
-                const minWait = 4000;
-                const remainingWait = Math.max(0, minWait - elapsedTime);
-
-                setTimeout(() => {
-                    preloader.style.opacity = '0';
-                    setTimeout(() => preloader.style.display = 'none', 1600);
-                }, remainingWait);
+                if (loadBtn) loadBtn.innerText = "Load More ✧";
+                if (!isAppend) {
+                    const elapsedTime = Date.now() - startTime;
+                    const minWait = 4000;
+                    const remainingWait = Math.max(0, minWait - elapsedTime);
+                    setTimeout(() => {
+                        preloader.style.opacity = '0';
+                        setTimeout(() => preloader.style.display = 'none', 1600);
+                    }, remainingWait);
+                }
             }
         }
 
-        function renderGrid() {
+        function renderGrid(isAppend = false, startIdx = 0) {
             const container = document.getElementById('main-grid');
-            container.innerHTML = galleryItems.map((item, i) => `
-                <div class="grid-item-card" onclick="openModal(${i})" style="animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards ${i * 0.1}s;">
+            const targetItems = isAppend ? galleryItems.slice(startIdx) : galleryItems;
+
+            const html = targetItems.map((item, i) => {
+                const globalIdx = isAppend ? startIdx + i : i;
+                return `
+                <div class="grid-item-card" onclick="openModal(${globalIdx})" style="animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards ${i * 0.1}s;">
                     <div class="source-tag">${item.source}</div>
                     <div class="card-img-wrapper" style="background:#0a0a0c;">
                         <img src="${item.url}" 
@@ -883,7 +934,14 @@
                         <span style="font-size:0.75rem; color:var(--accent); font-weight:600;">${item.date}</span>
                         <h3 style="font-size:1rem; margin-top:8px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:white;">${item.title}</h3>
                     </div>
-                </div>`).join('');
+                </div>`;
+            }).join('');
+
+            if (isAppend) {
+                container.insertAdjacentHTML('beforeend', html);
+            } else {
+                container.innerHTML = html;
+            }
 
             // Handle cached images where onload might have already fired
             container.querySelectorAll('img').forEach(img => {
