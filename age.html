@@ -4,7 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interstellar Identity | Moonlight Moments</title>
+    <title>Age on Other Planets Calculator | Weight on Every Planet | Moonlight Moments</title>
+
+    <meta name="description"
+        content="Calculate your age and weight on every planet in our solar system. Find out how old you are on Mars, Jupiter, Saturn and more with our free planetary age calculator.">
+    <meta name="keywords"
+        content="age on other planets, weight on other planets, planet age calculator, how old am I on Mars, planetary age calculator, age on Mars, weight on Mars, age on Jupiter, solar system calculator">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Moonlight Moments">
+
+    <link rel="canonical" href="https://www.moonlightmoments.co.in/age.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.moonlightmoments.co.in/age.html">
+    <meta property="og:title" content="Age on Other Planets Calculator | Moonlight Moments">
+    <meta property="og:description"
+        content="Find out your age and weight on Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, and Pluto. Free interstellar identity calculator.">
+    <meta property="og:site_name" content="Moonlight Moments">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Age on Other Planets Calculator | Moonlight Moments">
+    <meta name="twitter:description"
+        content="How old are you on Mars? Calculate your age and weight on every planet in our solar system.">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Planet Age & Weight Calculator",
+      "url": "https://www.moonlightmoments.co.in/age.html",
+      "description": "Calculate your age and weight on every planet in the solar system including Mars, Jupiter, Saturn, and more.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any"
+    }
+    </script>
 
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
@@ -350,17 +386,18 @@
 
     <div class="main-container">
         <div class="hero-text">
-            <h1>Interstellar Identity</h1>
-            <p>Planetary Biometric Sync</p>
+            <h1>How Old Are You on Other Planets?</h1>
+            <p>Calculate Your Age &amp; Weight on Every Planet in Our Solar System</p>
         </div>
 
         <div class="control-panel">
-            <div class="glass-pill"><input type="number" id="weight" placeholder="Earth Weight (kg)"></div>
-            <div class="glass-pill"><input type="date" id="birthdate"></div>
-            <button class="sync-btn" onclick="initializeSync()">Sync Profile</button>
+            <div class="glass-pill"><input type="number" id="weight" placeholder="Your Weight on Earth (kg)"
+                    aria-label="Enter your weight in kilograms"></div>
+            <div class="glass-pill"><input type="date" id="birthdate" aria-label="Enter your birth date"></div>
+            <button class="sync-btn" onclick="initializeSync()">Calculate My Planetary Age</button>
             <div class="action-btns" id="actions">
-                <button class="action-btn" onclick="exportPass()">Download Pass</button>
-                <button class="action-btn" onclick="shareStats()">Transmit</button>
+                <button class="action-btn" onclick="exportPass()">Download My Planet Card</button>
+                <button class="action-btn" onclick="shareStats()">Share My Results</button>
             </div>
         </div>
 
