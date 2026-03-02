@@ -339,6 +339,7 @@
         }
 
         /* --- MOBILE VIEW UPDATES --- */
+        /* ===== TABLET (≤768px) ===== */
         @media (max-width: 768px) {
 
             /* 1. Remove custom cursor */
@@ -350,30 +351,137 @@
                 cursor: auto !important;
             }
 
-            /* 2. Reposition Nav for Mobile */
+            /* 2. Nav */
             nav {
                 flex-direction: column;
-                border-radius: 25px;
-                padding: 20px;
-                top: 15px;
+                border-radius: 20px;
+                padding: 14px 18px;
+                top: 12px;
+                gap: 10px;
+                width: 94%;
             }
 
             .logo {
-                margin-bottom: 15px;
+                margin-bottom: 4px;
             }
 
             .nav-links {
                 width: 100%;
                 justify-content: center;
                 flex-wrap: wrap;
-                gap: 15px;
+                gap: 8px 14px;
             }
 
             /* Push Support button to its own line below the menu */
             .support-nav-btn {
                 width: 100%;
                 text-align: center;
-                margin-top: 5px;
+                margin-top: 4px;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* 3. Countdown */
+            .countdown-wrap {
+                padding: 140px 5% 50px;
+            }
+
+            .timer-val {
+                font-size: clamp(2rem, 8vw, 3.5rem);
+            }
+
+            /* 4. Container */
+            .container {
+                padding: 50px 5% 70px;
+            }
+
+            .header-flex {
+                margin-bottom: 35px;
+            }
+
+            /* 5. Circle nav buttons — bigger touch target */
+            .circle-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 1.1rem;
+            }
+
+            /* 6. Events Grid */
+            .events-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .img-box {
+                height: 180px;
+            }
+
+            .card-content {
+                padding: 20px 18px;
+            }
+        }
+
+        /* ===== PHONE (≤480px) ===== */
+        @media (max-width: 480px) {
+            nav {
+                top: 10px;
+                padding: 12px 14px;
+                border-radius: 16px;
+                width: 96%;
+            }
+
+            .logo {
+                font-size: 0.95rem;
+            }
+
+            /* Countdown stays 4-column but tighter */
+            .countdown-wrap {
+                padding: 130px 4% 40px;
+            }
+
+            .timer-display {
+                gap: 12px;
+            }
+
+            .timer-val {
+                font-size: clamp(1.8rem, 9vw, 2.8rem);
+            }
+
+            .timer-unit {
+                font-size: 0.55rem;
+                letter-spacing: 1px;
+            }
+
+            h1 {
+                font-size: clamp(1.8rem, 7vw, 2.5rem);
+            }
+
+            /* Single-column events */
+            .events-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .img-box {
+                height: 160px;
+            }
+
+            .card-content {
+                padding: 16px 14px;
+            }
+
+            .day-num {
+                font-size: 1.8rem;
+            }
+
+            .event-title {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 35px 4% 60px;
             }
         }
     </style>

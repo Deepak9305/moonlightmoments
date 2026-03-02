@@ -321,6 +321,7 @@
         }
 
         /* --- MOBILE OVERRIDES --- */
+        /* ===== TABLET (≤768px) ===== */
         @media (max-width: 768px) {
 
             #cursor,
@@ -334,26 +335,39 @@
 
             nav {
                 flex-direction: column;
-                border-radius: 25px;
-                padding: 20px;
-                top: 15px;
+                border-radius: 20px;
+                padding: 14px 18px;
+                top: 12px;
+                gap: 10px;
+                width: 94%;
             }
 
             .logo {
-                margin-bottom: 15px;
+                margin-bottom: 4px;
             }
 
             .nav-links {
                 width: 100%;
                 justify-content: center;
                 flex-wrap: wrap;
-                gap: 10px;
+                gap: 8px 14px;
             }
 
             .support-nav-btn {
                 width: 100%;
                 text-align: center;
-                margin-top: 5px;
+                margin-top: 4px;
+            }
+
+            .main-container {
+                margin: 150px auto 60px;
+                padding: 0 4%;
+            }
+
+            .control-panel {
+                flex-direction: column;
+                align-items: stretch;
+                margin-bottom: 60px;
             }
 
             .glass-pill,
@@ -364,6 +378,79 @@
             .glass-pill input {
                 width: 100%;
                 text-align: center;
+                min-height: 44px;
+            }
+
+            .sync-btn {
+                min-height: 48px;
+            }
+
+            .action-btns {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+            }
+
+            .action-btn {
+                width: 100%;
+                min-height: 44px;
+                text-align: center;
+            }
+
+            .planet-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .planet-card {
+                padding: 28px 20px;
+            }
+        }
+
+        /* ===== PHONE (≤480px) ===== */
+        @media (max-width: 480px) {
+            nav {
+                top: 10px;
+                padding: 12px 14px;
+                border-radius: 16px;
+                width: 96%;
+            }
+
+            .logo {
+                font-size: 0.95rem;
+            }
+
+            .main-container {
+                margin: 140px auto 50px;
+            }
+
+            .hero-text h1 {
+                font-size: clamp(1.8rem, 7vw, 2.5rem);
+            }
+
+            .hero-text p {
+                font-size: 0.65rem;
+                letter-spacing: 3px;
+                margin-bottom: 40px;
+            }
+
+            /* Single-column planet cards */
+            .planet-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .planet-card {
+                padding: 24px 18px;
+            }
+
+            .planet-name {
+                font-size: 1.4rem;
+                margin-bottom: 20px;
+            }
+
+            .stat-val {
+                font-size: 1.2rem;
             }
         }
     </style>
