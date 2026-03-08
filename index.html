@@ -1039,20 +1039,20 @@
             } catch (e) { return []; }
         }
 
-        async function fetchSpaceX() {
+        async function fetchDeepSpace() {
             try {
-                const res = await fetch('https://api.spacexdata.com/v4/launches');
+                const queries = ['hubble ultra deep field', 'james webb galaxy', 'm31 andromeda', 'crab nebula', 'eagle nebula pillows of creation'];
+                const q = queries[Math.floor(Math.random() * queries.length)];
+                const res = await fetch(`https://images-api.nasa.gov/search?q=${q}&media_type=image`);
                 if (!res.ok) return [];
                 const data = await res.json();
-                // Filter for launches with flickr images
-                const launchesWithImages = data.filter(l => l.links.flickr.original && l.links.flickr.original.length > 0);
-                return launchesWithImages.slice(-10).map(l => ({
-                    url: l.links.flickr.original[0],
-                    title: l.name,
-                    explanation: l.details || `SpaceX Launch: ${l.name}`,
-                    date: l.date_utc.split('T')[0],
-                    source: 'SPACEX'
-                }));
+                return (data.collection?.items || []).slice(0, 5).map(i => ({
+                    url: i.links?.[0]?.href,
+                    title: i.data[0].title || "Deep Space",
+                    explanation: i.data[0].description || "",
+                    date: i.data[0].date_created?.split('T')[0] || "Archive",
+                    source: 'DEEP SPACE'
+                })).filter(i => i.url);
             } catch (e) { return []; }
         }
 
@@ -1104,7 +1104,7 @@
             }
 
             // High-Beauty Search Pool
-            const beautyPool = ['nebula', 'galaxy cluster', 'carina nebula', 'hubble legacy', 'webb deep field', 'stellar nursery'];
+            const beautyPool = ['nebula', 'galaxy cluster', 'carina nebula', 'hubble legacy', 'webb deep field', 'stellar nursery', 'pillars of creation', 'supernova remnant', 'spiral galaxy'];
             const searchQ = query || beautyPool[Math.floor(Math.random() * beautyPool.length)];
 
             let cleanApods = [];
@@ -1128,7 +1128,7 @@
                 if (searchRes.ok) {
                     const searchData = await searchRes.json();
                     const items = searchData?.collection?.items || [];
-                    const badWords = ['astronaut', 'Museum', 'scientist', 'engineer', 'technician', 'personnel', 'crew portrait', 'standing next to', 'holding', 'man in', 'woman in', 'control room', 'laboratory interior', 'lab interior', 'test facility', 'machinery', 'circuitry', 'blueprint', 'schematic', 'technical diagram', 'instrument panel', 'launch vehicle technical', 'office building', 'hangar interior', 'warehouse', 'factory', 'parking lot', 'chart', 'graph', 'presentation slide', 'clipart', 'line drawing', 'patch design', 'insignia design', 'document scan', 'infographic', 'rocket', 'falcon', 'starship', 'pads', 'launch site', 'gantry', 'technical tower', 'spacesuit', 'suit portrait', 'official portrait', 'portrait of'];
+                    const badWords = ['astronaut', 'Museum', 'scientist', 'engineer', 'technician', 'personnel', 'crew portrait', 'standing next to', 'holding', 'man in', 'woman in', 'control room', 'laboratory interior', 'lab interior', 'test facility', 'machinery', 'circuitry', 'blueprint', 'schematic', 'technical diagram', 'instrument panel', 'launch vehicle technical', 'office building', 'hangar interior', 'warehouse', 'factory', 'parking lot', 'chart', 'graph', 'presentation slide', 'clipart', 'line drawing', 'patch design', 'insignia design', 'document scan', 'infographic', 'rocket', 'falcon', 'starship', 'pads', 'launch site', 'gantry', 'technical tower', 'spacesuit', 'suit portrait', 'official portrait', 'portrait of', 'booster', 'capsule', 'fairing', 'stage 1', 'stage 2', 'first stage', 'engine testing'];
 
 
                     cleanLibrary = items.filter(item => {
@@ -1149,7 +1149,7 @@
                     const diversified = await Promise.all([
                         fetchMarsRover(),
                         fetchEPIC(),
-                        fetchSpaceX(),
+                        fetchDeepSpace(),
                         fetchUnsplash(),
                         fetchPexels()
                     ]);
