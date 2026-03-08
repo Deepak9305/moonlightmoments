@@ -386,6 +386,27 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             backdrop-filter: blur(5px);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+        }
+
+        .source-tag.spacex {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .source-tag.unsplash {
+            color: #00d1ff;
+            border-color: rgba(0, 209, 255, 0.4);
+        }
+
+        .source-tag.pexels {
+            color: #05a081;
+            border-color: rgba(5, 160, 129, 0.4);
+        }
+
+        .source-tag.nasa {
+            color: #ff3d00;
+            border-color: rgba(255, 61, 0, 0.4);
         }
 
         /* Footer */
@@ -951,6 +972,8 @@
 
     <script>
         const API_KEY = 'DEMO_KEY';
+        const UNSPLASH_ACCESS_KEY = ''; // Add your Unsplash Access Key here
+        const PEXELS_API_KEY = '';      // Add your Pexels API Key here
         let galleryItems = [];
 
         // Cinematic Starfield Generator
@@ -996,6 +1019,57 @@
                         title: "Earth from EPIC", explanation: i.caption, date: i.date.split(' ')[0], source: 'EARTH EPIC'
                     };
                 });
+            } catch (e) { return []; }
+        }
+
+        async function fetchSpaceX() {
+            try {
+                const res = await fetch('https://api.spacexdata.com/v4/launches');
+                if (!res.ok) return [];
+                const data = await res.json();
+                // Filter for launches with flickr images
+                const launchesWithImages = data.filter(l => l.links.flickr.original && l.links.flickr.original.length > 0);
+                return launchesWithImages.slice(-10).map(l => ({
+                    url: l.links.flickr.original[0],
+                    title: l.name,
+                    explanation: l.details || `SpaceX Launch: ${l.name}`,
+                    date: l.date_utc.split('T')[0],
+                    source: 'SPACEX'
+                }));
+            } catch (e) { return []; }
+        }
+
+        async function fetchUnsplash() {
+            if (!UNSPLASH_ACCESS_KEY) return [];
+            try {
+                const res = await fetch(`https://api.unsplash.com/search/photos?query=nebula+galaxy+space&orientation=landscape&client_id=${UNSPLASH_ACCESS_KEY}`);
+                if (!res.ok) return [];
+                const data = await res.json();
+                return (data.results || []).map(i => ({
+                    url: i.urls.regular,
+                    title: i.description || i.alt_description || "Cosmic Scene",
+                    explanation: `Captured by ${i.user.name} on Unsplash.`,
+                    date: i.created_at.split('T')[0],
+                    source: 'UNSPLASH'
+                }));
+            } catch (e) { return []; }
+        }
+
+        async function fetchPexels() {
+            if (!PEXELS_API_KEY) return [];
+            try {
+                const res = await fetch(`https://api.pexels.com/v1/search?query=space+stars&orientation=landscape`, {
+                    headers: { 'Authorization': PEXELS_API_KEY }
+                });
+                if (!res.ok) return [];
+                const data = await res.json();
+                return (data.photos || []).map(i => ({
+                    url: i.src.large2x,
+                    title: i.alt || "Celestial Object",
+                    explanation: `Photo by ${i.photographer} on Pexels.`,
+                    date: "Recent",
+                    source: 'PEXELS'
+                }));
             } catch (e) { return []; }
         }
 
@@ -1053,9 +1127,15 @@
                     })).filter(i => i.url);
                 }
 
-                // Source 3: Diversified Intake (Mars, EPIC)
+                // Source 3: Diversified Intake (Mars, EPIC, SpaceX, Unsplash, Pexels)
                 if (isAppend || query === '') {
-                    const diversified = await Promise.all([fetchMarsRover(), fetchEPIC()]);
+                    const diversified = await Promise.all([
+                        fetchMarsRover(),
+                        fetchEPIC(),
+                        fetchSpaceX(),
+                        fetchUnsplash(),
+                        fetchPexels()
+                    ]);
                     extraSources = diversified.flat();
                 }
 
@@ -1104,7 +1184,7 @@
                 const globalIdx = isAppend ? startIdx + i : i;
                 return `
                 <div class="grid-item-card" onclick="openModal(${globalIdx})" style="animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards ${i * 0.1}s;">
-                    <div class="source-tag">${item.source}</div>
+                    <div class="source-tag ${item.source.toLowerCase().replace(' ', '-')}">${item.source}</div>
                     <div class="card-img-wrapper" style="background:#0a0a0c;">
                         <img src="${item.url}" 
                              style="opacity:0;" 
