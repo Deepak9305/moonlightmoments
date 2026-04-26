@@ -1,0 +1,127 @@
+/* --- Blog Hero --- */
+.blog-hero {
+    padding: 180px 8% 60px;
+    text-align: center;
+    background: linear-gradient(to bottom, rgba(167, 139, 250, 0.05), transparent);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.blog-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.blog-hero p {
+    color: var(--accent);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+}
+
+/* --- Blog Grid --- */
+.blog-section {
+    padding: 80px 8% 120px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 40px;
+}
+
+.blog-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent);
+    box-shadow: 0 20px 40px rgba(167, 139, 250, 0.2);
+}
+
+.blog-img-wrap {
+    height: 240px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.blog-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.5s ease;
+}
+
+.blog-card:hover .blog-img-wrap img {
+    transform: scale(1.1);
+}
+
+.blog-content {
+    padding: 30px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-meta {
+    font-size: 0.65rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 15px;
+}
+
+.blog-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    line-height: 1.3;
+    color: white;
+}
+
+.blog-excerpt {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.read-more {
+    margin-top: auto;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.read-more::after {
+    content: '→';
+    transition: transform 0.3s ease;
+}
+
+.read-more:hover::after {
+    transform: translateX(5px);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .blog-hero { padding: 140px 5% 50px; }
+    .blog-grid { grid-template-columns: 1fr; gap: 30px; }
+    .blog-img-wrap { height: 200px; }
+}

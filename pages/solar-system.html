@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive 3D Solar System & Star Map | Moonlight Moments</title>
+
+    <meta name="description"
+        content="Explore a 3D Solar System with realistic orbits, interactive famous stars, and constellation data. A premium space simulation by Moonlight Moments.">
+    <meta name="keywords"
+        content="3D solar system, interactive star map, celestial simulation, planetary orbits, three.js space, constellations 3D">
+    <meta name="robots" content="index, follow">
+
+    <!-- SEO Verification -->
+    <meta name="google-site-verification" content="PASTE_YOUR_SEARCH_CONSOLE_ID_HERE" />
+
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=PASTE_YOUR_GA_MEASUREMENT_ID_HERE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'PASTE_YOUR_GA_MEASUREMENT_ID_HERE');
+    </script>
+
+    <!-- Google AdSense -->
+    <script async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-PASTE_YOUR_ADSENSE_PUB_ID_HERE"
+        crossorigin="anonymous"></script>
+    <meta name="author" content="Moonlight Moments">
+    <link rel="canonical" href="https://www.moonlightmoments.co.in/solar-system.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.moonlightmoments.co.in/solar-system.html">
+    <meta property="og:title" content="Interactive 3D Solar System | Moonlight Moments">
+    <meta property="og:description"
+        content="Explore an interactive 3D Solar System with realistic planetary orbits and bloom effects.">
+
+    <!-- Three.js & Post-Processing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/FlyControls.js"></script>
+
+    <link rel="icon" type="image/png" href="../assets/img/logo.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/solar-system.css">
+</head>
+
+<body>
+
+    <nav class="glass-nav">
+        <a href="../index.html" class="logo">
+            <img src="../assets/img/logo.png" alt="Moonlight Moments Logo" class="logo-img">
+            Moonlight Moments
+        </a>
+        <div class="nav-links">
+            <a href="../index.html">Archive</a>
+            <a href="age.html">Identity</a>
+            <a href="event.html">Forecast</a>
+            <a href="solar-system.html" class="active">Solar System</a>
+            <a href="blog.html">Chronicles</a>
+            <a href="https://ko-fi.com/moonlightmoments" target="_blank" class="support-btn">Support Us</a>
+        </div>
+    </nav>
+
+    <canvas id="solar-canvas"></canvas>
+
+    <div id="page-title">
+        <h1>The Solar System</h1>
+        <p>Click any planet to explore · Drag to orbit · Scroll to zoom</p>
+    </div>
+
+    <div id="planet-info-panel">
+        <div class="planet-ui-title" id="pi-name">Earth</div>
+        <div class="planet-ui-desc" id="pi-desc">The blue marble.</div>
+        <div id="pi-stats-container"></div>
+        <button class="planet-ui-compare-btn" id="compare-btn">Compare</button>
+        <button class="planet-ui-close" id="close-panel-btn">✕ Close</button>
+    </div>
+
+    <div id="mode-controls">
+        <button class="mode-btn active" id="btn-orbit">Orbit</button>
+        <button class="mode-btn" id="btn-fly">Free Fly</button>
+    </div>
+
+    <div id="wasd-hint">WASD to Move · Mouse to Look</div>
+
+    <div id="compare-overlay"></div>
+    <div id="compare-modal">
+        <div class="compare-side left" id="comp-left"></div>
+        <div class="compare-vs">VS</div>
+        <div class="compare-side right" id="comp-right"></div>
+    </div>
+
+    <div id="time-controls">
+        <label>Speed</label>
+        <input type="range" id="time-slider" min="0" max="10" step="0.1" value="1">
+        <span id="speed-label">1×</span>
+    </div>
+
+    <div id="planet-hover-label"></div>
+    <div id="hint-bar">Click a planet to learn more</div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/common.js"></script>
+    <script src="../assets/js/solar-system.js"></script>
+</body>
+
+</html>

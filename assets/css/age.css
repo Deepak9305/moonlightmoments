@@ -1,0 +1,182 @@
+/* --- Hero & Controls --- */
+.main-container {
+    max-width: 1200px;
+    margin: 180px auto 100px;
+    text-align: center;
+    padding: 0 5%;
+}
+
+.hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.hero-text p {
+    color: var(--accent);
+    letter-spacing: 6px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    margin-bottom: 60px;
+}
+
+.control-panel {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 100px;
+}
+
+.glass-pill {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(15px);
+    padding: 8px 30px;
+    border-radius: 100px;
+}
+
+.glass-pill input {
+    background: none;
+    border: none;
+    color: white;
+    padding: 10px 0;
+    outline: none;
+    width: 160px;
+    font-size: 0.9rem;
+}
+
+.sync-btn {
+    background: var(--accent-gradient);
+    background-size: 200% 200%;
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    border-radius: 100px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.4s;
+    animation: gradientShift 3s ease infinite;
+}
+
+.sync-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 30px rgba(167, 139, 250, 0.5);
+}
+
+.action-btns {
+    margin-top: 20px;
+    display: none;
+    gap: 10px;
+    justify-content: center;
+}
+
+.action-btn {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-dim);
+    padding: 12px 25px;
+    border-radius: 100px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.action-btn:hover {
+    border-color: white;
+    color: white;
+}
+
+/* --- Grid --- */
+.planet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.planet-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 45px;
+    text-align: left;
+    position: relative;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.planet-card.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.planet-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--p-color);
+}
+
+.planet-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-style: italic;
+    margin-bottom: 30px;
+}
+
+.stat-label {
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    letter-spacing: 3px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.stat-val {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 25px;
+}
+
+.watermark {
+    display: none;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 0.7rem;
+    letter-spacing: 6px;
+    color: #444;
+    text-transform: uppercase;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* --- Mobile --- */
+@media (max-width: 768px) {
+    .main-container { margin: 150px auto 60px; padding: 0 4%; }
+    .control-panel { flex-direction: column; align-items: stretch; margin-bottom: 60px; }
+    .glass-pill, .sync-btn { width: 100%; }
+    .glass-pill input { width: 100%; text-align: center; min-height: 44px; }
+    .sync-btn { min-height: 48px; }
+    .action-btns { flex-direction: column; align-items: stretch; width: 100%; }
+    .action-btn { width: 100%; min-height: 44px; text-align: center; }
+    .planet-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .planet-card { padding: 28px 20px; }
+}
+
+@media (max-width: 480px) {
+    .hero-text h1 { font-size: clamp(1.8rem, 7vw, 2.5rem); }
+    .planet-grid { grid-template-columns: 1fr; gap: 14px; }
+    .planet-name { font-size: 1.4rem; }
+    .stat-val { font-size: 1.2rem; }
+}

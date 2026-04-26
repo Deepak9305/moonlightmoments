@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astronomical Events 2026 Calendar | Meteor Showers & Eclipses | Moonlight Moments</title>
+
+    <meta name="description"
+        content="Full 2026 astronomical events calendar with live countdowns. Track meteor showers, lunar eclipses, supermoons, and planetary alignments.">
+    <meta name="keywords"
+        content="astronomical events 2026, meteor shower calendar, lunar eclipse 2026, celestial events, supermoon 2026, stargazing calendar, Moonlight Moments">
+    <meta name="robots" content="index, follow">
+
+    <!-- SEO Verification -->
+    <meta name="google-site-verification" content="PASTE_YOUR_SEARCH_CONSOLE_ID_HERE" />
+
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=PASTE_YOUR_GA_MEASUREMENT_ID_HERE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'PASTE_YOUR_GA_MEASUREMENT_ID_HERE');
+    </script>
+
+    <!-- Google AdSense -->
+    <script async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-PASTE_YOUR_ADSENSE_PUB_ID_HERE"
+        crossorigin="anonymous"></script>
+    <meta name="author" content="Moonlight Moments">
+
+    <link rel="canonical" href="https://www.moonlightmoments.co.in/event.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.moonlightmoments.co.in/event.html">
+    <meta property="og:title" content="Astronomical Events 2026 Calendar | Moonlight Moments">
+    <meta property="og:description"
+        content="Full 2026 astronomical events calendar: Perseids, Geminids, lunar eclipses, supermoons, and planetary alignments with live countdowns.">
+    <meta property="og:site_name" content="Moonlight Moments">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Astronomical Events 2026 Calendar | Moonlight Moments">
+    <meta name="twitter:description"
+        content="Track every meteor shower, lunar eclipse, supermoon, and planetary alignment of 2026 with live countdowns.">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Astronomical Events 2026 Calendar",
+      "url": "https://www.moonlightmoments.co.in/event.html",
+      "description": "Complete 2026 astronomical events calendar including meteor showers like the Perseids and Geminids, lunar eclipses, supermoons, and planetary alignments.",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Moonlight Moments",
+        "url": "https://www.moonlightmoments.co.in"
+      }
+    }
+    </script>
+    <link rel="icon" type="image/png" href="../assets/img/logo.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/event.css">
+</head>
+
+<body>
+
+    <div id="cursor"></div>
+
+    <nav>
+        <a href="../index.html" class="logo">
+            <img src="../assets/img/logo.png" alt="Moonlight Moments Logo" class="logo-img">
+            Moonlight Moments
+        </a>
+        <div class="nav-links">
+            <a href="../index.html">Archive</a>
+            <a href="age.html">Identity</a>
+            <a href="event.html" class="active">Forecast</a>
+            <a href="solar-system.html">Solar System</a>
+            <a href="blog.html">Chronicles</a>
+            <a href="https://ko-fi.com/moonlightmoments" target="_blank" class="support-nav-btn">SUPPORT US</a>
+        </div>
+    </nav>
+
+    <div class="countdown-wrap">
+        <span class="next-event-label" id="timer-title">Next Astronomical Event in 2026</span>
+        <div class="timer-display">
+            <div class="timer-block"><span class="timer-val" id="days">00</span><span class="timer-unit">Days</span>
+            </div>
+            <div class="timer-block"><span class="timer-val" id="hours">00</span><span class="timer-unit">Hours</span>
+            </div>
+            <div class="timer-block"><span class="timer-val" id="minutes">00</span><span class="timer-unit">Mins</span>
+            </div>
+            <div class="timer-block"><span class="timer-val" id="seconds">00</span><span class="timer-unit">Secs</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header-flex">
+            <div>
+                <span class="month-label">2026 Astronomical Events Calendar</span>
+                <h1 id="month-name">Celestial Events</h1>
+            </div>
+            <div class="nav-btns">
+                <button class="circle-btn" id="prev-month-btn" aria-label="Previous month">←</button>
+                <button class="circle-btn" id="next-month-btn" aria-label="Next month">→</button>
+            </div>
+        </div>
+        <div class="events-grid" id="events-container"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/common.js"></script>
+    <script src="../assets/js/event.js"></script>
+</body>
+
+</html>

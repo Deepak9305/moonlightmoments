@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age on Other Planets Calculator | Weight on Planets | Moonlight Moments</title>
+
+    <meta name="description"
+        content="Calculate your age and weight on every planet in our solar system including Mars, Jupiter, and Saturn. Free planetary age calculator for space enthusiasts.">
+    <meta name="keywords"
+        content="age on other planets, weight on planets, planetary age calculator, how old am I on Mars, solar system weight calculator, Moonlight Moments">
+    <meta name="robots" content="index, follow">
+
+    <!-- SEO Verification -->
+    <meta name="google-site-verification" content="PASTE_YOUR_SEARCH_CONSOLE_ID_HERE" />
+
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=PASTE_YOUR_GA_MEASUREMENT_ID_HERE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'PASTE_YOUR_GA_MEASUREMENT_ID_HERE');
+    </script>
+
+    <!-- Google AdSense -->
+    <script async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-PASTE_YOUR_ADSENSE_PUB_ID_HERE"
+        crossorigin="anonymous"></script>
+    <meta name="author" content="Moonlight Moments">
+
+    <link rel="canonical" href="https://www.moonlightmoments.co.in/age.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.moonlightmoments.co.in/age.html">
+    <meta property="og:title" content="Age on Other Planets Calculator | Moonlight Moments">
+    <meta property="og:description"
+        content="Find out your age and weight on Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, and Pluto. Free interstellar identity calculator.">
+    <meta property="og:site_name" content="Moonlight Moments">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Age on Other Planets Calculator | Moonlight Moments">
+    <meta name="twitter:description"
+        content="How old are you on Mars? Calculate your age and weight on every planet in our solar system.">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Planet Age & Weight Calculator",
+      "url": "https://www.moonlightmoments.co.in/age.html",
+      "description": "Calculate your age and weight on every planet in the solar system including Mars, Jupiter, Saturn, and more.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any"
+    }
+    </script>
+
+    <link rel="icon" type="image/png" href="../assets/img/logo.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/age.css">
+</head>
+
+<body>
+
+    <div id="cursor"></div>
+    <div id="cursor-dot"></div>
+
+    <nav>
+        <a href="../index.html" class="logo">
+            <img src="../assets/img/logo.png" alt="Moonlight Moments Logo" class="logo-img">
+            Moonlight Moments
+        </a>
+        <div class="nav-links">
+            <a href="../index.html">Archive</a>
+            <a href="age.html" class="active">Identity</a>
+            <a href="event.html">Forecast</a>
+            <a href="solar-system.html">Solar System</a>
+            <a href="blog.html">Chronicles</a>
+            <a href="https://ko-fi.com/moonlightmoments" target="_blank" class="support-nav-btn">Support Us</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="hero-text">
+            <h1>How Old Are You on Other Planets?</h1>
+            <p>Calculate Your Age &amp; Weight on Every Planet in Our Solar System</p>
+        </div>
+
+        <div class="control-panel">
+            <div class="glass-pill"><input type="number" id="weight" placeholder="Your Weight on Earth (kg)"
+                    aria-label="Enter your weight in kilograms"></div>
+            <div class="glass-pill"><input type="date" id="birthdate" aria-label="Enter your birth date"></div>
+            <button class="sync-btn" id="sync-btn">Calculate My Planetary Age</button>
+            <div class="action-btns" id="actions">
+                <button class="action-btn" id="export-btn">Download My Planet Card</button>
+                <button class="action-btn" id="share-btn">Share My Results</button>
+            </div>
+        </div>
+
+        <div id="capture-area">
+            <div id="results" class="planet-grid"></div>
+            <div id="watermark" class="watermark">MOONLIGHTMOMENTS.CO.IN</div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/common.js"></script>
+    <script src="../assets/js/age.js"></script>
+</body>
+
+</html>

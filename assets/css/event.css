@@ -1,0 +1,211 @@
+/* --- Countdown Section --- */
+.countdown-wrap {
+    background: linear-gradient(to bottom, rgba(114, 164, 242, 0.05), transparent);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 180px 8% 60px;
+    text-align: center;
+}
+
+.next-event-label {
+    font-size: 0.65rem;
+    letter-spacing: 5px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.timer-display {
+    display: flex;
+    justify-content: center;
+    gap: clamp(15px, 4vw, 40px);
+    font-family: 'Playfair Display', serif;
+}
+
+.timer-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer-val {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-style: italic;
+    font-weight: 300;
+}
+
+.timer-unit {
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-top: -5px;
+}
+
+/* --- Main Content --- */
+.container {
+    padding: 80px 8% 100px;
+    min-height: 80vh;
+}
+
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.month-label {
+    color: var(--accent);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-style: italic;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* --- Navigation Buttons --- */
+.nav-btns {
+    display: flex;
+    gap: 12px;
+}
+
+.circle-btn {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(10px);
+    font-size: 1.2rem;
+}
+
+.circle-btn:hover {
+    background: var(--accent-gradient);
+    color: white;
+    transform: scale(1.15);
+    box-shadow: 0 8px 20px rgba(167, 139, 250, 0.4);
+}
+
+/* --- Events Grid --- */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 35px;
+    transition: 0.5s opacity ease, 0.5s transform ease;
+}
+
+.event-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 28px;
+    overflow: hidden;
+    transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.event-card:hover {
+    transform: translateY(-12px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.img-box {
+    height: 220px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-color: #111;
+    position: relative;
+}
+
+.img-box::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(transparent, var(--bg-color));
+}
+
+.card-content {
+    padding: 30px;
+    position: relative;
+    margin-top: -20px;
+}
+
+.tag {
+    font-size: 0.55rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: block;
+}
+
+.day-num {
+    font-size: 2.2rem;
+    font-family: 'Playfair Display';
+    font-style: italic;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.event-title {
+    font-size: 1.15rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+}
+
+.event-desc {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+}
+
+.fade-out {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+
+/* --- Mobile --- */
+@media (max-width: 768px) {
+    .countdown-wrap { padding: 140px 5% 50px; }
+    .timer-val { font-size: clamp(2rem, 8vw, 3.5rem); }
+    .container { padding: 50px 5% 70px; }
+    .header-flex { margin-bottom: 35px; }
+    .circle-btn { width: 48px; height: 48px; font-size: 1.1rem; }
+    .events-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .img-box { height: 180px; }
+    .card-content { padding: 20px 18px; }
+}
+
+@media (max-width: 480px) {
+    .countdown-wrap { padding: 130px 4% 40px; }
+    .timer-display { gap: 12px; }
+    .timer-val { font-size: clamp(1.8rem, 9vw, 2.8rem); }
+    .timer-unit { font-size: 0.55rem; letter-spacing: 1px; }
+    h1 { font-size: clamp(1.8rem, 7vw, 2.5rem); }
+    .events-grid { grid-template-columns: 1fr; gap: 18px; }
+    .img-box { height: 160px; }
+    .card-content { padding: 16px 14px; }
+    .day-num { font-size: 1.8rem; }
+    .event-title { font-size: 1rem; }
+    .container { padding: 35px 4% 60px; }
+}
