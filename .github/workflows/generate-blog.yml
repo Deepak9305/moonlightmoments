@@ -1,0 +1,49 @@
+name: Generate Blog Post
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: 'Blog topic (leave empty for random)'
+        required: false
+        default: ''
+
+jobs:
+  generate-blog:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          npm install axios dotenv
+
+      - name: Generate Blog Post
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          NASA_API_KEY: ${{ secrets.NASA_API_KEY }}
+          TOPIC: ${{ github.event.inputs.topic }}
+        run: node scripts/generate-blog.js
+
+      - name: Commit and Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "Blog Generator Bot"
+          git add pages/blog-posts/
+          if ! git diff-index --quiet HEAD --; then
+            git commit -m "feat: auto-generate blog post via GitHub Actions"
+            git push origin main
+          else
+            echo "No changes to commit"
+          fi
