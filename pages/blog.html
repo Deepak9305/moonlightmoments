@@ -54,102 +54,8 @@
     </header>
 
     <section class="blog-section">
-        <div class="blog-grid">
-            <!-- Blog 1 -->
-            <article class="blog-card">
-                <div class="blog-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1614728263952-84ea206f99b6?auto=format&fit=crop&q=80&w=800" alt="JWST Nebula">
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <span>✦ April 20, 2026</span>
-                        <span>✦ Deep Space</span>
-                    </div>
-                    <h2>The James Webb Revolution: Peering into the Dawn of Time</h2>
-                    <p class="blog-excerpt">How the world's most powerful telescope is dismantling our understanding of galaxy formation in the early universe.</p>
-                    <a href="#" class="read-more">CONTINUE READING</a>
-                </div>
-            </article>
-
-            <!-- Blog 2 -->
-            <article class="blog-card">
-                <div class="blog-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&q=80&w=800" alt="Mars Colony">
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <span>✦ April 15, 2026</span>
-                        <span>✦ Exploration</span>
-                    </div>
-                    <h2>Mars 2026: Preparing for the First Human Footsteps</h2>
-                    <p class="blog-excerpt">As the launch windows align, we look at the critical life-support technologies making the Red Planet a viable second home.</p>
-                    <a href="#" class="read-more">CONTINUE READING</a>
-                </div>
-            </article>
-
-            <!-- Blog 3 -->
-            <article class="blog-card">
-                <div class="blog-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800" alt="Astro Photography">
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <span>✦ April 08, 2026</span>
-                        <span>✦ Artistry</span>
-                    </div>
-                    <h2>The Art of Cosmic Photography: From Raw Data to Masterpiece</h2>
-                    <p class="blog-excerpt">A deep dive into how we process NASA's greyscale sensor data into the vibrant, soulful nebulae we feature in our archive.</p>
-                    <a href="#" class="read-more">CONTINUE READING</a>
-                </div>
-            </article>
-
-            <!-- Blog 4 -->
-            <article class="blog-card">
-                <div class="blog-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1581822261290-991b38693d1b?auto=format&fit=crop&q=80&w=800" alt="Black Hole">
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <span>✦ April 01, 2026</span>
-                        <span>✦ Science</span>
-                    </div>
-                    <h2>Black Holes Explained: Gateway to Understanding Spacetime</h2>
-                    <p class="blog-excerpt">Unraveling the mysteries of event horizons, singularities, and how black holes warp the fabric of space and time itself.</p>
-                    <a href="#" class="read-more">CONTINUE READING</a>
-                </div>
-            </article>
-
-            <!-- Blog 5 -->
-            <article class="blog-card">
-                <div class="blog-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?auto=format&fit=crop&q=80&w=800" alt="Exoplanet">
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <span>✦ March 25, 2026</span>
-                        <span>✦ Exploration</span>
-                    </div>
-                    <h2>Habitable Exoplanets: Are We Alone in the Universe?</h2>
-                    <p class="blog-excerpt">Discover the thousands of potentially habitable worlds we've detected orbiting distant stars and what they mean for the search for extraterrestrial life.</p>
-                    <a href="#" class="read-more">CONTINUE READING</a>
-                </div>
-            </article>
-
-            <!-- Blog 6 -->
-            <article class="blog-card">
-                <div class="blog-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800" alt="Starfield">
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <span>✦ March 18, 2026</span>
-                        <span>✦ Guide</span>
-                    </div>
-                    <h2>Stargazing Guide: How to Photograph Meteor Showers</h2>
-                    <p class="blog-excerpt">Master the art of capturing meteor showers with practical tips on camera settings, location scouting, and post-processing techniques.</p>
-                    <a href="#" class="read-more">CONTINUE READING</a>
-                </div>
-            </article>
+        <div id="blog-grid" class="blog-grid">
+            <p id="blog-loading" style="color: var(--text-dim); text-align: center; grid-column: 1/-1; padding: 60px 0; font-size: 1rem; letter-spacing: 2px;">LOADING POSTS...</p>
         </div>
     </section>
 
@@ -159,6 +65,49 @@
 
     <!-- Scripts -->
     <script src="../assets/js/common.js"></script>
+    <script>
+        (function () {
+            const grid = document.getElementById('blog-grid');
+            const loading = document.getElementById('blog-loading');
+            const FALLBACK_IMG = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
+
+            function renderCard(post) {
+                const img = post.imageUrl || FALLBACK_IMG;
+                const excerpt = post.excerpt || 'Read this in-depth exploration of ' + post.topic + '.';
+                const article = document.createElement('article');
+                article.className = 'blog-card';
+                article.innerHTML = `
+                    <div class="blog-img-wrap">
+                        <img src="${img}" alt="${post.title}" loading="lazy"
+                             onerror="this.src='${FALLBACK_IMG}'">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>✦ ${post.date}</span>
+                            <span>✦ Space Science</span>
+                        </div>
+                        <h2>${post.title}</h2>
+                        <p class="blog-excerpt">${excerpt}</p>
+                        <a href="blog-posts/${post.filename}" class="read-more">CONTINUE READING</a>
+                    </div>`;
+                return article;
+            }
+
+            function renderEmpty() {
+                loading.textContent = 'No posts yet — check back soon!';
+            }
+
+            fetch('blog-index.json')
+                .then(r => { if (!r.ok) throw new Error('index not found'); return r.json(); })
+                .then(data => {
+                    const posts = (data.posts || []);
+                    loading.remove();
+                    if (posts.length === 0) { renderEmpty(); return; }
+                    posts.forEach(p => grid.appendChild(renderCard(p)));
+                })
+                .catch(() => renderEmpty());
+        })();
+    </script>
 </body>
 
 </html>

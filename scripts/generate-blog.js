@@ -6,7 +6,6 @@ const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const NASA_API_KEY = process.env.NASA_API_KEY;
 const INPUT_TOPIC = process.env.TOPIC || '';
 
-// Mid-volume, low-competition space topics
 const SPACE_TOPICS = [
   'auroras on other planets',
   'moon dust composition',
@@ -50,119 +49,141 @@ const SPACE_TOPICS = [
   'cosmic rays',
 ];
 
-async function getGroqResponse(topic) {
-  try {
-    console.log(`Generating blog for topic: ${topic}`);
+const BLOG_DIR = path.join(__dirname, '../pages/blog-posts');
+const INDEX_FILE = path.join(__dirname, '../pages/blog-index.json');
 
-    const prompt = `Write an optimized, engaging 800-word blog post about "${topic}" for astronomy/space enthusiasts.
+function getGeneratedSlugs() {
+  if (!fs.existsSync(BLOG_DIR)) return new Set();
+  return new Set(
+    fs.readdirSync(BLOG_DIR)
+      .filter(f => f.endsWith('.html') && f !== '.gitkeep')
+      .map(f => f.replace(/^\d+-/, '').replace(/\.html$/, ''))
+  );
+}
 
-Requirements:
-- Exactly 800 words (approximately)
-- SEO-optimized with keyword usage
-- Educational yet accessible tone
-- Include interesting facts and recent discoveries
-- Well-structured with clear sections
-- Include a compelling introduction and conclusion
-- Format with HTML tags for headings (h2, h3) and paragraphs
-- No images tags (images will be added separately)
-
-Start with an H1 title tag, then provide the content.`;
-
-    const response = await axios.post(
-      'https://api.groq.com/openai/v1/chat/completions',
-      {
-        model: 'openai/gpt-oss-120b',
-        messages: [
-          {
-            role: 'user',
-            content: prompt
-          }
-        ],
-        max_tokens: 2000,
-        temperature: 0.7
-      },
-      {
-        headers: {
-          'Authorization': `Bearer ${GROQ_API_KEY}`,
-          'Content-Type': 'application/json'
-        }
-      }
-    );
-
-    return response.data.choices[0].message.content;
-  } catch (error) {
-    console.error('Groq API Error:', error.response?.data || error.message);
-    throw error;
+function selectTopic(generatedSlugs) {
+  if (INPUT_TOPIC && INPUT_TOPIC.trim()) {
+    return INPUT_TOPIC.trim();
   }
+  const available = SPACE_TOPICS.filter(
+    t => !generatedSlugs.has(t.toLowerCase().replace(/\s+/g, '-'))
+  );
+  if (available.length === 0) {
+    console.log('✅ All topics have already been generated. Nothing new to create.');
+    process.exit(0);
+  }
+  console.log(`📚 ${available.length} topics remaining out of ${SPACE_TOPICS.length}`);
+  return available[Math.floor(Math.random() * available.length)];
+}
+
+function extractTitle(content) {
+  const match = content.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
+  if (match) return match[1].replace(/<[^>]+>/g, '').trim();
+  return null;
+}
+
+function extractExcerpt(content) {
+  const match = content.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+  if (match) {
+    const text = match[1].replace(/<[^>]+>/g, '').trim();
+    return text.length > 200 ? text.slice(0, 197) + '...' : text;
+  }
+  return '';
+}
+
+async function getGroqResponse(topic) {
+  console.log(`Generating blog content for: "${topic}"`);
+
+  const prompt = `You are a science writer for a premium astronomy magazine. Write a high-quality, engaging blog post about "${topic}" for space enthusiasts aged 18–45.
+
+REQUIREMENTS:
+- 1000–1200 words total
+- A compelling, creative H1 title (not just the raw topic name)
+- At least 3 H2 section headings that cover different angles of the topic
+- H3 sub-headings within sections where they add clarity
+- Use <p> tags for every paragraph
+- Include exactly one "Did You Know?" callout formatted as a <blockquote> with a surprising, accurate fact
+- Magazine-quality prose: vivid, scientifically accurate, and accessible — explain jargon when used
+- A strong, inspiring conclusion paragraph
+- Do NOT include any image tags
+
+Output ONLY valid HTML fragments starting with the <h1> tag. Do not include DOCTYPE, <html>, <head>, or <body> tags.`;
+
+  const response = await axios.post(
+    'https://api.groq.com/openai/v1/chat/completions',
+    {
+      model: 'llama-3.3-70b-versatile',
+      messages: [{ role: 'user', content: prompt }],
+      max_tokens: 4096,
+      temperature: 0.7,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${GROQ_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+
+  const content = response.data.choices[0].message.content;
+  if (!content || !content.includes('<p>')) {
+    throw new Error('Groq returned empty or invalid content — aborting to prevent writing an empty file');
+  }
+  return content;
 }
 
 async function getNASAImage(topic) {
   try {
-    console.log(`Fetching NASA images for: ${topic}`);
-
+    console.log(`Fetching NASA image for: "${topic}"`);
     const response = await axios.get('https://images-api.nasa.gov/search', {
-      params: {
-        q: topic,
-        media_type: 'image',
-        page_size: 5
-      }
+      params: { q: topic, media_type: 'image', page_size: 5 },
     });
-
     const items = response.data.collection?.items || [];
     if (items.length > 0) {
-      // Filter out non-image content
       const image = items.find(item => item.links?.[0]?.href) || items[0];
       if (image?.links?.[0]?.href) {
         return {
           url: image.links[0].href,
           title: image.data?.[0]?.title || topic,
-          description: image.data?.[0]?.description || ''
         };
       }
     }
-
-    // Fallback image if no NASA images found
-    return {
-      url: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800',
-      title: topic,
-      description: 'Space imagery'
-    };
-  } catch (error) {
-    console.error('NASA API Error:', error.message);
-    return {
-      url: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800',
-      title: topic,
-      description: 'Space imagery'
-    };
+  } catch (err) {
+    console.error('NASA API Error:', err.message);
   }
+  return {
+    url: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800',
+    title: topic,
+  };
 }
 
-function selectTopic() {
-  if (INPUT_TOPIC && INPUT_TOPIC.trim()) {
-    return INPUT_TOPIC.trim();
+function updateIndex(entry) {
+  let index = { posts: [] };
+  if (fs.existsSync(INDEX_FILE)) {
+    try {
+      index = JSON.parse(fs.readFileSync(INDEX_FILE, 'utf8'));
+    } catch (_) {
+      index = { posts: [] };
+    }
   }
-  return SPACE_TOPICS[Math.floor(Math.random() * SPACE_TOPICS.length)];
+  index.posts = [entry, ...index.posts.filter(p => p.filename !== entry.filename)];
+  fs.writeFileSync(INDEX_FILE, JSON.stringify(index, null, 2));
 }
 
-function formatBlogContent(content, topic, imageUrl, imageTitle) {
-  const date = new Date().toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-
-  const category = 'Space Science';
-  const slug = topic.toLowerCase().replace(/\s+/g, '-');
+function formatBlogContent(content, topic, title, filename, imageUrl, imageTitle, date) {
+  const pageTitle = title || topic;
 
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${topic} - Moonlight Moments Blog</title>
-    <meta name="description" content="Explore ${topic} with Moonlight Moments. Learn about this fascinating topic in our comprehensive astronomy blog.">
-    <meta name="keywords" content="${topic}, astronomy, space science, nasa, exploration">
-
+    <title>${pageTitle} | Moonlight Moments</title>
+    <meta name="description" content="Explore ${topic} with Moonlight Moments — an in-depth astronomy blog covering the cosmos.">
+    <meta name="keywords" content="${topic}, astronomy, space science, nasa, exploration, cosmos">
+    <meta property="og:title" content="${pageTitle}">
+    <meta property="og:description" content="Explore ${topic} with Moonlight Moments.">
+    <meta property="og:image" content="${imageUrl}">
     <link rel="icon" type="image/png" href="../assets/img/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/base.css">
@@ -172,10 +193,33 @@ function formatBlogContent(content, topic, imageUrl, imageTitle) {
         .blog-post-header { margin-bottom: 30px; }
         .blog-post-meta { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 15px; }
         .blog-post-content { line-height: 1.8; color: var(--text-color); }
-        .blog-post-content h2 { margin-top: 30px; margin-bottom: 15px; }
-        .blog-post-content h3 { margin-top: 20px; margin-bottom: 10px; }
-        .blog-post-content p { margin-bottom: 15px; }
-        .blog-post-featured-img { width: 100%; max-height: 400px; object-fit: cover; border-radius: 10px; margin: 30px 0; }
+        .blog-post-content h1 { font-size: 2rem; margin-bottom: 12px; }
+        .blog-post-content h2 { margin-top: 35px; margin-bottom: 15px; font-size: 1.5rem; color: var(--accent); }
+        .blog-post-content h3 { margin-top: 25px; margin-bottom: 10px; font-size: 1.15rem; }
+        .blog-post-content p { margin-bottom: 18px; }
+        .blog-post-content blockquote {
+            border-left: 3px solid var(--accent);
+            margin: 30px 0;
+            padding: 16px 24px;
+            background: var(--glass);
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: var(--text-dim);
+        }
+        .blog-post-featured-img { width: 100%; max-height: 420px; object-fit: cover; border-radius: 12px; margin: 30px 0; }
+        @media (max-width: 768px) {
+            .blog-post-container { padding: 20px 15px; }
+            .blog-post-content h1 { font-size: 1.5rem; }
+            .blog-post-content h2 { font-size: 1.25rem; margin-top: 25px; }
+            .blog-post-content h3 { font-size: 1.05rem; }
+            .blog-post-featured-img { max-height: 220px; margin: 20px 0; border-radius: 8px; }
+        }
+        @media (max-width: 480px) {
+            .blog-post-container { padding: 15px 12px; }
+            .blog-post-content { font-size: 0.95rem; line-height: 1.7; }
+            .blog-post-meta { font-size: 0.8rem; }
+            .blog-post-content blockquote { padding: 12px 16px; }
+        }
     </style>
 </head>
 <body>
@@ -188,10 +232,10 @@ function formatBlogContent(content, topic, imageUrl, imageTitle) {
         </a>
         <div class="nav-links">
             <a href="../index.html">Space Gallery</a>
-            <a href="age.html">Age on Planets</a>
-            <a href="event.html">Astronomical Calendar</a>
-            <a href="solar-system.html">3D Solar System</a>
-            <a href="blog.html" class="active">Blogs</a>
+            <a href="../age.html">Age on Planets</a>
+            <a href="../event.html">Astronomical Calendar</a>
+            <a href="../solar-system.html">3D Solar System</a>
+            <a href="../blog.html" class="active">Blogs</a>
             <a href="https://ko-fi.com/moonlightmoments" target="_blank" class="support-btn">Support Us</a>
         </div>
     </nav>
@@ -200,11 +244,12 @@ function formatBlogContent(content, topic, imageUrl, imageTitle) {
         <header class="blog-post-header">
             <div class="blog-post-meta">
                 <span>✦ ${date}</span>
-                <span>✦ ${category}</span>
+                <span>✦ Space Science</span>
             </div>
         </header>
 
-        <img src="${imageUrl}" alt="${imageTitle}" class="blog-post-featured-img" onerror="this.src='https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800'">
+        <img src="${imageUrl}" alt="${imageTitle}" class="blog-post-featured-img"
+             onerror="this.src='https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800'">
 
         <div class="blog-post-content">
             ${content}
@@ -213,14 +258,14 @@ function formatBlogContent(content, topic, imageUrl, imageTitle) {
         <div style="margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--glass-border);">
             <p style="color: var(--text-dim); font-size: 0.9rem;">
                 <strong>Author:</strong> Moonlight Moments Team<br>
-                <strong>Generated:</strong> ${date}<br>
-                <strong>Category:</strong> ${category}
+                <strong>Published:</strong> ${date}<br>
+                <strong>Category:</strong> Space Science
             </p>
         </div>
     </article>
 
     <footer style="text-align: center; padding: 40px 20px; border-top: 1px solid var(--glass-border);">
-        <p class="footer-copyright">&copy; 2026 MOONLIGHT MOMENTS | AUTO-GENERATED SPACE BLOG</p>
+        <p class="footer-copyright">&copy; 2026 MOONLIGHT MOMENTS | ASTRONOMY BLOG</p>
     </footer>
 
     <script src="../assets/js/common.js"></script>
@@ -230,34 +275,32 @@ function formatBlogContent(content, topic, imageUrl, imageTitle) {
 
 async function generateBlog() {
   try {
-    const topic = selectTopic();
+    const generatedSlugs = getGeneratedSlugs();
+    const topic = selectTopic(generatedSlugs);
     console.log(`\n📝 Starting blog generation for: "${topic}"\n`);
 
-    // Generate content and fetch image in parallel
     const [content, image] = await Promise.all([
       getGroqResponse(topic),
-      getNASAImage(topic)
+      getNASAImage(topic),
     ]);
 
-    // Create blog-posts directory if it doesn't exist
-    const blogDir = path.join(__dirname, '../pages/blog-posts');
-    if (!fs.existsSync(blogDir)) {
-      fs.mkdirSync(blogDir, { recursive: true });
-    }
+    const title = extractTitle(content);
+    const excerpt = extractExcerpt(content);
+    const date = new Date().toLocaleDateString('en-US', {
+      year: 'numeric', month: 'long', day: 'numeric',
+    });
+    const timestamp = Date.now();
+    const slug = topic.toLowerCase().replace(/\s+/g, '-');
+    const filename = `${timestamp}-${slug}.html`;
+    const filepath = path.join(BLOG_DIR, filename);
 
-    // Format filename
-    const filename = `${Date.now()}-${topic.toLowerCase().replace(/\s+/g, '-')}.html`;
-    const filepath = path.join(blogDir, filename);
+    if (!fs.existsSync(BLOG_DIR)) fs.mkdirSync(BLOG_DIR, { recursive: true });
 
-    // Create formatted blog post
-    const htmlContent = formatBlogContent(content, topic, image.url, image.title);
+    fs.writeFileSync(filepath, formatBlogContent(content, topic, title, filename, image.url, image.title, date));
+    console.log(`✅ Blog post created: pages/blog-posts/${filename}`);
 
-    // Write file
-    fs.writeFileSync(filepath, htmlContent);
-    console.log(`✅ Blog post created: ${filepath}`);
-    console.log(`📊 Topic: ${topic}`);
-    console.log(`🖼️  Image: ${image.title}`);
-    console.log(`📝 Content length: ~800 words`);
+    updateIndex({ filename, topic, title: title || topic, date, timestamp, imageUrl: image.url, excerpt });
+    console.log(`📋 blog-index.json updated`);
     console.log(`\n✨ Blog generation complete!\n`);
 
   } catch (error) {
@@ -266,5 +309,4 @@ async function generateBlog() {
   }
 }
 
-// Run the generator
 generateBlog();
