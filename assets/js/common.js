@@ -41,24 +41,42 @@ function setupCursor() {
 
 function setupMobileMenu() {
     const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
     const dropdown = document.getElementById('myDropdown');
 
-    if (menuBtn && dropdown) {
-        menuBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            dropdown.classList.toggle('show');
+    if (!menuBtn) return;
+
+    menuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (window.innerWidth <= 768) {
+            navLinks && navLinks.classList.toggle('mobile-open');
+            menuBtn.classList.toggle('active');
+        } else {
+            dropdown && dropdown.classList.toggle('show');
+        }
+    });
+
+    // Close mobile nav when a link is tapped
+    navLinks && navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('mobile-open');
+            menuBtn.classList.remove('active');
         });
-        dropdown.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                dropdown.classList.remove('show');
-            });
-        });
-        window.addEventListener('click', () => {
-            if (dropdown.classList.contains('show')) {
-                dropdown.classList.remove('show');
-            }
-        });
-    }
+    });
+
+    // Close desktop dropdown when clicking outside
+    window.addEventListener('click', () => {
+        dropdown && dropdown.classList.remove('show');
+    });
+
+    // Reset mobile nav on resize to desktop
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            navLinks && navLinks.classList.remove('mobile-open');
+            menuBtn.classList.remove('active');
+            dropdown && dropdown.classList.remove('show');
+        }
+    });
 }
 
 function setupHovers() {

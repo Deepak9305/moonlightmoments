@@ -149,7 +149,7 @@ h1 {
 }
 
 .tag {
-    font-size: 0.55rem;
+    font-size: 0.7rem;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--accent);
@@ -197,15 +197,16 @@ h1 {
 }
 
 @media (max-width: 480px) {
-    .countdown-wrap { padding: 130px 4% 40px; }
-    .timer-display { gap: 12px; }
+    .countdown-wrap { padding: 110px 4% 35px; }
+    .timer-display { gap: 10px; }
     .timer-val { font-size: clamp(1.8rem, 9vw, 2.8rem); }
-    .timer-unit { font-size: 0.55rem; letter-spacing: 1px; }
+    .timer-unit { font-size: 0.65rem; letter-spacing: 1px; }
     h1 { font-size: clamp(1.8rem, 7vw, 2.5rem); }
-    .events-grid { grid-template-columns: 1fr; gap: 18px; }
+    .events-grid { grid-template-columns: 1fr; gap: 16px; }
     .img-box { height: 160px; }
     .card-content { padding: 16px 14px; }
     .day-num { font-size: 1.8rem; }
     .event-title { font-size: 1rem; }
-    .container { padding: 35px 4% 60px; }
+    .tag { font-size: 0.68rem; letter-spacing: 2px; }
+    .container { padding: 30px 4% 60px; }
 }

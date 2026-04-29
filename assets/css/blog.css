@@ -74,7 +74,7 @@
 }
 
 .blog-meta {
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -85,7 +85,7 @@
 
 .blog-card h2 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
     margin-bottom: 15px;
     line-height: 1.3;
     color: white;
@@ -121,7 +121,18 @@
 
 /* --- Responsive --- */
 @media (max-width: 768px) {
-    .blog-hero { padding: 140px 5% 50px; }
-    .blog-grid { grid-template-columns: 1fr; gap: 30px; }
+    .blog-hero { padding: 120px 5% 40px; }
+    .blog-grid { grid-template-columns: 1fr; gap: 24px; }
     .blog-img-wrap { height: 200px; }
+    .blog-content { padding: 22px; }
+}
+
+@media (max-width: 480px) {
+    .blog-hero { padding: 100px 4% 30px; }
+    .blog-section { padding: 50px 4% 80px; }
+    .blog-img-wrap { height: 170px; }
+    .blog-content { padding: 18px 16px; }
+    .blog-meta { font-size: 0.68rem; gap: 10px; }
+    .blog-card h2 { font-size: clamp(1.1rem, 5vw, 1.4rem); }
+    .blog-excerpt { font-size: 0.85rem; margin-bottom: 18px; }
 }

@@ -3,7 +3,6 @@ const fs = require('fs');
 const path = require('path');
 
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
-const NASA_API_KEY = process.env.NASA_API_KEY;
 const INPUT_TOPIC = process.env.TOPIC || '';
 
 const SPACE_TOPICS = [
@@ -170,7 +169,7 @@ function updateIndex(entry) {
   fs.writeFileSync(INDEX_FILE, JSON.stringify(index, null, 2));
 }
 
-function formatBlogContent(content, topic, title, filename, imageUrl, imageTitle, date) {
+function formatBlogContent(content, topic, title, imageUrl, imageTitle, date) {
   const pageTitle = title || topic;
 
   return `<!DOCTYPE html>
@@ -230,13 +229,22 @@ function formatBlogContent(content, topic, title, filename, imageUrl, imageTitle
             <img src="../assets/img/logo.png" alt="Moonlight Moments Logo" class="logo-img">
             Moonlight Moments
         </a>
-        <div class="nav-links">
+        <div class="nav-links" id="navLinks">
             <a href="../index.html">Space Gallery</a>
             <a href="../age.html">Age on Planets</a>
             <a href="../event.html">Astronomical Calendar</a>
             <a href="../solar-system.html">3D Solar System</a>
             <a href="../blog.html" class="active">Blogs</a>
             <a href="https://ko-fi.com/moonlightmoments" target="_blank" class="support-btn">Support Us</a>
+            <a href="#" class="legal-link nav-legal-link" data-type="about">✦ Our Story</a>
+            <a href="#" class="legal-link nav-legal-link" data-type="privacy">✦ Privacy Orbit</a>
+        </div>
+        <div class="nav-hamburger">
+            <button class="hamburger-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+            <div class="dropdown-content" id="myDropdown">
+                <a href="#" class="legal-link" data-type="about">✦ Our Story</a>
+                <a href="#" class="legal-link" data-type="privacy">✦ Privacy Orbit</a>
+            </div>
         </div>
     </nav>
 
@@ -296,7 +304,7 @@ async function generateBlog() {
 
     if (!fs.existsSync(BLOG_DIR)) fs.mkdirSync(BLOG_DIR, { recursive: true });
 
-    fs.writeFileSync(filepath, formatBlogContent(content, topic, title, filename, image.url, image.title, date));
+    fs.writeFileSync(filepath, formatBlogContent(content, topic, title, image.url, image.title, date));
     console.log(`✅ Blog post created: pages/blog-posts/${filename}`);
 
     updateIndex({ filename, topic, title: title || topic, date, timestamp, imageUrl: image.url, excerpt });

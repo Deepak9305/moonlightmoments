@@ -325,11 +325,64 @@ body {
 @keyframes titleFade { 0%, 50% { opacity: 1; } 100% { opacity: 0; } }
 
 @media (max-width: 768px) {
-    .glass-nav { top: 12px; padding: 12px 20px; border-radius: 20px; flex-wrap: wrap; gap: 8px; width: 94%; }
-    .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 6px 12px; order: 3; }
     #planet-info-panel { width: 240px; padding: 20px; left: 3%; }
-    #time-controls { bottom: 16px; right: 16px; padding: 10px 16px; }
+    #time-controls { bottom: 16px; padding: 10px 16px; }
     #time-slider { width: 100px; }
+    #mode-controls { top: 80px; right: 16px; }
+}
+
+@media (max-width: 480px) {
+    /* Info panel: full-width bar at bottom instead of side panel */
+    #planet-info-panel {
+        width: calc(100% - 24px);
+        left: 12px;
+        right: 12px;
+        top: auto;
+        bottom: 80px;
+        transform: none;
+        border-radius: 16px;
+        max-height: 55vh;
+        overflow-y: auto;
+    }
+
+    #planet-info-panel.visible {
+        transform: none;
+    }
+
+    /* Compare modal: single column */
+    #compare-modal {
+        grid-template-columns: 1fr;
+        padding: 24px 16px;
+        width: 94%;
+        gap: 16px;
+        overflow-y: auto;
+        max-height: 85vh;
+    }
+
+    .compare-side.right { text-align: left; }
+    .compare-side.right .planet-ui-stat { flex-direction: row; padding-left: 0; }
+
+    .compare-vs {
+        font-size: 1.6rem;
+        text-align: center;
+    }
+
+    /* Mode controls smaller on phone */
+    #mode-controls {
+        top: 70px;
+        right: 10px;
+        padding: 5px;
+    }
+
+    .mode-btn {
+        padding: 6px 10px;
+        font-size: 0.65rem;
+    }
+
+    /* Time slider narrower */
+    #time-controls { padding: 8px 12px; gap: 8px; }
+    #time-slider { width: 70px; }
+    #time-controls label { font-size: 0.6rem; letter-spacing: 1px; }
 }
 
 /* --- Utility Classes --- */
