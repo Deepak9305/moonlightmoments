@@ -1,3 +1,13 @@
 {
-  "posts": []
+  "posts": [
+    {
+      "filename": "1777549341068-binary-star-systems.html",
+      "topic": "binary star systems",
+      "title": "Celestial Waltz: Unveiling the Mysteries of Binary Star Systems",
+      "date": "April 30, 2026",
+      "timestamp": 1777549341068,
+      "imageUrl": "https://images-assets.nasa.gov/image/PIA09931/PIA09931~medium.jpg",
+      "excerpt": "Binary star systems, also known as double stars, have long fascinated astronomers and space enthusiasts alike. These systems consist of two stars that orbit around their common center of mass, ofte..."
+    }
+  ]
 }
