@@ -404,7 +404,7 @@ async function generateBlog() {
       year: 'numeric', month: 'long', day: 'numeric',
     });
     const timestamp = Date.now();
-    const filename = `${timestamp}-${slug}.html`;
+    const filename = `${slug}.html`;
     const filepath = path.join(BLOG_DIR, filename);
 
     if (!fs.existsSync(BLOG_DIR)) fs.mkdirSync(BLOG_DIR, { recursive: true });

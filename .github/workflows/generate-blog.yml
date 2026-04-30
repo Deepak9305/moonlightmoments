@@ -47,7 +47,7 @@ jobs:
             exit 0
           fi
 
-          SLUG=$(basename "$NEW_FILE" .html | sed 's/^[0-9]*-//')
+          SLUG=$(basename "$NEW_FILE" .html)
           TITLE="${SLUG//-/ }"
 
           git add pages/blog-posts/ pages/blog-index.json
