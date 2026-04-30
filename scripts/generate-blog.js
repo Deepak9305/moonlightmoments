@@ -56,7 +56,7 @@ function getGeneratedSlugs() {
   return new Set(
     fs.readdirSync(BLOG_DIR)
       .filter(f => f.endsWith('.html') && f !== '.gitkeep')
-      .map(f => f.replace(/^\d+-/, '').replace(/\.html$/, ''))
+      .map(f => f.replace(/\.html$/, ''))
   );
 }
 
