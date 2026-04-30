@@ -253,9 +253,9 @@ footer {
         gap: 0;
     }
 
-    /* Main nav links hidden by default, revealed on toggle */
+    /* Main nav links: always flex on mobile but hidden via opacity/transform */
     .nav-links {
-        display: none;
+        display: flex;
         position: fixed;
         top: 68px;
         left: 3%;
@@ -270,10 +270,20 @@ footer {
         padding: 12px;
         gap: 3px;
         z-index: 998;
+        /* hidden state */
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none;
+        transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+        overscroll-behavior: contain;
     }
 
     .nav-links.mobile-open {
-        display: flex;
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
     }
 
     /* Each nav link becomes a full-width 44px touch target */
@@ -346,6 +356,6 @@ footer {
     }
 
     .nav-links {
-        top: 62px;
+        top: 60px;
     }
 }

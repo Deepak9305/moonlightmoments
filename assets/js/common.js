@@ -43,14 +43,22 @@ function setupMobileMenu() {
     const menuBtn = document.getElementById('menuBtn');
     const navLinks = document.getElementById('navLinks');
     const dropdown = document.getElementById('myDropdown');
+    const nav = menuBtn && menuBtn.closest('nav, .glass-nav');
 
     if (!menuBtn) return;
+
+    function closeMobileMenu() {
+        navLinks && navLinks.classList.remove('mobile-open');
+        menuBtn.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 
     menuBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         if (window.innerWidth <= 768) {
-            navLinks && navLinks.classList.toggle('mobile-open');
+            const isOpen = navLinks && navLinks.classList.toggle('mobile-open');
             menuBtn.classList.toggle('active');
+            document.body.style.overflow = isOpen ? 'hidden' : '';
         } else {
             dropdown && dropdown.classList.toggle('show');
         }
@@ -58,22 +66,24 @@ function setupMobileMenu() {
 
     // Close mobile nav when a link is tapped
     navLinks && navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('mobile-open');
-            menuBtn.classList.remove('active');
-        });
+        link.addEventListener('click', closeMobileMenu);
     });
 
-    // Close desktop dropdown when clicking outside
-    window.addEventListener('click', () => {
-        dropdown && dropdown.classList.remove('show');
+    // Close when tapping outside nav (mobile) or anywhere (desktop dropdown)
+    document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+            if (nav && !nav.contains(e.target) && navLinks && !(navLinks.contains(e.target))) {
+                closeMobileMenu();
+            }
+        } else {
+            dropdown && dropdown.classList.remove('show');
+        }
     });
 
-    // Reset mobile nav on resize to desktop
+    // Reset on resize to desktop
     window.addEventListener('resize', () => {
         if (window.innerWidth > 768) {
-            navLinks && navLinks.classList.remove('mobile-open');
-            menuBtn.classList.remove('active');
+            closeMobileMenu();
             dropdown && dropdown.classList.remove('show');
         }
     });
