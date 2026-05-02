@@ -253,51 +253,53 @@ footer {
         gap: 0;
     }
 
-    /* Main nav links: always flex on mobile but hidden via opacity/transform */
+    /* Mobile nav drawer — slides in from right */
     .nav-links {
         display: flex;
         position: fixed;
-        top: 68px;
-        left: 3%;
-        right: 3%;
-        width: auto;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: auto;
+        width: 72vw;
+        max-width: 300px;
+        min-width: 220px;
         flex-direction: column;
-        background: rgba(5, 5, 8, 0.97);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid var(--glass-border);
-        border-radius: 20px;
-        padding: 12px;
-        gap: 3px;
-        z-index: 998;
-        /* hidden state */
+        background: rgba(8, 6, 14, 0.98);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border-left: 1px solid var(--glass-border);
+        border-radius: 0;
+        padding: 80px 0 32px;
+        gap: 2px;
+        z-index: 1001;
         visibility: hidden;
-        opacity: 0;
-        transform: translateY(-10px);
+        transform: translateX(100%);
         pointer-events: none;
-        transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s;
         overscroll-behavior: contain;
+        overflow-y: auto;
     }
 
     .nav-links.mobile-open {
         visibility: visible;
-        opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
         pointer-events: auto;
     }
 
-    /* Each nav link becomes a full-width 44px touch target */
+    /* Each nav link — left-aligned, inset from drawer edge */
     .nav-links > a {
         font-size: 0.85rem;
         letter-spacing: 1px;
-        padding: 13px 20px;
-        border-radius: 10px;
+        padding: 13px 24px;
+        border-radius: 8px;
+        margin: 0 12px;
         min-height: 44px;
         display: flex;
         align-items: center;
-        justify-content: center;
-        width: 100%;
-        text-align: center;
+        justify-content: flex-start;
+        width: calc(100% - 24px);
+        text-align: left;
     }
 
     .nav-links > a:hover,
@@ -306,7 +308,8 @@ footer {
     }
 
     .support-btn, .support-nav-btn {
-        width: 100%;
+        margin: 6px 12px 2px;
+        width: calc(100% - 24px);
         text-align: center;
         font-size: 0.85rem;
         padding: 13px 20px;
@@ -321,9 +324,33 @@ footer {
         display: flex !important;
         color: var(--text-dim) !important;
         font-size: 0.8rem !important;
+        justify-content: flex-start !important;
+    }
+
+    .nav-links > .nav-legal-link:first-of-type {
         border-top: 1px solid var(--glass-border);
-        margin-top: 4px;
-        padding-top: 6px;
+        margin-top: 8px;
+        padding-top: 10px;
+    }
+
+    /* Drawer backdrop */
+    .nav-drawer-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+        z-index: 1000;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease, visibility 0.3s;
+    }
+
+    .nav-drawer-backdrop.visible {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
     }
 
     /* Hamburger button — proper 44px touch target */
@@ -355,7 +382,5 @@ footer {
         height: 26px;
     }
 
-    .nav-links {
-        top: 60px;
-    }
+
 }

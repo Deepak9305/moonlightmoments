@@ -43,39 +43,54 @@ function setupMobileMenu() {
     const menuBtn = document.getElementById('menuBtn');
     const navLinks = document.getElementById('navLinks');
     const dropdown = document.getElementById('myDropdown');
-    const nav = menuBtn && menuBtn.closest('nav, .glass-nav');
 
     if (!menuBtn) return;
+
+    // Inject backdrop once
+    let backdrop = document.getElementById('nav-drawer-backdrop');
+    if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.id = 'nav-drawer-backdrop';
+        backdrop.className = 'nav-drawer-backdrop';
+        document.body.appendChild(backdrop);
+    }
+
+    function openMobileMenu() {
+        navLinks && navLinks.classList.add('mobile-open');
+        menuBtn.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        backdrop.classList.add('visible');
+    }
 
     function closeMobileMenu() {
         navLinks && navLinks.classList.remove('mobile-open');
         menuBtn.classList.remove('active');
         document.body.style.overflow = '';
+        backdrop.classList.remove('visible');
     }
 
     menuBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         if (window.innerWidth <= 768) {
-            const isOpen = navLinks && navLinks.classList.toggle('mobile-open');
-            menuBtn.classList.toggle('active');
-            document.body.style.overflow = isOpen ? 'hidden' : '';
+            navLinks && navLinks.classList.contains('mobile-open')
+                ? closeMobileMenu()
+                : openMobileMenu();
         } else {
             dropdown && dropdown.classList.toggle('show');
         }
     });
+
+    // Close when backdrop is tapped
+    backdrop.addEventListener('click', closeMobileMenu);
 
     // Close mobile nav when a link is tapped
     navLinks && navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', closeMobileMenu);
     });
 
-    // Close when tapping outside nav (mobile) or anywhere (desktop dropdown)
+    // Close desktop dropdown when clicking anywhere
     document.addEventListener('click', (e) => {
-        if (window.innerWidth <= 768) {
-            if (nav && !nav.contains(e.target) && navLinks && !(navLinks.contains(e.target))) {
-                closeMobileMenu();
-            }
-        } else {
+        if (window.innerWidth > 768) {
             dropdown && dropdown.classList.remove('show');
         }
     });
