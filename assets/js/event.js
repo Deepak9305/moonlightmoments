@@ -28,6 +28,7 @@ const masterCalendar = [
 ];
 
 let currentViewMonth = new Date().getMonth();
+let renderToken = 0;
 
 function startCountdown() {
     const now = new Date();
@@ -91,16 +92,19 @@ async function fetchEventImage(query) {
 async function updateUI() {
     const container = document.getElementById('events-container');
     if (!container) return;
+    const currentToken = ++renderToken;
     container.classList.add('fade-out');
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     setTimeout(async () => {
+        if (currentToken !== renderToken) return;
         try {
             const monthNameEl = document.getElementById('month-name');
             if (monthNameEl) monthNameEl.textContent = monthNames[currentViewMonth];
             container.innerHTML = '';
             const monthlyEvents = masterCalendar.filter(ev => ev.month === currentViewMonth);
             const eventImages = await Promise.all(monthlyEvents.map(ev => fetchEventImage(ev.query)));
+            if (currentToken !== renderToken) return;
 
             monthlyEvents.forEach((ev, index) => {
                 const card = document.createElement('div');
@@ -140,8 +144,10 @@ async function updateUI() {
                 container.appendChild(card);
             });
         } finally {
-            container.classList.remove('fade-out');
-            if (typeof setupHovers === 'function') setupHovers();
+            if (currentToken === renderToken) {
+                container.classList.remove('fade-out');
+                if (typeof setupHovers === 'function') setupHovers();
+            }
         }
     }, 500);
 }

@@ -13,12 +13,22 @@ function setupCursor() {
     
     if (!cursor) return;
 
+    const setCursorMode = () => {
+        const showCustomCursor = window.innerWidth > 900;
+        document.body.classList.toggle('no-mouse', showCustomCursor);
+        if (!showCustomCursor) {
+            cursor.style.display = 'none';
+            if (dot) dot.style.display = 'none';
+        }
+    };
+
     let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
 
     document.addEventListener('mousemove', e => {
         mouseX = e.clientX;
         mouseY = e.clientY;
         if (window.innerWidth > 900) {
+            document.body.classList.add('no-mouse');
             cursor.style.display = 'block';
             if (dot) {
                 dot.style.left = mouseX + 'px';
@@ -27,6 +37,13 @@ function setupCursor() {
             }
         }
     });
+
+    document.addEventListener('keydown', () => {
+        document.body.classList.remove('no-mouse');
+    });
+
+    window.addEventListener('resize', setCursorMode);
+    setCursorMode();
 
     function animateCursor() {
         if (window.innerWidth > 900) {
@@ -44,6 +61,8 @@ function setupMobileMenu() {
     const menuBtn = document.getElementById('menuBtn');
     const navLinks = document.getElementById('navLinks');
     const dropdown = document.getElementById('myDropdown');
+    const glassNav = document.querySelector('.glass-nav') || document.querySelector('nav');
+    const hamburgerContainer = document.querySelector('.nav-hamburger');
 
     if (!menuBtn) return;
 
@@ -63,6 +82,23 @@ function setupMobileMenu() {
     menuBtn.setAttribute('aria-label', 'Open navigation menu');
     if (navLinks) navLinks.setAttribute('aria-hidden', 'true');
     if (dropdown) dropdown.setAttribute('aria-hidden', 'true');
+
+    function handleNavPosition() {
+        if (!navLinks) return;
+        if (isCompactNav()) {
+            if (navLinks.parentNode !== document.body) {
+                document.body.appendChild(navLinks);
+            }
+        } else {
+            if (glassNav && navLinks.parentNode !== glassNav) {
+                if (hamburgerContainer) {
+                    glassNav.insertBefore(navLinks, hamburgerContainer);
+                } else {
+                    glassNav.appendChild(navLinks);
+                }
+            }
+        }
+    }
 
     function openMobileMenu() {
         navLinks && navLinks.classList.add('mobile-open');
@@ -136,10 +172,12 @@ function setupMobileMenu() {
         if (e.key === 'Escape') {
             closeMobileMenu();
             closeDesktopDropdown();
+            closeLegal();
         }
     });
 
     window.addEventListener('resize', () => {
+        handleNavPosition();
         if (!isCompactNav()) {
             closeMobileMenu();
         } else {
@@ -147,6 +185,7 @@ function setupMobileMenu() {
         }
     });
 
+    handleNavPosition(); // Initialize position based on current viewport
     closeMobileMenu();
     closeDesktopDropdown();
 }
@@ -186,7 +225,10 @@ function showLegal(t) {
 
     if (legalContent && legalModal && data[t]) {
         legalContent.innerHTML = '';
+        legalModal.setAttribute('role', 'dialog');
+        legalModal.setAttribute('aria-modal', 'true');
         const title = document.createElement('h2');
+        title.id = 'legal-modal-title';
         title.className = 'legal-title';
         title.textContent = t.toUpperCase();
         const desc = document.createElement('p');
@@ -194,6 +236,7 @@ function showLegal(t) {
         desc.textContent = data[t];
         legalContent.appendChild(title);
         legalContent.appendChild(desc);
+        legalModal.setAttribute('aria-labelledby', title.id);
         legalModal.style.display = 'block';
         document.body.style.overflow = 'hidden';
         legalModal.addEventListener('click', onLegalOverlayClick);

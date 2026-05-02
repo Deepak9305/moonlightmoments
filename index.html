@@ -74,7 +74,7 @@
     <link rel="stylesheet" href="assets/css/index.css">
 </head>
 
-<body class="no-mouse">
+<body>
 
     <div id="preloader">
         <div class="starfield" id="loader-starfield"></div>
@@ -149,7 +149,7 @@
         <p class="footer-copyright">&copy; 2026 MOONLIGHT MOMENTS | NASA OPEN API ARCHIVE | SPACE PHOTOGRAPHY GALLERY</p>
     </footer>
 
-    <div id="modal" class="modal-overlay">
+    <div id="modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="m-title" aria-describedby="m-desc">
         <div class="modal-content">
             <button class="modal-close-btn" id="close-modal-btn" aria-label="Close modal">&times;</button>
             <div class="modal-img-side"></div>
@@ -162,7 +162,7 @@
         </div>
     </div>
 
-    <div id="legal-modal" class="legal-modal">
+    <div id="legal-modal" class="legal-modal" role="dialog" aria-modal="true" aria-labelledby="legal-content">
         <span class="legal-close-span" id="close-legal-btn" aria-label="Close legal modal">&times;</span>
         <div class="legal-inner" id="legal-content"></div>
     </div>
