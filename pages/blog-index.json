@@ -1,6 +1,15 @@
 {
   "posts": [
     {
+      "filename": "hawking-radiation.html",
+      "topic": "hawking radiation",
+      "title": "Unveiling the Mysteries of Black Holes: The Enigmatic Hawking Radiation",
+      "date": "May 2, 2026",
+      "timestamp": 1777703962966,
+      "imageUrl": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800",
+      "excerpt": "For decades, black holes have been a source of fascination for space enthusiasts and scientists alike. These cosmic phenomena have captivated our imagination with their immense power and mystique. ..."
+    },
+    {
       "filename": "exoplanet-atmospheres.html",
       "topic": "exoplanet atmospheres",
       "title": "Beyond the Cosmic Horizon: Unveiling the Mysteries of Exoplanet Atmospheres",
