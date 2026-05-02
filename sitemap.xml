@@ -14,13 +14,19 @@
     </url>
     <url>
         <loc>https://www.moonlightmoments.co.in/pages/blog-posts/dark-energy-mystery.html</loc>
-        <lastmod>2026-04-30</lastmod>
+        <lastmod>2026-05-01</lastmod>
         <changefreq>never</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>https://www.moonlightmoments.co.in/pages/blog-posts/exoplanet-atmospheres.html</loc>
-        <lastmod>2026-04-30</lastmod>
+        <lastmod>2026-05-01</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.moonlightmoments.co.in/pages/blog-posts/hawking-radiation.html</loc>
+        <lastmod>2026-05-02</lastmod>
         <changefreq>never</changefreq>
         <priority>0.6</priority>
     </url>
