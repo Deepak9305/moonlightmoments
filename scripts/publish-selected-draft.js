@@ -379,10 +379,8 @@ function publish() {
   });
   console.log('[Publish] 📋 blog-index.json updated');
 
-  if (process.env.DELETE_DRAFT === 'true') {
-    fs.unlinkSync(draftPath);
-    console.log(`[Publish] 🗑️  Draft removed: drafts/${draftFilename}`);
-  }
+  fs.unlinkSync(draftPath);
+  console.log(`[Publish] 🗑️  Draft removed: drafts/${draftFilename}`);
 }
 
 publish();
