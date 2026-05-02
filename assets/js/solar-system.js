@@ -394,14 +394,22 @@ function showPlanetPanel(name) {
     focusedName = name; const d = PLANET_DATA[name]; if (!d) return;
     document.getElementById('pi-name').textContent = name; document.getElementById('pi-desc').textContent = d.desc;
     const s = document.getElementById('pi-stats-container'); s.innerHTML = '';
-    ['Diameter', 'Distance', 'Day Length', 'Year Length', 'Moons', 'Temperature', 'Type'].forEach(k => {
-        const val = d[k.toLowerCase().replace(' ', '')] || d[k.toLowerCase()];
+    const statMap = {
+        'Diameter': d.diameter,
+        'Distance': d.distance,
+        'Day Length': d.day,
+        'Year Length': d.year,
+        'Moons': d.moons,
+        'Temperature': d.temp,
+        'Type': d.type
+    };
+    Object.entries(statMap).forEach(([k, val]) => {
         const stat = document.createElement('div');
         stat.className = 'planet-ui-stat';
         const kSpan = document.createElement('span');
         kSpan.textContent = k;
         const vSpan = document.createElement('span');
-        vSpan.textContent = val;
+        vSpan.textContent = val || 'Unknown';
         stat.appendChild(kSpan);
         stat.appendChild(vSpan);
         s.appendChild(stat);

@@ -24,6 +24,7 @@ function initializeSync() {
     const weightInput = document.getElementById('weight');
     const birthdateInput = document.getElementById('birthdate');
     const res = document.getElementById('results');
+    const actions = document.getElementById('actions');
 
     const m = parseFloat(weightInput?.value || 0);
     const d = birthdateInput?.value || '';
@@ -44,6 +45,8 @@ function initializeSync() {
         alert("Birth date cannot be in the future.");
         return;
     }
+
+    if (!res || !actions) return;
 
     const diff = Math.floor((today - birthDate) / 86400000);
     res.innerHTML = '';
@@ -90,29 +93,39 @@ function initializeSync() {
         setTimeout(() => card.classList.add('active'), i * 150);
     });
 
-    document.getElementById('actions').style.display = 'flex';
+    actions.style.display = 'flex';
 }
 
 async function exportPass() {
     const area = document.getElementById('capture-area');
     const mark = document.getElementById('watermark');
+    if (!area || !mark || typeof html2canvas !== 'function') return;
     mark.style.display = 'block';
 
-    const canvas = await html2canvas(area, { backgroundColor: '#050505', scale: 2 });
-    const link = document.createElement('a');
-    link.download = 'Interstellar-Pass.png';
-    link.href = canvas.toDataURL();
-    link.click();
-    mark.style.display = 'none';
+    try {
+        const canvas = await html2canvas(area, { backgroundColor: '#050505', scale: 2 });
+        const link = document.createElement('a');
+        link.download = 'Interstellar-Pass.png';
+        link.href = canvas.toDataURL();
+        link.click();
+    } finally {
+        mark.style.display = 'none';
+    }
 }
 
 async function shareStats() {
     if (navigator.share) {
-        navigator.share({
-            title: 'Interstellar Identity',
-            text: 'I just synced my orbital biometrics!',
-            url: window.location.href
-        });
+        try {
+            await navigator.share({
+                title: 'Interstellar Identity',
+                text: 'I just synced my orbital biometrics!',
+                url: window.location.href
+            });
+        } catch (error) {
+            if (error && error.name !== 'AbortError') {
+                alert('Sharing is unavailable right now.');
+            }
+        }
     } else {
         alert("Sharing not supported on this browser.");
     }

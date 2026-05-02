@@ -122,7 +122,7 @@
             <a href="event.html">Astronomical Calendar</a>
             <a href="solar-system.html">3D Solar System</a>
             <a href="blog.html" class="active">Blogs</a>
-            <a href="https://ko-fi.com/moonlightmoments" target="_blank" class="support-btn">Support Us</a>
+            <a href="https://ko-fi.com/moonlightmoments" target="_blank" rel="noopener noreferrer" class="support-btn">Support Us</a>
             <a href="#" class="legal-link nav-legal-link" data-type="about">✦ Our Story</a>
             <a href="#" class="legal-link nav-legal-link" data-type="privacy">✦ Privacy Orbit</a>
         </div>
@@ -141,7 +141,7 @@
     </header>
 
     <section class="blog-section">
-        <div id="blog-grid" class="blog-grid">
+        <div id="blog-grid" class="blog-grid" aria-live="polite">
             <p id="blog-loading" style="color: var(--text-dim); text-align: center; grid-column: 1/-1; padding: 60px 0; font-size: 1rem; letter-spacing: 2px;">LOADING POSTS...</p>
         </div>
     </section>
@@ -211,7 +211,11 @@
             }
 
             function renderEmpty() {
-                loading.textContent = 'No posts yet — check back soon!';
+                if (loading && loading.parentNode) {
+                    loading.textContent = 'No posts yet - check back soon!';
+                    return;
+                }
+                grid.innerHTML = '<p style="color: var(--text-dim); text-align: center; grid-column: 1/-1; padding: 60px 0; font-size: 1rem; letter-spacing: 2px;">No posts yet - check back soon!</p>';
             }
 
             fetch('blog-index.json')

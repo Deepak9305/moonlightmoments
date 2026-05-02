@@ -78,6 +78,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 24px;
     z-index: 1000;
 }
 
@@ -102,8 +103,11 @@ body {
 
 .nav-links {
     display: flex;
-    gap: 25px;
+    gap: clamp(14px, 1.6vw, 25px);
     align-items: center;
+    justify-content: flex-end;
+    flex: 1;
+    min-width: 0;
 }
 
 .nav-links a {
@@ -113,6 +117,7 @@ body {
     letter-spacing: 2px;
     text-transform: uppercase;
     transition: 0.3s;
+    white-space: nowrap;
 }
 
 .nav-links a:hover,
@@ -143,23 +148,38 @@ body {
 /* --- Dropdown / Mobile Menu --- */
 .hamburger-btn {
     background: var(--glass);
-    border: none;
-    width: 40px;
+    border: 1px solid var(--glass-border);
+    min-width: 40px;
     height: 40px;
-    border-radius: 50%;
+    padding: 0 16px;
+    border-radius: 999px;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 4px;
+    gap: 0;
     cursor: pointer;
+    color: white;
+    white-space: nowrap;
+    transition: var(--transition);
 }
 
 .hamburger-btn span {
-    width: 18px;
-    height: 2px;
-    background: white;
-    transition: 0.3s;
+    display: none;
+}
+
+.hamburger-btn::after {
+    content: "More";
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+}
+
+.hamburger-btn:hover,
+.hamburger-btn:focus-visible {
+    border-color: var(--accent);
+    box-shadow: 0 0 25px rgba(167, 139, 250, 0.16);
+    outline: none;
 }
 
 .dropdown {
@@ -170,12 +190,13 @@ body {
     display: none;
     position: absolute;
     right: 0;
-    top: 50px;
+    top: calc(100% + 12px);
     background: #0f0f0f;
     min-width: 180px;
     border: 1px solid var(--glass-border);
     border-radius: 12px;
     overflow: hidden;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
 }
 
 .dropdown-content.show {
@@ -196,6 +217,52 @@ body {
     color: white;
 }
 
+/* --- Legal Modal --- */
+.legal-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 2, 4, 0.97);
+    z-index: 9999;
+    overflow-y: auto;
+    padding: 80px 5%;
+}
+
+.legal-inner {
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.legal-close-span {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    font-size: 3rem;
+    color: #fff;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+}
+
+.legal-close-span:hover,
+.legal-close-span:focus-visible {
+    opacity: 1;
+    outline: none;
+}
+
+.legal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 6vw, 3rem);
+    margin-bottom: 20px;
+}
+
+.legal-desc {
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    color: #aaa;
+    line-height: 2;
+}
+
 /* --- Footer --- */
 footer {
     padding: 100px 5% 40px;
@@ -209,19 +276,6 @@ footer {
     font-size: 0.7rem;
     letter-spacing: 3px;
     text-transform: uppercase;
-}
-
-/* --- Legal Modal --- */
-.legal-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 6vw, 3rem);
-    margin-bottom: 20px;
-}
-
-.legal-desc {
-    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-    color: #aaa;
-    line-height: 2;
 }
 
 /* --- Nav hamburger wrapper (sits outside nav-links) --- */
@@ -242,7 +296,7 @@ footer {
 .hamburger-btn.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .hamburger-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -5px); }
 
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
     /* Nav collapses to logo + hamburger row */
     .glass-nav, nav {
         top: 12px;
@@ -279,6 +333,7 @@ footer {
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s;
         overscroll-behavior: contain;
         overflow-y: auto;
+        flex: initial;
     }
 
     .nav-links.mobile-open {
@@ -357,7 +412,24 @@ footer {
     .hamburger-btn {
         width: 44px;
         height: 44px;
+        min-width: 44px;
+        padding: 0;
         margin-left: auto;
+        border-radius: 50%;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .hamburger-btn span {
+        display: block;
+        width: 18px;
+        height: 2px;
+        background: white;
+        transition: 0.3s;
+    }
+
+    .hamburger-btn::after {
+        content: none;
     }
 
     /* Hide desktop dropdown on mobile (legal links are in the mobile menu instead) */

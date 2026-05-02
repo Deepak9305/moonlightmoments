@@ -5,7 +5,7 @@ let galleryItems = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     if (API_KEY === 'DEMO_KEY') {
-        console.warn('⚠️ Using DEMO_KEY - API requests are rate-limited. Add your NASA API key for full functionality.');
+        console.warn('Warning: Using DEMO_KEY - API requests are rate-limited. Add your NASA API key for full functionality.');
     }
     createStars();
     loadArchive();
@@ -81,6 +81,15 @@ document.addEventListener('DOMContentLoaded', () => {
         mainGrid.addEventListener('click', (e) => {
             const card = e.target.closest('.grid-item-card');
             if (card) {
+                const idx = parseInt(card.getAttribute('data-index'), 10);
+                if (!isNaN(idx)) openModal(idx);
+            }
+        });
+        mainGrid.addEventListener('keydown', (e) => {
+            const card = e.target.closest('.grid-item-card');
+            if (!card) return;
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
                 const idx = parseInt(card.getAttribute('data-index'), 10);
                 if (!isNaN(idx)) openModal(idx);
             }
@@ -193,10 +202,10 @@ async function loadArchive(query = '', isAppend = false) {
     } catch (e) {
         console.error("Archive sync failure", e);
     } finally {
-        if (loadBtn) loadBtn.innerText = "Load More ✧";
+        if (loadBtn) loadBtn.innerText = 'Load More';
         if (!isAppend && preloader) {
             const elapsedTime = Date.now() - startTime;
-            const minWait = 4000;
+            const minWait = 1200;
             const remainingWait = Math.max(0, minWait - elapsedTime);
             setTimeout(() => {
                 preloader.style.opacity = '0';
@@ -220,6 +229,9 @@ function renderGrid(isAppend = false, startIdx = 0) {
         const card = document.createElement('div');
         card.className = 'grid-item-card';
         card.setAttribute('data-index', globalIdx);
+        card.tabIndex = 0;
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', `Open image details for ${item.title || 'this space image'}`);
         card.style.animation = `fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards ${i * 0.1}s`;
 
         const sourceTag = document.createElement('div');
@@ -228,7 +240,6 @@ function renderGrid(isAppend = false, startIdx = 0) {
 
         const imgWrapper = document.createElement('div');
         imgWrapper.className = 'card-img-wrapper';
-        imgWrapper.style.background = '#0a0a0c';
         const img = document.createElement('img');
         img.src = item.url || '';
         img.alt = item.title || 'Space image';
@@ -241,12 +252,12 @@ function renderGrid(isAppend = false, startIdx = 0) {
         imgWrapper.appendChild(img);
 
         const textSection = document.createElement('div');
-        textSection.style.padding = '22px';
+        textSection.className = 'grid-item-copy';
         const dateSpan = document.createElement('span');
-        dateSpan.style.cssText = 'font-size:0.75rem; color:var(--accent); font-weight:600;';
+        dateSpan.className = 'grid-item-date';
         dateSpan.textContent = item.date || 'Archive';
         const title = document.createElement('h3');
-        title.style.cssText = 'font-size:1rem; margin-top:8px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:white;';
+        title.className = 'grid-item-title';
         title.textContent = item.title || 'Cosmic Object';
         textSection.appendChild(dateSpan);
         textSection.appendChild(title);
@@ -262,6 +273,7 @@ function renderGrid(isAppend = false, startIdx = 0) {
 
 function openModal(i) {
     const item = galleryItems[i];
+    if (!item) return;
     const modalImg = document.querySelector('.modal-img-side');
     if (modalImg) {
         modalImg.innerHTML = '';

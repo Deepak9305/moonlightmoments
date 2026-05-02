@@ -55,7 +55,37 @@ function startCountdown() {
             if (minutesEl) minutesEl.textContent = Math.floor((diff / 1000 / 60) % 60).toString().padStart(2, '0');
             if (secondsEl) secondsEl.textContent = Math.floor((diff / 1000) % 60).toString().padStart(2, '0');
         }, 1000);
+    } else {
+        const timerTitle = document.getElementById('timer-title');
+        if (timerTitle) timerTitle.textContent = 'The 2026 celestial calendar is complete';
     }
+}
+
+async function fetchEventImage(query) {
+    let img = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
+
+    try {
+        const resp = await fetch(`https://images-api.nasa.gov/search?q=${query}&media_type=image`);
+        if (resp.ok) {
+            const data = await resp.json();
+            const items = data.collection?.items || [];
+            const badWords = ['astronaut', 'scientist', 'engineer', 'technician', 'personnel', 'crew portrait', 'standing next to', 'holding', 'man in', 'woman in', 'control room', 'laboratory interior', 'lab interior', 'test facility', 'machinery', 'circuitry', 'blueprint', 'schematic', 'technical diagram', 'instrument panel', 'launch vehicle technical', 'office building', 'hangar interior', 'warehouse', 'factory', 'parking lot', 'chart', 'graph', 'presentation slide', 'clipart', 'line drawing', 'patch design', 'insignia design', 'document scan', 'rocket', 'falcon', 'starship', 'pads', 'launch site', 'gantry', 'technical tower', 'spacesuit', 'suit portrait'];
+
+            const filteredItem = items.find(item => {
+                if (!item.data || !item.data[0]) return false;
+                const meta = (item.data[0].title + (item.data[0].description || '')).toLowerCase();
+                return !badWords.some(word => meta.includes(word));
+            }) || items[0];
+
+            if (filteredItem?.links?.[0]?.href) {
+                img = filteredItem.links[0].href;
+            }
+        }
+    } catch (e) {
+        console.error('Failed to fetch image for query:', query, e);
+    }
+
+    return img;
 }
 
 async function updateUI() {
@@ -70,37 +100,15 @@ async function updateUI() {
             if (monthNameEl) monthNameEl.textContent = monthNames[currentViewMonth];
             container.innerHTML = '';
             const monthlyEvents = masterCalendar.filter(ev => ev.month === currentViewMonth);
+            const eventImages = await Promise.all(monthlyEvents.map(ev => fetchEventImage(ev.query)));
 
-            for (const ev of monthlyEvents) {
+            monthlyEvents.forEach((ev, index) => {
                 const card = document.createElement('div');
                 card.className = 'event-card';
 
-                let img = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
-
-                try {
-                    const resp = await fetch(`https://images-api.nasa.gov/search?q=${ev.query}&media_type=image`);
-                    if (resp.ok) {
-                        const data = await resp.json();
-                        const items = data.collection?.items || [];
-                        const badWords = ['astronaut', 'scientist', 'engineer', 'technician', 'personnel', 'crew portrait', 'standing next to', 'holding', 'man in', 'woman in', 'control room', 'laboratory interior', 'lab interior', 'test facility', 'machinery', 'circuitry', 'blueprint', 'schematic', 'technical diagram', 'instrument panel', 'launch vehicle technical', 'office building', 'hangar interior', 'warehouse', 'factory', 'parking lot', 'chart', 'graph', 'presentation slide', 'clipart', 'line drawing', 'patch design', 'insignia design', 'document scan', 'rocket', 'falcon', 'starship', 'pads', 'launch site', 'gantry', 'technical tower', 'spacesuit', 'suit portrait'];
-
-                        const filteredItem = items.find(item => {
-                            if (!item.data || !item.data[0]) return false;
-                            const meta = (item.data[0].title + (item.data[0].description || "")).toLowerCase();
-                            return !badWords.some(word => meta.includes(word));
-                        }) || items[0];
-
-                        if (filteredItem?.links?.[0]?.href) {
-                            img = filteredItem.links[0].href;
-                        }
-                    }
-                } catch (e) {
-                    console.error("Failed to fetch image for event:", ev.title, e);
-                }
-
                 const imgBox = document.createElement('div');
                 imgBox.className = 'img-box';
-                imgBox.style.backgroundImage = `url('${img}')`;
+                imgBox.style.backgroundImage = `url('${eventImages[index]}')`;
                 imgBox.setAttribute('aria-label', ev.title);
 
                 const content = document.createElement('div');
@@ -130,7 +138,7 @@ async function updateUI() {
                 card.appendChild(imgBox);
                 card.appendChild(content);
                 container.appendChild(card);
-            }
+            });
         } finally {
             container.classList.remove('fade-out');
             if (typeof setupHovers === 'function') setupHovers();

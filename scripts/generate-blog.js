@@ -303,7 +303,7 @@ function formatBlogContent(content, topic, title, imageUrl, imageTitle, date) {
             <a href="../event.html">Astronomical Calendar</a>
             <a href="../solar-system.html">3D Solar System</a>
             <a href="../blog.html" class="active">Blogs</a>
-            <a href="https://ko-fi.com/moonlightmoments" target="_blank" class="support-btn">Support Us</a>
+            <a href="https://ko-fi.com/moonlightmoments" target="_blank" rel="noopener noreferrer" class="support-btn">Support Us</a>
             <a href="#" class="legal-link nav-legal-link" data-type="about">✦ Our Story</a>
             <a href="#" class="legal-link nav-legal-link" data-type="privacy">✦ Privacy Orbit</a>
         </div>
