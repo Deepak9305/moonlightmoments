@@ -1,0 +1,36 @@
+name: Delete Blog Post
+
+on:
+  workflow_dispatch:
+    inputs:
+      filename:
+        description: 'Post filename to delete (e.g. dark-energy-mystery.html)'
+        required: true
+
+jobs:
+  delete-post:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Delete post
+        env:
+          FILENAME: ${{ github.event.inputs.filename }}
+        run: node scripts/delete-post.js
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "Blog Bot"
+          git add pages/blog-posts/ pages/blog-index.json
+          git commit -m "blog: delete ${{ github.event.inputs.filename }}"
+          git push origin main

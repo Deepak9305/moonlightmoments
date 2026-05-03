@@ -1,15 +1,6 @@
 {
   "posts": [
     {
-      "filename": "starknet-zkevm-integration-guide.html",
-      "topic": "starknet zkevm integration guide",
-      "title": "StarkNet and zkEVM Integration",
-      "date": "May 2, 2026",
-      "timestamp": 1777746544279,
-      "imageUrl": "",
-      "excerpt": "StarkNet is a permissionless decentralized ZK-Rollup."
-    },
-    {
       "filename": "hawking-radiation.html",
       "topic": "hawking radiation",
       "title": "Unveiling the Mysteries of Black Holes: The Enigmatic Hawking Radiation",
