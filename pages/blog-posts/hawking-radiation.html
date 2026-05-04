@@ -9,10 +9,11 @@
     <meta name="author" content="Moonlight Moments Team">
     
     <!-- Open Graph Meta Tags -->
+    <link rel="canonical" href="https://www.moonlightmoments.org/pages/blog-posts/hawking-radiation.html">
     <meta property="og:title" content="The Enigma of Hawking Radiation: Why Black Holes Aren't Truly Black">
     <meta property="og:description" content="Discover how Stephen Hawking flipped physics on its head by proving that black holes actually glow and slowly evaporate over time.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800">
-    <meta property="og:url" content="https://www.moonlightmoments.com/blog/hawking-radiation">
+    <meta property="og:url" content="https://www.moonlightmoments.org/pages/blog-posts/hawking-radiation.html">
     <meta property="og:type" content="article">
     
     <link rel="icon" type="image/png" href="../../assets/img/logo.png">
@@ -36,7 +37,7 @@
         "name": "Moonlight Moments",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://www.moonlightmoments.com/assets/img/logo.png"
+          "url": "https://www.moonlightmoments.org/assets/img/logo.png"
         }
       },
       "datePublished": "2026-05-02",
@@ -294,7 +295,7 @@
              onerror="this.src='https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800'">
 
         <div class="blog-post-content">
-            <h1>Black Holes Actually Glow. Stephen Hawking Proved It — And Physics Has Never Been the Same.</h1>
+            <h1>The Enigma of Hawking Radiation: Why Black Holes Aren't Truly Black</h1>
             
             <p>For a long time, black holes were the universe's scariest punchline. The ultimate dead end. An abyss so absolute that nothing — not matter, not light, not even a bad idea — could claw its way back out. We had this image locked in: a black hole is black. Permanently, violently, irreversibly black.</p>
             
@@ -339,7 +340,7 @@
         </section>
     </article>
 
-    <footer style="text-align:center;padding:48px 20px 40px;border-top:1px solid var(--glass-border);">
+    <footer style="text-align: center; padding: 48px 20px 40px; border-top: 1px solid var(--glass-border);">
         <p class="footer-copyright">&copy; 2026 MOONLIGHT MOMENTS | ASTRONOMY BLOG</p>
     </footer>
 
@@ -363,20 +364,33 @@
             const grid = document.getElementById('related-posts-grid');
             const section = document.getElementById('related-section');
             if (!grid) return;
+
             const currentFile = location.pathname.split('/').pop();
             const fallback = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
+
             try {
                 const res = await fetch('../blog-index.json');
                 if (!res.ok) throw new Error();
                 const { posts } = await res.json();
-                const picks = posts.filter(p => p.filename !== currentFile).sort(() => Math.random() - 0.5).slice(0, 3);
-                if (!picks.length) { section.style.display = 'none'; return; }
+                const picks = posts
+                    .filter(p => p.filename !== currentFile)
+                    .sort(() => Math.random() - 0.5)
+                    .slice(0, 3);
+
+                if (picks.length === 0) { section.style.display = 'none'; return; }
+
                 grid.innerHTML = picks.map(p => `
                     <a href="${p.filename}" class="related-card">
-                        <img src="${p.imageUrl || fallback}" alt="${p.title}" onerror="this.src='${fallback}'" loading="lazy">
-                        <div class="related-card-body"><h4>${p.title}</h4><span class="related-date">${p.date}</span></div>
+                        <img src="${p.imageUrl || fallback}" alt="${p.title}"
+                             onerror="this.src='${fallback}'" loading="lazy">
+                        <div class="related-card-body">
+                            <h4>${p.title}</h4>
+                            <span class="related-date">${p.date}</span>
+                        </div>
                     </a>`).join('');
-            } catch (_) { section.style.display = 'none'; }
+            } catch (_) {
+                section.style.display = 'none';
+            }
         })();
     </script>
 </body>

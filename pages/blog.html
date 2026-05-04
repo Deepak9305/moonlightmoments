@@ -12,6 +12,40 @@
         content="space blog, astronomy blog articles, NASA news, JWST discoveries, mars colonization, space photography, celestial events">
     <meta name="robots" content="index, follow">
 
+    <link rel="canonical" href="https://www.moonlightmoments.org/pages/blog.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.moonlightmoments.org/pages/blog.html">
+    <meta property="og:title" content="Space & Astronomy Blog | Moonlight Moments">
+    <meta property="og:description"
+        content="Read the latest space discoveries, NASA mission updates, and astronomy insights on the Moonlight Moments blog.">
+    <meta property="og:site_name" content="Moonlight Moments">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Space & Astronomy Blog | Moonlight Moments">
+    <meta name="twitter:description"
+        content="Read the latest space discoveries, NASA mission updates, and astronomy insights on the Moonlight Moments blog.">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Moonlight Moments Blog",
+      "url": "https://www.moonlightmoments.org/pages/blog.html",
+      "description": "Read the latest space discoveries, NASA mission updates, and astronomy insights.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Moonlight Moments",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.moonlightmoments.org/assets/img/logo.png"
+        }
+      }
+    }
+    </script>
     <link rel="icon" type="image/png" href="../assets/img/logo.png">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
@@ -211,11 +245,7 @@
             }
 
             function renderEmpty() {
-                if (loading && loading.parentNode) {
-                    loading.textContent = 'No posts yet - check back soon!';
-                    return;
-                }
-                grid.innerHTML = '<p style="color: var(--text-dim); text-align: center; grid-column: 1/-1; padding: 60px 0; font-size: 1rem; letter-spacing: 2px;">No posts yet - check back soon!</p>';
+                loading.textContent = 'No posts yet - check back soon!';
             }
 
             fetch('blog-index.json')

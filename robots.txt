@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.moonlightmoments.co.in/sitemap.xml
+Sitemap: https://www.moonlightmoments.org/sitemap.xml
