@@ -1,6 +1,15 @@
 {
   "posts": [
     {
+      "filename": "cosmic-microwave-background.html",
+      "topic": "cosmic microwave background",
+      "title": "The Echoes of Eternity: Unraveling the Secrets of the Cosmic Microwave Background",
+      "date": "May 4, 2026",
+      "timestamp": 1777882219412,
+      "imageUrl": "https://images-assets.nasa.gov/image/PIA18916/PIA18916~small.jpg",
+      "excerpt": "The cosmic microwave background (CMB) is the residual heat from the Big Bang, a phenomenon that has captivated scientists and space enthusiasts alike for decades. This faint glow of microwave radia..."
+    },
+    {
       "filename": "cosmic-rays.html",
       "topic": "cosmic rays",
       "title": "Unveiling the Mysteries of the Universe: The Enigmatic Cosmic Rays",
