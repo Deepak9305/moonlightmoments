@@ -1,6 +1,15 @@
 {
   "posts": [
     {
+      "filename": "nebula-colors.html",
+      "topic": "nebula colors",
+      "title": "Cosmic Canvases: Unveiling the Vibrant World of Nebula Colors",
+      "date": "May 8, 2026",
+      "timestamp": 1778222352459,
+      "imageUrl": "https://images-assets.nasa.gov/image/PIA23646/PIA23646~medium.jpg",
+      "excerpt": "As we gaze up at the night sky, we are met with a breathtaking tapestry of colors, a kaleidoscope of hues that dance across the celestial expanse. Among the most striking of these colorful wonders ..."
+    },
+    {
       "filename": "dark-matter-detection.html",
       "topic": "dark matter detection",
       "title": "Unveiling the Invisible: The Quest for Dark Matter Detection",
