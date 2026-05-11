@@ -1,6 +1,15 @@
 {
   "posts": [
     {
+      "filename": "lunar-eclipse-science.html",
+      "topic": "lunar eclipse science",
+      "title": "Unveiling the Mystique of the Moon: A Journey Through Lunar Eclipse Science",
+      "date": "May 11, 2026",
+      "timestamp": 1778517765271,
+      "imageUrl": "https://images-assets.nasa.gov/image/iss007e05541/iss007e05541~medium.jpg",
+      "excerpt": "Lunar eclipses have long been a source of fascination for humans, with their mesmerizing display of celestial mechanics and awe-inspiring beauty. As our closest celestial neighbor, the Moon has bee..."
+    },
+    {
       "filename": "nebula-colors.html",
       "topic": "nebula colors",
       "title": "Cosmic Canvases: Unveiling the Vibrant World of Nebula Colors",
