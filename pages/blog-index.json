@@ -1,6 +1,15 @@
 {
   "posts": [
     {
+      "filename": "binary-star-systems.html",
+      "topic": "binary star systems",
+      "title": "Cosmic Waltz: Unveiling the Mysteries of Binary Star Systems",
+      "date": "May 12, 2026",
+      "timestamp": 1778600335388,
+      "imageUrl": "https://images-assets.nasa.gov/image/PIA09931/PIA09931~medium.jpg",
+      "excerpt": "Binary star systems, which consist of two stars orbiting a common center of mass, have long fascinated astronomers and space enthusiasts alike. These celestial duos offer a unique window into the f..."
+    },
+    {
       "filename": "lunar-eclipse-science.html",
       "topic": "lunar eclipse science",
       "title": "Unveiling the Mystique of the Moon: A Journey Through Lunar Eclipse Science",
