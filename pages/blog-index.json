@@ -16,7 +16,7 @@
       "date": "May 13, 2026",
       "timestamp": 1778679684744,
       "imageUrl": "https://images-assets.nasa.gov/image/PIA21867/PIA21867~medium.jpg",
-      "excerpt": "The Kuiper Belt, a vast and enigmatic expanse of icy bodies and celestial remnants, has long fascinated astronomers and space enthusiasts alike. Located beyond the orbit of Neptune, this distant re..."
+      "excerpt": "The Kuiper Belt, a vast and enigmatic expanse of icy bodies and celestial remnants, has long fascinated astronomers and space enthusiasts alike. Located beyond the orbit of Neptune, this distant realm..."
     },
     {
       "filename": "binary-star-systems.html",
@@ -25,7 +25,7 @@
       "date": "May 12, 2026",
       "timestamp": 1778600335388,
       "imageUrl": "https://images-assets.nasa.gov/image/PIA09931/PIA09931~medium.jpg",
-      "excerpt": "Binary star systems, which consist of two stars orbiting a common center of mass, have long fascinated astronomers and space enthusiasts alike. These celestial duos offer a unique window into the f..."
+      "excerpt": "Binary star systems, which consist of two stars orbiting a common center of mass, have long fascinated astronomers and space enthusiasts alike. These celestial duos offer a unique window into stellar evolution..."
     },
     {
       "filename": "lunar-eclipse-science.html",
@@ -34,7 +34,7 @@
       "date": "May 11, 2026",
       "timestamp": 1778517765271,
       "imageUrl": "https://images-assets.nasa.gov/image/iss007e05541/iss007e05541~medium.jpg",
-      "excerpt": "Lunar eclipses have long been a source of fascination for humans, with their mesmerizing display of celestial mechanics and awe-inspiring beauty. As our closest celestial neighbor, the Moon has bee..."
+      "excerpt": "Lunar eclipses have long been a source of fascination for humans, with their mesmerizing display of celestial mechanics and awe-inspiring beauty. Here is how Rayleigh scattering creates the blood moon."
     },
     {
       "filename": "nebula-colors.html",
@@ -43,7 +43,7 @@
       "date": "May 8, 2026",
       "timestamp": 1778222352459,
       "imageUrl": "https://images-assets.nasa.gov/image/PIA23646/PIA23646~medium.jpg",
-      "excerpt": "As we gaze up at the night sky, we are met with a breathtaking tapestry of colors, a kaleidoscope of hues that dance across the celestial expanse. Among the most striking of these colorful wonders ..."
+      "excerpt": "As we gaze up at the night sky, we are met with a breathtaking tapestry of colors. Explore how hydrogen alpha, oxygen-III, and sulfur-II create the vibrant palette of emission and reflection nebulae."
     },
     {
       "filename": "dark-matter-detection.html",
@@ -52,7 +52,7 @@
       "date": "May 5, 2026",
       "timestamp": 1777959681156,
       "imageUrl": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001774/GSFC_20171208_Archive_e001774~medium.jpg",
-      "excerpt": "For decades, scientists have been fascinated by the enigmatic presence of dark matter, a mysterious entity that makes up approximately 27% of the universe's mass-energy density. Despite its elusive..."
+      "excerpt": "For decades, scientists have been fascinated by the enigmatic presence of dark matter, a mysterious entity that makes up approximately 27% of the universe's mass-energy density."
     },
     {
       "filename": "cosmic-microwave-background.html",
@@ -61,7 +61,7 @@
       "date": "May 4, 2026",
       "timestamp": 1777882219412,
       "imageUrl": "https://images-assets.nasa.gov/image/PIA18916/PIA18916~small.jpg",
-      "excerpt": "The cosmic microwave background (CMB) is the residual heat from the Big Bang, a phenomenon that has captivated scientists and space enthusiasts alike for decades. This faint glow of microwave radia..."
+      "excerpt": "The cosmic microwave background (CMB) is the residual heat from the Big Bang, a snapshot of the universe when it was just 380,000 years old."
     },
     {
       "filename": "cosmic-rays.html",
@@ -70,7 +70,7 @@
       "date": "May 3, 2026",
       "timestamp": 1777789699395,
       "imageUrl": "https://images-assets.nasa.gov/image/PIA14551/PIA14551~small.jpg",
-      "excerpt": "Cosmic rays have long been a topic of fascination for astronomers and space enthusiasts alike, and for good reason. These high-energy particles, which originate from outside our solar system, offer..."
+      "excerpt": "Cosmic rays have long been a topic of fascination for astronomers and space enthusiasts alike. These ultra-high-energy atomic nuclei originate from supernovae and active galactic nuclei."
     },
     {
       "filename": "hawking-radiation.html",
@@ -79,7 +79,16 @@
       "date": "May 2, 2026",
       "timestamp": 1777703962966,
       "imageUrl": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800",
-      "excerpt": "For decades, black holes have been a source of fascination for space enthusiasts and scientists alike. These cosmic phenomena have captivated our imagination with their immense power and mystique. ..."
+      "excerpt": "How do black holes slowly evaporate over cosmic epochs? Explore quantum field theory in curved spacetime and Stephen Hawking's revolutionary discovery."
+    },
+    {
+      "filename": "uranus-ice.html",
+      "topic": "uranus ice",
+      "title": "The Icy Enigma of Uranus: Unveiling the Seventh Planet's Frozen Landscape",
+      "date": "April 30, 2026",
+      "timestamp": 1777549000767,
+      "imageUrl": "https://images-assets.nasa.gov/image/PIA25500/PIA25500~small.jpg",
+      "excerpt": "Explore the extreme ice mantle of Uranus. Discover superionic water ice, methane atmospheric dynamics, extreme magnetic fields, and upcoming probe exploration."
     },
     {
       "filename": "exoplanet-atmospheres.html",

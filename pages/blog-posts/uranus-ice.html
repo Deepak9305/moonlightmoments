@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Icy Enigma of Uranus: Frozen Landscapes &amp; High-Pressure Ice | Moonlight Moments</title>
+    <meta name="description" content="Explore the ice mantle of Uranus with Moonlight Moments. Discover superionic water ice, methane atmospheres, extreme weather, and proposed space probe missions.">
+    <meta name="keywords" content="Uranus ice, seventh planet, ice giant, superionic ice, planetary science, astronomy blog, solar system, Voyager 2">
+    <meta name="author" content="Moonlight Moments Team">
+    <meta property="og:title" content="The Icy Enigma of Uranus: Unveiling the Seventh Planet's Frozen Landscape">
+    <meta property="og:description" content="Explore the extreme ice world of Uranus. Discover superionic water ice, methane atmospheres, and planetary science with Moonlight Moments.">
+    <meta property="og:image" content="https://images-assets.nasa.gov/image/PIA25500/PIA25500~small.jpg">
+    <meta property="og:type" content="article">
+    <link rel="icon" type="image/png" href="../../assets/img/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/base.css">
+    <link rel="stylesheet" href="../../assets/css/blog.css">
+    <style>
+        .reading-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 2px; width: 0;
+            background: linear-gradient(90deg, #a78bfa, #7c3aed);
+            z-index: 1001;
+            transition: width 0.1s linear;
+        }
+        .blog-post-container { max-width: 760px; margin: 0 auto; padding: 120px 24px 60px; }
+        .post-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .blog-back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+        .blog-back-link:hover { color: #fff; transform: translateX(-4px); }
+        .share-post-btn {
+            background: rgba(167, 139, 250, 0.1);
+            border: 1px solid var(--glass-border);
+            color: #c4b5fd;
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-size: 0.76rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+        .share-post-btn:hover {
+            background: var(--accent-gradient);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 0 15px rgba(167, 139, 250, 0.4);
+        }
+        .blog-post-meta {
+            color: var(--text-dim); font-size: 0.8rem;
+            letter-spacing: 2px; text-transform: uppercase;
+            margin-bottom: 20px; display: flex; gap: 16px; flex-wrap: wrap;
+        }
+        .blog-post-featured-img {
+            width: 100%; max-height: 440px; object-fit: cover;
+            border-radius: 16px; margin: 0 0 36px; display: block;
+        }
+        .blog-post-content { line-height: 1.85; color: var(--text-color); }
+        .blog-post-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.7rem, 5vw, 2.4rem);
+            line-height: 1.25; margin-bottom: 16px;
+        }
+        .blog-post-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+            color: var(--accent); margin-top: 44px; margin-bottom: 14px; line-height: 1.35;
+        }
+        .blog-post-content h3 {
+            font-size: clamp(1rem, 3vw, 1.15rem);
+            margin-top: 28px; margin-bottom: 10px; color: #fff;
+        }
+        .blog-post-content p { margin-bottom: 20px; font-size: clamp(0.95rem, 2.2vw, 1.05rem); }
+        .blog-post-content ul { margin: 0 0 20px; padding-left: 22px; }
+        .blog-post-content li { margin-bottom: 10px; font-size: clamp(0.95rem, 2.2vw, 1.05rem); line-height: 1.7; }
+        .blog-post-content strong { color: var(--text-color); }
+        .blog-post-content blockquote {
+            border-left: 3px solid var(--accent);
+            margin: 36px 0; padding: 18px 24px;
+            background: var(--glass); border-radius: 0 12px 12px 0;
+            font-style: italic; color: var(--text-dim);
+            font-size: clamp(0.9rem, 2vw, 1rem); line-height: 1.7;
+        }
+        .post-footer { margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--glass-border); color: var(--text-dim); font-size: 0.85rem; }
+        .related-posts { margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--glass-border); }
+        .related-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem; color: #fff; margin-bottom: 24px;
+        }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .related-card {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            border-radius: 12px; overflow: hidden; text-decoration: none;
+            transition: transform 0.3s, border-color 0.3s; display: block;
+        }
+        .related-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+        .related-card img { width: 100%; height: 120px; object-fit: cover; }
+        .related-card-body { padding: 14px; }
+        .related-card-body h4 {
+            font-size: 0.85rem; color: #fff; line-height: 1.4; margin-bottom: 6px;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .related-date { font-size: 0.72rem; color: var(--accent); }
+        @media (max-width: 768px) {
+            .blog-post-container { padding: 90px 18px 40px; }
+            .related-grid { grid-template-columns: 1fr; }
+            .related-card img { height: 150px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="reading-progress" id="reading-progress"></div>
+    <div id="cursor-ring"></div>
+    <div id="cursor-dot"></div>
+
+    <nav class="glass-nav">
+        <a href="../../index.html" class="logo">
+            <img src="../../assets/img/logo.png" alt="Moonlight Moments Logo" class="logo-img">
+            Moonlight Moments
+        </a>
+        <div class="nav-links" id="navLinks">
+            <a href="../../index.html">Space Gallery</a>
+            <a href="../age.html">Age on Planets</a>
+            <a href="../event.html">Astronomical Calendar</a>
+            <a href="../solar-system.html">3D Solar System</a>
+            <a href="../blog.html" class="active">Blogs</a>
+            <a href="https://ko-fi.com/moonlightmoments" target="_blank" rel="noopener noreferrer" class="support-btn">Support Us</a>
+            <a href="#" class="legal-link nav-legal-link" data-type="about">✦ Our Story</a>
+            <a href="#" class="legal-link nav-legal-link" data-type="privacy">✦ Privacy Orbit</a>
+        </div>
+        <div class="nav-hamburger">
+            <button class="hamburger-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+            <div class="dropdown-content" id="myDropdown">
+                <a href="#" class="legal-link" data-type="about">✦ Our Story</a>
+                <a href="#" class="legal-link" data-type="privacy">✦ Privacy Orbit</a>
+            </div>
+        </div>
+    </nav>
+
+    <article class="blog-post-container">
+        <div class="post-header-bar">
+            <a href="../blog.html" class="blog-back-link">← Back to All Articles</a>
+            <button class="share-post-btn" id="share-btn">✦ Share Article</button>
+        </div>
+
+        <div class="blog-post-meta">
+            <span>✦ April 30, 2026</span>
+            <span>✦ Planetary Science &amp; Ice Giants</span>
+            <span>✦ 6 Min Read</span>
+        </div>
+
+        <img src="https://images-assets.nasa.gov/image/PIA25500/PIA25500~small.jpg" alt="Major Moons and Atmosphere of Uranus" class="blog-post-featured-img"
+             onerror="this.src='https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800'">
+
+        <div class="blog-post-content">
+            <h1>The Icy Enigma of Uranus: Unveiling the Seventh Planet's Frozen Landscape</h1>
+            
+            <p>Uranus, the seventh planet from the Sun, has long been a subject of fascination for planetary scientists and stargazers. Unlike gas giants Jupiter and Saturn, Uranus is classified as an <em>Ice Giant</em>. Its deep interior is composed of a dense, supercritical fluid of "ices"—primarily water ($H_2O$), ammonia ($NH_3$), and methane ($CH_4$)—surrounding a rocky silicate core under immense gravitational pressure.</p>
+
+            <h2>Composition and Properties of Uranus Ice</h2>
+            <p>The term "ice" in planetary astronomy refers to volatile chemical compounds with freezing points above about 100 Kelvin. On Uranus, these ices do not exist as crystalline surface glaciers like those found on Earth. Instead, extreme atmospheric pressure crushes them into a dense, hot fluid mantle often referred to as a "water-ammonia ocean."</p>
+
+            <h3>Superionic Water Ice &amp; High-Pressure Polymorphism</h3>
+            <p>Under pressures exceeding 2 million atmospheres and temperatures above 2,000°C, water inside Uranus transitions into an exotic state of matter called <strong>superionic water ice</strong>. In this phase, oxygen atoms lock into a solid crystalline lattice while hydrogen ions (protons) flow freely through the structure, conducting electricity and generating the planet's asymmetrical magnetic field.</p>
+
+            <blockquote>Did You Know? Uranus' magnetic field is tilted 59 degrees from its rotational axis and offset from the center of the planet by nearly a third of its radius, likely generated by convective churning inside this conductive superionic mantle.</blockquote>
+
+            <h2>The Role of Methane in Atmospheric Dynamics</h2>
+            <p>Methane in Uranus' upper atmosphere absorbs the red portion of the visible solar spectrum while reflecting cyan and blue wavelengths back into space, giving the planet its signature aquamarine hue. High-altitude clouds composed of methane ice crystals swirl along powerful jet streams reaching speeds over 560 miles per hour (900 km/h).</p>
+
+            <h2>Future Exploration: The Uranus Orbiter &amp; Probe</h2>
+            <p>NASA's Planetary Science Decadal Survey identified a flagship mission to Uranus—the proposed <strong>Uranus Orbiter and Probe (UOP)</strong>—as the highest-priority new planetary mission for the 2030s. A dedicated orbiter and atmospheric descent probe will unlock key questions regarding ice giant interior chemistry, ring system dynamics, and potential subsurface oceans on moons like Miranda, Ariel, and Titania.</p>
+            
+            <p>You can inspect Uranus' extreme axial tilt (98 degrees) directly in our interactive <a href="../solar-system.html">3D Solar System Explorer</a>.</p>
+        </div>
+
+        <div class="post-footer">
+            <strong>Author:</strong> Moonlight Moments Team &nbsp;·&nbsp;
+            <strong>Published:</strong> April 30, 2026 &nbsp;·&nbsp;
+            <strong>Category:</strong> Planetary Science &amp; Ice Giants
+        </div>
+
+        <section class="related-posts" id="related-section">
+            <h2 class="related-heading">✦ You Might Also Like</h2>
+            <div class="related-grid" id="related-posts-grid"></div>
+        </section>
+    </article>
+
+    <div id="toast" class="site-toast">Article link copied to clipboard! ✦</div>
+
+    <footer>
+        <p class="footer-copyright">&copy; 2026 MOONLIGHT MOMENTS | ASTRONOMY BLOG</p>
+    </footer>
+
+    <div id="legal-modal" class="legal-modal">
+        <span class="legal-close-span" id="close-legal-btn" aria-label="Close">&times;</span>
+        <div class="legal-inner" id="legal-content"></div>
+    </div>
+
+    <script src="../../assets/js/common.js"></script>
+    <script>
+        const progressBar = document.getElementById('reading-progress');
+        const articleContent = document.querySelector('.blog-post-content');
+        if (progressBar && articleContent) {
+            window.addEventListener('scroll', () => {
+                const rect = articleContent.getBoundingClientRect();
+                const scrolled = Math.max(0, -rect.top);
+                progressBar.style.width = Math.min(100, (scrolled / articleContent.offsetHeight) * 100) + '%';
+            }, { passive: true });
+        }
+
+        const shareBtn = document.getElementById('share-btn');
+        const toast = document.getElementById('toast');
+        if (shareBtn && toast) {
+            shareBtn.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(window.location.href);
+                    toast.classList.add('show');
+                    setTimeout(() => toast.classList.remove('show'), 2500);
+                } catch (_) {
+                    shareBtn.textContent = '✦ Copied!';
+                    setTimeout(() => shareBtn.textContent = '✦ Share Article', 2000);
+                }
+            });
+        }
+
+        (async function loadRelated() {
+            const grid = document.getElementById('related-posts-grid');
+            const section = document.getElementById('related-section');
+            if (!grid) return;
+            const currentFile = location.pathname.split('/').pop();
+            const fallback = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
+            try {
+                const res = await fetch('../blog-index.json');
+                if (!res.ok) throw new Error();
+                const { posts } = await res.json();
+                const picks = posts.filter(p => p.filename !== currentFile).sort(() => Math.random() - 0.5).slice(0, 3);
+                if (!picks.length) { section.style.display = 'none'; return; }
+                grid.innerHTML = picks.map(p => `
+                    <a href="${p.filename}" class="related-card">
+                        <img src="${p.imageUrl || fallback}" alt="${p.title}" onerror="this.src='${fallback}'" loading="lazy">
+                        <div class="related-card-body"><h4>${p.title}</h4><span class="related-date">${p.date}</span></div>
+                    </a>`).join('');
+            } catch (_) { section.style.display = 'none'; }
+        })();
+    </script>
+</body>
+</html>
