@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astronomical Events 2026 Calendar | Meteor Showers & Eclipses | Moonlight Moments</title>
+    <title>Astronomical Events 2026 Calendar | Meteor Showers &amp; Eclipses | Moonlight Moments</title>
 
     <meta name="description"
         content="Full 2026 astronomical events calendar with live countdowns. Track meteor showers, lunar eclipses, supermoons, and planetary alignments.">
@@ -30,11 +30,11 @@
         crossorigin="anonymous"></script>
     <meta name="author" content="Moonlight Moments">
 
-    <link rel="canonical" href="https://www.moonlightmoments.org/event.html">
+    <link rel="canonical" href="https://www.moonlightmoments.org/pages/event.html">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.moonlightmoments.org/event.html">
+    <meta property="og:url" content="https://www.moonlightmoments.org/pages/event.html">
     <meta property="og:title" content="Astronomical Events 2026 Calendar | Moonlight Moments">
     <meta property="og:description"
         content="Full 2026 astronomical events calendar: Perseids, Geminids, lunar eclipses, supermoons, and planetary alignments with live countdowns.">
@@ -52,7 +52,7 @@
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "Astronomical Events 2026 Calendar",
-      "url": "https://www.moonlightmoments.org/event.html",
+      "url": "https://www.moonlightmoments.org/pages/event.html",
       "description": "Complete 2026 astronomical events calendar including meteor showers like the Perseids and Geminids, lunar eclipses, supermoons, and planetary alignments.",
       "isPartOf": {
         "@type": "WebSite",
@@ -63,7 +63,7 @@
     </script>
     <link rel="icon" type="image/png" href="../assets/img/logo.png">
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
         rel="stylesheet">
 
     <!-- Stylesheets -->
@@ -73,9 +73,10 @@
 
 <body>
 
-    <div id="cursor"></div>
+    <div id="cursor-ring"></div>
+    <div id="cursor-dot"></div>
 
-    <nav>
+    <nav class="glass-nav">
         <a href="../index.html" class="logo">
             <img src="../assets/img/logo.png" alt="Moonlight Moments Logo" class="logo-img">
             Moonlight Moments
@@ -86,7 +87,7 @@
             <a href="event.html" class="active">Astronomical Calendar</a>
             <a href="solar-system.html">3D Solar System</a>
             <a href="blog.html">Blogs</a>
-            <a href="https://ko-fi.com/moonlightmoments" target="_blank" rel="noopener noreferrer" class="support-nav-btn">SUPPORT US</a>
+            <a href="https://ko-fi.com/moonlightmoments" target="_blank" rel="noopener noreferrer" class="support-btn">Support Us</a>
             <a href="#" class="legal-link nav-legal-link" data-type="about">✦ Our Story</a>
             <a href="#" class="legal-link nav-legal-link" data-type="privacy">✦ Privacy Orbit</a>
         </div>
@@ -100,31 +101,47 @@
     </nav>
 
     <div class="countdown-wrap">
-        <span class="next-event-label" id="timer-title">Next Astronomical Event in 2026</span>
+        <span class="next-event-label" id="timer-title">✦ Next Major Astronomical Event</span>
         <div class="timer-display">
-            <div class="timer-block"><span class="timer-val" id="days">00</span><span class="timer-unit">Days</span>
-            </div>
-            <div class="timer-block"><span class="timer-val" id="hours">00</span><span class="timer-unit">Hours</span>
-            </div>
-            <div class="timer-block"><span class="timer-val" id="minutes">00</span><span class="timer-unit">Mins</span>
-            </div>
-            <div class="timer-block"><span class="timer-val" id="seconds">00</span><span class="timer-unit">Secs</span>
-            </div>
+            <div class="timer-block"><span class="timer-val" id="days">00</span><span class="timer-unit">Days</span></div>
+            <div class="timer-block"><span class="timer-val" id="hours">00</span><span class="timer-unit">Hours</span></div>
+            <div class="timer-block"><span class="timer-val" id="minutes">00</span><span class="timer-unit">Mins</span></div>
+            <div class="timer-block"><span class="timer-val" id="seconds">00</span><span class="timer-unit">Secs</span></div>
         </div>
     </div>
 
     <div class="container">
         <div class="header-flex">
             <div>
-                <span class="month-label">2026 Astronomical Events Calendar</span>
+                <span class="month-label">2026 Live Skywatching Almanac</span>
                 <h1 id="month-name">Celestial Events</h1>
             </div>
+            
+            <div class="event-filter-bar">
+                <button class="event-filter-btn active" data-type="all">All Events</button>
+                <button class="event-filter-btn" data-type="meteor">Meteor Showers</button>
+                <button class="event-filter-btn" data-type="moon">Moon &amp; Eclipses</button>
+                <button class="event-filter-btn" data-type="planet">Planetary Alignments</button>
+            </div>
+
             <div class="nav-btns">
                 <button class="circle-btn" id="prev-month-btn" aria-label="Previous month">←</button>
                 <button class="circle-btn" id="next-month-btn" aria-label="Next month">→</button>
             </div>
         </div>
+        
         <div class="events-grid" id="events-container"></div>
+    </div>
+
+    <div id="toast" class="site-toast">Event copied to clipboard! ✦</div>
+
+    <footer>
+        <p class="footer-copyright">&copy; 2026 MOONLIGHT MOMENTS | ASTRONOMICAL EVENTS CALENDAR</p>
+    </footer>
+
+    <div id="legal-modal" class="legal-modal">
+        <span class="legal-close-span" id="close-legal-btn" aria-label="Close">&times;</span>
+        <div class="legal-inner" id="legal-content"></div>
     </div>
 
     <!-- Scripts -->

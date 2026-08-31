@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive 3D Solar System & Star Map | Moonlight Moments</title>
+    <title>Interactive 3D Solar System &amp; Star Map | Moonlight Moments</title>
 
     <meta name="description"
-        content="Explore a 3D Solar System with realistic orbits, interactive famous stars, and constellation data. A premium space simulation by Moonlight Moments.">
+        content="Explore an interactive 3D Solar System with realistic planetary orbits, celestial bodies, and deep space exploration. A premium simulation by Moonlight Moments.">
     <meta name="keywords"
-        content="3D solar system, interactive star map, celestial simulation, planetary orbits, three.js space, constellations 3D">
+        content="3D solar system, interactive star map, celestial simulation, planetary orbits, three.js space, constellations 3D, space simulation">
     <meta name="robots" content="index, follow">
 
     <!-- SEO Verification -->
@@ -29,10 +29,10 @@
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-PASTE_YOUR_ADSENSE_PUB_ID_HERE"
         crossorigin="anonymous"></script>
     <meta name="author" content="Moonlight Moments">
-    <link rel="canonical" href="https://www.moonlightmoments.org/solar-system.html">
+    <link rel="canonical" href="https://www.moonlightmoments.org/pages/solar-system.html">
 
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.moonlightmoments.org/solar-system.html">
+    <meta property="og:url" content="https://www.moonlightmoments.org/pages/solar-system.html">
     <meta property="og:title" content="Interactive 3D Solar System | Moonlight Moments">
     <meta property="og:description"
         content="Explore an interactive 3D Solar System with realistic planetary orbits and bloom effects.">
@@ -50,7 +50,7 @@
 
     <link rel="icon" type="image/png" href="../assets/img/logo.png">
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
         rel="stylesheet">
 
     <!-- Stylesheets -->
@@ -87,21 +87,38 @@
     <canvas id="solar-canvas"></canvas>
 
     <div id="page-title">
-        <h1>The Solar System</h1>
-        <p>Click any planet to explore · Drag to orbit · Scroll to zoom</p>
+        <h1>The Solar System in 3D</h1>
+        <p>Click any planet or use the bottom dock to orbit · Drag to rotate · Scroll to zoom</p>
+    </div>
+
+    <!-- Quick Planet Selector Dock -->
+    <div class="planet-dock" id="planet-dock">
+        <button class="dock-btn" data-target="Sun">☀️ Sun</button>
+        <button class="dock-btn" data-target="Mercury">Mercury</button>
+        <button class="dock-btn" data-target="Venus">Venus</button>
+        <button class="dock-btn" data-target="Earth">Earth</button>
+        <button class="dock-btn" data-target="Mars">Mars</button>
+        <button class="dock-btn" data-target="Jupiter">Jupiter</button>
+        <button class="dock-btn" data-target="Saturn">Saturn</button>
+        <button class="dock-btn" data-target="Uranus">Uranus</button>
+        <button class="dock-btn" data-target="Neptune">Neptune</button>
+        <button class="dock-btn" data-target="Pluto">Pluto</button>
     </div>
 
     <div id="planet-info-panel">
         <div class="planet-ui-title" id="pi-name">Earth</div>
         <div class="planet-ui-desc" id="pi-desc">The blue marble.</div>
         <div id="pi-stats-container"></div>
-        <button class="planet-ui-compare-btn" id="compare-btn">Compare</button>
-        <button class="planet-ui-close" id="close-panel-btn">✕ Close</button>
+        <a href="age.html" class="planet-calc-cta" id="calc-cta-link">✦ Calculate your weight &amp; age here →</a>
+        <div class="panel-btn-row">
+            <button class="planet-ui-compare-btn" id="compare-btn">Compare</button>
+            <button class="planet-ui-close" id="close-panel-btn">✕ Close</button>
+        </div>
     </div>
 
     <div id="mode-controls">
-        <button class="mode-btn active" id="btn-orbit">Orbit</button>
-        <button class="mode-btn" id="btn-fly">Free Fly</button>
+        <button class="mode-btn active" id="btn-orbit">Orbit View</button>
+        <button class="mode-btn" id="btn-fly">Free Flight</button>
     </div>
 
     <div id="wasd-hint">WASD to Move · Mouse to Look</div>
@@ -114,7 +131,7 @@
     </div>
 
     <div id="time-controls">
-        <label>Speed</label>
+        <label>Orbit Speed</label>
         <input type="range" id="time-slider" min="0" max="10" step="0.1" value="1">
         <span id="speed-label">1×</span>
     </div>

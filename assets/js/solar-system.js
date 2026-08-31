@@ -2,6 +2,11 @@
 //  PLANET DATA (realistic)
 // =============================================
 const PLANET_DATA = {
+    Sun: {
+        desc: "The yellow dwarf star at the center of our solar system. It holds 99.86% of the system's total mass and radiates the light and heat powering all planetary climates.",
+        diameter: "1,392,700 km", distance: "0 km (Center)", day: "25-35 Earth days", year: "230M Earth yrs",
+        moons: "8 Planets", temp: "5,500°C (15M°C core)", type: "G2V Yellow Dwarf Star"
+    },
     Mercury: {
         desc: "The smallest and innermost planet. A cratered world of extremes — scorching days reaching 430°C and freezing nights at −180°C, with virtually no atmosphere to moderate temperatures.",
         diameter: "4,879 km", distance: "57.9M km", day: "58.6 Earth days", year: "88 Earth days",
@@ -415,7 +420,18 @@ function showPlanetPanel(name) {
         s.appendChild(stat);
     });
     document.getElementById('planet-info-panel').classList.add('visible');
-    focusedObject = planetMeshes.find(p => p.name === name); focusLerp = 0;
+    if (name === 'Sun') {
+        focusedObject = { mesh: sun, radius: 25 };
+    } else {
+        focusedObject = planetMeshes.find(p => p.name === name);
+    }
+    focusLerp = 0;
+
+    // Highlight dock button
+    document.querySelectorAll('.dock-btn').forEach(b => {
+        if (b.dataset.target === name) b.classList.add('active');
+        else b.classList.remove('active');
+    });
 }
 
 function showStarPanel(star, mesh) {
@@ -499,6 +515,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const compareOverlay = document.getElementById('compare-overlay');
     if (compareOverlay) compareOverlay.addEventListener('click', closeCompareModal);
+
+    // Planet Dock quick buttons
+    document.querySelectorAll('.dock-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = btn.dataset.target;
+            if (target) {
+                if (currentMode !== 'orbit') setMode('orbit');
+                showPlanetPanel(target);
+            }
+        });
+    });
 });
 
 // Animation

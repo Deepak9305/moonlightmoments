@@ -1,43 +1,89 @@
 const masterCalendar = [
-    { month: 0, day: 3, type: "Celestial Primary", title: "Quadrantids Peak", query: "meteor shower", dateObj: new Date(2026, 0, 3, 23, 0), desc: "High-velocity meteors with bright blue trails." },
-    { month: 0, day: 14, type: "Planetary Alignment", title: "Mercury Elongation", query: "mercury", dateObj: new Date(2026, 0, 14, 18, 0), desc: "Best evening visibility for the smallest planet." },
-    { month: 0, day: 22, type: "Stellar Event", title: "Lunar Perigee", query: "moon surface", dateObj: new Date(2026, 0, 22, 10, 0), desc: "The moon reaches its closest point to Earth." },
-    { month: 1, day: 1, type: "Lunar Phase", title: "Full Snow Moon", query: "full moon", dateObj: new Date(2026, 1, 1, 20, 0), desc: "Named after the heavy snowfalls of midwinter." },
-    { month: 1, day: 15, type: "Celestial Primary", title: "Mars Opposition", query: "mars", dateObj: new Date(2026, 1, 15, 22, 0), desc: "Mars is visible all night and at its brightest." },
-    { month: 2, day: 3, type: "Celestial Primary", title: "Total Lunar Eclipse", query: "lunar eclipse", dateObj: new Date(2026, 2, 3, 11, 30), desc: "A rare blood moon visible across the Pacific." },
-    { month: 2, day: 20, type: "Orbital Equinox", title: "March Equinox", query: "equinox", dateObj: new Date(2026, 2, 20, 14, 0), desc: "Spring begins in the Northern Hemisphere." },
-    { month: 3, day: 12, type: "Stellar Event", title: "Ceres at Opposition", query: "asteroid", dateObj: new Date(2026, 3, 12, 1, 0), desc: "The dwarf planet Ceres is bright in the night sky." },
-    { month: 3, day: 21, type: "Celestial Primary", title: "Lyrids Shower", query: "lyrids", dateObj: new Date(2026, 3, 21, 23, 0), desc: "Active meteor shower originating from Comet Thatcher." },
-    { month: 4, day: 5, type: "Stellar Event", title: "Eta Aquariids", query: "comet halley", dateObj: new Date(2026, 4, 5, 3, 0), desc: "Fast meteors produced by debris from Halley's Comet." },
-    { month: 4, day: 30, type: "Lunar Phase", title: "Super Flower Moon", query: "supermoon", dateObj: new Date(2026, 4, 30, 18, 45), desc: "One of the largest full moons of the year." },
-    { month: 5, day: 12, type: "Planetary Alignment", title: "Moon & Saturn", query: "saturn", dateObj: new Date(2026, 5, 12, 2, 0), desc: "A stunning pre-dawn pairing in the eastern sky." },
-    { month: 5, day: 21, type: "Orbital Solstice", title: "June Solstice", query: "solstice", dateObj: new Date(2026, 5, 21, 8, 20), desc: "The longest day of the year for the North." },
-    { month: 6, day: 4, type: "Planetary Alignment", title: "Earth at Aphelion", query: "earth orbit", dateObj: new Date(2026, 6, 4, 15, 0), desc: "Earth reaches its furthest point from the Sun." },
-    { month: 6, day: 28, type: "Stellar Event", title: "Delta Aquariids", query: "meteors", dateObj: new Date(2026, 6, 28, 22, 0), desc: "Best viewed from southern dark-sky locations." },
-    { month: 7, day: 12, type: "Celestial Primary", title: "Perseids Peak", query: "perseid", dateObj: new Date(2026, 7, 12, 23, 0), desc: "The most famous meteor shower of the summer." },
-    { month: 7, day: 28, type: "Planetary Alignment", title: "Neptune Opposition", query: "neptune", dateObj: new Date(2026, 7, 28, 21, 0), desc: "The blue ice giant is at its closest point to Earth." },
-    { month: 8, day: 14, type: "Lunar Phase", title: "Harvest Supermoon", query: "harvest moon", dateObj: new Date(2026, 8, 14, 5, 0), desc: "A massive moon rising near the autumnal equinox." },
-    { month: 8, day: 21, type: "Celestial Primary", title: "Saturn Opposition", query: "saturn rings", dateObj: new Date(2026, 8, 21, 19, 0), desc: "The ringed planet is visible all night at its brightest." },
-    { month: 9, day: 12, type: "Planetary Alignment", title: "Moon & Venus", query: "venus moon", dateObj: new Date(2026, 9, 12, 18, 0), desc: "Bright evening pairing in the western sky." },
-    { month: 9, day: 21, type: "Stellar Event", title: "Orionids Shower", query: "orionids", dateObj: new Date(2026, 9, 21, 23, 0), desc: "Meteors from the tail of Comet Halley." },
-    { month: 10, day: 10, type: "Stellar Event", title: "Taurids Peak", query: "fireball", dateObj: new Date(2026, 10, 10, 1, 0), desc: "Known for slow-moving, bright fireball meteors." },
-    { month: 10, day: 17, type: "Stellar Event", title: "Leonids Shower", query: "leonid", dateObj: new Date(2026, 10, 17, 2, 0), desc: "Fast-moving meteors from Comet Tempel-Tuttle." },
-    { month: 11, day: 14, type: "Celestial Primary", title: "Geminids Peak", query: "geminids", dateObj: new Date(2026, 11, 14, 21, 0), desc: "Usually the strongest meteor shower of the year." },
-    { month: 11, day: 21, type: "Orbital Solstice", title: "December Solstice", query: "winter", dateObj: new Date(2026, 11, 21, 20, 50), desc: "The shortest day of the year in the North." },
-    { month: 11, day: 30, type: "Lunar Phase", title: "New Year's Moon", query: "crescent", dateObj: new Date(2026, 11, 30, 23, 59), desc: "Closing the year under a waning crescent moon." }
+    { month: 0, day: 3, type: "meteor", typeName: "Meteor Shower", title: "Quadrantids Peak", query: "meteor shower", dateObj: new Date(2026, 0, 3, 23, 0), desc: "High-velocity meteors with bright blue trails. Up to 120 meteors per hour under dark skies.", blogUrl: "blog-posts/how-to-watch-a-meteor-shower.html", blogText: "✦ Meteor Viewing Guide" },
+    { month: 0, day: 14, type: "planet", typeName: "Planetary Alignment", title: "Mercury Greatest Elongation", query: "mercury planet", dateObj: new Date(2026, 0, 14, 18, 0), desc: "Best evening visibility for the smallest planet as it reaches its farthest point from the Sun." },
+    { month: 0, day: 22, type: "moon", typeName: "Stellar Event", title: "Lunar Perigee", query: "moon surface", dateObj: new Date(2026, 0, 22, 10, 0), desc: "The moon reaches its closest orbital point to Earth, creating elevated gravitational tides." },
+    { month: 1, day: 1, type: "moon", typeName: "Lunar Phase", title: "Full Snow Moon", query: "full moon", dateObj: new Date(2026, 1, 1, 20, 0), desc: "Named after the heavy snowfalls of midwinter, illuminating the winter sky." },
+    { month: 1, day: 15, type: "planet", typeName: "Celestial Opposition", title: "Mars at Opposition", query: "mars planet", dateObj: new Date(2026, 1, 15, 22, 0), desc: "Mars is opposite the Sun from Earth, glowing at its brightest all night long." },
+    { month: 2, day: 3, type: "moon", typeName: "Total Lunar Eclipse", title: "Total Blood Moon Eclipse", query: "lunar eclipse", dateObj: new Date(2026, 2, 3, 11, 30), desc: "A total lunar eclipse casting Earth's copper-red umbral shadow across the lunar disk.", blogUrl: "blog-posts/lunar-eclipse-science.html", blogText: "✦ Eclipse Science Guide" },
+    { month: 2, day: 20, type: "equinox", typeName: "Orbital Equinox", title: "March Equinox", query: "equinox space", dateObj: new Date(2026, 2, 20, 14, 0), desc: "Day and night are equal in length. Spring begins in the Northern Hemisphere." },
+    { month: 3, day: 12, type: "planet", typeName: "Stellar Event", title: "Dwarf Planet Ceres Opposition", query: "asteroid ceres", dateObj: new Date(2026, 3, 12, 1, 0), desc: "The largest object in the asteroid belt is visible with binoculars in the constellation Virgo." },
+    { month: 3, day: 21, type: "meteor", typeName: "Meteor Shower", title: "Lyrids Shower Peak", query: "lyrids meteor shower", dateObj: new Date(2026, 3, 21, 23, 0), desc: "Annual shower originating from debris shed by Comet C/1861 G1 Thatcher.", blogUrl: "blog-posts/how-to-watch-a-meteor-shower.html", blogText: "✦ Meteor Viewing Guide" },
+    { month: 4, day: 5, type: "meteor", typeName: "Meteor Shower", title: "Eta Aquariids Peak", query: "eta aquariids", dateObj: new Date(2026, 4, 5, 3, 0), desc: "Fast meteors produced by debris from Halley's Comet, favoring southern hemisphere observers.", blogUrl: "blog-posts/how-to-watch-a-meteor-shower.html", blogText: "✦ Meteor Viewing Guide" },
+    { month: 4, day: 30, type: "moon", typeName: "Supermoon", title: "Super Flower Moon", query: "supermoon", dateObj: new Date(2026, 4, 30, 18, 45), desc: "One of the largest and closest full moons of the year, appearing 14% larger and 30% brighter." },
+    { month: 5, day: 12, type: "planet", typeName: "Planetary Conjunction", title: "Moon & Saturn Conjunction", query: "saturn rings", dateObj: new Date(2026, 5, 12, 2, 0), desc: "A stunning pre-dawn pairing in the eastern sky with the ringed planet." },
+    { month: 5, day: 21, type: "equinox", typeName: "Orbital Solstice", title: "June Solstice", query: "sun solar", dateObj: new Date(2026, 5, 21, 8, 20), desc: "The longest day of the year in the Northern Hemisphere and shortest in the South." },
+    { month: 6, day: 4, type: "planet", typeName: "Orbital Milestone", title: "Earth at Aphelion", query: "earth orbit space", dateObj: new Date(2026, 6, 4, 15, 0), desc: "Earth reaches its farthest point in orbit from the Sun (approx. 94.5 million miles)." },
+    { month: 6, day: 28, type: "meteor", typeName: "Meteor Shower", title: "Delta Aquariids Peak", query: "delta aquariids", dateObj: new Date(2026, 6, 28, 22, 0), desc: "Produces up to 20 meteors per hour under moonless skies.", blogUrl: "blog-posts/how-to-watch-a-meteor-shower.html", blogText: "✦ Meteor Viewing Guide" },
+    { month: 7, day: 12, type: "meteor", typeName: "Major Meteor Peak", title: "Perseids Meteor Peak", query: "perseid meteors", dateObj: new Date(2026, 7, 12, 23, 0), desc: "The king of summer meteor showers, producing 90 to 110 meteors per hour with glowing fireballs.", blogUrl: "blog-posts/how-to-watch-a-meteor-shower.html", blogText: "✦ Perseids Viewing Guide" },
+    { month: 7, day: 28, type: "planet", typeName: "Planetary Opposition", title: "Neptune at Opposition", query: "neptune planet", dateObj: new Date(2026, 7, 28, 21, 0), desc: "The blue ice giant is at its closest point to Earth and fully illuminated by the Sun." },
+    { month: 8, day: 14, type: "moon", typeName: "Supermoon", title: "Harvest Supermoon", query: "harvest moon", dateObj: new Date(2026, 8, 14, 5, 0), desc: "A massive full supermoon rising near the autumnal equinox." },
+    { month: 8, day: 21, type: "planet", typeName: "Planetary Opposition", title: "Saturn at Opposition", query: "saturn telescope", dateObj: new Date(2026, 8, 21, 19, 0), desc: "Saturn's ring system is inclined and visible all night at maximum brilliance." },
+    { month: 9, day: 12, type: "planet", typeName: "Planetary Conjunction", title: "Moon & Venus Pairing", query: "venus evening star", dateObj: new Date(2026, 9, 12, 18, 0), desc: "Brilliant evening pairing between the thin crescent Moon and glowing Venus." },
+    { month: 9, day: 21, type: "meteor", typeName: "Meteor Shower", title: "Orionids Meteor Peak", query: "orionids meteor shower", dateObj: new Date(2026, 9, 21, 23, 0), desc: "Fast shooting stars formed from debris left behind by Halley's Comet.", blogUrl: "blog-posts/how-to-watch-a-meteor-shower.html", blogText: "✦ Meteor Viewing Guide" },
+    { month: 10, day: 10, type: "meteor", typeName: "Meteor Shower", title: "Taurids Fireball Peak", query: "fireball meteor", dateObj: new Date(2026, 10, 10, 1, 0), desc: "Famous for exceptionally bright, slow-moving fireball meteors." },
+    { month: 10, day: 17, type: "meteor", typeName: "Meteor Shower", title: "Leonids Meteor Peak", query: "leonids meteors", dateObj: new Date(2026, 10, 17, 2, 0), desc: "Fast meteors traveling at 44 miles per second from Comet Tempel-Tuttle.", blogUrl: "blog-posts/how-to-watch-a-meteor-shower.html", blogText: "✦ Meteor Viewing Guide" },
+    { month: 11, day: 14, type: "meteor", typeName: "Major Meteor Peak", title: "Geminids Meteor Peak", query: "geminids meteor shower", dateObj: new Date(2026, 11, 14, 21, 0), desc: "The most reliable winter meteor shower with rates up to 150 multicolored meteors per hour.", blogUrl: "blog-posts/how-to-watch-a-meteor-shower.html", blogText: "✦ Geminids Viewing Guide" },
+    { month: 11, day: 21, type: "equinox", typeName: "Orbital Solstice", title: "December Solstice", query: "winter solstice space", dateObj: new Date(2026, 11, 21, 20, 50), desc: "The shortest day and longest night of the year in the Northern Hemisphere." },
+    { month: 11, day: 30, type: "moon", typeName: "Lunar Phase", title: "New Year's Moon", query: "crescent moon sky", dateObj: new Date(2026, 11, 30, 23, 59), desc: "Closing 2026 beneath a delicate crescent moon." }
 ];
 
 let currentViewMonth = new Date().getMonth();
+let currentFilter = 'all';
 let renderToken = 0;
+
+document.addEventListener('DOMContentLoaded', () => {
+    startCountdown();
+    updateUI();
+
+    const prevBtn = document.getElementById('prev-month-btn');
+    const nextBtn = document.getElementById('next-month-btn');
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            currentViewMonth = (currentViewMonth - 1 + 12) % 12;
+            updateUI();
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            currentViewMonth = (currentViewMonth + 1) % 12;
+            updateUI();
+        });
+    }
+
+    // Filter bar
+    document.querySelectorAll('.event-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.event-filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFilter = btn.dataset.type;
+            updateUI();
+        });
+    });
+});
+
+function showToast(text) {
+    let toast = document.getElementById('toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast';
+        toast.className = 'site-toast';
+        document.body.appendChild(toast);
+    }
+    toast.textContent = text;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+}
 
 function startCountdown() {
     const now = new Date();
     const futureEvents = masterCalendar.filter(ev => ev.dateObj > now).sort((a, b) => a.dateObj - b.dateObj);
 
+    const timerTitle = document.getElementById('timer-title');
     if (futureEvents.length > 0) {
         const next = futureEvents[0];
-        const timerTitle = document.getElementById('timer-title');
-        if (timerTitle) timerTitle.textContent = `Next Sequence: ${next.title}`;
+        if (timerTitle) timerTitle.textContent = `✦ Next Up: ${next.title} (${next.dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })})`;
 
         let timerId = setInterval(() => {
             const diff = next.dateObj - new Date();
@@ -57,8 +103,7 @@ function startCountdown() {
             if (secondsEl) secondsEl.textContent = Math.floor((diff / 1000) % 60).toString().padStart(2, '0');
         }, 1000);
     } else {
-        const timerTitle = document.getElementById('timer-title');
-        if (timerTitle) timerTitle.textContent = 'The 2026 celestial calendar is complete';
+        if (timerTitle) timerTitle.textContent = '✦ 2026 Astronomical Almanac Complete';
     }
 }
 
@@ -66,11 +111,11 @@ async function fetchEventImage(query) {
     let img = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
 
     try {
-        const resp = await fetch(`https://images-api.nasa.gov/search?q=${query}&media_type=image`);
+        const resp = await fetch(`https://images-api.nasa.gov/search?q=${encodeURIComponent(query)}&media_type=image`);
         if (resp.ok) {
             const data = await resp.json();
             const items = data.collection?.items || [];
-            const badWords = ['astronaut', 'scientist', 'engineer', 'technician', 'personnel', 'crew portrait', 'standing next to', 'holding', 'man in', 'woman in', 'control room', 'laboratory interior', 'lab interior', 'test facility', 'machinery', 'circuitry', 'blueprint', 'schematic', 'technical diagram', 'instrument panel', 'launch vehicle technical', 'office building', 'hangar interior', 'warehouse', 'factory', 'parking lot', 'chart', 'graph', 'presentation slide', 'clipart', 'line drawing', 'patch design', 'insignia design', 'document scan', 'rocket', 'falcon', 'starship', 'pads', 'launch site', 'gantry', 'technical tower', 'spacesuit', 'suit portrait'];
+            const badWords = ['astronaut', 'scientist', 'engineer', 'technician', 'personnel', 'crew', 'standing next to', 'holding', 'control room', 'laboratory', 'diagram', 'chart', 'blueprint', 'rocket', 'falcon', 'starship'];
 
             const filteredItem = items.find(item => {
                 if (!item.data || !item.data[0]) return false;
@@ -83,7 +128,7 @@ async function fetchEventImage(query) {
             }
         }
     } catch (e) {
-        console.error('Failed to fetch image for query:', query, e);
+        // Fallback
     }
 
     return img;
@@ -91,79 +136,77 @@ async function fetchEventImage(query) {
 
 async function updateUI() {
     const container = document.getElementById('events-container');
+    const monthHeader = document.getElementById('month-name');
     if (!container) return;
+
     const currentToken = ++renderToken;
     container.classList.add('fade-out');
-    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const monthNames = ["January 2026", "February 2026", "March 2026", "April 2026", "May 2026", "June 2026", "July 2026", "August 2026", "September 2026", "October 2026", "November 2026", "December 2026"];
+
+    if (monthHeader) {
+        monthHeader.textContent = monthNames[currentViewMonth];
+    }
 
     setTimeout(async () => {
         if (currentToken !== renderToken) return;
-        try {
-            const monthNameEl = document.getElementById('month-name');
-            if (monthNameEl) monthNameEl.textContent = monthNames[currentViewMonth];
-            container.innerHTML = '';
-            const monthlyEvents = masterCalendar.filter(ev => ev.month === currentViewMonth);
-            const eventImages = await Promise.all(monthlyEvents.map(ev => fetchEventImage(ev.query)));
-            if (currentToken !== renderToken) return;
+        container.innerHTML = '';
 
-            monthlyEvents.forEach((ev, index) => {
-                const card = document.createElement('div');
-                card.className = 'event-card';
-
-                const imgBox = document.createElement('div');
-                imgBox.className = 'img-box';
-                imgBox.style.backgroundImage = `url('${eventImages[index]}')`;
-                imgBox.setAttribute('aria-label', ev.title);
-
-                const content = document.createElement('div');
-                content.className = 'card-content';
-
-                const tag = document.createElement('span');
-                tag.className = 'tag';
-                tag.textContent = ev.type;
-
-                const dayNum = document.createElement('div');
-                dayNum.className = 'day-num';
-                dayNum.textContent = ev.day.toString().padStart(2, '0');
-
-                const title = document.createElement('div');
-                title.className = 'event-title';
-                title.textContent = ev.title;
-
-                const desc = document.createElement('p');
-                desc.className = 'event-desc';
-                desc.textContent = ev.desc;
-
-                content.appendChild(tag);
-                content.appendChild(dayNum);
-                content.appendChild(title);
-                content.appendChild(desc);
-
-                card.appendChild(imgBox);
-                card.appendChild(content);
-                container.appendChild(card);
-            });
-        } finally {
-            if (currentToken === renderToken) {
-                container.classList.remove('fade-out');
-                if (typeof setupHovers === 'function') setupHovers();
-            }
+        let monthlyEvents = masterCalendar.filter(ev => ev.month === currentViewMonth);
+        if (currentFilter !== 'all') {
+            monthlyEvents = monthlyEvents.filter(ev => ev.type === currentFilter);
         }
-    }, 500);
+
+        if (monthlyEvents.length === 0) {
+            container.innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--text-dim);">
+                    <p style="font-size: 1.1rem; color: #fff; margin-bottom: 8px;">No ${currentFilter} events in ${monthNames[currentViewMonth]}</p>
+                    <p style="font-size: 0.85rem;">Use the arrows above to browse other months or select "All Events".</p>
+                </div>`;
+            container.classList.remove('fade-out');
+            return;
+        }
+
+        for (const ev of monthlyEvents) {
+            const card = document.createElement('div');
+            card.className = 'event-card';
+
+            const blogLinkHtml = ev.blogUrl ? `<a href="${ev.blogUrl}" class="event-guide-link">${ev.blogText}</a>` : `<span></span>`;
+
+            card.innerHTML = `
+                <div class="img-box" style="background-image: url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="card-content">
+                    <div class="card-top-row">
+                        <span class="tag">✦ ${ev.typeName}</span>
+                        <div class="day-num">${ev.day.toString().padStart(2, '0')}</div>
+                    </div>
+                    <div class="event-title">${ev.title}</div>
+                    <div class="event-desc">${ev.desc}</div>
+                    <div class="event-card-actions">
+                        ${blogLinkHtml}
+                        <button class="copy-event-btn" data-title="${ev.title}" data-date="${ev.day} ${monthNames[ev.month]}">📋 Copy Info</button>
+                    </div>
+                </div>
+            `;
+
+            container.appendChild(card);
+
+            // Fetch NASA APOD/Media image asynchronously
+            fetchEventImage(ev.query).then(imgUrl => {
+                const imgBox = card.querySelector('.img-box');
+                if (imgBox && imgUrl) {
+                    imgBox.style.backgroundImage = `url('${imgUrl}')`;
+                }
+            });
+        }
+
+        // Add copy listeners
+        container.querySelectorAll('.copy-event-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const text = `🌌 Astronomical Event: ${btn.dataset.title} on ${btn.dataset.date} - Track on MoonlightMoments.org`;
+                navigator.clipboard.writeText(text).then(() => showToast("Event copied to clipboard! ✦"));
+            });
+        });
+
+        container.classList.remove('fade-out');
+    }, 250);
 }
-
-function changeMonth(delta) {
-    currentViewMonth = (currentViewMonth + delta + 12) % 12;
-    updateUI();
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    startCountdown();
-    updateUI();
-
-    const prevBtn = document.getElementById('prev-month-btn');
-    if (prevBtn) prevBtn.addEventListener('click', () => changeMonth(-1));
-
-    const nextBtn = document.getElementById('next-month-btn');
-    if (nextBtn) nextBtn.addEventListener('click', () => changeMonth(1));
-});

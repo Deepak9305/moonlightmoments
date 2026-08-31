@@ -7,9 +7,9 @@
     <title>Age on Other Planets Calculator | Weight on Planets | Moonlight Moments</title>
 
     <meta name="description"
-        content="Calculate your age and weight on every planet in our solar system including Mars, Jupiter, and Saturn. Free planetary age calculator for space enthusiasts.">
+        content="Calculate your exact age, weight, and next birthday on every planet in our solar system including Mercury, Mars, Jupiter, and Saturn. Free interstellar calculator.">
     <meta name="keywords"
-        content="age on other planets, weight on planets, planetary age calculator, how old am I on Mars, solar system weight calculator, Moonlight Moments">
+        content="age on other planets, weight on planets, planetary age calculator, how old am I on Mars, solar system weight calculator, next planet birthday, Moonlight Moments">
     <meta name="robots" content="index, follow">
 
     <!-- SEO Verification -->
@@ -30,14 +30,14 @@
         crossorigin="anonymous"></script>
     <meta name="author" content="Moonlight Moments">
 
-    <link rel="canonical" href="https://www.moonlightmoments.org/age.html">
+    <link rel="canonical" href="https://www.moonlightmoments.org/pages/age.html">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.moonlightmoments.org/age.html">
+    <meta property="og:url" content="https://www.moonlightmoments.org/pages/age.html">
     <meta property="og:title" content="Age on Other Planets Calculator | Moonlight Moments">
     <meta property="og:description"
-        content="Find out your age and weight on Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, and Pluto. Free interstellar identity calculator.">
+        content="Find out your age, weight, and next birthday on Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, and Pluto.">
     <meta property="og:site_name" content="Moonlight Moments">
 
     <!-- Twitter Card -->
@@ -52,8 +52,8 @@
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "Planet Age & Weight Calculator",
-      "url": "https://www.moonlightmoments.org/age.html",
-      "description": "Calculate your age and weight on every planet in the solar system including Mars, Jupiter, Saturn, and more.",
+      "url": "https://www.moonlightmoments.org/pages/age.html",
+      "description": "Calculate your exact age, weight, and next birthday on every planet in the solar system including Mars, Jupiter, Saturn, and more.",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Any"
     }
@@ -61,7 +61,7 @@
 
     <link rel="icon" type="image/png" href="../assets/img/logo.png">
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
         rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
@@ -72,10 +72,10 @@
 
 <body>
 
-    <div id="cursor"></div>
+    <div id="cursor-ring"></div>
     <div id="cursor-dot"></div>
 
-    <nav>
+    <nav class="glass-nav">
         <a href="../index.html" class="logo">
             <img src="../assets/img/logo.png" alt="Moonlight Moments Logo" class="logo-img">
             Moonlight Moments
@@ -86,7 +86,7 @@
             <a href="event.html">Astronomical Calendar</a>
             <a href="solar-system.html">3D Solar System</a>
             <a href="blog.html">Blogs</a>
-            <a href="https://ko-fi.com/moonlightmoments" target="_blank" rel="noopener noreferrer" class="support-nav-btn">Support Us</a>
+            <a href="https://ko-fi.com/moonlightmoments" target="_blank" rel="noopener noreferrer" class="support-btn">Support Us</a>
             <a href="#" class="legal-link nav-legal-link" data-type="about">✦ Our Story</a>
             <a href="#" class="legal-link nav-legal-link" data-type="privacy">✦ Privacy Orbit</a>
         </div>
@@ -101,25 +101,66 @@
 
     <div class="main-container">
         <div class="hero-text">
+            <span class="tool-badge">✦ Interstellar Biometric Calculator</span>
             <h1>How Old Are You on Other Planets?</h1>
-            <p>Calculate Your Age &amp; Weight on Every Planet in Our Solar System</p>
+            <p>Calculate Your Exact Age, Gravitational Weight, and Next Birthday Across the Solar System</p>
         </div>
 
         <div class="control-panel">
-            <div class="glass-pill"><input type="number" id="weight" placeholder="Your Weight on Earth (kg)"
-                    aria-label="Enter your weight in kilograms"></div>
-            <div class="glass-pill"><input type="date" id="birthdate" aria-label="Enter your birth date"></div>
-            <button class="sync-btn" id="sync-btn">Calculate My Planetary Age</button>
-            <div class="action-btns" id="actions">
-                <button class="action-btn" id="export-btn">Download My Planet Card</button>
-                <button class="action-btn" id="share-btn">Share My Results</button>
+            <div class="unit-toggle-wrap">
+                <button type="button" class="unit-btn active" id="unit-kg" data-unit="kg">KG</button>
+                <button type="button" class="unit-btn" id="unit-lbs" data-unit="lbs">LBS</button>
             </div>
+            
+            <div class="glass-pill">
+                <input type="number" id="weight" placeholder="Earth Weight (kg)" min="1" max="1000"
+                    aria-label="Enter your weight">
+            </div>
+            
+            <div class="glass-pill">
+                <input type="date" id="birthdate" aria-label="Enter your birth date">
+            </div>
+            
+            <button class="sync-btn" id="sync-btn">Calculate Cosmic Age ✧</button>
+        </div>
+
+        <div class="quick-presets">
+            <span class="preset-label">Quick Try:</span>
+            <button class="preset-chip" data-weight="70" data-years="25">Age 25 (70 kg)</button>
+            <button class="preset-chip" data-weight="65" data-years="30">Age 30 (65 kg)</button>
+            <button class="preset-chip" data-weight="80" data-years="45">Age 45 (80 kg)</button>
+        </div>
+
+        <div class="action-btns" id="actions" style="display: none;">
+            <button class="action-btn" id="export-btn">📸 Download Planet Pass Card</button>
+            <button class="action-btn" id="share-btn">🔗 Share Results</button>
         </div>
 
         <div id="capture-area">
             <div id="results" class="planet-grid"></div>
-            <div id="watermark" class="watermark">MOONLIGHTMOMENTS.ORG</div>
+            <div id="watermark" class="watermark">MOONLIGHTMOMENTS.ORG · COSMIC PASSPORT</div>
         </div>
+
+        <!-- Cross-Promotion Banner -->
+        <div class="tool-promo-banner" id="tool-promo" style="display:none;">
+            <h3>Curious about cosmic orbits &amp; relativity?</h3>
+            <p>Explore the full interactive planets in 3D or read our astrophysics guides.</p>
+            <div class="tool-promo-links">
+                <a href="solar-system.html" class="promo-btn">🪐 Open 3D Solar System</a>
+                <a href="blog.html" class="promo-btn promo-btn-alt">📚 Read Astronomy Blog</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="site-toast">Cosmic link copied to clipboard! ✦</div>
+
+    <footer>
+        <p class="footer-copyright">&copy; 2026 MOONLIGHT MOMENTS | PLANETARY AGE &amp; WEIGHT CALCULATOR</p>
+    </footer>
+
+    <div id="legal-modal" class="legal-modal">
+        <span class="legal-close-span" id="close-legal-btn" aria-label="Close">&times;</span>
+        <div class="legal-inner" id="legal-content"></div>
     </div>
 
     <!-- Scripts -->

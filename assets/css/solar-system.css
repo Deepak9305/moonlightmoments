@@ -322,13 +322,88 @@ body {
     margin-top: 8px;
 }
 
-@keyframes titleFade { 0%, 50% { opacity: 1; } 100% { opacity: 0; } }
+/* --- Planet Quick Selector Dock --- */
+.planet-dock {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    background: rgba(10, 10, 18, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(167, 139, 250, 0.25);
+    padding: 6px 12px;
+    border-radius: 999px;
+    z-index: 950;
+    max-width: 94vw;
+    overflow-x: auto;
+    scrollbar-width: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.planet-dock::-webkit-scrollbar {
+    display: none;
+}
+
+.dock-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    font-size: 0.74rem;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.dock-btn:hover,
+.dock-btn.active {
+    background: rgba(167, 139, 250, 0.2);
+    color: #fff;
+    box-shadow: 0 0 12px rgba(167, 139, 250, 0.3);
+}
+
+.planet-calc-cta {
+    display: block;
+    margin-top: 6px;
+    color: var(--accent);
+    font-size: 0.76rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 8px 12px;
+    background: rgba(167, 139, 250, 0.08);
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.planet-calc-cta:hover {
+    background: var(--accent-gradient);
+    color: #fff;
+    border-color: transparent;
+}
+
+.panel-btn-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.panel-btn-row button {
+    flex: 1;
+}
 
 @media (max-width: 768px) {
     #planet-info-panel { width: 240px; padding: 20px; left: 3%; }
-    #time-controls { bottom: 16px; padding: 10px 16px; }
-    #time-slider { width: 100px; }
+    #time-controls { bottom: 80px; left: 16px; transform: none; padding: 8px 14px; }
+    #time-slider { width: 90px; }
     #mode-controls { top: 80px; right: 16px; }
+    .planet-dock { bottom: 16px; padding: 4px 8px; gap: 4px; }
+    .dock-btn { font-size: 0.68rem; padding: 5px 10px; }
 }
 
 @media (max-width: 480px) {
@@ -338,10 +413,10 @@ body {
         left: 12px;
         right: 12px;
         top: auto;
-        bottom: 80px;
+        bottom: 74px;
         transform: none;
         border-radius: 16px;
-        max-height: 55vh;
+        max-height: 50vh;
         overflow-y: auto;
     }
 
@@ -349,7 +424,6 @@ body {
         transform: none;
     }
 
-    /* Compare modal: single column */
     #compare-modal {
         grid-template-columns: 1fr;
         padding: 24px 16px;
@@ -367,7 +441,6 @@ body {
         text-align: center;
     }
 
-    /* Mode controls smaller on phone */
     #mode-controls {
         top: 70px;
         right: 10px;
@@ -379,13 +452,5 @@ body {
         font-size: 0.65rem;
     }
 
-    /* Time slider narrower */
-    #time-controls { padding: 8px 12px; gap: 8px; }
-    #time-slider { width: 70px; }
-    #time-controls label { font-size: 0.6rem; letter-spacing: 1px; }
-}
-
-/* --- Utility Classes --- */
-.compare-desc-margin {
-    margin-bottom: 15px;
+    #time-controls { display: none; }
 }
