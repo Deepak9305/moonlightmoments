@@ -240,7 +240,7 @@ composer.addPass(new THREE.RenderPass(scene, camera));
 composer.addPass(new THREE.UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.0, 0.5, 0.9));
 
 // =============================================
-//  SUN
+//  SUN & RADIANT CORONA
 // =============================================
 const sunC = document.createElement('canvas');
 sunC.width = sunC.height = 512;
@@ -248,27 +248,87 @@ const sunCtx = sunC.getContext('2d');
 const sunImgData = sunCtx.createImageData(512, 512);
 for (let i = 0; i < 512 * 512; i++) {
     const px = i % 512, py = Math.floor(i / 512);
-    const n = fbm(px / 51.2, py / 51.2, 6);
-    const n2 = fbm(px / 25.6 + 5, py / 25.6 + 5, 4);
+    const n = fbm(px / 32, py / 32, 6);
+    const n2 = fbm(px / 16 + 5, py / 16 + 5, 4);
+    const plasma = n * 0.6 + n2 * 0.4;
     sunImgData.data[i * 4] = 255;
-    sunImgData.data[i * 4 + 1] = 200 + n * 55;
-    sunImgData.data[i * 4 + 2] = 80 + n2 * 80;
+    sunImgData.data[i * 4 + 1] = Math.min(255, 205 + Math.floor(plasma * 50));
+    sunImgData.data[i * 4 + 2] = Math.min(255, 100 + Math.floor(plasma * 120));
     sunImgData.data[i * 4 + 3] = 255;
 }
 sunCtx.putImageData(sunImgData, 0, 0);
-const sun = new THREE.Mesh(new THREE.SphereGeometry(22, 64, 64), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(sunC) }));
+
+const sunTexture = new THREE.CanvasTexture(sunC);
+const sun = new THREE.Mesh(
+    new THREE.SphereGeometry(22, 64, 64),
+    new THREE.MeshBasicMaterial({ map: sunTexture, color: 0xfff6dd })
+);
 sun.name = 'Sun';
 scene.add(sun);
 
+// Volumetric Corona Glow Spheres (BackSide + Additive + depthWrite:false)
+const corona1 = new THREE.Mesh(
+    new THREE.SphereGeometry(24, 48, 48),
+    new THREE.MeshBasicMaterial({
+        color: 0xffb84d,
+        transparent: true,
+        opacity: 0.5,
+        side: THREE.BackSide,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+    })
+);
+sun.add(corona1);
+
+const corona2 = new THREE.Mesh(
+    new THREE.SphereGeometry(28, 48, 48),
+    new THREE.MeshBasicMaterial({
+        color: 0xff6611,
+        transparent: true,
+        opacity: 0.28,
+        side: THREE.BackSide,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+    })
+);
+sun.add(corona2);
+
+const corona3 = new THREE.Mesh(
+    new THREE.SphereGeometry(35, 32, 32),
+    new THREE.MeshBasicMaterial({
+        color: 0xff3300,
+        transparent: true,
+        opacity: 0.12,
+        side: THREE.BackSide,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+    })
+);
+sun.add(corona3);
+
+// Soft radial flare sprite with clean alpha clearing & depthWrite: false
 const glowC = document.createElement('canvas');
 glowC.width = glowC.height = 512;
 const glowCtx = glowC.getContext('2d');
-const grad = glowCtx.createRadialGradient(256, 256, 40, 256, 256, 256);
-grad.addColorStop(0, 'rgba(255,220,150,0.45)'); grad.addColorStop(1, 'rgba(255,60,10,0)');
-glowCtx.fillStyle = grad; glowCtx.fillRect(0, 0, 512, 512);
-const glowSprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(glowC), transparent: true, blending: THREE.AdditiveBlending }));
-glowSprite.scale.set(150, 150, 1);
+glowCtx.clearRect(0, 0, 512, 512);
+const grad = glowCtx.createRadialGradient(256, 256, 20, 256, 256, 240);
+grad.addColorStop(0, 'rgba(255, 240, 190, 0.65)');
+grad.addColorStop(0.25, 'rgba(255, 170, 50, 0.3)');
+grad.addColorStop(0.65, 'rgba(255, 70, 10, 0.08)');
+grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+glowCtx.fillStyle = grad;
+glowCtx.fillRect(0, 0, 512, 512);
+
+const glowSprite = new THREE.Sprite(new THREE.SpriteMaterial({
+    map: new THREE.CanvasTexture(glowC),
+    transparent: true,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+    depthTest: true
+}));
+glowSprite.scale.set(120, 120, 1);
 sun.add(glowSprite);
+
 sun.add(new THREE.PointLight(0xffeedd, 3.5, 4000, 1.2));
 scene.add(new THREE.AmbientLight(0x202030, 0.4));
 
