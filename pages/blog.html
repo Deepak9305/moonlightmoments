@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space & Astronomy Blog | Moonlight Moments</title>
+    <title>Space &amp; Astronomy Blog | Moonlight Moments</title>
 
     <meta name="description"
-        content="Read the latest space discoveries, NASA mission updates, and astronomy insights on the Moonlight Moments blog.">
+        content="Explore curated astronomy articles, deep space insights, stargazing guides, and astrophysics mysteries on Moonlight Moments.">
     <meta name="keywords"
-        content="space blog, astronomy blog articles, NASA news, JWST discoveries, mars colonization, space photography, celestial events">
+        content="astronomy blog, space science, meteor shower guide, stargazing tips, NASA photography, astrophysics, cosmology, exoplanets, dark matter">
     <meta name="robots" content="index, follow">
 
     <link rel="canonical" href="https://www.moonlightmoments.org/pages/blog.html">
@@ -17,16 +17,16 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.moonlightmoments.org/pages/blog.html">
-    <meta property="og:title" content="Space & Astronomy Blog | Moonlight Moments">
+    <meta property="og:title" content="Space &amp; Astronomy Blog | Moonlight Moments">
     <meta property="og:description"
-        content="Read the latest space discoveries, NASA mission updates, and astronomy insights on the Moonlight Moments blog.">
+        content="Explore curated astronomy articles, deep space insights, stargazing guides, and astrophysics mysteries on Moonlight Moments.">
     <meta property="og:site_name" content="Moonlight Moments">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Space & Astronomy Blog | Moonlight Moments">
+    <meta name="twitter:title" content="Space &amp; Astronomy Blog | Moonlight Moments">
     <meta name="twitter:description"
-        content="Read the latest space discoveries, NASA mission updates, and astronomy insights on the Moonlight Moments blog.">
+        content="Explore curated astronomy articles, deep space insights, stargazing guides, and astrophysics mysteries on Moonlight Moments.">
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -35,7 +35,7 @@
       "@type": "Blog",
       "name": "Moonlight Moments Blog",
       "url": "https://www.moonlightmoments.org/pages/blog.html",
-      "description": "Read the latest space discoveries, NASA mission updates, and astronomy insights.",
+      "description": "Curated deep space discoveries, stargazing guides, and astrophysics insights.",
       "publisher": {
         "@type": "Organization",
         "name": "Moonlight Moments",
@@ -48,98 +48,54 @@
     </script>
     <link rel="icon" type="image/png" href="../assets/img/logo.png">
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
         rel="stylesheet">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../assets/css/base.css">
     <link rel="stylesheet" href="../assets/css/blog.css">
+    <style>
+        .legal-modal {
+            display: none; position: fixed; inset: 0;
+            background: rgba(2,2,4,0.97); z-index: 9999; overflow-y: auto; padding: 80px 5%;
+        }
+        .legal-inner { max-width: 680px; margin: 0 auto; }
+        .legal-close-span {
+            position: fixed; top: 28px; right: 28px; font-size: 2.6rem;
+            color: #fff; cursor: pointer; line-height: 1; opacity: 0.7; transition: opacity 0.2s;
+        }
+        .legal-close-span:hover { opacity: 1; }
+        
+        .no-results-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 70px 20px;
+            color: var(--text-dim);
+        }
+        .no-results-state h3 {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+        .reset-search-btn {
+            margin-top: 16px;
+            background: rgba(167, 139, 250, 0.15);
+            border: 1px solid var(--accent);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: 0.2s;
+        }
+        .reset-search-btn:hover {
+            background: var(--accent-gradient);
+        }
+    </style>
 </head>
 
-<style>
-    .legal-modal {
-        display: none; position: fixed; inset: 0;
-        background: rgba(2,2,4,0.97); z-index: 9999; overflow-y: auto; padding: 80px 5%;
-    }
-    .legal-inner { max-width: 680px; margin: 0 auto; }
-    .legal-close-span {
-        position: fixed; top: 28px; right: 28px; font-size: 2.6rem;
-        color: #fff; cursor: pointer; line-height: 1; opacity: 0.7; transition: opacity 0.2s;
-    }
-    .legal-close-span:hover { opacity: 1; }
-
-    /* You Might Also Like — listing page */
-    .blog-recommendations {
-        padding: 0 8% 100px;
-        max-width: 1400px;
-        margin: 0 auto;
-    }
-    .blog-rec-heading {
-        font-family: 'Playfair Display', serif;
-        font-style: italic;
-        font-size: clamp(1.6rem, 4vw, 2.2rem);
-        margin-bottom: 32px;
-        color: #fff;
-    }
-    .blog-rec-heading span {
-        color: var(--accent);
-    }
-    .blog-rec-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 28px;
-    }
-    .blog-rec-card {
-        background: var(--glass);
-        border: 1px solid var(--glass-border);
-        border-radius: 20px;
-        overflow: hidden;
-        text-decoration: none;
-        display: flex;
-        flex-direction: column;
-        transition: var(--transition);
-    }
-    .blog-rec-card:hover {
-        transform: translateY(-8px);
-        border-color: var(--accent);
-        box-shadow: 0 20px 40px rgba(167, 139, 250, 0.2);
-    }
-    .blog-rec-img {
-        width: 100%; height: 180px; object-fit: cover; display: block;
-        transition: transform 1.5s ease;
-    }
-    .blog-rec-card:hover .blog-rec-img { transform: scale(1.06); }
-    .blog-rec-body { padding: 20px 22px 22px; flex: 1; display: flex; flex-direction: column; }
-    .blog-rec-meta {
-        font-size: 0.7rem; color: var(--accent);
-        text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;
-    }
-    .blog-rec-body h3 {
-        font-family: 'Playfair Display', serif;
-        font-size: clamp(1rem, 3vw, 1.25rem);
-        color: #fff; line-height: 1.35; margin-bottom: 10px;
-    }
-    .blog-rec-excerpt {
-        font-size: 0.85rem; color: var(--text-dim); line-height: 1.65; margin-bottom: 16px; flex: 1;
-    }
-    .blog-rec-cta {
-        font-size: 0.75rem; font-weight: 600; letter-spacing: 1px;
-        color: var(--accent); display: flex; align-items: center; gap: 6px;
-    }
-    .blog-rec-cta::after { content: '→'; transition: transform 0.3s; }
-    .blog-rec-card:hover .blog-rec-cta::after { transform: translateX(4px); }
-
-    @media (max-width: 768px) {
-        .blog-recommendations { padding: 0 5% 70px; }
-        .blog-rec-grid { grid-template-columns: 1fr; gap: 18px; }
-        .blog-rec-img { height: 160px; }
-    }
-    @media (max-width: 480px) {
-        .blog-recommendations { padding: 0 4% 56px; }
-        .blog-rec-img { height: 140px; }
-        .blog-rec-body { padding: 16px 16px 18px; }
-    }
-</style>
 <body>
 
     <div id="cursor-ring"></div>
@@ -170,24 +126,43 @@
     </nav>
 
     <header class="blog-hero">
-        <h1>Astronomy & Space Blog</h1>
-        <p>Discover the latest discoveries, insights, and stories from the cosmos</p>
+        <div class="blog-badge">✦ Astronomy &amp; Deep Space Journal</div>
+        <h1>Explore the Cosmic Archive</h1>
+        <p>Discover in-depth stargazing guides, astrophysics deep-dives, and cutting-edge space science discoveries.</p>
+
+        <div class="blog-controls">
+            <div class="blog-search-wrap">
+                <span class="blog-search-icon">🔍</span>
+                <input type="text" id="blog-search-input" class="blog-search-input"
+                    placeholder="Search articles (e.g., meteor showers, black holes, exoplanets, dark matter)..."
+                    aria-label="Search articles">
+            </div>
+
+            <div class="blog-categories" id="category-pills">
+                <button class="category-chip active" data-cat="all">All Articles</button>
+                <button class="category-chip" data-cat="stargazing">Stargazing &amp; Eclipses</button>
+                <button class="category-chip" data-cat="astrophysics">Astrophysics &amp; Physics</button>
+                <button class="category-chip" data-cat="planets">Solar System &amp; Exoplanets</button>
+                <button class="category-chip" data-cat="cosmology">Cosmology &amp; Deep Space</button>
+            </div>
+        </div>
     </header>
 
     <section class="blog-section">
+        <div class="blog-results-meta">
+            <span id="results-counter">✦ Showing all articles</span>
+        </div>
+
         <div id="blog-grid" class="blog-grid" aria-live="polite">
-            <p id="blog-loading" style="color: var(--text-dim); text-align: center; grid-column: 1/-1; padding: 60px 0; font-size: 1rem; letter-spacing: 2px;">LOADING POSTS...</p>
+            <p id="blog-loading" style="color: var(--text-dim); text-align: center; grid-column: 1/-1; padding: 60px 0; font-size: 1rem; letter-spacing: 2px;">LOADING COSMIC ARCHIVE...</p>
         </div>
     </section>
 
-    <section class="blog-recommendations" id="rec-section" style="display:none">
-        <h2 class="blog-rec-heading">✦ You Might Also <span>Like</span></h2>
-        <div class="blog-rec-grid" id="rec-grid"></div>
-    </section>
-
     <footer>
-        <p class="footer-copyright">&copy; 2026 MOONLIGHT MOMENTS | SPACE & ASTRONOMY BLOG</p>
+        <p class="footer-copyright">&copy; 2026 MOONLIGHT MOMENTS | SPACE &amp; ASTRONOMY BLOG</p>
     </footer>
+
+    <div id="toast" class="site-toast">Link copied to clipboard! ✦</div>
 
     <div id="legal-modal" class="legal-modal">
         <span class="legal-close-span" id="close-legal-btn" aria-label="Close">&times;</span>
@@ -200,70 +175,131 @@
         (function () {
             const grid = document.getElementById('blog-grid');
             const loading = document.getElementById('blog-loading');
-            const recSection = document.getElementById('rec-section');
-            const recGrid = document.getElementById('rec-grid');
+            const searchInput = document.getElementById('blog-search-input');
+            const categoryPills = document.querySelectorAll('.category-chip');
+            const resultsCounter = document.getElementById('results-counter');
             const FALLBACK_IMG = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
+
+            let allPosts = [];
+            let currentCategory = 'all';
+            let searchQuery = '';
+
+            function getCategory(post) {
+                const topic = (post.topic || '').toLowerCase();
+                const title = (post.title || '').toLowerCase();
+                const text = topic + ' ' + title;
+
+                if (text.includes('meteor') || text.includes('eclipse') || text.includes('stargazing')) {
+                    return { slug: 'stargazing', label: 'Stargazing Guide' };
+                }
+                if (text.includes('hawking') || text.includes('dark matter') || text.includes('dark energy') || text.includes('black hole')) {
+                    return { slug: 'astrophysics', label: 'Astrophysics' };
+                }
+                if (text.includes('planet') || text.includes('kuiper') || text.includes('star systems') || text.includes('exoplanet')) {
+                    return { slug: 'planets', label: 'Planetary Science' };
+                }
+                return { slug: 'cosmology', label: 'Cosmology & Deep Space' };
+            }
+
+            function estimateReadTime(post) {
+                if (post.filename === 'how-to-watch-a-meteor-shower.html') return '8 min read';
+                return '5 min read';
+            }
 
             function renderCard(post) {
                 const img = post.imageUrl || FALLBACK_IMG;
-                const excerpt = post.excerpt || 'Read this in-depth exploration of ' + post.topic + '.';
+                const excerpt = post.excerpt || 'Read this in-depth scientific exploration on ' + (post.topic || 'the cosmos') + '.';
+                const cat = getCategory(post);
+                const readTime = estimateReadTime(post);
+
                 const article = document.createElement('article');
                 article.className = 'blog-card';
+                article.dataset.category = cat.slug;
                 article.innerHTML = `
                     <div class="blog-img-wrap">
+                        <span class="blog-card-category">${cat.label}</span>
                         <img src="${img}" alt="${post.title}" loading="lazy"
                              onerror="this.src='${FALLBACK_IMG}'">
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
                             <span>✦ ${post.date}</span>
-                            <span>✦ Space Science</span>
                         </div>
                         <h2>${post.title}</h2>
                         <p class="blog-excerpt">${excerpt}</p>
-                        <a href="blog-posts/${post.filename}" class="read-more">CONTINUE READING</a>
+                        <div class="blog-card-footer">
+                            <a href="blog-posts/${post.filename}" class="read-more">CONTINUE READING</a>
+                            <span class="read-time">${readTime}</span>
+                        </div>
                     </div>`;
                 return article;
             }
 
-            function renderRecCard(post) {
-                const img = post.imageUrl || FALLBACK_IMG;
-                const excerpt = post.excerpt || 'An in-depth exploration of ' + post.topic + '.';
-                const a = document.createElement('a');
-                a.className = 'blog-rec-card';
-                a.href = 'blog-posts/' + post.filename;
-                a.innerHTML = `
-                    <img src="${img}" alt="${post.title}" class="blog-rec-img" loading="lazy"
-                         onerror="this.src='${FALLBACK_IMG}'">
-                    <div class="blog-rec-body">
-                        <div class="blog-rec-meta">✦ ${post.date} &nbsp;·&nbsp; Space Science</div>
-                        <h3>${post.title}</h3>
-                        <p class="blog-rec-excerpt">${excerpt}</p>
-                        <span class="blog-rec-cta">READ NOW</span>
-                    </div>`;
-                return a;
+            function filterAndRender() {
+                const query = searchQuery.trim().toLowerCase();
+                const filtered = allPosts.filter(post => {
+                    const cat = getCategory(post);
+                    const matchesCategory = (currentCategory === 'all' || cat.slug === currentCategory);
+                    const matchesSearch = !query || 
+                        (post.title && post.title.toLowerCase().includes(query)) ||
+                        (post.topic && post.topic.toLowerCase().includes(query)) ||
+                        (post.excerpt && post.excerpt.toLowerCase().includes(query));
+                    return matchesCategory && matchesSearch;
+                });
+
+                grid.innerHTML = '';
+                if (filtered.length === 0) {
+                    grid.innerHTML = `
+                        <div class="no-results-state">
+                            <h3>No articles found for "${searchQuery}"</h3>
+                            <p>Try searching for other astronomical terms like "meteor", "exoplanet", "eclipse", or "nebula".</p>
+                            <button class="reset-search-btn" id="reset-search-btn">Show All Articles</button>
+                        </div>`;
+                    document.getElementById('reset-search-btn')?.addEventListener('click', () => {
+                        searchInput.value = '';
+                        searchQuery = '';
+                        currentCategory = 'all';
+                        categoryPills.forEach(p => p.classList.toggle('active', p.dataset.cat === 'all'));
+                        filterAndRender();
+                    });
+                    resultsCounter.textContent = '✦ 0 articles found';
+                    return;
+                }
+
+                filtered.forEach(p => grid.appendChild(renderCard(p)));
+                resultsCounter.textContent = `✦ Showing ${filtered.length} ${filtered.length === 1 ? 'article' : 'articles'}`;
             }
 
-            function renderEmpty() {
-                loading.textContent = 'No posts yet - check back soon!';
-            }
+            // Category filter click
+            categoryPills.forEach(pill => {
+                pill.addEventListener('click', () => {
+                    categoryPills.forEach(p => p.classList.remove('active'));
+                    pill.classList.add('active');
+                    currentCategory = pill.dataset.cat;
+                    filterAndRender();
+                });
+            });
+
+            // Live Search with debounce
+            let debounceTimer;
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    searchQuery = e.target.value;
+                    filterAndRender();
+                }, 150);
+            });
 
             fetch('blog-index.json')
                 .then(r => { if (!r.ok) throw new Error('index not found'); return r.json(); })
                 .then(data => {
-                    const posts = (data.posts || []);
+                    allPosts = (data.posts || []);
                     loading.remove();
-                    if (posts.length === 0) { renderEmpty(); return; }
-                    posts.forEach(p => grid.appendChild(renderCard(p)));
-
-                    // Populate "You Might Also Like" with up to 3 random picks
-                    if (posts.length >= 2) {
-                        const picks = [...posts].sort(() => Math.random() - 0.5).slice(0, 3);
-                        picks.forEach(p => recGrid.appendChild(renderRecCard(p)));
-                        recSection.style.display = '';
-                    }
+                    filterAndRender();
                 })
-                .catch(() => renderEmpty());
+                .catch(() => {
+                    loading.textContent = 'Unable to load posts at this moment. Please check back soon.';
+                });
         })();
     </script>
 </body>

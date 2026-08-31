@@ -2,68 +2,99 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://www.moonlightmoments.org/</loc>
-        <lastmod>2026-05-02</lastmod>
+        <lastmod>2026-08-31</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://www.moonlightmoments.org/pages/age.html</loc>
-        <lastmod>2026-05-02</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://www.moonlightmoments.org/pages/blog-posts/how-to-watch-a-meteor-shower.html</loc>
-        <lastmod>2026-08-31</lastmod>
-        <changefreq>never</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://www.moonlightmoments.org/pages/blog-posts/cosmic-microwave-background.html</loc>
-        <lastmod>2026-05-04</lastmod>
-        <changefreq>never</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://www.moonlightmoments.org/pages/blog-posts/cosmic-rays.html</loc>
-        <lastmod>2026-05-03</lastmod>
-        <changefreq>never</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://www.moonlightmoments.org/pages/blog-posts/dark-energy-mystery.html</loc>
-        <lastmod>2026-05-02</lastmod>
-        <changefreq>never</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://www.moonlightmoments.org/pages/blog-posts/exoplanet-atmospheres.html</loc>
-        <lastmod>2026-05-02</lastmod>
-        <changefreq>never</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://www.moonlightmoments.org/pages/blog-posts/hawking-radiation.html</loc>
-        <lastmod>2026-05-03</lastmod>
-        <changefreq>never</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
         <loc>https://www.moonlightmoments.org/pages/blog.html</loc>
-        <lastmod>2026-05-02</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
+        <lastmod>2026-08-31</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
     </url>
     <url>
         <loc>https://www.moonlightmoments.org/pages/event.html</loc>
-        <lastmod>2026-05-02</lastmod>
+        <lastmod>2026-08-31</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.moonlightmoments.org/pages/solar-system.html</loc>
-        <lastmod>2026-05-02</lastmod>
+        <lastmod>2026-08-31</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.moonlightmoments.org/pages/age.html</loc>
+        <lastmod>2026-08-31</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <!-- Blog Articles -->
+    <url>
+        <loc>https://www.moonlightmoments.org/pages/blog-posts/how-to-watch-a-meteor-shower.html</loc>
+        <lastmod>2026-08-31</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.moonlightmoments.org/pages/blog-posts/kuiper-belt-objects.html</loc>
+        <lastmod>2026-05-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.moonlightmoments.org/pages/blog-posts/binary-star-systems.html</loc>
+        <lastmod>2026-05-12</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.moonlightmoments.org/pages/blog-posts/lunar-eclipse-science.html</loc>
+        <lastmod>2026-05-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.moonlightmoments.org/pages/blog-posts/nebula-colors.html</loc>
+        <lastmod>2026-05-08</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.moonlightmoments.org/pages/blog-posts/dark-matter-detection.html</loc>
+        <lastmod>2026-05-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.moonlightmoments.org/pages/blog-posts/cosmic-microwave-background.html</loc>
+        <lastmod>2026-05-04</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.moonlightmoments.org/pages/blog-posts/cosmic-rays.html</loc>
+        <lastmod>2026-05-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.moonlightmoments.org/pages/blog-posts/hawking-radiation.html</loc>
+        <lastmod>2026-05-02</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.moonlightmoments.org/pages/blog-posts/exoplanet-atmospheres.html</loc>
+        <lastmod>2026-04-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.moonlightmoments.org/pages/blog-posts/dark-energy-mystery.html</loc>
+        <lastmod>2026-04-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
     </url>
 </urlset>

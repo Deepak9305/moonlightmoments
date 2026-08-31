@@ -1,19 +1,46 @@
 :root {
-    --bg-color: #050505;
-    --text-color: #E0E0E0;
-    --text-dim: #888;
+    --bg-color: #050508;
+    --text-color: #E2E8F0;
+    --text-dim: #94A3B8;
     --accent: #a78bfa;
     --accent-secondary: #ec4899;
+    --accent-cyan: #38bdf8;
     --accent-gradient: linear-gradient(135deg, #ec4899, #8b5cf6);
     --glass: rgba(167, 139, 250, 0.08);
-    --glass-border: rgba(167, 139, 250, 0.15);
-    --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    --glass-hover: rgba(167, 139, 250, 0.14);
+    --glass-border: rgba(167, 139, 250, 0.18);
+    --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+::selection {
+    background: #7c3aed;
+    color: #ffffff;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #06060c;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(167, 139, 250, 0.25);
+    border-radius: 999px;
+    border: 2px solid #06060c;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(167, 139, 250, 0.5);
 }
 
 body {
@@ -113,16 +140,42 @@ body {
 .nav-links a {
     text-decoration: none;
     color: var(--text-dim);
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     letter-spacing: 2px;
     text-transform: uppercase;
-    transition: 0.3s;
+    transition: color 0.25s ease, text-shadow 0.25s ease;
     white-space: nowrap;
+    position: relative;
+    padding: 6px 0;
 }
 
-.nav-links a:hover,
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent-gradient);
+    transition: width 0.3s ease, left 0.3s ease;
+    border-radius: 999px;
+}
+
+.nav-links a:hover {
+    color: #fff;
+    text-shadow: 0 0 12px rgba(167, 139, 250, 0.4);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+    left: 0;
+}
+
 .nav-links a.active {
     color: #fff;
+    font-weight: 600;
+    text-shadow: 0 0 16px rgba(167, 139, 250, 0.6);
 }
 
 .support-btn, .support-nav-btn {
