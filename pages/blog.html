@@ -189,19 +189,20 @@
                 const title = (post.title || '').toLowerCase();
                 const text = topic + ' ' + title;
 
-                if (text.includes('meteor') || text.includes('eclipse') || text.includes('stargazing')) {
+                if (text.includes('meteor') || text.includes('eclipse') || text.includes('stargazing') || text.includes('telescope') || text.includes('observe')) {
                     return { slug: 'stargazing', label: 'Stargazing Guide' };
                 }
                 if (text.includes('hawking') || text.includes('dark matter') || text.includes('dark energy') || text.includes('black hole')) {
                     return { slug: 'astrophysics', label: 'Astrophysics' };
                 }
-                if (text.includes('planet') || text.includes('kuiper') || text.includes('star systems') || text.includes('exoplanet')) {
+                if (text.includes('saturn') || text.includes('planet') || text.includes('kuiper') || text.includes('star systems') || text.includes('exoplanet') || text.includes('uranus')) {
                     return { slug: 'planets', label: 'Planetary Science' };
                 }
                 return { slug: 'cosmology', label: 'Cosmology & Deep Space' };
             }
 
             function estimateReadTime(post) {
+                if (post.filename === 'how-to-observe-saturn-and-its-rings.html') return '10 min read';
                 if (post.filename === 'how-to-watch-a-meteor-shower.html') return '8 min read';
                 return '5 min read';
             }
