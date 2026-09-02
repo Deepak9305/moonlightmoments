@@ -333,7 +333,7 @@
         </div>
 
         <img src="../../assets/img/jupiter-telescope-guide-hero.jpg" alt="Vibrant and detailed view of planet Jupiter with the Great Red Spot and its four Galilean moons aligned in deep space" class="blog-post-featured-img"
-             onerror="this.src='https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=800&q=80'">
+             onerror="this.src='https://images-assets.nasa.gov/image/PIA02873/PIA02873~medium.jpg'">
 
         <div class="blog-post-content">
             <h1>How to Observe Jupiter &amp; Its Moons: The Ultimate Backyard Telescope &amp; Stargazing Guide</h1>
@@ -639,18 +639,26 @@
             const section = document.getElementById('related-section');
             if (!grid) return;
             const currentFile = location.pathname.split('/').pop();
-            const fallback = 'https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=800&q=80';
+            const fallback = 'https://images-assets.nasa.gov/image/PIA02873/PIA02873~medium.jpg';
             try {
                 const res = await fetch('../blog-index.json');
                 if (!res.ok) throw new Error();
                 const { posts } = await res.json();
                 const picks = posts.filter(p => p.filename !== currentFile).sort(() => Math.random() - 0.5).slice(0, 3);
                 if (!picks.length) { section.style.display = 'none'; return; }
-                grid.innerHTML = picks.map(p => `
+                grid.innerHTML = picks.map(p => {
+                    let img = p.imageUrl || fallback;
+                    if (img.startsWith('../assets/')) {
+                        img = '../' + img;
+                    } else if (img.startsWith('assets/')) {
+                        img = '../../' + img;
+                    }
+                    return `
                     <a href="${p.filename}" class="related-card">
-                        <img src="${p.imageUrl || fallback}" alt="${p.title}" onerror="this.src='${fallback}'" loading="lazy">
+                        <img src="${img}" alt="${p.title}" onerror="this.src='${fallback}'" loading="lazy">
                         <div class="related-card-body"><h4>${p.title}</h4><span class="related-date">${p.date}</span></div>
-                    </a>`).join('');
+                    </a>`;
+                }).join('');
             } catch (_) { section.style.display = 'none'; }
         })();
     </script>

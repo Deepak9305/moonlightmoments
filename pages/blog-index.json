@@ -6,7 +6,7 @@
       "title": "How to Observe Jupiter & Its Moons: The Ultimate Backyard Telescope & Stargazing Guide",
       "date": "September 2, 2026",
       "timestamp": 1788334800000,
-      "imageUrl": "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=800&q=80",
+      "imageUrl": "../assets/img/jupiter-telescope-guide-hero.jpg",
       "excerpt": "Observe the King of Planets with backyard optics. Learn how to track the Great Red Spot, spot the four Galilean moons, resolve atmospheric cloud belts, and witness lunar shadow transits."
     },
     {
@@ -15,7 +15,7 @@
       "title": "How to Observe Saturn & Its Rings: The Ultimate Backyard Telescope & Stargazing Guide",
       "date": "September 1, 2026",
       "timestamp": 1788248500000,
-      "imageUrl": "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=800&q=80",
+      "imageUrl": "../assets/img/saturn-telescope-guide-hero.jpg",
       "excerpt": "Seeing Saturn through an eyepiece is a milestone for every stargazer. Here is your complete guide to resolving the Cassini Division, spotting moons like Titan and Enceladus, and mastering planetary magnification."
     },
     {
@@ -24,7 +24,7 @@
       "title": "How to Watch a Meteor Shower: The Ultimate Stargazing & Peak Viewing Guide",
       "date": "August 31, 2026",
       "timestamp": 1788191400000,
-      "imageUrl": "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80",
+      "imageUrl": "../assets/img/meteor-shower-guide-hero.jpg",
       "excerpt": "Catching a meteor shower is one of the most thrilling night-sky experiences. Here is your complete guide to peak dates, radiant points, dark sky preparation, and essential stargazing tips."
     },
     {

@@ -208,8 +208,31 @@
                 return '5 min read';
             }
 
+            function getCardFallback(filename) {
+                if (filename === 'how-to-observe-jupiter-and-its-moons.html') {
+                    return 'https://images-assets.nasa.gov/image/PIA02873/PIA02873~medium.jpg';
+                }
+                if (filename === 'how-to-observe-saturn-and-its-rings.html') {
+                    return 'https://images-assets.nasa.gov/image/PIA09931/PIA09931~medium.jpg';
+                }
+                if (filename === 'how-to-watch-a-meteor-shower.html') {
+                    return 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80';
+                }
+                return FALLBACK_IMG;
+            }
+
+            function resolveCardImg(url, filename) {
+                if (!url) return getCardFallback(filename);
+                if (url.startsWith('http://') || url.startsWith('https://')) return url;
+                if (url.startsWith('../assets/')) return url;
+                if (url.startsWith('assets/')) return '../' + url;
+                if (url.startsWith('/assets/')) return '..' + url;
+                return url;
+            }
+
             function renderCard(post) {
-                const img = post.imageUrl || FALLBACK_IMG;
+                const cardFallback = getCardFallback(post.filename);
+                const img = resolveCardImg(post.imageUrl, post.filename);
                 const excerpt = post.excerpt || 'Read this in-depth scientific exploration on ' + (post.topic || 'the cosmos') + '.';
                 const cat = getCategory(post);
                 const readTime = estimateReadTime(post);
@@ -221,7 +244,7 @@
                     <div class="blog-img-wrap">
                         <span class="blog-card-category">${cat.label}</span>
                         <img src="${img}" alt="${post.title}" loading="lazy"
-                             onerror="this.src='${FALLBACK_IMG}'">
+                             onerror="this.src='${cardFallback}'">
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
