@@ -202,6 +202,7 @@
             }
 
             function estimateReadTime(post) {
+                if (post.filename === 'how-to-observe-jupiter-and-its-moons.html') return '11 min read';
                 if (post.filename === 'how-to-observe-saturn-and-its-rings.html') return '10 min read';
                 if (post.filename === 'how-to-watch-a-meteor-shower.html') return '8 min read';
                 return '5 min read';
