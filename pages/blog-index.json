@@ -1,6 +1,15 @@
 {
   "posts": [
     {
+      "filename": "how-to-observe-mars-and-its-ice-caps.html",
+      "topic": "how to observe mars and its ice caps",
+      "title": "How to Observe Mars & Its Polar Ice Caps: The Ultimate Backyard Telescope & Stargazing Guide",
+      "date": "September 3, 2026",
+      "timestamp": 1788421800000,
+      "imageUrl": "../assets/img/mars-telescope-guide-hero.jpg",
+      "excerpt": "Master how to observe the Red Planet with a backyard telescope. Discover how to spot the bright polar ice caps, resolve dark albedo plains like Syrtis Major, track dust storms, and master opposition viewing."
+    },
+    {
       "filename": "how-to-observe-jupiter-and-its-moons.html",
       "topic": "how to observe jupiter and its moons",
       "title": "How to Observe Jupiter & Its Moons: The Ultimate Backyard Telescope & Stargazing Guide",

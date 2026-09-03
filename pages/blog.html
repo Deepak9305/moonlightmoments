@@ -202,6 +202,7 @@
             }
 
             function estimateReadTime(post) {
+                if (post.filename === 'how-to-observe-mars-and-its-ice-caps.html') return '12 min read';
                 if (post.filename === 'how-to-observe-jupiter-and-its-moons.html') return '11 min read';
                 if (post.filename === 'how-to-observe-saturn-and-its-rings.html') return '10 min read';
                 if (post.filename === 'how-to-watch-a-meteor-shower.html') return '8 min read';
@@ -209,6 +210,9 @@
             }
 
             function getCardFallback(filename) {
+                if (filename === 'how-to-observe-mars-and-its-ice-caps.html') {
+                    return 'https://images-assets.nasa.gov/image/PIA04591/PIA04591~medium.jpg';
+                }
                 if (filename === 'how-to-observe-jupiter-and-its-moons.html') {
                     return 'https://images-assets.nasa.gov/image/PIA02873/PIA02873~medium.jpg';
                 }
