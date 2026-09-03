@@ -775,7 +775,7 @@
             const currentFile = location.pathname.split('/').pop();
             const fallback = 'https://images-assets.nasa.gov/image/PIA04591/PIA04591~medium.jpg';
             try {
-                const res = await fetch('../blog-index.json');
+                const res = await fetch('../blog-index.json?t=' + Date.now(), { cache: 'no-store' });
                 if (!res.ok) throw new Error();
                 const { posts } = await res.json();
                 const picks = posts.filter(p => p.filename !== currentFile).sort(() => Math.random() - 0.5).slice(0, 3);

@@ -319,7 +319,7 @@
                 }, 150);
             });
 
-            fetch('blog-index.json')
+            fetch('blog-index.json?t=' + Date.now(), { cache: 'no-store' })
                 .then(r => { if (!r.ok) throw new Error('index not found'); return r.json(); })
                 .then(data => {
                     allPosts = (data.posts || []);
