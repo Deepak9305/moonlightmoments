@@ -32,6 +32,12 @@
     </url>
     <!-- Blog Articles -->
     <url>
+        <loc>https://www.moonlightmoments.org/pages/blog-posts/how-to-observe-venus-and-its-phases.html</loc>
+        <lastmod>2026-09-04</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
         <loc>https://www.moonlightmoments.org/pages/blog-posts/how-to-observe-mars-and-its-ice-caps.html</loc>
         <lastmod>2026-09-03</lastmod>
         <changefreq>monthly</changefreq>
