@@ -99,11 +99,13 @@ function adsenseTag() {
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>`;
 }
 
-function wrapFragment(content, meta, title, date, imageUrl, imageTitle) {
+function wrapFragment(content, meta, title, date, imageUrl, imageTitle, filename) {
   const pageTitle = title || 'Blog Post';
   const topic = meta.topic || pageTitle;
   const fallback = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
   const heroImg = imageUrl || fallback;
+  const canonicalUrl = `https://www.moonlightmoments.org/pages/blog-posts/${filename || ''}`;
+  const excerpt = meta.description || extractExcerpt(content);
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -113,9 +115,48 @@ function wrapFragment(content, meta, title, date, imageUrl, imageTitle) {
     <title>${pageTitle} | Moonlight Moments</title>
     <meta name="description" content="${meta.description || `Explore ${topic} with Moonlight Moments.`}">
     <meta name="keywords" content="${topic}, astronomy, space science, cosmos">
+    <meta name="author" content="Moonlight Moments Team">
+    <meta name="robots" content="index, follow">
+    ${filename ? `<link rel="canonical" href="${canonicalUrl}">` : ''}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    ${filename ? `<meta property="og:url" content="${canonicalUrl}">` : ''}
     <meta property="og:title" content="${pageTitle}">
     <meta property="og:description" content="${meta.description || `Explore ${topic} with Moonlight Moments.`}">
     <meta property="og:image" content="${heroImg}">
+    <meta property="og:site_name" content="Moonlight Moments">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${pageTitle}">
+    <meta name="twitter:description" content="${meta.description || `Explore ${topic} with Moonlight Moments.`}">
+    <meta name="twitter:image" content="${heroImg}">
+
+    <!-- Schema.org JSON-LD Article Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "${pageTitle.replace(/"/g, '\\"')}",
+      "image": "${heroImg}",
+      "author": {
+        "@type": "Organization",
+        "name": "Moonlight Moments"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Moonlight Moments",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.moonlightmoments.org/assets/img/logo.png"
+        }
+      },
+      "datePublished": "${new Date().toISOString().split('T')[0]}",
+      "description": "${excerpt.replace(/"/g, '\\"')}"
+    }
+    </script>
+
     <link rel="icon" type="image/png" href="../../assets/img/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/base.css">
@@ -344,7 +385,7 @@ function publish() {
     imageUrl = extracted.imageUrl;
     date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     const bodyContent = extractBodyContent(raw);
-    fs.writeFileSync(outputPath, wrapFragment(bodyContent, meta, title, date, imageUrl, title || ''));
+    fs.writeFileSync(outputPath, wrapFragment(bodyContent, meta, title, date, imageUrl, title || '', outputFilename));
   } else {
     // Try front matter, fall back to treating whole file as a fragment
     const parsed = tryParseFrontMatter(raw);
@@ -355,14 +396,14 @@ function publish() {
       excerpt = meta.excerpt || extractExcerpt(content);
       imageUrl = meta.imageUrl || '';
       date = meta.date || new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-      fs.writeFileSync(outputPath, wrapFragment(content, meta, title, date, imageUrl, meta.imageTitle || title || ''));
+      fs.writeFileSync(outputPath, wrapFragment(content, meta, title, date, imageUrl, meta.imageTitle || title || '', outputFilename));
     } else {
       // Plain fragment, no front matter
       title = extractTitle(raw);
       excerpt = extractExcerpt(raw);
       imageUrl = '';
       date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-      fs.writeFileSync(outputPath, wrapFragment(raw, meta, title, date, imageUrl, title || ''));
+      fs.writeFileSync(outputPath, wrapFragment(raw, meta, title, date, imageUrl, title || '', outputFilename));
     }
   }
 
@@ -378,6 +419,22 @@ function publish() {
     excerpt: excerpt || '',
   });
   console.log('[Publish] 📋 blog-index.json updated');
+
+  try {
+    const { prerenderBlog } = require('./prerender-blog');
+    prerenderBlog();
+    console.log('[Publish] 🚀 pages/blog.html pre-rendered for SEO indexing');
+  } catch (err) {
+    console.warn('Could not prerender blog.html:', err.message);
+  }
+
+  try {
+    const { syncSitemap } = require('./update-sitemap');
+    syncSitemap();
+    console.log('[Publish] 🗺️  sitemap.xml synchronized');
+  } catch (err) {
+    console.warn('Could not update sitemap.xml:', err.message);
+  }
 
   fs.unlinkSync(draftPath);
   console.log(`[Publish] 🗑️  Draft removed: drafts/${draftFilename}`);

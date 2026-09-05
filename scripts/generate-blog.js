@@ -172,9 +172,12 @@ function updateIndex(entry) {
   fs.writeFileSync(INDEX_FILE, JSON.stringify(index, null, 2));
 }
 
-function formatBlogContent(content, topic, title, imageUrl, imageTitle, date) {
+function formatBlogContent(content, topic, title, imageUrl, imageTitle, date, filename) {
   const pageTitle = title || topic;
   const fallback = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
+  const heroImg = imageUrl || fallback;
+  const canonicalUrl = `https://www.moonlightmoments.org/pages/blog-posts/${filename}`;
+  const excerpt = extractExcerpt(content);
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -184,9 +187,48 @@ function formatBlogContent(content, topic, title, imageUrl, imageTitle, date) {
     <title>${pageTitle} | Moonlight Moments</title>
     <meta name="description" content="Explore ${topic} with Moonlight Moments — an in-depth astronomy blog covering the cosmos.">
     <meta name="keywords" content="${topic}, astronomy, space science, nasa, exploration, cosmos">
+    <meta name="author" content="Moonlight Moments Team">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="${canonicalUrl}">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="${canonicalUrl}">
     <meta property="og:title" content="${pageTitle}">
     <meta property="og:description" content="Explore ${topic} with Moonlight Moments.">
-    <meta property="og:image" content="${imageUrl}">
+    <meta property="og:image" content="${heroImg}">
+    <meta property="og:site_name" content="Moonlight Moments">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${pageTitle}">
+    <meta name="twitter:description" content="Explore ${topic} with Moonlight Moments.">
+    <meta name="twitter:image" content="${heroImg}">
+
+    <!-- Schema.org JSON-LD Article Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "${pageTitle.replace(/"/g, '\\"')}",
+      "image": "${heroImg}",
+      "author": {
+        "@type": "Organization",
+        "name": "Moonlight Moments"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Moonlight Moments",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.moonlightmoments.org/assets/img/logo.png"
+        }
+      },
+      "datePublished": "${new Date().toISOString().split('T')[0]}",
+      "description": "${excerpt.replace(/"/g, '\\"')}"
+    }
+    </script>
+
     <link rel="icon" type="image/png" href="../../assets/img/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/base.css">
@@ -409,11 +451,28 @@ async function generateBlog() {
 
     if (!fs.existsSync(BLOG_DIR)) fs.mkdirSync(BLOG_DIR, { recursive: true });
 
-    fs.writeFileSync(filepath, formatBlogContent(content, topic, title, image.url, image.title, date));
+    fs.writeFileSync(filepath, formatBlogContent(content, topic, title, image.url, image.title, date, filename));
     console.log(`✅ Blog post created: pages/blog-posts/${filename}`);
 
     updateIndex({ filename, topic, title: title || topic, date, timestamp, imageUrl: image.url, excerpt });
     console.log(`📋 blog-index.json updated`);
+
+    try {
+      const { prerenderBlog } = require('./prerender-blog');
+      prerenderBlog();
+      console.log(`🚀 pages/blog.html pre-rendered for SEO indexing`);
+    } catch (err) {
+      console.warn('Could not prerender blog.html:', err.message);
+    }
+
+    try {
+      const { syncSitemap } = require('./update-sitemap');
+      syncSitemap();
+      console.log(`🗺️  sitemap.xml synchronized`);
+    } catch (err) {
+      console.warn('Could not update sitemap.xml:', err.message);
+    }
+
     console.log(`\n✨ Blog generation complete!\n`);
 
   } catch (error) {

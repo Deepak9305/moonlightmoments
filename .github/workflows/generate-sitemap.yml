@@ -17,7 +17,7 @@ jobs:
 
       - name: Generate sitemap.xml
         run: |
-          BASE_URL="https://www.moonlightmoments.co.in"
+          BASE_URL="https://www.moonlightmoments.org"
           TODAY=$(date -u +%Y-%m-%d)
 
           {
@@ -37,8 +37,8 @@ jobs:
                     changefreq="daily"
                   elif [[ "$file" == pages/blog-posts/* ]]; then
                     url="${BASE_URL}/${file}"
-                    priority="0.6"
-                    changefreq="never"
+                    priority="0.7"
+                    changefreq="monthly"
                   elif [[ "$file" == pages/* ]]; then
                     url="${BASE_URL}/${file}"
                     priority="0.8"

@@ -31,3 +31,17 @@ if (index.posts.length === before) {
 
 fs.writeFileSync(indexPath, JSON.stringify(index, null, 2) + '\n');
 console.log('blog-index.json updated.');
+
+try {
+  const { removeSitemapEntry } = require('./update-sitemap');
+  removeSitemapEntry(filename);
+} catch (err) {
+  console.warn('Could not update sitemap.xml:', err.message);
+}
+
+try {
+  const { prerenderBlog } = require('./prerender-blog');
+  prerenderBlog();
+} catch (err) {
+  console.warn('Could not prerender blog.html:', err.message);
+}

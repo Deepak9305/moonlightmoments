@@ -566,3 +566,125 @@
     transform: translateX(4px);
 }
 
+/* --- Featured Stargazing Guides Section --- */
+.featured-guides-section {
+    padding: 20px 8% 100px;
+    max-width: 1360px;
+    margin: 0 auto;
+}
+
+.featured-guides-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.featured-guide-card {
+    background: rgba(16, 16, 26, 0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(167, 139, 250, 0.15);
+    border-radius: 20px;
+    overflow: hidden;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.35s ease;
+}
+
+.featured-guide-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(167, 139, 250, 0.5);
+    box-shadow: 0 20px 45px rgba(167, 139, 250, 0.22);
+}
+
+.guide-card-img-wrap {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+}
+
+.guide-card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.featured-guide-card:hover .guide-card-img-wrap img {
+    transform: scale(1.05);
+}
+
+.guide-card-tag {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(10, 10, 18, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(167, 139, 250, 0.3);
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+.guide-card-content {
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.guide-card-meta {
+    font-size: 0.73rem;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.guide-card-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: #fff;
+    margin-bottom: 10px;
+    line-height: 1.35;
+    transition: color 0.2s ease;
+}
+
+.featured-guide-card:hover .guide-card-content h3 {
+    color: #c4b5fd;
+}
+
+.guide-card-content p {
+    color: var(--text-dim);
+    font-size: 0.86rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.guide-cta {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.featured-guide-card:hover .guide-cta {
+    color: #fff;
+    transform: translateX(4px);
+}
+
+.guides-footer-cta {
+    text-align: center;
+}
+
+

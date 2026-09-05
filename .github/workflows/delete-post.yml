@@ -31,6 +31,6 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "Blog Bot"
-          git add pages/blog-posts/ pages/blog-index.json
+          git add pages/blog-posts/ pages/blog-index.json pages/blog.html sitemap.xml
           git commit -m "blog: delete ${{ github.event.inputs.filename }}"
           git push origin main

@@ -50,6 +50,6 @@ jobs:
           SLUG=$(basename "$NEW_FILE" .html)
           TITLE="${SLUG//-/ }"
 
-          git add pages/blog-posts/ pages/blog-index.json
+          git add pages/blog-posts/ pages/blog-index.json pages/blog.html sitemap.xml
           git commit -m "blog: ${TITLE}"
           git push origin main
