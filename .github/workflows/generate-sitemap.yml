@@ -1,6 +1,13 @@
 name: Generate Sitemap
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'pages/**/*.html'
+      - 'pages/blog-index.json'
+      - 'scripts/update-sitemap.js'
   workflow_dispatch:
 
 jobs:
@@ -15,56 +22,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Generate sitemap.xml
-        run: |
-          BASE_URL="https://www.moonlightmoments.org"
-          TODAY=$(date -u +%Y-%m-%d)
-
-          {
-            echo '<?xml version="1.0" encoding="UTF-8"?>'
-            echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
-
-            find . -name "*.html" \
-              ! -path "./.git/*" \
-              ! -path "./node_modules/*" \
-              | sort \
-              | while read -r file; do
-                  file="${file#./}"
-
-                  if [ "$file" = "index.html" ]; then
-                    url="${BASE_URL}/"
-                    priority="1.0"
-                    changefreq="daily"
-                  elif [[ "$file" == pages/blog-posts/* ]]; then
-                    url="${BASE_URL}/${file}"
-                    priority="0.7"
-                    changefreq="monthly"
-                  elif [[ "$file" == pages/* ]]; then
-                    url="${BASE_URL}/${file}"
-                    priority="0.8"
-                    changefreq="weekly"
-                  else
-                    url="${BASE_URL}/${file}"
-                    priority="0.7"
-                    changefreq="monthly"
-                  fi
-
-                  lastmod=$(git log -1 --format="%ai" -- "$file" 2>/dev/null | cut -d' ' -f1)
-                  [ -z "$lastmod" ] && lastmod="$TODAY"
-
-                  echo "    <url>"
-                  echo "        <loc>${url}</loc>"
-                  echo "        <lastmod>${lastmod}</lastmod>"
-                  echo "        <changefreq>${changefreq}</changefreq>"
-                  echo "        <priority>${priority}</priority>"
-                  echo "    </url>"
-              done
-
-            echo '</urlset>'
-          } > sitemap.xml
-
-          echo "Generated sitemap.xml:"
-          cat sitemap.xml
+        run: node scripts/update-sitemap.js
 
       - name: Commit and push if changed
         run: |
@@ -72,7 +36,7 @@ jobs:
           git config --local user.name "Sitemap Generator Bot"
 
           if git diff --quiet sitemap.xml; then
-            echo "Sitemap unchanged — nothing to commit"
+            echo "Sitemap unchanged; nothing to commit"
           else
             git add sitemap.xml
             git commit -m "chore: regenerate sitemap"

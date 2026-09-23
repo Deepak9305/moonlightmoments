@@ -67,7 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const birthInput = document.getElementById('birthdate');
             if (birthInput) {
-                birthInput.value = d.toISOString().split('T')[0];
+                const localYear = d.getFullYear();
+                const localMonth = String(d.getMonth() + 1).padStart(2, '0');
+                const localDay = String(d.getDate()).padStart(2, '0');
+                birthInput.value = `${localYear}-${localMonth}-${localDay}`;
             }
             initializeSync();
         });
@@ -107,16 +110,18 @@ function initializeSync() {
         return;
     }
 
-    const birthDate = new Date(d);
+    const [birthYear, birthMonth, birthDay] = d.split('-').map(Number);
+    const birthDate = Date.UTC(birthYear, birthMonth - 1, birthDay);
     const today = new Date();
-    if (birthDate > today) {
+    const todayUtc = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+    if (birthDate > todayUtc) {
         showToast("Birth date cannot be in the future.");
         return;
     }
 
     if (!res || !actions) return;
 
-    const diffDays = Math.floor((today - birthDate) / 86400000);
+    const diffDays = Math.floor((todayUtc - birthDate) / 86400000);
     res.innerHTML = '';
 
     planetDB.forEach((p, i) => {
@@ -140,7 +145,7 @@ function initializeSync() {
             </div>
             
             <div class="stat-group">
-                <div class="stat-label">Cosmic Mass</div>
+                <div class="stat-label">Estimated Weight Equivalent</div>
                 <div class="stat-val">${weightOnPlanet} <small>${unitLabel}</small></div>
             </div>
 

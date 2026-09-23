@@ -48,6 +48,11 @@ function resolveCardImg(url, filename) {
   return url;
 }
 
+function escapeHtml(value) {
+  const entities = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+  return String(value ?? '').replace(/[&<>"']/g, char => entities[char]);
+}
+
 function prerenderBlog() {
   const blogData = JSON.parse(fs.readFileSync(INDEX_JSON, 'utf8'));
   const posts = blogData.posts;
@@ -55,24 +60,27 @@ function prerenderBlog() {
   const staticCardsHtml = posts.map(post => {
     const cat = getCategory(post);
     const readTime = estimateReadTime(post);
-    const img = resolveCardImg(post.imageUrl, post.filename);
-    const fallback = getCardFallback(post.filename);
-    const excerpt = post.excerpt || `Read this in-depth scientific exploration on ${post.topic || 'the cosmos'}.`;
+    const img = escapeHtml(resolveCardImg(post.imageUrl, post.filename));
+    const fallback = escapeHtml(getCardFallback(post.filename));
+    const title = escapeHtml(post.title);
+    const date = escapeHtml(post.date);
+    const excerpt = escapeHtml(post.excerpt || `Read this in-depth scientific exploration on ${post.topic || 'the cosmos'}.`);
+    const href = `blog-posts/${encodeURIComponent(post.filename)}`;
 
     return `
             <article class="blog-card" data-category="${cat.slug}">
                 <div class="blog-img-wrap">
                     <span class="blog-card-category">${cat.label}</span>
-                    <img src="${img}" alt="${post.title}" loading="lazy" onerror="this.src='${fallback}'">
+                    <img src="${img}" alt="${title}" loading="lazy" onerror="this.onerror=null;this.src='${fallback}'">
                 </div>
                 <div class="blog-content">
                     <div class="blog-meta">
-                        <span>✦ ${post.date}</span>
+                        <span>✦ ${date}</span>
                     </div>
-                    <h2>${post.title}</h2>
+                    <h2>${title}</h2>
                     <p class="blog-excerpt">${excerpt}</p>
                     <div class="blog-card-footer">
-                        <a href="blog-posts/${post.filename}" class="read-more">CONTINUE READING</a>
+                        <a href="${href}" class="read-more">CONTINUE READING</a>
                         <span class="read-time">${readTime}</span>
                     </div>
                 </div>
@@ -81,22 +89,25 @@ function prerenderBlog() {
 
   let blogHtml = fs.readFileSync(BLOG_HTML, 'utf8');
 
-  // Replace #blog-grid content with static cards
-  blogHtml = blogHtml.replace(
-    /<div id="blog-grid" class="blog-grid" aria-live="polite">[\s\S]*?<\/div>/i,
-    `<div id="blog-grid" class="blog-grid" aria-live="polite">${staticCardsHtml}\n        </div>`
-  );
+  const startMarker = '<!-- BLOG_CARDS_START -->';
+  const endMarker = '<!-- BLOG_CARDS_END -->';
+  const start = blogHtml.indexOf(startMarker);
+  const end = blogHtml.indexOf(endMarker, start + startMarker.length);
+  if (start < 0 || end < 0) {
+    throw new Error('Expected BLOG_CARDS_START and BLOG_CARDS_END markers in pages/blog.html');
+  }
+  blogHtml = `${blogHtml.slice(0, start + startMarker.length)}\n${staticCardsHtml}\n            ${blogHtml.slice(end)}`;
 
   // Update initial JS in blog.html to embed initial posts so loading indicator is not needed
   blogHtml = blogHtml.replace(
     /let allPosts = \[.*?\];/s,
-    `let allPosts = ${JSON.stringify(posts)};`
+    `let allPosts = ${JSON.stringify(posts).replace(/<\/script/gi, '<\\/script')};`
   );
 
   // Update counter initially
   blogHtml = blogHtml.replace(
-    /<span id="results-counter">✦ Showing [^<]*<\/span>/,
-    `<span id="results-counter">✦ Showing all ${posts.length} articles</span>`
+    /<span id="results-counter">[^<]*Showing[^<]*<\/span>/,
+    `<span id="results-counter">Showing all ${posts.length} articles</span>`
   );
 
   fs.writeFileSync(BLOG_HTML, blogHtml, 'utf8');

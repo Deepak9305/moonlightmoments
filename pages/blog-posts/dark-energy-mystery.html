@@ -4,15 +4,15 @@
     <meta name="robots" content="index, follow">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmic Enigma: Unraveling the Dark Energy Mystery That's Rewriting the Universe | Moonlight Moments</title>
-    <meta name="description" content="What is driving the universe apart? Explore the dark energy mystery, the 1998 supernova discovery, and how next-gen telescopes are rewriting the cosmos.">
+    <title>Dark Energy: Why the Universe Expands | Moonlight Moments</title>
+    <meta name="description" content="Learn how distant supernova observations revealed cosmic acceleration and how astronomers study dark energy today.">
     <meta name="keywords" content="dark energy mystery, accelerating universe, Vera Rubin Observatory, Euclid telescope, astronomy, space science, cosmos">
     <meta name="author" content="Moonlight Moments Team">
 
     <!-- Open Graph Meta Tags -->
     <link rel="canonical" href="https://www.moonlightmoments.org/pages/blog-posts/dark-energy-mystery.html">
-    <meta property="og:title" content="Cosmic Enigma: Unraveling the Dark Energy Mystery That's Rewriting the Universe">
-    <meta property="og:description" content="For decades, we thought the universe's expansion was slowing down. We were wrong. Dive into the biggest unsolved mystery in astrophysics.">
+    <meta property="og:title" content="Dark Energy: Why the Universe Expands | Moonlight Moments">
+    <meta property="og:description" content="Learn how distant supernova observations revealed cosmic acceleration and how astronomers study dark energy today.">
     <meta property="og:image" content="https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000995/GSFC_20171208_Archive_e000995~small.jpg">
     <meta property="og:url" content="https://www.moonlightmoments.org/pages/blog-posts/dark-energy-mystery.html">
     <meta property="og:type" content="article">
@@ -24,26 +24,26 @@
 
     <!-- JSON-LD Structured Data for SEO -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": "Cosmic Enigma: Unraveling the Dark Energy Mystery That's Rewriting the Universe",
-      "image": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000995/GSFC_20171208_Archive_e000995~small.jpg",
-      "author": {
-        "@type": "Organization",
-        "name": "Moonlight Moments"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Moonlight Moments",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://www.moonlightmoments.org/assets/img/logo.png"
-        }
-      },
-      "datePublished": "2026-04-28",
-      "description": "What is driving the universe apart? Explore the dark energy mystery, the 1998 supernova discovery, and how next-gen telescopes are rewriting the cosmos."
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Cosmic Enigma: Unraveling the Dark Energy Mystery That's Rewriting the Universe",
+  "image": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000995/GSFC_20171208_Archive_e000995~small.jpg",
+  "author": {
+    "@type": "Organization",
+    "name": "Moonlight Moments"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Moonlight Moments",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.moonlightmoments.org/assets/img/logo.png"
     }
+  },
+  "datePublished": "2026-04-28",
+  "description": "Learn how distant supernova observations revealed cosmic acceleration and how astronomers study dark energy today."
+}
     </script>
 
     <style>
@@ -252,6 +252,9 @@
             .legal-close-span { top: 16px; right: 16px; font-size: 2rem; }
         }
     </style>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dark Energy: Why the Universe Expands | Moonlight Moments">
+    <meta name="twitter:description" content="Learn how distant supernova observations revealed cosmic acceleration and how astronomers study dark energy today.">
 </head>
 <body>
     <div class="reading-progress" id="reading-progress"></div>
@@ -335,6 +338,14 @@
             <p>Together, these observatories will let us test whether dark energy has stayed constant since the beginning — or whether it's been shifting, evolving, doing something we haven't accounted for. That difference matters enormously.</p>
 
             <p>Because this isn't just about satisfying scientific curiosity. The nature of dark energy determines the fate of everything. A Big Freeze. A Big Rip. Or maybe something we don't have a name for yet — some twist in the physics that changes the picture entirely. The answer is out there, buried in the dark, waiting for us to ask the right question in the right way.</p>
+
+            <section class="post-sources" aria-labelledby="post-sources-heading">
+                <h2 id="post-sources-heading">Sources &amp; Further Reading</h2>
+                <ul>
+                <li><a href="https://science.nasa.gov/dark-energy/" target="_blank" rel="noopener noreferrer">NASA: What Is Dark Energy?</a></li>
+                <li><a href="https://science.nasa.gov/mission/hubble/science/science-behind-the-discoveries/hubble-dark-energy/" target="_blank" rel="noopener noreferrer">NASA Hubble: Supernova Evidence for Cosmic Acceleration</a></li>
+                </ul>
+            </section>
         </div>
 
         <div class="post-footer">
@@ -416,7 +427,7 @@
 
                 grid.innerHTML = picks.map(p => `
                     <a href="${p.filename}" class="related-card">
-                        <img src="${p.imageUrl || fallback}" alt="${p.title}"
+                        <img src="${p.imageUrl ? p.imageUrl.replace(/^\.\.\/assets\//, '../../assets/').replace(/^assets\//, '../../assets/') : fallback}" alt="${p.title}"
                              onerror="this.src='${fallback}'" loading="lazy">
                         <div class="related-card-body">
                             <h4>${p.title}</h4>
