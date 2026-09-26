@@ -5,7 +5,53 @@ document.addEventListener('DOMContentLoaded', () => {
     setupMobileMenu();
     setupHovers();
     setupLegalModals();
+    setupResponsiveBlogImages();
 });
+
+function setupResponsiveBlogImages() {
+    const localImageNames = new Set([
+        'venus-telescope-guide-hero.jpg',
+        'mars-telescope-guide-hero.jpg',
+        'jupiter-telescope-guide-hero.jpg',
+        'saturn-telescope-guide-hero.jpg',
+        'meteor-shower-guide-hero.jpg'
+    ]);
+
+    function webpUrl(src) {
+        if (!src) return null;
+        const cleanSrc = src.split(/[?#]/, 1)[0];
+        const filename = cleanSrc.slice(cleanSrc.lastIndexOf('/') + 1).toLowerCase();
+        if (!localImageNames.has(filename)) return null;
+        return src.replace(/\.jpg(?=([?#]|$))/i, '.webp');
+    }
+
+    function wrapImage(img) {
+        if (!img || img.parentElement?.tagName === 'PICTURE') return;
+        const webp = webpUrl(img.getAttribute('src'));
+        if (!webp || !img.parentNode) return;
+
+        const picture = document.createElement('picture');
+        const source = document.createElement('source');
+        source.type = 'image/webp';
+        source.srcset = webp;
+        picture.appendChild(source);
+        img.parentNode.insertBefore(picture, img);
+        picture.appendChild(img);
+    }
+
+    function scan(root) {
+        if (root?.matches?.('img')) wrapImage(root);
+        root?.querySelectorAll?.('img[src]').forEach(wrapImage);
+    }
+
+    scan(document);
+    const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => mutation.addedNodes.forEach(node => {
+            if (node.nodeType === Node.ELEMENT_NODE) scan(node);
+        }));
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+}
 
 function setupCursor() {
     const cursor = document.getElementById('cursor-ring') || document.getElementById('cursor');

@@ -4,6 +4,7 @@ const path = require('path');
 const BLOG_HTML = path.join(__dirname, '../pages/blog.html');
 const INDEX_JSON = path.join(__dirname, '../pages/blog-index.json');
 const { categoryForTopic, normalizeCategory } = require('./blog-taxonomy');
+const { responsiveImageMarkup } = require('./blog-image-utils');
 
 const blogData = JSON.parse(fs.readFileSync(INDEX_JSON, 'utf8'));
 const posts = blogData.posts;
@@ -58,11 +59,17 @@ function prerenderBlog() {
     const excerpt = escapeHtml(post.excerpt || `Read this in-depth scientific exploration on ${post.topic || 'the cosmos'}.`);
     const href = `blog-posts/${encodeURIComponent(post.filename)}`;
 
+    const image = responsiveImageMarkup({
+      src: img,
+      alt: title,
+      attrs: ` loading="lazy" onerror="this.onerror=null;this.src='${fallback}'"`,
+    });
+
     return `
             <article class="blog-card" data-category="${cat.slug}">
                 <div class="blog-img-wrap">
                     <span class="blog-card-category">${cat.label}</span>
-                    <img src="${img}" alt="${title}" loading="lazy" onerror="this.onerror=null;this.src='${fallback}'">
+                    ${image}
                 </div>
                 <div class="blog-content">
                     <div class="blog-meta">

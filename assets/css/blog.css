@@ -191,6 +191,13 @@
     transition: transform 0.8s ease, filter 0.8s ease;
 }
 
+.blog-img-wrap picture,
+.related-card picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
 .blog-card:hover .blog-img-wrap img {
     transform: scale(1.08);
 }

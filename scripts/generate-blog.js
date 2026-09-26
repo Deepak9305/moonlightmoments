@@ -6,6 +6,7 @@ const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const INPUT_TOPIC = process.env.TOPIC || '';
 const INPUT_CATEGORY = process.env.CATEGORY || '';
 const { categoryForTopic, normalizeCategory } = require('./blog-taxonomy');
+const { responsiveImageMarkup } = require('./blog-image-utils');
 
 // The default queue is intentionally ordered. The next run takes the first
 // topic that has not been generated yet, so the editorial sequence is stable.
@@ -215,6 +216,11 @@ function formatBlogContent(content, topic, title, imageUrl, imageTitle, date, fi
   const pageTitle = title || topic;
   const fallback = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
   const heroImg = imageUrl || fallback;
+  const heroMarkup = responsiveImageMarkup({
+    src: heroImg,
+    alt: imageTitle,
+    attrs: ` class="blog-post-featured-img" onerror="this.src='${fallback}'"`,
+  });
   const canonicalUrl = `https://www.moonlightmoments.org/pages/blog-posts/${filename}`;
   const excerpt = extractExcerpt(content);
   const categoryInfo = normalizeCategory(category) || categoryForTopic(topic);
@@ -294,6 +300,7 @@ function formatBlogContent(content, topic, title, imageUrl, imageTitle, date, fi
             width: 100%; max-height: 440px; object-fit: cover;
             border-radius: 16px; margin: 0 0 36px; display: block;
         }
+        .blog-post-container > picture { display: block; }
         .blog-post-content { line-height: 1.85; color: var(--text-color); }
         .blog-post-content h1 {
             font-family: 'Playfair Display', serif;
@@ -406,8 +413,7 @@ function formatBlogContent(content, topic, title, imageUrl, imageTitle, date, fi
             <span>✦ ${categoryInfo.label}</span>
         </div>
 
-        <img src="${imageUrl}" alt="${imageTitle}" class="blog-post-featured-img"
-             onerror="this.src='${fallback}'">
+        ${heroMarkup}
 
         <div class="blog-post-content">
             ${content}

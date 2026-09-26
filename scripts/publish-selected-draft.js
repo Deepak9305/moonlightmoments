@@ -8,6 +8,7 @@ const DRAFTS_DIR = path.join(__dirname, '../drafts');
 const BLOG_DIR = path.join(__dirname, '../pages/blog-posts');
 const INDEX_FILE = path.join(__dirname, '../pages/blog-index.json');
 const { categoryForTopic, normalizeCategory } = require('./blog-taxonomy');
+const { responsiveImageMarkup } = require('./blog-image-utils');
 
 function selectDraft() {
   if (DRAFT_FILE) return DRAFT_FILE;
@@ -105,6 +106,11 @@ function wrapFragment(content, meta, title, date, imageUrl, imageTitle, filename
   const topic = meta.topic || pageTitle;
   const fallback = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
   const heroImg = imageUrl || fallback;
+  const heroMarkup = responsiveImageMarkup({
+    src: heroImg,
+    alt: imageTitle || topic,
+    attrs: ` class="blog-post-featured-img" onerror="this.src='${fallback}'"`,
+  });
   const canonicalUrl = `https://www.moonlightmoments.org/pages/blog-posts/${filename || ''}`;
   const excerpt = meta.description || extractExcerpt(content);
   const category = normalizeCategory(meta.category) || categoryForTopic(topic);
@@ -183,6 +189,7 @@ function wrapFragment(content, meta, title, date, imageUrl, imageTitle, filename
             width: 100%; max-height: 440px; object-fit: cover;
             border-radius: 16px; margin: 0 0 36px; display: block;
         }
+        .blog-post-container > picture { display: block; }
         .blog-post-content { line-height: 1.85; color: var(--text-color); }
         .blog-post-content h1 {
             font-family: 'Playfair Display', serif;
@@ -295,8 +302,7 @@ function wrapFragment(content, meta, title, date, imageUrl, imageTitle, filename
             <span>✦ ${category.label}</span>
         </div>
 
-        <img src="${heroImg}" alt="${imageTitle || topic}" class="blog-post-featured-img"
-             onerror="this.src='${fallback}'">
+        ${heroMarkup}
 
         <div class="blog-post-content">
             ${content}

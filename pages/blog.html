@@ -173,7 +173,7 @@
             <article class="blog-card" data-category="stargazing">
                 <div class="blog-img-wrap">
                     <span class="blog-card-category">Stargazing & Eclipses</span>
-                    <img src="../assets/img/venus-telescope-guide-hero.jpg" alt="How to Observe Venus &amp; Its Phases: The Ultimate Backyard Telescope &amp; Stargazing Guide" loading="lazy" onerror="this.onerror=null;this.src='https://images-assets.nasa.gov/image/PIA00104/PIA00104~medium.jpg'">
+                    <picture><source srcset="../assets/img/venus-telescope-guide-hero.webp" type="image/webp"><img src="../assets/img/venus-telescope-guide-hero.jpg" alt="How to Observe Venus &amp; Its Phases: The Ultimate Backyard Telescope &amp; Stargazing Guide" loading="lazy" onerror="this.onerror=null;this.src='https://images-assets.nasa.gov/image/PIA00104/PIA00104~medium.jpg'"></picture>
                 </div>
                 <div class="blog-content">
                     <div class="blog-meta">
@@ -191,7 +191,7 @@
             <article class="blog-card" data-category="stargazing">
                 <div class="blog-img-wrap">
                     <span class="blog-card-category">Stargazing & Eclipses</span>
-                    <img src="../assets/img/mars-telescope-guide-hero.jpg" alt="How to Observe Mars &amp; Its Polar Ice Caps: The Ultimate Backyard Telescope &amp; Stargazing Guide" loading="lazy" onerror="this.onerror=null;this.src='https://images-assets.nasa.gov/image/PIA04591/PIA04591~medium.jpg'">
+                    <picture><source srcset="../assets/img/mars-telescope-guide-hero.webp" type="image/webp"><img src="../assets/img/mars-telescope-guide-hero.jpg" alt="How to Observe Mars &amp; Its Polar Ice Caps: The Ultimate Backyard Telescope &amp; Stargazing Guide" loading="lazy" onerror="this.onerror=null;this.src='https://images-assets.nasa.gov/image/PIA04591/PIA04591~medium.jpg'"></picture>
                 </div>
                 <div class="blog-content">
                     <div class="blog-meta">
@@ -209,7 +209,7 @@
             <article class="blog-card" data-category="stargazing">
                 <div class="blog-img-wrap">
                     <span class="blog-card-category">Stargazing & Eclipses</span>
-                    <img src="../assets/img/jupiter-telescope-guide-hero.jpg" alt="How to Observe Jupiter &amp; Its Moons: The Ultimate Backyard Telescope &amp; Stargazing Guide" loading="lazy" onerror="this.onerror=null;this.src='https://images-assets.nasa.gov/image/PIA02873/PIA02873~medium.jpg'">
+                    <picture><source srcset="../assets/img/jupiter-telescope-guide-hero.webp" type="image/webp"><img src="../assets/img/jupiter-telescope-guide-hero.jpg" alt="How to Observe Jupiter &amp; Its Moons: The Ultimate Backyard Telescope &amp; Stargazing Guide" loading="lazy" onerror="this.onerror=null;this.src='https://images-assets.nasa.gov/image/PIA02873/PIA02873~medium.jpg'"></picture>
                 </div>
                 <div class="blog-content">
                     <div class="blog-meta">
@@ -227,7 +227,7 @@
             <article class="blog-card" data-category="stargazing">
                 <div class="blog-img-wrap">
                     <span class="blog-card-category">Stargazing & Eclipses</span>
-                    <img src="../assets/img/saturn-telescope-guide-hero.jpg" alt="How to Observe Saturn &amp; Its Rings: The Ultimate Backyard Telescope &amp; Stargazing Guide" loading="lazy" onerror="this.onerror=null;this.src='https://images-assets.nasa.gov/image/PIA09931/PIA09931~medium.jpg'">
+                    <picture><source srcset="../assets/img/saturn-telescope-guide-hero.webp" type="image/webp"><img src="../assets/img/saturn-telescope-guide-hero.jpg" alt="How to Observe Saturn &amp; Its Rings: The Ultimate Backyard Telescope &amp; Stargazing Guide" loading="lazy" onerror="this.onerror=null;this.src='https://images-assets.nasa.gov/image/PIA09931/PIA09931~medium.jpg'"></picture>
                 </div>
                 <div class="blog-content">
                     <div class="blog-meta">
@@ -245,7 +245,7 @@
             <article class="blog-card" data-category="stargazing">
                 <div class="blog-img-wrap">
                     <span class="blog-card-category">Stargazing & Eclipses</span>
-                    <img src="../assets/img/meteor-shower-guide-hero.jpg" alt="How to Watch a Meteor Shower: The Ultimate Stargazing &amp; Peak Viewing Guide" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&amp;fit=crop&amp;w=800&amp;q=80'">
+                    <picture><source srcset="../assets/img/meteor-shower-guide-hero.webp" type="image/webp"><img src="../assets/img/meteor-shower-guide-hero.jpg" alt="How to Watch a Meteor Shower: The Ultimate Stargazing &amp; Peak Viewing Guide" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&amp;fit=crop&amp;w=800&amp;q=80'"></picture>
                 </div>
                 <div class="blog-content">
                     <div class="blog-meta">
@@ -548,6 +548,22 @@
                 return url;
             }
 
+            function getLocalWebpUrl(url) {
+                if (!url) return null;
+                const cleanUrl = url.split(/[?#]/, 1)[0];
+                const filename = cleanUrl.slice(cleanUrl.lastIndexOf('/') + 1).toLowerCase();
+                if (!/^(venus|mars|jupiter|saturn)-telescope-guide-hero\.jpg$|^meteor-shower-guide-hero\.jpg$/.test(filename)) return null;
+                return url.replace(/\.jpg(?=([?#]|$))/i, '.webp');
+            }
+
+            function renderCardImage(url, fallback, alt) {
+                const webp = getLocalWebpUrl(url);
+                const image = `<img src="${url}" alt="${alt}" loading="lazy" onerror="this.onerror=null;this.src='${fallback}'">`;
+                return webp
+                    ? `<picture><source srcset="${webp}" type="image/webp">${image}</picture>`
+                    : image;
+            }
+
             function renderCard(post) {
                 const cardFallback = getCardFallback(post.filename);
                 const img = resolveCardImg(post.imageUrl, post.filename);
@@ -561,8 +577,7 @@
                 article.innerHTML = `
                     <div class="blog-img-wrap">
                         <span class="blog-card-category">${cat.label}</span>
-                        <img src="${img}" alt="${post.title}" loading="lazy"
-                             onerror="this.src='${cardFallback}'">
+                        ${renderCardImage(img, cardFallback, post.title)}
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
