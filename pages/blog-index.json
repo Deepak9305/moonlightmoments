@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "filename": "auroras-on-other-planets.html",
+      "topic": "auroras on other planets",
+      "category": "planets",
+      "sequence": 1,
+      "title": "Auroras on Other Planets: How Alien Skies Make Their Own Light",
+      "date": "September 26, 2026",
+      "timestamp": 1790410165014,
+      "imageUrl": "https://images-assets.nasa.gov/image/hubble-captures-vivid-auroras-in-jupiters-atmosphere_28000029525_o/hubble-captures-vivid-auroras-in-jupiters-atmosphere_28000029525_o~medium.jpg",
+      "excerpt": "Earth's northern and southern lights are not a one-planet phenomenon. Spacecraft and the Hubble Space Telescope have found auroras on Jupiter, Saturn, Mars, Uranus and even Venus. The light may be ..."
+    },
+    {
       "filename": "how-to-observe-venus-and-its-phases.html",
       "topic": "how to observe venus and its phases",
       "category": "stargazing",
