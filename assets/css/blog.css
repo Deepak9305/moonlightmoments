@@ -290,6 +290,72 @@
     font-size: 0.75rem;
 }
 
+/* --- Internal Tool Promo --- */
+.blog-tool-promo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin: 42px 0 48px;
+    padding: 22px 24px;
+    border: 1px solid rgba(167, 139, 250, 0.32);
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.18), rgba(30, 27, 75, 0.52));
+    box-shadow: 0 14px 36px rgba(15, 10, 45, 0.2);
+}
+
+.blog-tool-promo-label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.blog-tool-promo h2 {
+    margin: 0 0 6px;
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+}
+
+.blog-tool-promo p {
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
+.blog-tool-promo-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.blog-tool-promo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 14px;
+    border: 1px solid rgba(196, 181, 253, 0.5);
+    border-radius: 999px;
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.blog-tool-promo-link:hover {
+    border-color: var(--accent);
+    background: rgba(167, 139, 250, 0.18);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
 /* --- Toast Notification --- */
 .site-toast {
     position: fixed;
@@ -322,6 +388,7 @@
     .blog-grid { grid-template-columns: 1fr; gap: 24px; }
     .blog-img-wrap { height: 190px; }
     .blog-content { padding: 22px; }
+    .blog-tool-promo { align-items: flex-start; flex-direction: column; gap: 16px; }
 }
 
 @media (max-width: 480px) {
@@ -333,4 +400,7 @@
     .blog-content { padding: 18px 16px; }
     .blog-card h2 { font-size: 1.15rem; }
     .blog-excerpt { font-size: 0.84rem; }
+    .blog-tool-promo { margin: 34px 0 40px; padding: 19px; }
+    .blog-tool-promo-actions { width: 100%; }
+    .blog-tool-promo-link { flex: 1; justify-content: center; }
 }

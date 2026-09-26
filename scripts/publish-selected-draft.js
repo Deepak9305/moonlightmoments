@@ -304,6 +304,18 @@ function wrapFragment(content, meta, title, date, imageUrl, imageTitle, filename
 
         ${adsenseTag()}
 
+        <aside class="blog-tool-promo" aria-label="Moonlight Moments interactive tools">
+            <div>
+                <span class="blog-tool-promo-label">Try a Moonlight Moments tool</span>
+                <h2>Explore the sky interactively</h2>
+                <p>Turn this article into a hands-on skywatching session with our free interactive tools.</p>
+            </div>
+            <div class="blog-tool-promo-actions">
+                <a class="blog-tool-promo-link" href="../solar-system.html">3D Solar System <span aria-hidden="true">→</span></a>
+                <a class="blog-tool-promo-link" href="../event.html">Sky Calendar <span aria-hidden="true">→</span></a>
+            </div>
+        </aside>
+
         <div class="post-footer">
             <strong>Author:</strong> ${meta.author || 'Moonlight Moments Team'} &nbsp;·&nbsp;
             <strong>Published:</strong> ${date} &nbsp;·&nbsp;
