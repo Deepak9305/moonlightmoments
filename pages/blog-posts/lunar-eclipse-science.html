@@ -182,7 +182,7 @@
         </div>
 
         <img src="https://images-assets.nasa.gov/image/iss007e05541/iss007e05541~medium.jpg" alt="Views of the Lunar Eclipse taken by the Expedition Seven crew" class="blog-post-featured-img"
-             onerror="this.src='https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800'">
+             onerror="this.src='https://images-assets.nasa.gov/image/NHQ202211080005/NHQ202211080005~medium.jpg'">
 
         <div class="blog-post-content">
             <h1>Unveiling the Mystique of the Moon: A Journey Through Lunar Eclipse Science</h1>
@@ -193,7 +193,7 @@
             <p>Strip it down to basics and a lunar eclipse is Earth doing something remarkably clumsy — sliding directly between the Sun and the Moon and blocking its own light. A giant cosmic photobomb. It only happens during a full moon, and even then, the geometry has to line up just right. Most full moons miss entirely. When it does click into place, though, the show begins.</p>
 
             <!-- IMAGE 1: Shadow / Partial Phase -->
-            <img src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?auto=format&fit=crop&w=800&q=80" alt="Earth's shadow beginning to fall across the lunar surface" style="max-width: 100%; height: auto; border-radius: 12px; margin: 28px 0; display: block;" loading="lazy">
+            <img src="https://images-assets.nasa.gov/image/201012210001HQ/201012210001HQ~medium.jpg" alt="A partial lunar eclipse with Earth's shadow covering part of the Moon" style="max-width: 100%; height: auto; border-radius: 12px; margin: 28px 0; display: block;" loading="lazy">
 
             <p>Depending on how perfectly everything lines up, you get three different versions of this thing:</p>
             <ul>
@@ -206,7 +206,7 @@
             <p>Okay, so here's the part that breaks people's brains a little — in a good way. If Earth is completely blocking the Sun, shouldn't the Moon just go dark? Black? Nothing? Why red?</p>
 
             <!-- IMAGE 2: Blood Moon Phase -->
-            <img src="https://images.unsplash.com/photo-1550684376-efcbd6e3f031?auto=format&fit=crop&w=800&q=80" alt="A brilliant, copper-red total lunar eclipse" style="max-width: 100%; height: auto; border-radius: 12px; margin: 28px 0; display: block;" loading="lazy">
+            <img src="https://images-assets.nasa.gov/image/NHQ202211080005/NHQ202211080005~medium.jpg" alt="A copper-red total lunar eclipse photographed by NASA" style="max-width: 100%; height: auto; border-radius: 12px; margin: 28px 0; display: block;" loading="lazy">
 
             <p>It's our atmosphere. All of it. When sunlight hits the rim of the Earth, the atmosphere acts like a curved lens — bending and filtering the light as it wraps around the planet. The short blue wavelengths scatter off (same reason the daytime sky is blue). But the long, red wavelengths bend inward and get aimed straight at the Moon. So what you're actually seeing up there — that deep, burning red — is the collected light of every sunrise and every sunset happening on Earth right now, all at once, projected onto the face of the Moon. Let that sit for a second.</p>
 
@@ -218,7 +218,7 @@
             <h2>From Ancient Omens to Global Watch Parties</h2>
 
             <!-- IMAGE 3: Stargazing / Silhouette -->
-            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Silhouettes of people gazing up at the night sky" style="max-width: 100%; height: auto; border-radius: 12px; margin: 28px 0; display: block;" loading="lazy">
+            <img src="https://images-assets.nasa.gov/image/GRC-2025-C-01605/GRC-2025-C-01605~medium.jpg" alt="The phases of a total lunar eclipse arranged from full Moon to blood Moon and back" style="max-width: 100%; height: auto; border-radius: 12px; margin: 28px 0; display: block;" loading="lazy">
 
             <p>Without any understanding of orbital physics, this thing was terrifying. The most reliable light in the night sky slowly turning the color of blood, with no warning and no explanation. Ancient cultures shouted at it, banged drums, fired arrows into the dark to drive away whatever was eating the Moon. And honestly — can you blame them? It looks like the world is ending. That gut-drop feeling doesn't fully go away even now, even when you know exactly what's happening.</p>
 
@@ -232,6 +232,7 @@
                 <h2 id="post-sources-heading">Sources &amp; Further Reading</h2>
                 <ul>
                 <li><a href="https://science.nasa.gov/moon/eclipses/" target="_blank" rel="noopener noreferrer">NASA: Eclipses and the Moon</a></li>
+                <li><a href="https://images.nasa.gov/search?search=lunar%20eclipse" target="_blank" rel="noopener noreferrer">NASA Image Library: Lunar Eclipses</a> — Source imagery for the eclipse phases shown in this guide.</li>
                 </ul>
             </section>
         </div>
@@ -307,7 +308,7 @@
             const section = document.getElementById('related-section');
             if (!grid) return;
             const currentFile = location.pathname.split('/').pop();
-            const fallback = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
+            const fallback = 'https://images-assets.nasa.gov/image/iss007e05541/iss007e05541~medium.jpg';
             try {
                 const res = await fetch('../blog-index.json');
                 if (!res.ok) throw new Error();

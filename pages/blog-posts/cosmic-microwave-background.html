@@ -183,7 +183,7 @@
         <img src="https://images-assets.nasa.gov/image/PIA18916/PIA18916~small.jpg" 
              alt="Visual map showing the tiny temperature fluctuations in the Cosmic Microwave Background" 
              class="blog-post-featured-img"
-             onerror="this.src='https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800'">
+             onerror="this.src='https://images-assets.nasa.gov/image/PIA18916/PIA18916~small.jpg'">
 
         <div class="blog-post-content">
             <h1>The Echoes of Eternity: Unraveling the Secrets of the Cosmic Microwave Background</h1>
@@ -303,7 +303,7 @@
             const section = document.getElementById('related-section');
             if (!grid) return;
             const currentFile = location.pathname.split('/').pop();
-            const fallback = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
+            const fallback = 'https://images-assets.nasa.gov/image/PIA18916/PIA18916~small.jpg';
             try {
                 const res = await fetch('../blog-index.json');
                 if (!res.ok) throw new Error();

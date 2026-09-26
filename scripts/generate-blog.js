@@ -201,7 +201,7 @@ async function getNASAImage(topic) {
     console.error('NASA API Error:', err.message);
   }
   return {
-    url: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800',
+    url: 'https://images-assets.nasa.gov/image/PIA18916/PIA18916~small.jpg',
     title: topic,
   };
 }
@@ -214,7 +214,7 @@ function updateIndex(entry) {
 
 function formatBlogContent(content, topic, title, imageUrl, imageTitle, date, filename, category) {
   const pageTitle = title || topic;
-  const fallback = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
+  const fallback = 'https://images-assets.nasa.gov/image/PIA18916/PIA18916~small.jpg';
   const heroImg = imageUrl || fallback;
   const heroMarkup = responsiveImageMarkup({
     src: heroImg,

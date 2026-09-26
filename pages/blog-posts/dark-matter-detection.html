@@ -183,7 +183,7 @@
         <img src="https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001774/GSFC_20171208_Archive_e001774~medium.jpg" 
              alt="An artist's conception showing a web of dark matter holding a galaxy together" 
              class="blog-post-featured-img"
-             onerror="this.src='https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800'">
+             onerror="this.src='https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001774/GSFC_20171208_Archive_e001774~small.jpg'">
 
         <div class="blog-post-content">
             <h1>Unveiling the Invisible: The Quest for Dark Matter Detection</h1>
@@ -208,7 +208,7 @@
 
             <p>For example, the <strong><a href="https://lz.lbl.gov/" target="_blank" rel="noopener noreferrer">LUX-ZEPLIN (LZ)</a></strong> experiment operates at the Sanford Underground Research Facility in South Dakota, and <strong>XENONnT</strong> operates at Gran Sasso in Italy. The rock above these detectors reduces background from cosmic rays; the experiments still must distinguish possible signals from other sources of detector noise.</p>
 
-            <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?auto=format&fit=crop&w=1000&q=80" alt="High-tech scientific laboratory equipment" style="max-width:100%; height:auto; margin: 36px 0; border-radius: 12px; display: block;">
+            <img src="https://images-assets.nasa.gov/image/iss075e0068625/iss075e0068625~medium.jpg" alt="The Alpha Magnetic Spectrometer particle detector mounted on the International Space Station" style="max-width:100%; height:auto; margin: 36px 0; border-radius: 12px; display: block;">
 
             <h2>Indirect Detection: Looking for the Carnage</h2>
             <p>Fine. If dark matter won't come to us, maybe we can find the wreckage it leaves behind. That's the logic of <strong>Indirect Detection</strong> — and honestly, it's a little brutal in the best possible way.</p>
@@ -217,7 +217,7 @@
 
             <p>The <strong><a href="https://fermi.gsfc.nasa.gov/" target="_blank" rel="noopener noreferrer">Fermi Gamma-Ray Space Telescope</a></strong> stares straight into the heart of the Milky Way — the densest, most tightly packed pocket of dark matter in our galaxy. And it's found something genuinely strange: two enormous, glowing bubbles of excess gamma radiation rising from the galactic center. Scientists have been arguing about those bubbles for years. Dark matter annihilation? Or just pulsars — hyper-spinning stellar corpses flinging out energy at extraordinary rates? Nobody agrees. Yet.</p>
 
-            <img src="https://images.unsplash.com/photo-1436891620584-47fd0e565afb?auto=format&fit=crop&w=1000&q=80" alt="Deep space and the Milky Way galaxy" style="max-width:100%; height:auto; margin: 36px 0; border-radius: 12px; display: block;">
+            <img src="https://images-assets.nasa.gov/image/PIA26702/PIA26702~medium.jpg" alt="NASA Webb deep-field image overlaid with a map of dark matter" style="max-width:100%; height:auto; margin: 36px 0; border-radius: 12px; display: block;">
 
             <h2>Shifting the Paradigm: Axions and Beyond</h2>
             <p>Here's the part that keeps physicists up at night. Decades of increasingly sensitive searches have not yielded a confirmed WIMP detection. Null results rule out parts of the parameter space; they do not show that every detector is perfect or that all dark-matter candidates have been excluded.</p>
@@ -233,6 +233,8 @@
                 <h2 id="post-sources-heading">Sources &amp; Further Reading</h2>
                 <ul>
                 <li><a href="https://science.nasa.gov/dark-matter/" target="_blank" rel="noopener noreferrer">NASA: Dark Matter</a></li>
+                <li><a href="https://images.nasa.gov/details/iss075e0068625" target="_blank" rel="noopener noreferrer">NASA Image Library: Alpha Magnetic Spectrometer</a></li>
+                <li><a href="https://images.nasa.gov/details/PIA26702" target="_blank" rel="noopener noreferrer">NASA Image Library: Webb Dark Matter Map</a></li>
                 <li><a href="https://science.nasa.gov/mission/roman-space-telescope/dark-matter/" target="_blank" rel="noopener noreferrer">NASA Roman: Dark Matter Surveys</a></li>
                 </ul>
             </section>
@@ -309,7 +311,7 @@
             const section = document.getElementById('related-section');
             if (!grid) return;
             const currentFile = location.pathname.split('/').pop();
-            const fallback = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
+            const fallback = 'https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001774/GSFC_20171208_Archive_e001774~medium.jpg';
             try {
                 const res = await fetch('../blog-index.json');
                 if (!res.ok) throw new Error();

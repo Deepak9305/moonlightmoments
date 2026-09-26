@@ -12,7 +12,7 @@
     <meta property="og:url" content="https://www.moonlightmoments.org/pages/blog-posts/uranus-ice.html">
     <meta property="og:title" content="Uranus: Ice Giant, Atmosphere &amp; Rings | Moonlight Moments">
     <meta property="og:description" content="Explore Uranus's sideways rotation, rings, moons, atmosphere and unusual magnetic field through NASA mission findings.">
-    <meta property="og:image" content="https://images-assets.nasa.gov/image/PIA25500/PIA25500~small.jpg">
+    <meta property="og:image" content="https://images-assets.nasa.gov/image/PIA18182/PIA18182~orig.jpg">
     <meta property="og:type" content="article">
     <link rel="icon" type="image/png" href="../../assets/img/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
@@ -137,7 +137,7 @@
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "The Icy Enigma of Uranus: Unveiling the Seventh Planet's Frozen Landscape",
-  "image": "https://images-assets.nasa.gov/image/PIA25500/PIA25500~small.jpg",
+  "image": "https://images-assets.nasa.gov/image/PIA18182/PIA18182~orig.jpg",
   "author": {
     "@type": "Organization",
     "name": "Moonlight Moments"
@@ -199,8 +199,8 @@
             <span>✦ 6 Min Read</span>
         </div>
 
-        <img src="https://images-assets.nasa.gov/image/PIA25500/PIA25500~small.jpg" alt="Major Moons and Atmosphere of Uranus" class="blog-post-featured-img"
-             onerror="this.src='https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800'">
+        <img src="https://images-assets.nasa.gov/image/PIA18182/PIA18182~orig.jpg" alt="Uranus photographed by NASA Voyager 2" class="blog-post-featured-img"
+             onerror="this.src='https://images-assets.nasa.gov/image/PIA18182/PIA18182~small.jpg'">
 
         <div class="blog-post-content">
             <h1>The Icy Enigma of Uranus: Unveiling the Seventh Planet's Frozen Landscape</h1>
@@ -228,6 +228,7 @@
                 <ul>
                 <li><a href="https://science.nasa.gov/uranus/facts/" target="_blank" rel="noopener noreferrer">NASA: Uranus Facts</a></li>
                 <li><a href="https://science.nasa.gov/missions/webb/examining-ice-giants-with-nasas-webb-telescope/" target="_blank" rel="noopener noreferrer">NASA Webb: Studying the Ice Giants</a></li>
+                <li><a href="https://images.nasa.gov/details/PIA18182" target="_blank" rel="noopener noreferrer">NASA Image Library: Uranus from Voyager 2</a></li>
                 </ul>
             </section>
         </div>
@@ -321,7 +322,7 @@
             const section = document.getElementById('related-section');
             if (!grid) return;
             const currentFile = location.pathname.split('/').pop();
-            const fallback = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
+            const fallback = 'https://images-assets.nasa.gov/image/PIA18182/PIA18182~orig.jpg';
             try {
                 const res = await fetch('../blog-index.json');
                 if (!res.ok) throw new Error();

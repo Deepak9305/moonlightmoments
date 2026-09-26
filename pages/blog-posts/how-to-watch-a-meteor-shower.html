@@ -314,7 +314,7 @@
         </div>
 
         <picture><source srcset="../../assets/img/meteor-shower-guide-hero.webp" type="image/webp"><img src="../../assets/img/meteor-shower-guide-hero.jpg" alt="Vibrant streak of a meteor across a starry night sky with silhouettes of trees and stargazers below" class="blog-post-featured-img"
-             onerror="this.src='https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80'"></picture>
+             onerror="this.src='https://images-assets.nasa.gov/image/NHQ202108110003/NHQ202108110003~medium.jpg'"></picture>
 
         <div class="blog-post-content">
             <h1>How to Watch a Meteor Shower: The Ultimate Stargazing &amp; Peak Viewing Guide</h1>
@@ -340,7 +340,7 @@
 
             <p>You can visualize these orbital intersections directly inside our interactive <a href="../solar-system.html">3D Solar System Explorer</a>, where you can inspect how elliptical comet trajectories cross Earth's orbital plane.</p>
 
-            <img src="https://images-assets.nasa.gov/image/PIA14551/PIA14551~medium.jpg" alt="Orbital paths and cosmic particle trajectories across the solar system" style="max-width: 100%; height: auto; border-radius: 12px; margin: 28px 0; display: block;" loading="lazy">
+            <img src="https://images-assets.nasa.gov/image/NHQ202108110003/NHQ202108110003~medium.jpg" alt="A Perseid meteor streaking across a star-filled night sky" style="max-width: 100%; height: auto; border-radius: 12px; margin: 28px 0; display: block;" loading="lazy">
 
             <h3>Meteors vs. Meteoroids vs. Meteorites: The Quick Distinction</h3>
             <p>Astronomers classify space debris into three distinct stages:</p>
@@ -433,7 +433,7 @@
 
             <p>The radiant is an optical perspective effect, identical to how parallel railroad tracks appear to converge toward a single vanishing point in the distance. Because all debris particles within a comet's stream travel in parallel trajectories at identical velocities, tracing their atmospheric trails backward points toward the exact same celestial coordinate.</p>
 
-            <img src="https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=800&q=80" alt="Starry night sky showing celestial constellations and bright meteor paths" style="max-width: 100%; height: auto; border-radius: 12px; margin: 28px 0; display: block;" loading="lazy">
+            <img src="https://images-assets.nasa.gov/image/NHQ202108110001/NHQ202108110001~medium.jpg" alt="A second Perseid meteor trail captured during the annual meteor shower" style="max-width: 100%; height: auto; border-radius: 12px; margin: 28px 0; display: block;" loading="lazy">
 
             <blockquote>
                 <strong>Pro-Observer Rule:</strong> Do not fix your gaze on the radiant point. Meteors near it appear short because of perspective. To catch longer streaks, aim your gaze <strong>about 45 to 90 degrees away from the radiant</strong> toward the darkest part of your sky.
@@ -471,7 +471,7 @@
             <h3>7. Prepare for Steep Temperature Drops</h3>
             <p>Even during mid-summer showers, open-air nighttime temperatures drop significantly before dawn due to radiative cooling. Pack thermal layers, a windbreaker, wool socks, a beanie, and a thermos with hot drinks to stay comfortable for hours.</p>
 
-            <img src="https://images.unsplash.com/photo-1538370965046-79c0d6907d47?auto=format&fit=crop&w=800&q=80" alt="Milky Way arching over a tranquil mountainous landscape" style="max-width: 100%; height: auto; border-radius: 12px; margin: 28px 0; display: block;" loading="lazy">
+            <img src="https://images-assets.nasa.gov/image/NHQ202508030001/NHQ202508030001~small.jpg" alt="A meteor crossing the Milky Way during the Perseid and Alpha Capricornid showers" style="max-width: 100%; height: auto; border-radius: 12px; margin: 28px 0; display: block;" loading="lazy">
 
             <h2>How to Photograph a Meteor Shower: Camera &amp; Phone Settings</h2>
             <p>Because shooting stars are unpredictable and brief, astrophotography requires continuous long exposures rather than manual timing.</p>
@@ -553,6 +553,7 @@
                 <li><a href="https://www.imo.net/" target="_blank" rel="noopener noreferrer">International Meteor Organization (IMO)</a> — Global meteor calendars, live visual observation campaigns, and radio meteor flux data.</li>
                 <li><a href="https://www.amsmeteors.org/" target="_blank" rel="noopener noreferrer">American Meteor Society (AMS)</a> — Comprehensive North American meteor guides, fireball log databases, and observation reporting forms.</li>
                 <li><a href="https://science.nasa.gov/solar-system/meteors-meteorites/" target="_blank" rel="noopener noreferrer">NASA Science: Meteors &amp; Meteorites</a> — In-depth planetary science overviews of asteroid debris streams and sample return missions.</li>
+                <li><a href="https://images.nasa.gov/search?search=meteor%20shower" target="_blank" rel="noopener noreferrer">NASA Image Library: Meteor Showers</a> — Source imagery for the Perseid and related meteor-shower photographs.</li>
                 <li><a href="https://darksky.org/" target="_blank" rel="noopener noreferrer">DarkSky International</a> — Interactive dark sky maps, IDA-certified stargazing locations, and light pollution mitigation research.</li>
             </ul>
 
@@ -653,7 +654,7 @@
             const section = document.getElementById('related-section');
             if (!grid) return;
             const currentFile = location.pathname.split('/').pop();
-            const fallback = 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80';
+            const fallback = 'https://www.moonlightmoments.org/assets/img/meteor-shower-guide-hero.jpg';
             try {
                 const res = await fetch('../blog-index.json');
                 if (!res.ok) throw new Error();

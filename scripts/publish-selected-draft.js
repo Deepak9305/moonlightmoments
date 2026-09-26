@@ -104,7 +104,7 @@ function adsenseTag() {
 function wrapFragment(content, meta, title, date, imageUrl, imageTitle, filename) {
   const pageTitle = title || 'Blog Post';
   const topic = meta.topic || pageTitle;
-  const fallback = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
+  const fallback = 'https://images-assets.nasa.gov/image/PIA18916/PIA18916~small.jpg';
   const heroImg = imageUrl || fallback;
   const heroMarkup = responsiveImageMarkup({
     src: heroImg,

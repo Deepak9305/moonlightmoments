@@ -178,7 +178,7 @@
         </div>
 
         <img src="https://images-assets.nasa.gov/image/PIA23646/PIA23646~medium.jpg" alt="Tarantula Nebula Spitzer 2-Color Image" class="blog-post-featured-img"
-             onerror="this.src='https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800'">
+             onerror="this.src='https://images-assets.nasa.gov/image/PIA04220/PIA04220~orig.jpg'">
 
         <div class="blog-post-content">
             <h1>Cosmic Canvases: Unveiling the Vibrant World of Nebula Colors</h1>
@@ -198,14 +198,14 @@
                 <li><strong>Sulfur (Deep Red):</strong> Excited sulfur also lands in the red part of the spectrum, often tangling so tightly with hydrogen that together they build those dark, smoldering crimson pillars you see in long-exposure deep-space photography.</li>
             </ul>
 
-            <img src="https://images.unsplash.com/photo-1462332420958-a05d1e002413?auto=format&fit=crop&w=1000&q=80" alt="Vibrant emission nebula showing red and blue cosmic gases" style="max-width:100%; height:auto; margin: 30px 0; border-radius: 8px; display: block;">
+            <img src="https://images-assets.nasa.gov/image/PIA04220/PIA04220~orig.jpg" alt="NASA Hubble image of the colorful Trifid Nebula" style="max-width:100%; height:auto; margin: 30px 0; border-radius: 8px; display: block;">
 
             <h2>Cosmic Mirrors: Why Some Nebulae Are Blue</h2>
             <p>Not every nebula is out here making its own light, though. Some of them don't even try. They just... receive. Reflect. These are <strong>Reflection Nebulae</strong> — vast, drifting clouds of cosmic dust that produce no glow of their own, only bouncing back whatever starlight happens to be falling on them. Think of them as the universe's ancient, dusty mirrors.</p>
 
             <p>Many reflection nebulae look blue because interstellar dust scatters shorter blue wavelengths more efficiently than longer red wavelengths. The effect is related to wavelength-dependent scattering in Earth's sky, although the dust grains and geometry are different. The color also depends on the illuminating star, dust properties and the filters used to make the image.</p>
 
-            <img src="https://images.unsplash.com/photo-1538370965046-79c0d6907d47?auto=format&fit=crop&w=1000&q=80" alt="Brilliant blue reflection nebula scattering starlight" style="max-width:100%; height:auto; margin: 30px 0; border-radius: 8px; display: block;">
+            <img src="https://images-assets.nasa.gov/image/PIA04215/PIA04215~orig.jpg" alt="NASA Hubble image of the Horsehead Nebula and its blue reflection glow" style="max-width:100%; height:auto; margin: 30px 0; border-radius: 8px; display: block;">
 
             <h2>The "Fake Color" Elephant in the Room</h2>
             <p>Alright. Let's actually go there. The "Pillars of Creation" — maybe the single most famous photograph the Hubble Space Telescope ever produced — shows those towering gas columns lit up in greens and blues. Breathtaking. Iconic. But hydrogen glows red. So why do those hydrogen-filled pillars look green?</p>
@@ -224,6 +224,8 @@
                 <ul>
                 <li><a href="https://science.nasa.gov/mission/hubble/overview/faqs/" target="_blank" rel="noopener noreferrer">NASA: Hubble image color and processing FAQ</a></li>
                 <li><a href="https://science.nasa.gov/mission/hubble/science/science-behind-the-discoveries/wavelengths/" target="_blank" rel="noopener noreferrer">NASA: Seeing the universe in different wavelengths</a></li>
+                <li><a href="https://images.nasa.gov/details/PIA04220" target="_blank" rel="noopener noreferrer">NASA Image Library: Trifid Nebula</a></li>
+                <li><a href="https://images.nasa.gov/details/PIA04215" target="_blank" rel="noopener noreferrer">NASA Image Library: Horsehead Nebula</a></li>
                 </ul>
             </section>
         </div>
@@ -299,7 +301,7 @@
             const section = document.getElementById('related-section');
             if (!grid) return;
             const currentFile = location.pathname.split('/').pop();
-            const fallback = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
+            const fallback = 'https://images-assets.nasa.gov/image/PIA23646/PIA23646~medium.jpg';
             try {
                 const res = await fetch('../blog-index.json');
                 if (!res.ok) throw new Error();

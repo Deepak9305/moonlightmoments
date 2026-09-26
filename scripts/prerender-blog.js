@@ -27,8 +27,11 @@ function getCardFallback(filename) {
   if (filename === 'how-to-observe-mars-and-its-ice-caps.html') return 'https://images-assets.nasa.gov/image/PIA04591/PIA04591~medium.jpg';
   if (filename === 'how-to-observe-jupiter-and-its-moons.html') return 'https://images-assets.nasa.gov/image/PIA02873/PIA02873~medium.jpg';
   if (filename === 'how-to-observe-saturn-and-its-rings.html') return 'https://images-assets.nasa.gov/image/PIA09931/PIA09931~medium.jpg';
-  if (filename === 'how-to-watch-a-meteor-shower.html') return 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80';
-  return 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
+  if (filename === 'how-to-watch-a-meteor-shower.html') return 'https://images-assets.nasa.gov/image/NHQ202108110003/NHQ202108110003~medium.jpg';
+  if (filename === 'hawking-radiation.html') return 'https://images-assets.nasa.gov/image/behemoth-black-hole-found-in-an-unlikely-place_26209716511_o/behemoth-black-hole-found-in-an-unlikely-place_26209716511_o~medium.jpg';
+  if (filename === 'uranus-ice.html') return 'https://images-assets.nasa.gov/image/PIA18182/PIA18182~orig.jpg';
+  if (filename === 'dark-energy-mystery.html') return 'https://images-assets.nasa.gov/image/PIA14094/PIA14094~medium.jpg';
+  return 'https://images-assets.nasa.gov/image/PIA18916/PIA18916~small.jpg';
 }
 
 function resolveCardImg(url, filename) {
