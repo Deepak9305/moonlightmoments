@@ -7,7 +7,7 @@
       "date": "September 4, 2026",
       "timestamp": 1788508200000,
       "imageUrl": "../assets/img/venus-telescope-guide-hero.jpg",
-      "excerpt": "Master how to observe Venus with a backyard telescope. Discover how to track its changing crescent and gibbous phases, eliminate intense visual glare with filters, view in twilight, and observe cusp extensions."
+      "excerpt": "Learn how to observe Venus's changing phases, reduce glare with practical filters, and choose better twilight viewing times with a backyard telescope."
     },
     {
       "filename": "how-to-observe-mars-and-its-ice-caps.html",
@@ -16,7 +16,7 @@
       "date": "September 3, 2026",
       "timestamp": 1788421800000,
       "imageUrl": "../assets/img/mars-telescope-guide-hero.jpg",
-      "excerpt": "Master how to observe the Red Planet with a backyard telescope. Discover how to spot the bright polar ice caps, resolve dark albedo plains like Syrtis Major, track dust storms, and master opposition viewing."
+      "excerpt": "Learn when Mars is best placed for a backyard telescope and how conditions affect views of polar caps, albedo features and dust storms around opposition."
     },
     {
       "filename": "how-to-observe-jupiter-and-its-moons.html",
@@ -52,7 +52,7 @@
       "date": "May 13, 2026",
       "timestamp": 1778679684744,
       "imageUrl": "https://images-assets.nasa.gov/image/PIA21867/PIA21867~medium.jpg",
-      "excerpt": "The Kuiper Belt, a vast and enigmatic expanse of icy bodies and celestial remnants, has long fascinated astronomers and space enthusiasts alike. Located beyond the orbit of Neptune, this distant realm..."
+      "excerpt": "Explore the Kuiper Belt's icy bodies, orbital resonances and links to the formation and continuing evolution of the outer solar system."
     },
     {
       "filename": "binary-star-systems.html",
@@ -97,7 +97,7 @@
       "date": "May 4, 2026",
       "timestamp": 1777882219412,
       "imageUrl": "https://images-assets.nasa.gov/image/PIA18916/PIA18916~small.jpg",
-      "excerpt": "The cosmic microwave background (CMB) is the residual heat from the Big Bang, a snapshot of the universe when it was just 380,000 years old."
+      "excerpt": "The cosmic microwave background is an ancient radiation map released about 380,000 years after the Big Bang that constrains the early universe's contents and geometry."
     },
     {
       "filename": "cosmic-rays.html",
@@ -106,7 +106,7 @@
       "date": "May 3, 2026",
       "timestamp": 1777789699395,
       "imageUrl": "https://images-assets.nasa.gov/image/PIA14551/PIA14551~small.jpg",
-      "excerpt": "Cosmic rays have long been a topic of fascination for astronomers and space enthusiasts alike. These ultra-high-energy atomic nuclei originate from supernovae and active galactic nuclei."
+      "excerpt": "Learn what cosmic rays are, why most are high-energy protons and nuclei, how magnetic fields deflect them, and what their sources reveal about extreme astrophysics."
     },
     {
       "filename": "hawking-radiation.html",
@@ -142,7 +142,7 @@
       "date": "April 29, 2026",
       "timestamp": 1777465561496,
       "imageUrl": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000995/GSFC_20171208_Archive_e000995~small.jpg",
-      "excerpt": "For most of the 20th century, astrophysicists were certain the universe's expansion was slowing down. Then the data came back — and we were entirely wrong."
+      "excerpt": "Learn how observations revealed accelerated cosmic expansion and why dark energy remains a name for an unresolved component or gravity model."
     }
   ]
 }
