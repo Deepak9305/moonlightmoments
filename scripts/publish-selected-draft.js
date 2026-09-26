@@ -7,6 +7,7 @@ const DRAFT_FILE = process.env.DRAFT_FILE || '';
 const DRAFTS_DIR = path.join(__dirname, '../drafts');
 const BLOG_DIR = path.join(__dirname, '../pages/blog-posts');
 const INDEX_FILE = path.join(__dirname, '../pages/blog-index.json');
+const { categoryForTopic, normalizeCategory } = require('./blog-taxonomy');
 
 function selectDraft() {
   if (DRAFT_FILE) return DRAFT_FILE;
@@ -106,6 +107,7 @@ function wrapFragment(content, meta, title, date, imageUrl, imageTitle, filename
   const heroImg = imageUrl || fallback;
   const canonicalUrl = `https://www.moonlightmoments.org/pages/blog-posts/${filename || ''}`;
   const excerpt = meta.description || extractExcerpt(content);
+  const category = normalizeCategory(meta.category) || categoryForTopic(topic);
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -124,6 +126,7 @@ function wrapFragment(content, meta, title, date, imageUrl, imageTitle, filename
     ${filename ? `<meta property="og:url" content="${canonicalUrl}">` : ''}
     <meta property="og:title" content="${pageTitle}">
     <meta property="og:description" content="${meta.description || `Explore ${topic} with Moonlight Moments.`}">
+    <meta property="article:section" content="${category.label}">
     <meta property="og:image" content="${heroImg}">
     <meta property="og:site_name" content="Moonlight Moments">
 
@@ -153,6 +156,7 @@ function wrapFragment(content, meta, title, date, imageUrl, imageTitle, filename
         }
       },
       "datePublished": "${new Date().toISOString().split('T')[0]}",
+      "articleSection": "${category.label}",
       "description": "${excerpt.replace(/"/g, '\\"')}"
     }
     </script>
@@ -288,7 +292,7 @@ function wrapFragment(content, meta, title, date, imageUrl, imageTitle, filename
     <article class="blog-post-container">
         <div class="blog-post-meta">
             <span>✦ ${date}</span>
-            <span>✦ ${meta.category || 'Space Science'}</span>
+            <span>✦ ${category.label}</span>
         </div>
 
         <img src="${heroImg}" alt="${imageTitle || topic}" class="blog-post-featured-img"
@@ -303,7 +307,7 @@ function wrapFragment(content, meta, title, date, imageUrl, imageTitle, filename
         <div class="post-footer">
             <strong>Author:</strong> ${meta.author || 'Moonlight Moments Team'} &nbsp;·&nbsp;
             <strong>Published:</strong> ${date} &nbsp;·&nbsp;
-            <strong>Category:</strong> ${meta.category || 'Space Science'}
+            <strong>Category:</strong> ${category.label}
         </div>
 
         <section class="related-posts" id="related-section">
@@ -412,6 +416,8 @@ function publish() {
   updateIndex({
     filename: outputFilename,
     topic: meta.topic || slug.replace(/-/g, ' '),
+    category: (normalizeCategory(meta.category) || categoryForTopic(meta.topic || slug)).slug,
+    ...(meta.sequence ? { sequence: Number(meta.sequence) } : {}),
     title: title || slug,
     date,
     timestamp: Date.now(),

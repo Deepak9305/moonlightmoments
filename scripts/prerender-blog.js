@@ -3,22 +3,13 @@ const path = require('path');
 
 const BLOG_HTML = path.join(__dirname, '../pages/blog.html');
 const INDEX_JSON = path.join(__dirname, '../pages/blog-index.json');
+const { categoryForTopic, normalizeCategory } = require('./blog-taxonomy');
 
 const blogData = JSON.parse(fs.readFileSync(INDEX_JSON, 'utf8'));
 const posts = blogData.posts;
 
 function getCategory(post) {
-  const text = ((post.topic || '') + ' ' + (post.title || '')).toLowerCase();
-  if (text.includes('meteor') || text.includes('eclipse') || text.includes('stargazing') || text.includes('telescope') || text.includes('observe')) {
-    return { slug: 'stargazing', label: 'Stargazing Guide' };
-  }
-  if (text.includes('hawking') || text.includes('dark matter') || text.includes('dark energy') || text.includes('black hole')) {
-    return { slug: 'astrophysics', label: 'Astrophysics' };
-  }
-  if (text.includes('saturn') || text.includes('planet') || text.includes('kuiper') || text.includes('star systems') || text.includes('exoplanet') || text.includes('uranus')) {
-    return { slug: 'planets', label: 'Planetary Science' };
-  }
-  return { slug: 'cosmology', label: 'Cosmology & Deep Space' };
+  return normalizeCategory(post.category) || categoryForTopic(`${post.topic || ''} ${post.title || ''}`);
 }
 
 function estimateReadTime(post) {

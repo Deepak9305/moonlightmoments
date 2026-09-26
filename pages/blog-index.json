@@ -3,6 +3,7 @@
     {
       "filename": "how-to-observe-venus-and-its-phases.html",
       "topic": "how to observe venus and its phases",
+      "category": "stargazing",
       "title": "How to Observe Venus & Its Phases: The Ultimate Backyard Telescope & Stargazing Guide",
       "date": "September 4, 2026",
       "timestamp": 1788508200000,
@@ -12,6 +13,7 @@
     {
       "filename": "how-to-observe-mars-and-its-ice-caps.html",
       "topic": "how to observe mars and its ice caps",
+      "category": "stargazing",
       "title": "How to Observe Mars & Its Polar Ice Caps: The Ultimate Backyard Telescope & Stargazing Guide",
       "date": "September 3, 2026",
       "timestamp": 1788421800000,
@@ -21,6 +23,7 @@
     {
       "filename": "how-to-observe-jupiter-and-its-moons.html",
       "topic": "how to observe jupiter and its moons",
+      "category": "stargazing",
       "title": "How to Observe Jupiter & Its Moons: The Ultimate Backyard Telescope & Stargazing Guide",
       "date": "September 2, 2026",
       "timestamp": 1788334800000,
@@ -30,6 +33,7 @@
     {
       "filename": "how-to-observe-saturn-and-its-rings.html",
       "topic": "how to observe saturn and its rings",
+      "category": "stargazing",
       "title": "How to Observe Saturn & Its Rings: The Ultimate Backyard Telescope & Stargazing Guide",
       "date": "September 1, 2026",
       "timestamp": 1788248500000,
@@ -39,6 +43,7 @@
     {
       "filename": "how-to-watch-a-meteor-shower.html",
       "topic": "how to watch a meteor shower",
+      "category": "stargazing",
       "title": "How to Watch a Meteor Shower: The Ultimate Stargazing & Peak Viewing Guide",
       "date": "August 31, 2026",
       "timestamp": 1788191400000,
@@ -48,6 +53,7 @@
     {
       "filename": "kuiper-belt-objects.html",
       "topic": "kuiper belt objects",
+      "category": "planets",
       "title": "Unveiling the Mysteries of the Kuiper Belt: A Realm of Ancient Secrets and Frozen Worlds",
       "date": "May 13, 2026",
       "timestamp": 1778679684744,
@@ -57,6 +63,7 @@
     {
       "filename": "binary-star-systems.html",
       "topic": "binary star systems",
+      "category": "astrophysics",
       "title": "Cosmic Waltz: Unveiling the Mysteries of Binary Star Systems",
       "date": "May 12, 2026",
       "timestamp": 1778600335388,
@@ -66,6 +73,7 @@
     {
       "filename": "lunar-eclipse-science.html",
       "topic": "lunar eclipse science",
+      "category": "stargazing",
       "title": "Unveiling the Mystique of the Moon: A Journey Through Lunar Eclipse Science",
       "date": "May 11, 2026",
       "timestamp": 1778517765271,
@@ -75,6 +83,7 @@
     {
       "filename": "nebula-colors.html",
       "topic": "nebula colors",
+      "category": "cosmology",
       "title": "Cosmic Canvases: Unveiling the Vibrant World of Nebula Colors",
       "date": "May 8, 2026",
       "timestamp": 1778222352459,
@@ -84,6 +93,7 @@
     {
       "filename": "dark-matter-detection.html",
       "topic": "dark matter detection",
+      "category": "astrophysics",
       "title": "Unveiling the Invisible: The Quest for Dark Matter Detection",
       "date": "May 5, 2026",
       "timestamp": 1777959681156,
@@ -93,6 +103,7 @@
     {
       "filename": "cosmic-microwave-background.html",
       "topic": "cosmic microwave background",
+      "category": "cosmology",
       "title": "The Echoes of Eternity: Unraveling the Secrets of the Cosmic Microwave Background",
       "date": "May 4, 2026",
       "timestamp": 1777882219412,
@@ -102,6 +113,7 @@
     {
       "filename": "cosmic-rays.html",
       "topic": "cosmic rays",
+      "category": "astrophysics",
       "title": "Unveiling the Mysteries of the Universe: The Enigmatic Cosmic Rays",
       "date": "May 3, 2026",
       "timestamp": 1777789699395,
@@ -111,6 +123,7 @@
     {
       "filename": "hawking-radiation.html",
       "topic": "hawking radiation",
+      "category": "astrophysics",
       "title": "Unveiling the Mysteries of Black Holes: The Enigmatic Hawking Radiation",
       "date": "May 2, 2026",
       "timestamp": 1777703962966,
@@ -120,6 +133,7 @@
     {
       "filename": "uranus-ice.html",
       "topic": "uranus ice",
+      "category": "planets",
       "title": "The Icy Enigma of Uranus: Unveiling the Seventh Planet's Frozen Landscape",
       "date": "April 30, 2026",
       "timestamp": 1777549000767,
@@ -129,6 +143,7 @@
     {
       "filename": "exoplanet-atmospheres.html",
       "topic": "exoplanet atmospheres",
+      "category": "planets",
       "title": "Beyond the Cosmic Horizon: Unveiling the Mysteries of Exoplanet Atmospheres",
       "date": "April 30, 2026",
       "timestamp": 1777549403281,
@@ -138,6 +153,7 @@
     {
       "filename": "dark-energy-mystery.html",
       "topic": "dark energy mystery",
+      "category": "astrophysics",
       "title": "Cosmic Enigma: Unraveling the Dark Energy Mystery That's Rewriting the Universe",
       "date": "April 29, 2026",
       "timestamp": 1777465561496,

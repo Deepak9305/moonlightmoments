@@ -4,49 +4,80 @@ const path = require('path');
 
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const INPUT_TOPIC = process.env.TOPIC || '';
+const INPUT_CATEGORY = process.env.CATEGORY || '';
+const { categoryForTopic, normalizeCategory } = require('./blog-taxonomy');
 
-const SPACE_TOPICS = [
-  'auroras on other planets',
-  'moon dust composition',
-  'solar wind effects on satellites',
-  'cosmic radiation',
-  'exoplanet atmospheres',
-  'neutron stars',
-  'binary star systems',
-  'pulsar stars',
-  'asteroid mining',
-  'space debris',
-  'gravitational lensing',
-  'dark energy mystery',
-  'kuiper belt objects',
-  'comet tail formation',
-  'solar flares',
-  'magnetosphere',
-  'lunar eclipse science',
-  'solar eclipse corona',
-  'interstellar dust',
-  'galaxy formation',
-  'supernova remnants',
-  'nebula colors',
-  'planetary rings',
-  'moons of jupiter',
-  'saturn atmosphere',
-  'uranus ice',
-  'neptune winds',
-  'mars geology',
-  'venus atmosphere',
-  'mercury surface',
-  'earth magnetosphere',
-  'cosmic microwave background',
-  'big bang theory',
-  'quantum entanglement in space',
-  'time dilation near black holes',
-  'hawking radiation',
-  'wormholes theory',
-  'multiverse hypothesis',
-  'dark matter detection',
-  'cosmic rays',
+// The default queue is intentionally ordered. The next run takes the first
+// topic that has not been generated yet, so the editorial sequence is stable.
+const TOPIC_PLAN = [
+  ['auroras on other planets', 'planets'],
+  ['moon dust composition', 'planets'],
+  ['solar wind effects on satellites', 'astrophysics'],
+  ['neutron stars', 'astrophysics'],
+  ['pulsar timing', 'astrophysics'],
+  ['asteroid mining', 'planets'],
+  ['space debris', 'astrophysics'],
+  ['gravitational lensing', 'cosmology'],
+  ['comet tail formation', 'planets'],
+  ['solar flares', 'astrophysics'],
+  ['magnetosphere', 'planets'],
+  ['solar eclipse corona', 'stargazing'],
+  ['interstellar dust', 'cosmology'],
+  ['galaxy formation', 'cosmology'],
+  ['supernova remnants', 'astrophysics'],
+  ['planetary rings', 'planets'],
+  ['neptune winds', 'planets'],
+  ['mercury surface', 'planets'],
+  ['earth magnetosphere', 'planets'],
+  ['big bang theory', 'cosmology'],
+  ['quantum entanglement in space', 'astrophysics'],
+  ['time dilation near black holes', 'astrophysics'],
+  ['wormholes theory', 'astrophysics'],
+  ['multiverse hypothesis', 'cosmology'],
+  ['stellar nurseries', 'cosmology'],
+  ['red giant stars', 'astrophysics'],
+  ['white dwarf stars', 'astrophysics'],
+  ['neutron star mergers', 'astrophysics'],
+  ['gravitational waves', 'astrophysics'],
+  ['fast radio bursts', 'astrophysics'],
+  ['gamma ray bursts', 'astrophysics'],
+  ['dark skies and light pollution', 'stargazing'],
+  ['telescope collimation', 'stargazing'],
+  ['astrophotography for beginners', 'stargazing'],
+  ['choosing telescope eyepieces', 'stargazing'],
+  ['star hopping for beginners', 'stargazing'],
+  ['lunar craters', 'stargazing'],
+  ['observing double stars', 'stargazing'],
+  ['variable stars', 'stargazing'],
+  ['stellar occultations', 'stargazing'],
+  ['space weather forecasting', 'astrophysics'],
+  ['solar sail technology', 'astrophysics'],
+  ['ion propulsion', 'astrophysics'],
+  ['space telescope comparison', 'astrophysics'],
+  ['james webb space telescope discoveries', 'astrophysics'],
+  ['mars sample return', 'planets'],
+  ['europa ocean', 'planets'],
+  ['enceladus plumes', 'planets'],
+  ['titan atmosphere', 'planets'],
+  ['pluto geology', 'planets'],
+  ['oort cloud', 'cosmology'],
+  ['rogue planets', 'planets'],
+  ['habitable zone', 'planets'],
+  ['biosignatures on exoplanets', 'planets'],
+  ['galaxy clusters', 'cosmology'],
+  ['cosmic inflation', 'cosmology'],
+  ['quantum gravity', 'astrophysics'],
+  ['black hole mergers', 'astrophysics'],
+  ['supermassive black holes', 'astrophysics'],
+  ['cosmic neutrinos', 'astrophysics'],
+  ['antimatter in space', 'astrophysics'],
 ];
+
+const TOPIC_SEQUENCE = TOPIC_PLAN.map(([topic, category], index) => ({
+  topic,
+  category,
+  sequence: index + 1,
+}));
 
 const BLOG_DIR = path.join(__dirname, '../pages/blog-posts');
 const INDEX_FILE = path.join(__dirname, '../pages/blog-index.json');
@@ -62,17 +93,24 @@ function getGeneratedSlugs() {
 
 function selectTopic(generatedSlugs) {
   if (INPUT_TOPIC && INPUT_TOPIC.trim()) {
-    return INPUT_TOPIC.trim();
+    const topic = INPUT_TOPIC.trim();
+    return {
+      topic,
+      category: normalizeCategory(INPUT_CATEGORY)?.slug || categoryForTopic(topic).slug,
+      sequence: null,
+    };
   }
-  const available = SPACE_TOPICS.filter(
-    t => !generatedSlugs.has(t.toLowerCase().replace(/\s+/g, '-'))
+  const available = TOPIC_SEQUENCE.filter(
+    plan => !generatedSlugs.has(plan.topic.toLowerCase().replace(/\s+/g, '-'))
   );
   if (available.length === 0) {
     console.log('✅ All topics have already been generated. Nothing new to create.');
     process.exit(0);
   }
-  console.log(`📚 ${available.length} topics remaining out of ${SPACE_TOPICS.length}`);
-  return available[Math.floor(Math.random() * available.length)];
+  const next = available[0];
+  console.log(`📚 ${available.length} topics remaining out of ${TOPIC_SEQUENCE.length}`);
+  console.log(`➡️  Sequence ${next.sequence}: ${next.topic} (${next.category})`);
+  return next;
 }
 
 function extractTitle(content) {
@@ -100,10 +138,11 @@ function readIndex() {
 }
 
 
-async function getGroqResponse(topic) {
-  console.log(`Generating blog content for: "${topic}"`);
+async function getGroqResponse(topic, category) {
+  const categoryInfo = normalizeCategory(category) || categoryForTopic(topic);
+  console.log(`Generating blog content for: "${topic}" (${categoryInfo.label})`);
 
-  const prompt = `You are a science writer for a premium astronomy magazine. Write a high-quality, engaging blog post about "${topic}" for space enthusiasts aged 18–45.
+  const prompt = `You are a science writer for a premium astronomy magazine. Write a high-quality, engaging blog post about "${topic}" for space enthusiasts aged 18–45. File this article under the editorial category "${categoryInfo.label}".
 
 REQUIREMENTS:
 - 1000–1200 words total
@@ -172,12 +211,13 @@ function updateIndex(entry) {
   fs.writeFileSync(INDEX_FILE, JSON.stringify(index, null, 2));
 }
 
-function formatBlogContent(content, topic, title, imageUrl, imageTitle, date, filename) {
+function formatBlogContent(content, topic, title, imageUrl, imageTitle, date, filename, category) {
   const pageTitle = title || topic;
   const fallback = 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=800';
   const heroImg = imageUrl || fallback;
   const canonicalUrl = `https://www.moonlightmoments.org/pages/blog-posts/${filename}`;
   const excerpt = extractExcerpt(content);
+  const categoryInfo = normalizeCategory(category) || categoryForTopic(topic);
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -196,6 +236,7 @@ function formatBlogContent(content, topic, title, imageUrl, imageTitle, date, fi
     <meta property="og:url" content="${canonicalUrl}">
     <meta property="og:title" content="${pageTitle}">
     <meta property="og:description" content="Explore ${topic} with Moonlight Moments.">
+    <meta property="article:section" content="${categoryInfo.label}">
     <meta property="og:image" content="${heroImg}">
     <meta property="og:site_name" content="Moonlight Moments">
 
@@ -225,6 +266,7 @@ function formatBlogContent(content, topic, title, imageUrl, imageTitle, date, fi
         }
       },
       "datePublished": "${new Date().toISOString().split('T')[0]}",
+      "articleSection": "${categoryInfo.label}",
       "description": "${excerpt.replace(/"/g, '\\"')}"
     }
     </script>
@@ -361,7 +403,7 @@ function formatBlogContent(content, topic, title, imageUrl, imageTitle, date, fi
     <article class="blog-post-container">
         <div class="blog-post-meta">
             <span>✦ ${date}</span>
-            <span>✦ Space Science</span>
+            <span>✦ ${categoryInfo.label}</span>
         </div>
 
         <img src="${imageUrl}" alt="${imageTitle}" class="blog-post-featured-img"
@@ -374,7 +416,7 @@ function formatBlogContent(content, topic, title, imageUrl, imageTitle, date, fi
         <div class="post-footer">
             <strong>Author:</strong> Moonlight Moments Team &nbsp;·&nbsp;
             <strong>Published:</strong> ${date} &nbsp;·&nbsp;
-            <strong>Category:</strong> Space Science
+            <strong>Category:</strong> ${categoryInfo.label}
         </div>
 
         <section class="related-posts" id="related-section">
@@ -430,13 +472,14 @@ function formatBlogContent(content, topic, title, imageUrl, imageTitle, date, fi
 async function generateBlog() {
   try {
     const generatedSlugs = getGeneratedSlugs();
-    const topic = selectTopic(generatedSlugs);
+    const plan = selectTopic(generatedSlugs);
+    const topic = plan.topic;
     console.log(`\n📝 Starting blog generation for: "${topic}"\n`);
 
     const slug = topic.toLowerCase().replace(/\s+/g, '-');
 
     const [content, image] = await Promise.all([
-      getGroqResponse(topic),
+      getGroqResponse(topic, plan.category),
       getNASAImage(topic),
     ]);
 
@@ -451,10 +494,10 @@ async function generateBlog() {
 
     if (!fs.existsSync(BLOG_DIR)) fs.mkdirSync(BLOG_DIR, { recursive: true });
 
-    fs.writeFileSync(filepath, formatBlogContent(content, topic, title, image.url, image.title, date, filename));
+    fs.writeFileSync(filepath, formatBlogContent(content, topic, title, image.url, image.title, date, filename, plan.category));
     console.log(`✅ Blog post created: pages/blog-posts/${filename}`);
 
-    updateIndex({ filename, topic, title: title || topic, date, timestamp, imageUrl: image.url, excerpt });
+    updateIndex({ filename, topic, category: plan.category, sequence: plan.sequence, title: title || topic, date, timestamp, imageUrl: image.url, excerpt });
     console.log(`📋 blog-index.json updated`);
 
     try {
