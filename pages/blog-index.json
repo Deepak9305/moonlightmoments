@@ -1,6 +1,17 @@
 {
   "posts": [
     {
+      "filename": "gravitational-waves.html",
+      "topic": "gravitational waves",
+      "category": "astrophysics",
+      "sequence": 2,
+      "title": "Gravitational Waves Explained: How LIGO Hears the Universe",
+      "date": "September 27, 2026",
+      "timestamp": 1790447400000,
+      "imageUrl": "https://images-assets.nasa.gov/image/PIA20196/PIA20196~medium.jpg",
+      "excerpt": "Learn how black-hole and neutron-star mergers create gravitational waves, how LIGO detects tiny changes in distance, and what these cosmic signals reveal."
+    },
+    {
       "filename": "auroras-on-other-planets.html",
       "topic": "auroras on other planets",
       "category": "planets",

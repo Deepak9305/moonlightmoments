@@ -14,6 +14,7 @@ function getCategory(post) {
 }
 
 function estimateReadTime(post) {
+  if (post.filename === 'gravitational-waves.html') return '9 min read';
   if (post.filename === 'how-to-observe-venus-and-its-phases.html') return '11 min read';
   if (post.filename === 'how-to-observe-mars-and-its-ice-caps.html') return '12 min read';
   if (post.filename === 'how-to-observe-jupiter-and-its-moons.html') return '11 min read';
